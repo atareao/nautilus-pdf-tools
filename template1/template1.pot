@@ -1,0 +1,572 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: lorenzo.carbonell.cerezo@gmail.com\n"
+"POT-Creation-Date: 2013-12-30 08:44+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:244
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:258
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2321
+msgid "Paginate"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:289
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:444
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:620
+msgid "Top"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:290
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:445
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:621
+msgid "Middle"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:291
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:446
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:622
+msgid "Bottom"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:294
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:449
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:625
+msgid "Left"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:295
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:450
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:626
+msgid "Center"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:296
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:451
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:627
+msgid "Right"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:298
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:453
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:629
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:776
+msgid "Overwrite original file?"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:303
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:350
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:517
+msgid "Select font"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:306
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:336
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:461
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:503
+msgid "Select color"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:310
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:477
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:644
+msgid "Horizontal position"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:319
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:486
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:653
+msgid "Vertical position"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:400
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:414
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2320
+msgid "Textmark"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:458
+msgid "Select Font"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:469
+msgid "Text"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:576
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:590
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:634
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2319
+msgid "Watermark"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:640
+msgid "Choose File"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:702
+msgid "Please choose a file"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:710
+msgid "Png files"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:779
+msgid "Flip vertical"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:787
+msgid "Flip horizontal"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:795
+msgid "Rotate"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:898
+msgid "Pdf file"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:907
+msgid "Up"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:914
+msgid "Down"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:921
+msgid "Add"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:928
+msgid "Remove"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:966
+msgid "Select one or more pdf files"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:975
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1434
+msgid "Pdf files"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1023
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1069
+msgid "Select Pages"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1031
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1077
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1154
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1325
+msgid "Pages"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1032
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1037
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1078
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1083
+msgid ""
+"Type page number and/or page\n"
+"ranges separated by commas\n"
+"counting from start of the\n"
+"document ej. 1,4,6-9"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1092
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1106
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1117
+msgid "Convert to"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1162
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1333
+msgid "Paper size"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1163
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1334
+msgid "Select the size of the output file"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1167
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1338
+msgid "Orientation"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1168
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1339
+msgid "Select the orientation of the page"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1172
+msgid "Pages in Page"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1173
+msgid "Select how many pages in a page"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1177
+msgid "by"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1178
+msgid "rows by columns"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1182
+msgid "Sort"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1183
+msgid "Select the combination sort"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1187
+msgid "Set the margin"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1188
+msgid "The margin to the page in mm"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1193
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1344
+msgid "A0"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1194
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1345
+msgid "A1"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1195
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1346
+msgid "A2"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1196
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1347
+msgid "A3"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1197
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1348
+msgid "A4"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1198
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1349
+msgid "A5"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1199
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1350
+msgid "A6"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1200
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1351
+msgid "A7"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1201
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1352
+msgid "A8"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1202
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1353
+msgid "A9"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1203
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1354
+msgid "A10"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1204
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1355
+msgid "B0"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1205
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1356
+msgid "B1"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1206
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1357
+msgid "B2"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1207
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1358
+msgid "B3"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1208
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1359
+msgid "B4"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1209
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1360
+msgid "B5"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1210
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1361
+msgid "B6"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1211
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1362
+msgid "B7"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1212
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1363
+msgid "B8"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1213
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1364
+msgid "B9"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1214
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1365
+msgid "B10"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1215
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1366
+msgid "Letter (8 1/2x11)"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1216
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1367
+msgid "Note (8 1/2x11)"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1217
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1368
+msgid "Legal (8 1/2x14)"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1218
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1369
+msgid "Executive (8 1/4x10 1/2)"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1219
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1370
+msgid "Halfetter (5 1/2x8 1/2)"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1220
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1371
+msgid "Halfexecutive (5 1/4x7 1/4)"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1221
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1372
+msgid "11x17 (11x17)"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1222
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1373
+msgid "Statement (5 1/2x8 1/2)"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1223
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1374
+msgid "Folio (8 1/2x13)"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1224
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1375
+msgid "10x14 (10x14)"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1225
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1376
+msgid "Ledger (17x11)"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1226
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1377
+msgid "Tabloid (11x17)"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1235
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1285
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1386
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1411
+msgid "Vertical"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1236
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1387
+msgid "Horizontal"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1255
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1300
+msgid "By rows"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1256
+msgid "By columns"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1457
+msgid "Text file"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2085
+msgid "Resize pages"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2095
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2118
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2132
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2224
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2268
+msgid "Select file to save new file"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2104
+msgid "Combine pages"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2126
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2325
+msgid "Join pdf files"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2194
+msgid "Rotate files"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2213
+msgid "Rotate some pages"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2236
+msgid "Tools to manage pdf files"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2263
+msgid "Remove some pages"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2286
+msgid "Extract some pages"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2291
+msgid "Select file to save extracted pages"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2301
+msgid "Select file to save extracted text"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2310
+msgid "Pdf Tools"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2311
+msgid "Tools to manipulate pdf files"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2318
+msgid "Rotate and flip"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2318
+msgid "rotate_and_flip pdf files"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2319
+msgid "Watermark pdffiles"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2320
+msgid "Textmark pdf files"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2321
+msgid "Paginate pdf files"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2322
+msgid "Rotate pages"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2322
+msgid "Rotate pages of the document files"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2323
+msgid "Remove pages"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2323
+msgid "Remove pages of the document files"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2324
+msgid "Extract pages"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2324
+msgid "Extract pages of the document files"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2325
+msgid "Join pdf files in one document"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2326
+msgid "Split pdf files"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2326
+msgid "Split a pdf in several documents"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2327
+msgid "Combine pdf pages"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2327
+msgid "Combine pdf pages in one page"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2328
+msgid "Resize pdf pages"
+msgstr ""
+
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2341
+#: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2342
+msgid "About"
+msgstr ""
