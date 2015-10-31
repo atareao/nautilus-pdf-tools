@@ -1027,7 +1027,7 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
 	def about(self,menu,selected):
 		ad=Gtk.AboutDialog()
 		ad.set_name(comun.APP)
-		ad.set_icon_name(comun.ICON)
+		ad.set_icon_from_file(comun.ICON)
 		ad.set_version(comun.VERSION)
 		ad.set_copyright('Copyrignt (c) 2012-2015\nLorenzo Carbonell')
 		ad.set_comments(_('Tools to manage pdf files'))
@@ -1047,7 +1047,7 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
 		ad.set_authors(['Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>'])
 		ad.set_documenters(['Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>'])
 		ad.set_program_name(comun.APP)
-		ad.set_logo_icon_name(comun.ICON)
+		ad.set_logo(GdkPixbuf.Pixbuf.new_from_file(comun.ICON))
 		ad.run()
 		ad.destroy()		
 		

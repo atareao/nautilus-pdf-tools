@@ -31,7 +31,7 @@ class ConvertDialog(Gtk.Dialog):
 		Gtk.Dialog.__init__(self,_('Convert to'),None,Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT,Gtk.STOCK_CANCEL,Gtk.ResponseType.CANCEL))
 		self.set_size_request(300, 140)
 		self.set_resizable(False)
-		self.set_icon_name(comun.ICON)
+		self.set_icon_from_file(comun.ICON)
 		self.connect('destroy', self.close_application)
 		#
 		vbox0 = Gtk.VBox(spacing = 5)

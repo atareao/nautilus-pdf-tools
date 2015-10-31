@@ -30,7 +30,7 @@ class SelectPagesDialog(Gtk.Dialog):
 		Gtk.Dialog.__init__(self,title,None,Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT,Gtk.STOCK_CANCEL,Gtk.ResponseType.CANCEL))
 		self.set_size_request(300, 120)
 		self.set_resizable(False)
-		self.set_icon_name(comun.ICON)
+		self.set_icon_from_file(comun.ICON)
 		self.connect('destroy', self.close_application)
 		#
 		vbox0 = Gtk.VBox(spacing = 5)
