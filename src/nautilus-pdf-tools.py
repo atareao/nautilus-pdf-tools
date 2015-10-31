@@ -1026,9 +1026,9 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
 				
 	def about(self,menu,selected):
 		ad=Gtk.AboutDialog()
-		ad.set_name(APP)
-		ad.set_icon_name(ICON)
-		ad.set_version(VERSION)
+		ad.set_name(comun.APP)
+		ad.set_icon_name(comun.ICON)
+		ad.set_version(comun.VERSION)
 		ad.set_copyright('Copyrignt (c) 2012-2015\nLorenzo Carbonell')
 		ad.set_comments(_('Tools to manage pdf files'))
 		ad.set_license(''+
@@ -1046,8 +1046,8 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
 		ad.set_website_label('http://www.atareao.es')
 		ad.set_authors(['Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>'])
 		ad.set_documenters(['Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>'])
-		ad.set_program_name(APP)
-		ad.set_logo_icon_name(ICON)
+		ad.set_program_name(comun.APP)
+		ad.set_logo_icon_name(comun.ICON)
 		ad.run()
 		ad.destroy()		
 		

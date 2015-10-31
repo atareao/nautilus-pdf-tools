@@ -124,5 +124,5 @@ for aformat in GdkPixbuf.Pixbuf.get_formats():
 	MIMETYPES_IMAGE[aformat.get_description()] = {'mimetypes':mime_types,'patterns':patterns}
 MIMETYPES_IMAGE[_('ALL')] = {'mimetypes':all_mime_types,'patterns':all_paterns}
 MIMETYPES_IMAGE = collections.OrderedDict(sorted(MIMETYPES_IMAGE.items()))
-
+print(MIMETYPES_IMAGE)
 
