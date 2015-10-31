@@ -1,8 +1,8 @@
-nautilus-pdf-tools (0.8.0-0extras15.04.3) vivid; urgency=medium
+nautilus-pdf-tools (0.8.0-0extras15.04.4) vivid; urgency=medium
 
   * Fixed minor bug
 
- -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sat, 31 Oct 2015 20:03:34 +0100
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sat, 31 Oct 2015 20:23:39 +0100
 
 nautilus-pdf-tools (0.8.0-0extras15.04.0) vivid; urgency=medium
 
