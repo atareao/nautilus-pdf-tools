@@ -21,11 +21,15 @@
 #
 #
 #
+if __file__.startswith('/usr/share/nautilus-python/extensions') or \
+	os.getcwd().startswith('/usr/share/nautilus-python/extensions'):
+	sys.path.insert(1, '/opt/extras.ubuntu.com/nautilus-pdf-tools/share/nautilus-pdf-tools')
+
 from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import GdkPixbuf
 import cairo
-import math
+
 from comun import SEPARATOR, RESOLUTION, MMTOPIXEL, MMTOPDF, MMTOPNG, TOP, MIDLE, BOTTOM, LEFT, CENTER, RIGHT, ROTATE_000, ROTATE_090, ROTATE_180, ROTATE_270
 
 def create_image_surface_from_file(filename):

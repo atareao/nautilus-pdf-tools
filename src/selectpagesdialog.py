@@ -21,6 +21,10 @@
 #
 #
 #
+if __file__.startswith('/usr/share/nautilus-python/extensions') or \
+	os.getcwd().startswith('/usr/share/nautilus-python/extensions'):
+	sys.path.insert(1, '/opt/extras.ubuntu.com/nautilus-pdf-tools/share/nautilus-pdf-tools')
+
 from gi.repository import Gtk
 import comun
 from comun import _
