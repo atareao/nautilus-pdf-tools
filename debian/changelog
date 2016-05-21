@@ -1,4 +1,4 @@
-nautilus-pdf-tools (0.8.0-0extras15.04.8) vivid; urgency=medium
+nautilus-pdf-tools (0.8.0-0extras15.04.9) vivid; urgency=medium
 
   * Fixed minor bug
 
@@ -74,7 +74,7 @@ nautilus-pdf-tools (0.7.1-0extras13.10.0) saucy; urgency=low
 nautilus-pdf-tools (0.7.0-0extras13.10.0) saucy; urgency=low
 
   * Added new feature to flip pdfs
-  * Added a dialog to show flip and rotate operations  
+  * Added a dialog to show flip and rotate operations
   * Using cairo to rotate and flip pdfs
   * Added a new feature to watermark pdfs with png images
 
