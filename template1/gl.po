@@ -8,20 +8,21 @@ msgstr ""
 "Project-Id-Version: nautilus-pdf-tools 0.9.0\n"
 "Report-Msgid-Bugs-To: lorenzo.carbonell.cerezo@gmail.com\n"
 "POT-Creation-Date: 2013-12-30 08:44+0100\n"
-"PO-Revision-Date: 2012-02-26 19:31+0100\n"
-"Last-Translator: atareao <lorenzo.carbonell.cerezo@gmail.com>\n"
-"Language-Team: Spanish\n"
+"PO-Revision-Date: 2016-05-30 17:47+0100\n"
+"Last-Translator: Manuel X. Lemos <mxlemos@openmailbox.org>\n"
+"Language-Team: Galician\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
+"Language: gl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:244
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:258
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2321
 msgid "Paginate"
-msgstr "Pagina"
+msgstr "Paxinar"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:289
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:444
@@ -45,7 +46,7 @@ msgstr "Inferior"
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:449
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:625
 msgid "Left"
-msgstr "Izquierda"
+msgstr "Esquerda"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:295
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:450
@@ -57,40 +58,37 @@ msgstr "Centro"
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:451
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:627
 msgid "Right"
-msgstr "Derecha"
+msgstr "Dereita"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:298
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:453
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:629
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:776
 msgid "Overwrite original file?"
-msgstr "¿Sobreescribir el archivo original?"
+msgstr "Sobrescribir o ficheiro orixinal?"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:303
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:350
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:517
-#, fuzzy
 msgid "Select font"
-msgstr "Selecciona fuente"
+msgstr "Seleccionar tipo de letra"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:306
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:336
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:461
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:503
 msgid "Select color"
-msgstr "Selecciona color"
+msgstr "Selecciona cor"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:310
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:477
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:644
-#, fuzzy
 msgid "Horizontal position"
 msgstr "Posición horizontal"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:319
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:486
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:653
-#, fuzzy
 msgid "Vertical position"
 msgstr "Posición vertical"
 
@@ -102,31 +100,30 @@ msgstr "Marca de texto"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:458
 msgid "Select Font"
-msgstr "Selecciona fuente"
+msgstr "Selecciona tipo de letra"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:469
-#, fuzzy
 msgid "Text"
-msgstr "Marca de texto"
+msgstr "Texto"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:576
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:590
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:634
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2319
 msgid "Watermark"
-msgstr "Marca de agua"
+msgstr "Marca de auga"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:640
 msgid "Choose File"
-msgstr "Elige archivo"
+msgstr "Elixe ficheiro"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:702
 msgid "Please choose a file"
-msgstr "Por favor selecciona un archivo"
+msgstr "Por favor selecciona un ficheiro"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:710
 msgid "Png files"
-msgstr "Archivos Png"
+msgstr "Ficheiros PNG"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:779
 msgid "Flip vertical"
@@ -138,11 +135,11 @@ msgstr "Volteo horizontal"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:795
 msgid "Rotate"
-msgstr "Gira"
+msgstr "Xirar"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:898
 msgid "Pdf file"
-msgstr "Archivo Pdf"
+msgstr "Ficheiro Pdf"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:907
 msgid "Up"
@@ -150,11 +147,11 @@ msgstr "Arriba"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:914
 msgid "Down"
-msgstr "Abajo"
+msgstr "Abaixo"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:921
 msgid "Add"
-msgstr "Añadir"
+msgstr "Engadir"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:928
 msgid "Remove"
@@ -162,24 +159,24 @@ msgstr "Quitar"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:966
 msgid "Select one or more pdf files"
-msgstr "Selecciona uno o mas archivos pdf"
+msgstr "Selecciona un ou máis ficheiros pdf"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:975
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1434
 msgid "Pdf files"
-msgstr "Archivos Pdf"
+msgstr "Ficheiros PDF"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1023
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1069
 msgid "Select Pages"
-msgstr "Páginas seleccionadas"
+msgstr "Páxinas seleccionadas"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1031
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1077
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1154
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1325
 msgid "Pages"
-msgstr "Páginas"
+msgstr "Páxinas"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1032
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1037
@@ -191,10 +188,10 @@ msgid ""
 "counting from start of the\n"
 "document ej. 1,4,6-9"
 msgstr ""
-"Excribe el número de la página y/o el rango\n"
-"de las páginas separadas por comas empezando\n"
-"a contar desde el inicio del documento, por\n"
-"ejemplo 1,4,6-9"
+"Escribe o número da páxina e/ou o rango\n"
+"das páxinas separadas por comas comezando\n"
+"a contar dende o inicio do documento, por\n"
+"exemplo 1,4,6-9"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1092
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1106
@@ -205,13 +202,12 @@ msgstr "Convertir a"
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1162
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1333
 msgid "Paper size"
-msgstr "Tamaño de hoja"
+msgstr "Tamaño de folla"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1163
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1334
-#, fuzzy
 msgid "Select the size of the output file"
-msgstr "Selecciona tamaño del archivo de salida"
+msgstr "Seleccione o tamaño do ficheiro de saída"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1167
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1338
@@ -221,15 +217,15 @@ msgstr "Orientación"
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1168
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1339
 msgid "Select the orientation of the page"
-msgstr "Selecciona la orientación de las páginas"
+msgstr "Seleccionar a orientación das páxinas"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1172
 msgid "Pages in Page"
-msgstr "Paginas por hoja"
+msgstr "Páxinas por folla"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1173
 msgid "Select how many pages in a page"
-msgstr "Selecciona cuantas páginas por hoja"
+msgstr "Selecciona cantas páxinas por folla"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1177
 msgid "by"
@@ -241,19 +237,19 @@ msgstr "filas por columnas"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1182
 msgid "Sort"
-msgstr "Ordena"
+msgstr "Ordenar"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1183
 msgid "Select the combination sort"
-msgstr "Selecciona el orden de combinación"
+msgstr "Seleccionar a orde de combinación"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1187
 msgid "Set the margin"
-msgstr "Establece el margen"
+msgstr "Establecer a marxe"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1188
 msgid "The margin to the page in mm"
-msgstr "Establece el margen en mm"
+msgstr "Establece a marxe en mm"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1193
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1344
@@ -383,7 +379,7 @@ msgstr "Legal (8 1/2x14)"
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1218
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1369
 msgid "Executive (8 1/4x10 1/2)"
-msgstr "Ejecutivo (8 1/4x10 1/2)"
+msgstr "Executivo (8 1/4x10 1/2)"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1219
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1370
@@ -393,7 +389,7 @@ msgstr "Media carta (5 1/2x8 1/2)"
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1220
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1371
 msgid "Halfexecutive (5 1/4x7 1/4)"
-msgstr "Medio ejecutivo (5 1/4x7 1/4)"
+msgstr "Medio executivo (5 1/4x7 1/4)"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1221
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1372
@@ -403,7 +399,7 @@ msgstr "11x17 (11x17)"
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1222
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1373
 msgid "Statement (5 1/2x8 1/2)"
-msgstr ""
+msgstr "Media carta, 5 1/2 x 8 1/2 polgadas"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1223
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1374
@@ -418,12 +414,12 @@ msgstr "10x14 (10x14)"
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1225
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1376
 msgid "Ledger (17x11)"
-msgstr ""
+msgstr "Libro maior, 17 x 11 polgadas"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1226
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1377
 msgid "Tabloid (11x17)"
-msgstr ""
+msgstr "Tabloide, 11 x 17 polgadas"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1235
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1285
@@ -448,12 +444,11 @@ msgstr "Por columnas"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:1457
 msgid "Text file"
-msgstr "Archivo de texto"
+msgstr "Ficheiro de texto"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2085
-#, fuzzy
 msgid "Resize pages"
-msgstr "Redimensiona las páginas"
+msgstr "Redimensionar páxinas"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2095
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2118
@@ -461,127 +456,120 @@ msgstr "Redimensiona las páginas"
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2224
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2268
 msgid "Select file to save new file"
-msgstr "Selecciona el archivo para guardar el documento"
+msgstr "Selecciona o ficheiro para gardar o documento"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2104
-#, fuzzy
 msgid "Combine pages"
-msgstr "Combina páginas"
+msgstr "Combinar varias páxinas por folla"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2126
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2325
 msgid "Join pdf files"
-msgstr "Une archivos pdf"
+msgstr "Unir ficheiros pdf"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2194
-#, fuzzy
 msgid "Rotate files"
-msgstr "Gira algunas páginas"
+msgstr "Xira ficheiros"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2213
 msgid "Rotate some pages"
-msgstr "Gira algunas páginas"
+msgstr "Xirar algunhas páxinas"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2236
-#, fuzzy
 msgid "Tools to manage pdf files"
-msgstr "Un conjunto de herramientas para trabajar con archivos pdf"
+msgstr "Un conxunto de ferramentas para traballar con ficheiros pdf"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2263
 msgid "Remove some pages"
-msgstr "Quita algunas páginas"
+msgstr "Quitar algunhas páxinas"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2286
 msgid "Extract some pages"
-msgstr "Extrae algunas páginas"
+msgstr "Extraer algunhas páxinas"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2291
 msgid "Select file to save extracted pages"
-msgstr "Selecciona el archivo para guardar las páginas extraidas"
+msgstr "Selecciona o ficheiro para gardar as páxinas extraídas"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2301
-#, fuzzy
 msgid "Select file to save extracted text"
-msgstr "Selecciona el archivo para guardar las páginas extraidas"
+msgstr "Selecciona un ficheiro para gardar as páxinas extraídas"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2310
 msgid "Pdf Tools"
-msgstr "Herramientas Pdf"
+msgstr "Ferramentas PDF"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2311
 msgid "Tools to manipulate pdf files"
-msgstr "Un conjunto de herramientas para trabajar con archivos pdf"
+msgstr "Un conxunto de ferramentas para traballar con ficheiros pdf"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2318
 msgid "Rotate and flip"
-msgstr ""
+msgstr "Xirar e voltear"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2318
-#, fuzzy
 msgid "rotate_and_flip pdf files"
-msgstr "Une archivos pdf"
+msgstr "Xira e voltea ficheiros pdf"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2319
-#, fuzzy
 msgid "Watermark pdffiles"
-msgstr "Selecciona uno o mas archivos pdf"
+msgstr "Engade unha marca de auga ao ficheiro pdf"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2320
 msgid "Textmark pdf files"
-msgstr "Marca archivos con texto"
+msgstr "Marca ficheiros con texto"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2321
 msgid "Paginate pdf files"
-msgstr "Pagina archivos pdf"
+msgstr "Paxina ficheiros pdf"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2322
 msgid "Rotate pages"
-msgstr "Gira algunas páginas"
+msgstr "Xirar páxinas"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2322
 msgid "Rotate pages of the document files"
-msgstr "Gira páginas de archivos pdf"
+msgstr "Xira páxinas de ficheiros pdf"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2323
 msgid "Remove pages"
-msgstr "Quita páginas"
+msgstr "Quitar páxinas"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2323
 msgid "Remove pages of the document files"
-msgstr "Quita algunas páginas del documento"
+msgstr "Quita algunhas páxinas do documento"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2324
 msgid "Extract pages"
-msgstr "Extrae páginas"
+msgstr "Extraer páxinas"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2324
 msgid "Extract pages of the document files"
-msgstr "Extrae páginas del documento"
+msgstr "Extrae páxinas do documento"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2325
 msgid "Join pdf files in one document"
-msgstr "Une archivos pdf en un único documento"
+msgstr "Une ficheiros pdf nun único documento"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2326
 msgid "Split pdf files"
-msgstr "Separa un archivo pdf"
+msgstr "Separar un ficheiro pdf"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2326
-#, fuzzy
 msgid "Split a pdf in several documents"
-msgstr "Une archivos pdf en un único documento"
+msgstr "Separa ficheiros pdf en varios documentos"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2327
 msgid "Combine pdf pages"
-msgstr "Combina varias paginas por hoja"
+msgstr "Combinar páxinas"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2327
 msgid "Combine pdf pages in one page"
-msgstr "Combina varias páginas en una única"
+msgstr "Combina varias páxinas nunha única"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2328
 msgid "Resize pdf pages"
-msgstr "Redimensiona páginas"
+msgstr "Redimensionar páxinas"
 
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2341
 #: /home/atareao_s/Copy/PROGRAMACION/Python/saucy/nautilus-pdf-tools/src/nautilus-pdf-tools.py:2342
