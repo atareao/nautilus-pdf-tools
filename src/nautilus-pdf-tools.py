@@ -35,9 +35,12 @@ try:
     sys.path.insert(0, '/opt/extras.ubuntu.com/pdf-tools/share/pdf-tools')
     from pdfmanager import PDFManager
     from comun import APPNAME, ICON, VERSION
+    import tools
 except Exception as e:
     print(e)
     exit(-1)
+
+SEPARATOR = u'\u2015' * 10
 
 """
 Tools to manipulate pdf
@@ -87,7 +90,7 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
         """Adds the 'Replace in Filenames' menu item to the File Manager
         right-click menu, connects its 'activate' signal to the 'run' method
         passing the selected Directory/File"""
-        if all_files_are_pdf(sel_items):
+        if tools.all_files_are_pdf(sel_items):
             top_menuitem = FileManager.MenuItem(
                 name='PdfToolsMenuProvider::Gtk-pdf-tools',
                 label=_('Pdf Tools'),
@@ -154,7 +157,7 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
             submenu.append_item(sub_menuitem_99)
             #
             return top_menuitem,
-        elif all_files_are_images(sel_items):
+        elif tools.all_files_are_images(sel_items):
             top_menuitem = FileManager.MenuItem(
                 name='PdfToolsMenuProvider::Gtk-pdf-tools',
                 label=_('Pdf Tools'),
