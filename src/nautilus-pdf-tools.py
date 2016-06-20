@@ -196,7 +196,6 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
         return
 
     def about(self, widget):
-        widget.set_sensitive(False)
         ad = Gtk.AboutDialog()
         ad.set_name(APPNAME)
         ad.set_version(VERSION)
@@ -226,7 +225,6 @@ this program. If not, see <http://www.gnu.org/licenses/>.
         ad.set_program_name(APPNAME)
         ad.run()
         ad.destroy()
-        widget.set_sensitive(True)
 
 if __name__ == '__main__':
     '''
