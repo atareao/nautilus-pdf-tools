@@ -1,0 +1,791 @@
+# Spanish translations for PACKAGE package.
+# Copyright (C) 2012 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# atareao <lorenzo.carbonell.cerezo@gmail.com>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nautilus-pdf-tools 0.9.0\n"
+"Report-Msgid-Bugs-To: lorenzo.carbonell.cerezo@gmail.com\n"
+"POT-Creation-Date: 2018-03-19 10:36+0100\n"
+"PO-Revision-Date: 2012-02-26 19:31+0100\n"
+"Last-Translator: atareao <lorenzo.carbonell.cerezo@gmail.com>\n"
+"Language-Team: Spanish\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:96
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:163
+msgid "Pdf Tools"
+msgstr "Herramientas Pdf"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:97
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:164
+msgid "Tools to manipulate pdf files"
+msgstr "Un conjunto de herramientas para trabajar con archivos pdf"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:104
+msgid "Rotate and flip"
+msgstr ""
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:104
+#, fuzzy
+msgid "rotate_and_flip pdf files"
+msgstr "Une archivos pdf"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:106
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/watermarkdialog.py:37
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/watermarkdialog.py:54
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/watermarkdialog.py:101
+msgid "Watermark"
+msgstr "Marca de agua"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:106
+#, fuzzy
+msgid "Watermark pdffiles"
+msgstr "Selecciona uno o mas archivos pdf"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:108
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/textmarkdialog.py:36
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/textmarkdialog.py:51
+msgid "Textmark"
+msgstr "Marca de texto"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:108
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:238
+msgid "Textmark pdf files"
+msgstr "Marca archivos con texto"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:110
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/paginatedialog.py:35
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/paginatedialog.py:52
+msgid "Paginate"
+msgstr "Pagina"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:110
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:201
+msgid "Paginate pdf files"
+msgstr "Pagina archivos pdf"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:112
+msgid "Rotate pages"
+msgstr "Gira algunas páginas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:113
+msgid "Rotate pages of the document files"
+msgstr "Gira páginas de archivos pdf"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:115
+msgid "Remove pages"
+msgstr "Quita páginas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:116
+msgid "Remove pages of the document files"
+msgstr "Quita algunas páginas del documento"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:118
+msgid "Extract pages"
+msgstr "Extrae páginas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:119
+msgid "Extract pages of the document files"
+msgstr "Extrae páginas del documento"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:121
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:173
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:179
+msgid "Join pdf files"
+msgstr "Une archivos pdf"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:122
+msgid "Join pdf files in one document"
+msgstr "Une archivos pdf en un único documento"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:124
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:361
+msgid "Split pdf files"
+msgstr "Separa un archivo pdf"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:125
+#, fuzzy
+msgid "Split a pdf in several documents"
+msgstr "Une archivos pdf en un único documento"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:127
+msgid "Combine pdf pages"
+msgstr "Combina varias paginas por hoja"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:128
+msgid "Combine pdf pages in one page"
+msgstr "Combina varias páginas en una única"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:130
+msgid "Reduce pdf size"
+msgstr ""
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:132
+msgid "Resize pdf pages"
+msgstr "Redimensiona páginas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:134
+#, fuzzy
+msgid "Convert pdf to png"
+msgstr "Convertir a"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:135
+msgid "Convert pdf file to png image"
+msgstr ""
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:153
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:154
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:189
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:190
+msgid "About"
+msgstr "Acerca de..."
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:170
+#, fuzzy
+msgid "Convert to pdf"
+msgstr "Convertir a"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:171
+#, fuzzy
+msgid "Convert images to pdf"
+msgstr "Convertir a"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/nautilus-pdf-tools.py:203
+msgid "A weather indicator"
+msgstr ""
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/joinpdfsdialog.py:60
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:70
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/selectpagesrotatedialog.py:85
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:88
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:75
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/selectpagesdialog.py:67
+#, fuzzy
+msgid "Output file"
+msgstr "Gira algunas páginas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/joinpdfsdialog.py:61
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:71
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/selectpagesrotatedialog.py:86
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:89
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:76
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/selectpagesdialog.py:68
+#, fuzzy
+msgid "Select the output file"
+msgstr "Selecciona tamaño del archivo de salida"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/joinpdfsdialog.py:83
+msgid "Pdf file"
+msgstr "Archivo Pdf"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/joinpdfsdialog.py:111
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:196
+msgid "Up"
+msgstr "Arriba"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/joinpdfsdialog.py:119
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:204
+msgid "Down"
+msgstr "Abajo"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/joinpdfsdialog.py:127
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:212
+msgid "Add"
+msgstr "Añadir"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/joinpdfsdialog.py:135
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:220
+msgid "Remove"
+msgstr "Quitar"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/joinpdfsdialog.py:148
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:140
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/selectpagesrotatedialog.py:100
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:186
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:234
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/selectpagesdialog.py:82
+msgid "Select file to save new file"
+msgstr "Selecciona el archivo para guardar el documento"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/joinpdfsdialog.py:214
+msgid "Select one or more pdf files"
+msgstr "Selecciona uno o mas archivos pdf"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/joinpdfsdialog.py:225
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/tools.py:97
+msgid "Pdf files"
+msgstr "Archivos Pdf"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:49
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/selectpagesrotatedialog.py:54
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:45
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/selectpagesdialog.py:53
+msgid "Pages"
+msgstr "Páginas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:56
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:52
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:56
+msgid "Paper size"
+msgstr "Tamaño de hoja"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:57
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:53
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:57
+#, fuzzy
+msgid "Select the size of the output file"
+msgstr "Selecciona tamaño del archivo de salida"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:63
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:58
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:62
+msgid "Orientation"
+msgstr "Orientación"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:64
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:59
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:63
+msgid "Select the orientation of the page"
+msgstr "Selecciona la orientación de las páginas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:78
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:95
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:83
+msgid "A0"
+msgstr "A0"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:79
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:96
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:84
+msgid "A1"
+msgstr "A1"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:80
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:97
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:85
+msgid "A2"
+msgstr "A2"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:81
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:98
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:86
+msgid "A3"
+msgstr "A3"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:82
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:99
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:87
+msgid "A4"
+msgstr "A4"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:83
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:100
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:88
+msgid "A5"
+msgstr "A5"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:84
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:101
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:89
+msgid "A6"
+msgstr "A6"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:85
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:102
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:90
+msgid "A7"
+msgstr "A7"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:86
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:103
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:91
+msgid "A8"
+msgstr "A8"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:87
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:104
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:92
+msgid "A9"
+msgstr "A9"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:88
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:105
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:93
+msgid "A10"
+msgstr "A10"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:89
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:106
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:94
+msgid "B0"
+msgstr "B0"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:90
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:107
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:95
+msgid "B1"
+msgstr "B1"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:91
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:108
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:96
+msgid "B2"
+msgstr "B2"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:92
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:109
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:97
+msgid "B3"
+msgstr "B3"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:93
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:110
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:98
+msgid "B4"
+msgstr "B4"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:94
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:111
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:99
+msgid "B5"
+msgstr "B5"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:95
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:112
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:100
+msgid "B6"
+msgstr "B6"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:96
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:113
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:101
+msgid "B7"
+msgstr "B7"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:97
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:114
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:102
+msgid "B8"
+msgstr "B8"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:98
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:115
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:103
+msgid "B9"
+msgstr "B9"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:99
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:116
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:104
+msgid "B10"
+msgstr "B10"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:100
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:117
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:105
+msgid "Letter (8 1/2x11)"
+msgstr "Carta (8 1/2x11)"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:101
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:118
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:106
+msgid "Note (8 1/2x11)"
+msgstr "Nota (8 1/2x11)"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:102
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:119
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:107
+msgid "Legal (8 1/2x14)"
+msgstr "Legal (8 1/2x14)"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:103
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:120
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:108
+msgid "Executive (8 1/4x10 1/2)"
+msgstr "Ejecutivo (8 1/4x10 1/2)"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:104
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:121
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:109
+msgid "Halfetter (5 1/2x8 1/2)"
+msgstr "Media carta (5 1/2x8 1/2)"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:105
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:122
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:110
+msgid "Halfexecutive (5 1/4x7 1/4)"
+msgstr "Medio ejecutivo (5 1/4x7 1/4)"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:106
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:123
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:111
+msgid "11x17 (11x17)"
+msgstr "11x17 (11x17)"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:107
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:124
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:112
+msgid "Statement (5 1/2x8 1/2)"
+msgstr ""
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:108
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:125
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:113
+msgid "Folio (8 1/2x13)"
+msgstr "Folio (8 1/2x13)"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:109
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:126
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:114
+msgid "10x14 (10x14)"
+msgstr "10x14 (10x14)"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:110
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:127
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:115
+msgid "Ledger (17x11)"
+msgstr ""
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:111
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:128
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:116
+msgid "Tabloid (11x17)"
+msgstr ""
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:121
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:161
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:138
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:207
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:127
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:354
+msgid "Vertical"
+msgstr "Vertical"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/resizedialog.py:122
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:139
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:128
+msgid "Horizontal"
+msgstr "Horizontal"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/selectpagesrotatedialog.py:48
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/selectpagesdialog.py:47
+msgid "Select Pages"
+msgstr "Páginas seleccionadas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/selectpagesrotatedialog.py:55
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/selectpagesrotatedialog.py:62
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/selectpagesdialog.py:54
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/selectpagesdialog.py:61
+msgid ""
+"Type page number and/or page\n"
+"ranges separated by commas\n"
+"counting from start of the\n"
+"document ej. 1,4,6-9"
+msgstr ""
+"Excribe el número de la página y/o el rango\n"
+"de las páginas separadas por comas empezando\n"
+"a contar desde el inicio del documento, por\n"
+"ejemplo 1,4,6-9"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/flipdialog.py:83
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/paginatedialog.py:96
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/textmarkdialog.py:86
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/watermarkdialog.py:93
+msgid "Overwrite original file?"
+msgstr "¿Sobreescribir el archivo original?"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/flipdialog.py:88
+msgid "Flip vertical"
+msgstr "Volteo vertical"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/flipdialog.py:107
+msgid "Flip horizontal"
+msgstr "Volteo horizontal"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/flipdialog.py:126
+msgid "Rotate"
+msgstr "Gira"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/convertdialog.py:32
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/convertdialog.py:48
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/convertdialog.py:60
+msgid "Convert to"
+msgstr "Convertir a"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/convertdialog.py:58
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:265
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/comun.py:129
+msgid "ALL"
+msgstr ""
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/tools.py:122
+msgid "Text file"
+msgstr "Archivo de texto"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/paginatedialog.py:87
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/textmarkdialog.py:79
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/watermarkdialog.py:84
+msgid "Top"
+msgstr "Superior"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/paginatedialog.py:88
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/textmarkdialog.py:80
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/watermarkdialog.py:85
+msgid "Middle"
+msgstr "Medio"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/paginatedialog.py:89
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/textmarkdialog.py:81
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/watermarkdialog.py:86
+msgid "Bottom"
+msgstr "Inferior"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/paginatedialog.py:92
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/textmarkdialog.py:83
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/watermarkdialog.py:89
+msgid "Left"
+msgstr "Izquierda"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/paginatedialog.py:93
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/textmarkdialog.py:84
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/watermarkdialog.py:90
+msgid "Center"
+msgstr "Centro"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/paginatedialog.py:94
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/textmarkdialog.py:85
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/watermarkdialog.py:91
+msgid "Right"
+msgstr "Derecha"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/paginatedialog.py:105
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/paginatedialog.py:206
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/textmarkdialog.py:200
+#, fuzzy
+msgid "Select font"
+msgstr "Selecciona fuente"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/paginatedialog.py:108
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/paginatedialog.py:183
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/textmarkdialog.py:97
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/textmarkdialog.py:177
+msgid "Select color"
+msgstr "Selecciona color"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/paginatedialog.py:112
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/textmarkdialog.py:110
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/watermarkdialog.py:112
+#, fuzzy
+msgid "Horizontal position"
+msgstr "Posición horizontal"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/paginatedialog.py:127
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/textmarkdialog.py:123
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/watermarkdialog.py:126
+#, fuzzy
+msgid "Vertical position"
+msgstr "Posición vertical"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/paginatedialog.py:141
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/textmarkdialog.py:136
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/watermarkdialog.py:155
+#, fuzzy
+msgid "Set horizontal margin"
+msgstr "Establece el margen"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/paginatedialog.py:154
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/textmarkdialog.py:149
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/watermarkdialog.py:168
+#, fuzzy
+msgid "Set vertical margin"
+msgstr "Establece el margen"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/textmarkdialog.py:94
+msgid "Select Font"
+msgstr "Selecciona fuente"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/textmarkdialog.py:104
+#, fuzzy
+msgid "Text"
+msgstr "Marca de texto"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:64
+msgid "Pages in Page"
+msgstr "Paginas por hoja"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:65
+msgid "Select how many pages in a page"
+msgstr "Selecciona cuantas páginas por hoja"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:70
+msgid "by"
+msgstr "por"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:71
+msgid "rows by columns"
+msgstr "filas por columnas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:76
+msgid "Sort"
+msgstr "Ordena"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:77
+msgid "Select the combination sort"
+msgstr "Selecciona el orden de combinación"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:82
+msgid "Set the margin"
+msgstr "Establece el margen"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:83
+msgid "The margin to the page in mm"
+msgstr "Establece el margen en mm"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:161
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:222
+msgid "By rows"
+msgstr "Por filas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/combinedialog.py:162
+msgid "By columns"
+msgstr "Por columnas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:79
+#, fuzzy
+msgid "Resize pages"
+msgstr "Redimensiona las páginas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:91
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:101
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:131
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:158
+#, fuzzy
+msgid "Convert pdfs to png"
+msgstr "Convertir a"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:115
+#, fuzzy
+msgid "Combine pages"
+msgstr "Combina páginas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:146
+#, fuzzy
+msgid "Create pdf from images"
+msgstr "Pagina archivos pdf"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:214
+msgid "Reduce pdf files size"
+msgstr ""
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:262
+#, fuzzy
+msgid "Watermark pdf files"
+msgstr "Selecciona uno o mas archivos pdf"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:279
+#, fuzzy
+msgid "Rotate files"
+msgstr "Gira algunas páginas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:294
+#, fuzzy
+msgid "Rotate pdf files"
+msgstr "Gira algunas páginas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:312
+msgid "Rotate some pages"
+msgstr "Gira algunas páginas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:324
+#, fuzzy
+msgid "Rotate some pages in pdf"
+msgstr "Gira algunas páginas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:341
+msgid "Remove some pages"
+msgstr "Quita algunas páginas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:348
+#, fuzzy
+msgid "Remove some pages in pdf"
+msgstr "Quita algunas páginas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:376
+msgid "Extract some pages"
+msgstr "Extrae algunas páginas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:383
+#, fuzzy
+msgid "Extract some pages in pdf"
+msgstr "Extrae algunas páginas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/pdfmanager.py:400
+#, fuzzy
+msgid "Select file to save extracted text"
+msgstr "Selecciona el archivo para guardar las páginas extraidas"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:69
+msgid "Margen"
+msgstr ""
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:70
+#, fuzzy
+msgid "Select the size of the margin"
+msgstr "Selecciona tamaño del archivo de salida"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:138
+#, fuzzy
+msgid "No margin"
+msgstr "Establece el margen"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:139
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:363
+msgid "small margin"
+msgstr ""
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:140
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:365
+msgid "big margin"
+msgstr ""
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:169
+msgid "Image"
+msgstr ""
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/createpdffromImagesdialog.py:300
+#, fuzzy
+msgid "Select one or more image files"
+msgstr "Selecciona uno o mas archivos pdf"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/watermarkdialog.py:108
+msgid "Choose File"
+msgstr "Elige archivo"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/watermarkdialog.py:140
+#, fuzzy
+msgid "Watermark zoom"
+msgstr "Marca de agua"
+
+#: /datos/Sync/Programacion/Nautilus/nautilus-pdf-tools/src/pdf-tools/watermarkdialog.py:230
+#, fuzzy
+msgid "Select one image"
+msgstr "Páginas seleccionadas"
+
+#~ msgid "Please choose a file"
+#~ msgstr "Por favor selecciona un archivo"
+
+#~ msgid "Png files"
+#~ msgstr "Archivos Png"
+
+#, fuzzy
+#~ msgid "Tools to manage pdf files"
+#~ msgstr "Un conjunto de herramientas para trabajar con archivos pdf"
+
+#~ msgid "Select file to save extracted pages"
+#~ msgstr "Selecciona el archivo para guardar las páginas extraidas"
