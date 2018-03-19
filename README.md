@@ -1,6 +1,4 @@
-==================
-nautilus-pdf-tools
-==================
+# nautilus-pdf-tools
 
 A set of tools to work with PDF documents from Nautilus
 
@@ -10,23 +8,20 @@ https://github.com/atareao/nautilus-pdf-tools
 or
 http://www.atareao.es
 
-============
-Requirements
-============
+## Requirements
 
 Required dependencies:
 
-python,
-python-gi,
-gir1.2-gtk-3.0,
-gir1.2-gdkpixbuf-2.0,
-gir1.2-nautilus-3.0,
-python-nautilus,
-pdf-tools
+```
+python
+python-gi
+gir1.2-gtk-3.0
+gir1.2-gdkpixbuf-2.0
+gir1.2-nautilus-3.0
+python-nautilus
+```
 
-========
-Download
-========
+## Download
 
 Download the package:
 
