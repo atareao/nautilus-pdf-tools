@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# This file is part of pdf-tools
+# This file is part of nautilus-pdf-tools
 #
-# Copyright (C) 2012-2016 Lorenzo Carbonell
-# lorenzo.carbonell.cerezo@gmail.com
+# Copyright (C) 2012-2018 Lorenzo Carbonell
+# <lorenzo.carbonell.cerezo@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ import shutil
 
 
 def get_num_of_pages(file_in):
-    file_in = open(file_in_name, 'rb')
+    file_in = open(file_in, 'rb')
     reader = PyPDF2.PdfFileReader(file_in)
     ans = reader.getNumPages()
     file_in.close()

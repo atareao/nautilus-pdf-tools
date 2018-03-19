@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# This file is part of pdf-tools
+# This file is part of nautilus-pdf-tools
 #
-# Copyright (C) 2012-2016 Lorenzo Carbonell
-# lorenzo.carbonell.cerezo@gmail.com
+# Copyright (C) 2012-2018 Lorenzo Carbonell
+# <lorenzo.carbonell.cerezo@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -23,23 +23,18 @@
 import gi
 try:
     gi.require_version('Gtk', '3.0')
-    GTKVERSION = '3.0'
-    print('Gtk version:', GTKVERSION)
+    gi.require_version('Gdk', '3.0')
 except Exception as e:
-    gi.require_version('Gtk', '2.0')
-    GTKVERSION = '2.0'
-    print('Gtk version:', GTKVERSION)
     print(e)
+    exit(1)
 from gi.repository import Gtk
 from gi.repository import Gdk
-from gi.repository import GdkPixbuf
 import cairo
 import math
 import tools
 
-from comun import RESOLUTION, MMTOPIXEL, MMTOPDF, MMTOPNG, TOP,\
-    MIDLE, BOTTOM, LEFT, CENTER, RIGHT, ROTATE_000, ROTATE_090, ROTATE_180,\
-    ROTATE_270
+from comun import RESOLUTION, MMTOPIXEL, TOP,\
+    MIDLE, BOTTOM, LEFT, CENTER, RIGHT
 
 
 class MiniView(Gtk.DrawingArea):
@@ -77,36 +72,33 @@ class MiniView(Gtk.DrawingArea):
         self.size = 12
         self.position_vertical = TOP
         self.position_horizontal = LEFT
-        if GTKVERSION == '3.0':
-            self.connect('draw', self.on_expose, None)
-        elif GTKVERSION == '2.0':
-            self.connect('expose_event', self.on_expose, None)
+        self.connect('draw', self.on_expose, None)
         self.set_size_request(self.width, self.height)
 
     def on_expose(self, widget, cr, data):
         if self.page:
             if self.rotation_angle == 0.0 or self.rotation_angle == 2.0:
-                zw = (self.width-2.0*self.margin)/self.or_width
-                zh = (self.height-2.0*self.margin)/self.or_height
+                zw = (self.width - 2.0 * self.margin) / self.or_width
+                zh = (self.height - 2.0 * self.margin) / self.or_height
                 if zw < zh:
                     self.zoom = zw
                 else:
                     self.zoom = zh
-                self.page_width = self.or_width*self.zoom
-                self.page_height = self.or_height*self.zoom
-                self.margin_width = (self.width - self.page_width)/2.0
-                self.margin_height = (self.height - self.page_height)/2.0
+                self.page_width = self.or_width * self.zoom
+                self.page_height = self.or_height * self.zoom
+                self.margin_width = (self.width - self.page_width) / 2.0
+                self.margin_height = (self.height - self.page_height) / 2.0
             else:
-                zw = (self.width-2.0*self.margin)/self.or_height
-                zh = (self.height-2.0*self.margin)/self.or_width
+                zw = (self.width - 2.0 * self.margin) / self.or_height
+                zh = (self.height - 2.0 * self.margin) / self.or_width
                 if zw < zh:
                     self.zoom = zw
                 else:
                     self.zoom = zh
-                self.page_width = self.or_height*self.zoom
-                self.page_height = self.or_width*self.zoom
-                self.margin_width = (self.width - self.page_width)/2.0
-                self.margin_height = (self.height - self.page_height)/2.0
+                self.page_width = self.or_height * self.zoom
+                self.page_height = self.or_width * self.zoom
+                self.margin_width = (self.width - self.page_width) / 2.0
+                self.margin_height = (self.height - self.page_height) / 2.0
             self.image_surface = cairo.ImageSurface(
                 cairo.FORMAT_RGB24,
                 int(self.page_width),
@@ -116,18 +108,19 @@ class MiniView(Gtk.DrawingArea):
             context.set_source_rgba(1.0, 1.0, 1.0, 1.0)
             context.paint()
             mtr = cairo.Matrix()
-            mtr.rotate(self.rotation_angle*math.pi/2.0)
-            mtr.scale(self.zoom*RESOLUTION, self.zoom*RESOLUTION)
+            mtr.rotate(self.rotation_angle * math.pi / 2.0)
+            mtr.scale(self.zoom * RESOLUTION, self.zoom * RESOLUTION)
             context.transform(mtr)
             if self.rotation_angle == 1.0:
-                    context.translate(0.0,
-                                      -self.page_width/self.zoom/RESOLUTION)
+                    context.translate(
+                        0.0, -self.page_width / self.zoom / RESOLUTION)
             elif self.rotation_angle == 2.0:
-                    context.translate(-self.page_width/self.zoom/RESOLUTION,
-                                      -self.page_height/self.zoom/RESOLUTION)
+                    context.translate(
+                        -self.page_width / self.zoom / RESOLUTION,
+                        -self.page_height / self.zoom / RESOLUTION)
             elif self.rotation_angle == 3.0:
-                    context.translate(-self.page_height/self.zoom/RESOLUTION,
-                                      0.0)
+                    context.translate(
+                        -self.page_height / self.zoom / RESOLUTION, 0.0)
             self.page.render(context)
             context.restore()
             if self.image:
@@ -140,19 +133,19 @@ class MiniView(Gtk.DrawingArea):
                 if self.position_vertical == TOP:
                     y = self.image_margin_height
                 elif self.position_vertical == MIDLE:
-                    y = (self.or_height - img_height/MMTOPIXEL)/2
+                    y = (self.or_height - img_height / MMTOPIXEL) / 2
                 elif self.position_vertical == BOTTOM:
-                    y = (self.or_height - img_height/MMTOPIXEL -
+                    y = (self.or_height - img_height / MMTOPIXEL -
                          self.image_margin_height)
                 if self.position_horizontal == LEFT:
                     x = self.image_margin_width
                 elif self.position_horizontal == CENTER:
-                    x = (self.or_width - img_width/MMTOPIXEL)/2
+                    x = (self.or_width - img_width / MMTOPIXEL) / 2
                 elif self.position_horizontal == RIGHT:
-                    x = (self.or_width - img_width/MMTOPIXEL -
+                    x = (self.or_width - img_width / MMTOPIXEL -
                          self.image_margin_width)
-                context.translate(x*self.zoom, y*self.zoom)
-                context.scale(self.zoom/MMTOPIXEL, self.zoom/MMTOPIXEL)
+                context.translate(x * self.zoom, y * self.zoom)
+                context.scale(self.zoom / MMTOPIXEL, self.zoom / MMTOPIXEL)
                 context.set_source_surface(watermark_surface)
                 context.paint()
                 context.restore()
@@ -166,36 +159,36 @@ class MiniView(Gtk.DrawingArea):
                 if self.position_vertical == TOP:
                     y = self.text_margin_height + font_height
                 elif self.position_vertical == MIDLE:
-                    y = (self.or_height + font_height)/2
+                    y = (self.or_height + font_height) / 2
                 elif self.position_vertical == BOTTOM:
                     y = self.or_height - self.text_margin_height
                 if self.position_horizontal == LEFT:
                     x = self.text_margin_width
                 elif self.position_horizontal == CENTER:
-                    x = (self.or_width - font_width)/2
+                    x = (self.or_width - font_width) / 2
                 elif self.position_horizontal == RIGHT:
                     x = (self.or_width - font_width + xbearing -
                          self.text_margin_width)
-                context.move_to(x*self.zoom, y*self.zoom)
-                context.translate(x*self.zoom, y*self.zoom)
+                context.move_to(x * self.zoom, y * self.zoom)
+                context.translate(x * self.zoom, y * self.zoom)
                 context.scale(self.zoom, self.zoom)
                 context.show_text(self.text)
                 context.restore()
         cr.save()
         cr.set_source_rgba(0.0, 0.0, 0.0, 0.5)
-        cr.rectangle(self.margin_width-self.border,
-                     self.margin_height-self.border,
-                     self.page_width+2.0*self.border,
-                     self.page_height+2.0*self.border)
+        cr.rectangle(self.margin_width - self.border,
+                     self.margin_height - self.border,
+                     self.page_width + 2.0 * self.border,
+                     self.page_height + 2.0 * self.border)
         cr.stroke()
         cr.restore()
         #
         if self.flip_vertical:
             cr.scale(1, -1)
-            cr.translate(0, -(2*self.margin_height+self.page_height))
+            cr.translate(0, -(2 * self.margin_height + self.page_height))
         if self.flip_horizontal:
             cr.scale(-1, 1)
-            cr.translate(-(2*self.margin_width+self.page_width), 0)
+            cr.translate(-(2 * self.margin_width + self.page_width), 0)
         if self.page:
             cr.set_source_surface(self.image_surface,
                                   self.margin_width,
@@ -207,8 +200,8 @@ class MiniView(Gtk.DrawingArea):
         self.rotation_angle = 0.0
         self.drawings = []
         self.or_width, self.or_height = self.page.get_size()
-        self.or_width = int(self.or_width*RESOLUTION)
-        self.or_height = int(self.or_height*RESOLUTION)
+        self.or_width = int(self.or_width * RESOLUTION)
+        self.or_height = int(self.or_height * RESOLUTION)
         self.queue_draw()
 
     def set_rotation_angle(self, rotation_angle):

@@ -18,6 +18,7 @@ python-gi
 gir1.2-gtk-3.0
 gir1.2-gdkpixbuf-2.0
 gir1.2-nautilus-3.0
+gir1.2-poppler-0.18
 python-nautilus
 ```
 

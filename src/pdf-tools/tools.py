@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# This file is part of pdf-tools
+# This file is part of nautilus-pdf-tools
 #
-# Copyright (C) 2012-2016 Lorenzo Carbonell
-# lorenzo.carbonell.cerezo@gmail.com
+# Copyright (C) 2012-2018 Lorenzo Carbonell
+# <lorenzo.carbonell.cerezo@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,13 +19,20 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
-from gi.repository import GObject
+import gi
+try:
+    gi.require_version('GObject', '2.0')
+    gi.require_version('Gtk', '3.0')
+    gi.require_version('Gdk', '3.0')
+    gi.require_version('GdkPixbuf', '2.0')
+    gi.require_version('Poppler', '0.18')
+except Exception as e:
+    print(e)
+    exit(1)
 from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import GdkPixbuf
 from gi.repository import Poppler
-from comun import ROTATE_000, ROTATE_090, ROTATE_180, ROTATE_270
 from comun import MIMETYPES_PDF, MIMETYPES_PNG
 from comun import MMTOPNG, MMTOPIXEL, EXTENSIONS_FROM
 from comun import _
@@ -45,7 +52,7 @@ def get_pages_from_ranges(ranges):
     pages = []
     for rang in ranges:
         if len(rang) > 1:
-            for i in range(rang[0], rang[1]+1):
+            for i in range(rang[0], rang[1] + 1):
                 if i not in pages:
                     pages.append(i)
         else:

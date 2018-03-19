@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# This file is part of pdf-tools
+# This file is part of nautilus-pdf-tools
 #
-# Copyright (C) 2012-2016 Lorenzo Carbonell
-# lorenzo.carbonell.cerezo@gmail.com
+# Copyright (C) 2012-2018 Lorenzo Carbonell
+# <lorenzo.carbonell.cerezo@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,19 +22,11 @@
 import gi
 try:
     gi.require_version('Gtk', '3.0')
-    GTKVERSION = '3.0'
-    print('Gtk version:', GTKVERSION)
-except Exception as e:
-    gi.require_version('Gtk', '2.0')
-    GTKVERSION = '2.0'
-    print('Gtk version:', GTKVERSION)
-    print(e)
-try:
-    gi.require_version('Poppler', '0.18')
     gi.require_version('GdkPixbuf', '2.0')
+    gi.require_version('Poppler', '0.18')
 except Exception as e:
     print(e)
-    exit(-1)
+    exit(1)
 try:
     import PyPDF2
     import pypdfapi as pdfapi

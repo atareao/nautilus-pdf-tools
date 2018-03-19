@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# This file is part of pdf-tools
+# This file is part of nautilus-pdf-tools
 #
-# Copyright (C) 2012-2016 Lorenzo Carbonell
-# lorenzo.carbonell.cerezo@gmail.com
+# Copyright (C) 2012-2018 Lorenzo Carbonell
+# <lorenzo.carbonell.cerezo@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,14 +21,10 @@
 
 import gi
 try:
-    gi.require_version('Gtk', '3.0')
-    GTKVERSION = '3.0'
-    print('Gtk version:', GTKVERSION)
+    gi.require_version('GdkPixbuf', '2.0')
 except Exception as e:
-    gi.require_version('Gtk', '2.0')
-    GTKVERSION = '2.0'
-    print('Gtk version:', GTKVERSION)
     print(e)
+    exit(1)
 import os
 import locale
 import gettext
@@ -36,12 +32,15 @@ import sys
 from gi.repository import GdkPixbuf
 import collections
 
+USRDIR = '/opt/extras.ubuntu.com/pdf-tools/'
+
 
 def is_package():
-    return __file__.find('src') < 0
+    return (__file__.startswith(USRDIR) or os.getcwd().startswith(USRDIR))
 
-APP = 'pdf-tools'
-APPNAME = 'PDF Tools'
+
+APP = 'nautilus-pdf-tools'
+APPNAME = 'Nautilus PDF Tools'
 
 if is_package():
     ROOTDIR = '/opt/extras.ubuntu.com/pdf-tools/share/'
@@ -52,12 +51,12 @@ if is_package():
     CHANGELOG = os.path.join(APPDIR, 'changelog')
 else:
     ROOTDIR = os.path.dirname(__file__)
-    LANGDIR = os.path.normpath(os.path.join(ROOTDIR, '../template1'))
+    LANGDIR = os.path.normpath(os.path.join(ROOTDIR, '../../po'))
     APPDIR = ROOTDIR
-    DATADIR = os.path.normpath(os.path.join(ROOTDIR, '../data'))
-    ICONDIR = os.path.normpath(os.path.join(ROOTDIR, '../data/icons'))
-    SOCIALDIR = os.path.normpath(os.path.join(ROOTDIR, '../data/social'))
-    DEBIANDIR = os.path.normpath(os.path.join(ROOTDIR, '../debian'))
+    DATADIR = os.path.normpath(os.path.join(ROOTDIR, '../../data'))
+    ICONDIR = os.path.normpath(os.path.join(ROOTDIR, '../../data/icons'))
+    SOCIALDIR = os.path.normpath(os.path.join(ROOTDIR, '../../data/social'))
+    DEBIANDIR = os.path.normpath(os.path.join(ROOTDIR, '../../debian'))
     CHANGELOG = os.path.join(DEBIANDIR, 'changelog')
 
 ICON = os.path.join(ICONDIR, 'updf.svg')
@@ -67,7 +66,7 @@ line = f.readline()
 f.close()
 pos = line.find('(')
 posf = line.find(')', pos)
-VERSION = line[pos+1:posf].strip()
+VERSION = line[pos + 1: posf].strip()
 if not is_package():
     VERSION = VERSION + '-src'
 try:

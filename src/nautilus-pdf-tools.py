@@ -3,8 +3,8 @@
 #
 # This file is part of nautilus-pdf-tools
 #
-# Copyright (C) 2012-2015 Lorenzo Carbonell
-# lorenzo.carbonell.cerezo@gmail.com
+# Copyright (C) 2012-2018 Lorenzo Carbonell
+# <lorenzo.carbonell.cerezo@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,6 +22,9 @@
 import gi
 try:
     gi.require_version('Nautilus', '3.0')
+    gi.require_version('GObject', '2.0')
+    gi.require_version('Gtk', '3.0')
+    gi.require_version('GdkPixbuf', '2.0')
 except Exception as e:
     print(e)
     exit(1)
@@ -35,6 +38,7 @@ try:
     sys.path.insert(0, '/opt/extras.ubuntu.com/pdf-tools/share/pdf-tools')
     from pdfmanager import PDFManager
     from comun import APPNAME, ICON, VERSION
+    from comun import _
     import tools
 except Exception as e:
     print(e)
@@ -137,7 +141,7 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
             ]
             for item in items:
                 sub_menuitem = FileManager.MenuItem(
-                    name='PdfToolsMenuProvider::Gtk-pdf-tools-'+item[0],
+                    name='PdfToolsMenuProvider::Gtk-pdf-tools-' + item[0],
                     label=item[1],
                     tip=item[2])
                 sub_menuitem.connect('activate', self.doit, item[3], sel_items)
@@ -165,7 +169,6 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
                 icon='Gtk-find-and-replace')
             submenu = FileManager.Menu()
             top_menuitem.set_submenu(submenu)
-            sub_menus = []
             items = [
                 ('51', _('Convert to pdf'),
                  _('Convert images to pdf'),
@@ -173,7 +176,7 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
             ]
             for item in items:
                 sub_menuitem = FileManager.MenuItem(
-                    name='PdfToolsMenuProvider::Gtk-pdf-tools-'+item[0],
+                    name='PdfToolsMenuProvider::Gtk-pdf-tools-' + item[0],
                     label=item[1],
                     tip=item[2])
                 sub_menuitem.connect('activate', self.doit, item[3], sel_items)
@@ -199,8 +202,8 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
         ad = Gtk.AboutDialog()
         ad.set_name(APPNAME)
         ad.set_version(VERSION)
-        ad.set_copyright('Copyrignt (c) 2011-2016\nLorenzo Carbonell')
-        ad.set_comments(_('A weather indicator'))
+        ad.set_copyright('Copyrignt (c) 2011-2018\nLorenzo Carbonell')
+        ad.set_comments(_('Nautilus Pdf Tools'))
         ad.set_license('''
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software

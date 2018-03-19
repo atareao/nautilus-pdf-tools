@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# This file is part of pdf-tools
+# This file is part of nautilus-pdf-tools
 #
-# Copyright (C) 2012-2016 Lorenzo Carbonell
-# lorenzo.carbonell.cerezo@gmail.com
+# Copyright (C) 2012-2018 Lorenzo Carbonell
+# <lorenzo.carbonell.cerezo@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,7 +19,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
+import gi
+try:
+    gi.require_version('Poppler', '0.18')
+except Exception as e:
+    print(e)
+    exit(1)
 from gi.repository import Poppler
 import cairo
 import os
@@ -49,23 +54,23 @@ def resize(file_in, file_out, width=1189, height=1682):
         widthi, heighti = current_page.get_size()
         horizontali = (widthi > heighti)
         if horizontal != horizontali:
-            sw = width/heighti
-            sh = height/widthi
+            sw = width / heighti
+            sh = height / widthi
             if sw < sh:
                 scale = sw
             else:
                 scale = sh
             context.save()
             mtr = cairo.Matrix()
-            mtr.rotate(ROTATE_270/180.0*math.pi)
+            mtr.rotate(ROTATE_270 / 180.0 * math.pi)
             context.transform(mtr)
             context.scale(scale, scale)
             context.translate(-widthi, 0.0)
             current_page.render(context)
             context.restore()
         else:
-            sw = width/widthi
-            sh = height/heighti
+            sw = width / widthi
+            sh = height / heighti
             if sw < sh:
                 scale = sw
             else:
@@ -87,7 +92,7 @@ def remove_ranges(file_in, file_out, ranges):
     pdfsurface = cairo.PDFSurface(temp_pdf, 200, 200)
     context = cairo.Context(pdfsurface)
     for i in range(0, number_of_pages):
-        if i+1 not in pages:
+        if i + 1 not in pages:
             current_page = document.get_page(i)
             context.save()
             pdf_width, pdf_height = current_page.get_size()
@@ -111,7 +116,7 @@ def rotate_ranges_in_pdf(file_in, file_out, degrees, ranges,
         context = cairo.Context(pdfsurface)
         for i in range(0, document.get_n_pages()):
             current_page = document.get_page(i)
-            if i+1 in pages:
+            if i + 1 in pages:
                 if degrees == ROTATE_000 or degrees == ROTATE_180:
                     pdf_width, pdf_height = current_page.get_size()
                 else:
@@ -119,7 +124,7 @@ def rotate_ranges_in_pdf(file_in, file_out, degrees, ranges,
                 pdfsurface.set_size(pdf_width, pdf_height)
                 context.save()
                 mtr = cairo.Matrix()
-                mtr.rotate(degrees/180.0*math.pi)
+                mtr.rotate(degrees / 180.0 * math.pi)
                 context.transform(mtr)
                 if degrees == ROTATE_090:
                         context.translate(0.0, -pdf_width)
