@@ -22,16 +22,21 @@
 import gi
 try:
     gi.require_version('Gtk', '3.0')
+    gi.require_version('Gdk', '3.0')
     gi.require_version('GdkPixbuf', '2.0')
 except Exception as e:
     print(e)
     exit(1)
 from gi.repository import Gtk
+from gi.repository import Gdk
 from gi.repository import GdkPixbuf
 import os
 import comun
 import tools
+import mimetypes
+from urllib import unquote_plus
 from comun import _
+from comun import MIMETYPES_IMAGE
 
 
 class JoinPdfsDialog(Gtk.Dialog):
@@ -124,8 +129,19 @@ class JoinPdfsDialog(Gtk.Dialog):
         button4.connect('clicked', self.on_button_remove_clicked)
         vbox2.pack_start(button4, False, False, 0)
         #
-        for afile in files:
-            self.store.append([afile])
+        if len(files) > 0:
+            position = 0
+            model = self.iconview.get_model()
+            for filename in files:
+                pixbuf = tools.get_pixbuf_from_pdf(filename, 200)
+                if pixbuf is not None:
+                    position += 1
+                    if self.iconview.get_item_width() < pixbuf.get_width():
+                        self.iconview.set_item_width(pixbuf.get_width())
+                    model.insert(position,
+                                 [pixbuf,
+                                  os.path.basename(filename),
+                                  filename])
         #
         self.show_all()
 

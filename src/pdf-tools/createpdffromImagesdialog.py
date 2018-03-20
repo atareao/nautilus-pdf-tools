@@ -40,20 +40,21 @@ from comun import MIMETYPES_IMAGE
 
 
 class CreatePDFFromImagesDialog(Gtk.Dialog):
-
     def __init__(self, title, files, afile):
         Gtk.Dialog.__init__(
-            self, title, None,
+            self,
+            title,
+            None,
             Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
             (Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT,
              Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL))
-        self.set_size_request(350, 200)
-        self.set_resizable(False)
         self.set_icon_from_file(comun.ICON)
         self.connect('destroy', self.close_application)
+
         vbox0 = Gtk.VBox(spacing=5)
         vbox0.set_border_width(5)
         self.get_content_area().add(vbox0)
+
         frame1 = Gtk.Frame()
         vbox0.add(frame1)
         table1 = Gtk.Table(rows=4, columns=2, homogeneous=False)
@@ -169,32 +170,17 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
         scrolledwindow.set_shadow_type(Gtk.ShadowType.ETCHED_OUT)
         scrolledwindow.set_size_request(450, 300)
         hbox.pack_start(scrolledwindow, True, True, 0)
-        #
-        # id, text, image
-        self.store = Gtk.ListStore(str)
-        self.treeview = Gtk.TreeView(model=self.store)
-        self.treeview.append_column(
-            Gtk.TreeViewColumn(_('Image'), Gtk.CellRendererText(), text=0))
-        scrolledwindow.add(self.treeview)
-        #
-        # set icon for drag operation
-        self.treeview.connect('drag-begin', self.drag_begin)
-        self.treeview.connect('drag-data-get', self.drag_data_get_data)
-        self.treeview.connect('drag-data-received', self.drag_data_received)
-        #
-        dnd_list = [Gtk.TargetEntry.new(
-            'text/uri-list', 0, 100), Gtk.TargetEntry.new('text/plain', 0, 80)]
-        self.treeview.drag_source_set(
-            Gdk.ModifierType.BUTTON1_MASK, dnd_list, Gdk.DragAction.COPY)
-        self.treeview.drag_source_add_uri_targets()
-        dnd_list = Gtk.TargetEntry.new("text/uri-list", 0, 0)
-        self.treeview.drag_dest_set(
-            Gtk.DestDefaults.MOTION | Gtk.DestDefaults.HIGHLIGHT |
-            Gtk.DestDefaults.DROP,
-            [dnd_list],
-            Gdk.DragAction.MOVE)
-        self.treeview.drag_dest_add_uri_targets()
-        #
+
+        liststore = Gtk.ListStore(GdkPixbuf.Pixbuf, str, str)
+        self.iconview = Gtk.IconView.new()
+        self.iconview.set_model(liststore)
+        self.iconview.set_pixbuf_column(0)
+        self.iconview.set_text_column(1)
+        self.iconview.set_item_width(-1)
+        self.iconview.set_reorderable(True)
+
+        scrolledwindow.add(self.iconview)
+
         vbox2 = Gtk.VBox(spacing=0)
         vbox2.set_border_width(5)
         hbox.pack_start(vbox2, False, False, 0)
@@ -230,11 +216,22 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
             Gtk.Image.new_from_stock(Gtk.STOCK_REMOVE, Gtk.IconSize.BUTTON))
         self.button4.connect('clicked', self.on_button_remove_clicked)
         vbox2.pack_start(self.button4, False, False, 0)
-        #
-        #
-        for afile in files:
-            self.store.append([afile])
-        #
+
+        if len(files) > 0:
+            position = 0
+            model = self.iconview.get_model()
+            for filename in files:
+                pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename,
+                                                                200, 200)
+                if pixbuf is not None:
+                    position += 1
+                    if self.iconview.get_item_width() < pixbuf.get_width():
+                        self.iconview.set_item_width(pixbuf.get_width())
+                    model.insert(position,
+                                 [pixbuf,
+                                  os.path.basename(filename),
+                                  filename])
+
         self.show_all()
 
     def on_button_output_file_clicked(self, widget):
@@ -246,71 +243,39 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
     def get_file_out(self):
         return self.output_file.get_label()
 
-    def drag_begin(self, widget, context):
-        pass
-
-    def drag_data_get_data(self, treeview, context, selection, target_id,
-                           etime):
-        pass
-
-    def drag_data_received(self, widget, drag_context, x, y, selection_data,
-                           info, timestamp):
-        selection = self.treeview.get_selection()
-        if selection.count_selected_rows() > 0:
-            model, iter = selection.get_selected()
-            treepath = model.get_path(iter)
-            position = int(str(treepath))
-        else:
-            model = self.treeview.get_model()
-            position = len(model)
-        for filename in selection_data.get_uris():
-            if len(filename) > 8:
-                filename = unquote_plus(filename)
-                filename = filename[7:]
-                mime = mimetypes.guess_type(filename)
-                if os.path.exists(filename):
-                    mime = mimetypes.guess_type(filename)[0]
-                    if mime in MIMETYPES_IMAGE[_('ALL')]['mimetypes']:
-                        model.insert(position + 1, [filename])
-        return True
-
     def on_button_up_clicked(self, widget):
-        selection = self.treeview.get_selection()
-        if selection.count_selected_rows() > 0:
-            model, iter = selection.get_selected()
-            treepath = model.get_path(iter)
-            path = int(str(treepath))
-            if path > 0:
-                previous_path = Gtk.TreePath.new_from_string(str(path - 1))
-                previous_iter = model.get_iter(previous_path)
-                model.swap(iter, previous_iter)
+        selection = self.iconview.get_selected_items()
+        if len(selection) > 0:
+            model = self.iconview.get_model()
+            selected_iter = model.get_iter(selection[0])
+            previous_iter = model.iter_previous(selected_iter)
+            if previous_iter is not None:
+                model.swap(selected_iter, previous_iter)
 
     def on_button_down_clicked(self, widget):
-        selection = self.treeview.get_selection()
-        if selection.count_selected_rows() > 0:
-            model, iter = selection.get_selected()
-            treepath = model.get_path(iter)
-            path = int(str(treepath))
-            if path < len(model) - 1:
-                next_path = Gtk.TreePath.new_from_string(str(path + 1))
-                next_iter = model.get_iter(next_path)
-                model.swap(iter, next_iter)
+        selection = self.iconview.get_selected_items()
+        if len(selection) > 0:
+            model = self.iconview.get_model()
+            selected_iter = model.get_iter(selection[0])
+            next_iter = model.iter_next(selected_iter)
+            if next_iter is not None:
+                model.swap(selected_iter, next_iter)
 
     def on_button_add_clicked(self, widget):
-        selection = self.treeview.get_selection()
-        if selection.count_selected_rows() > 0:
-            model, iter = selection.get_selected()
-            treepath = model.get_path(iter)
-            position = int(str(treepath))
+        selection = self.iconview.get_selected_items()
+        if len(selection) > 0:
+            model = self.iconview.get_model()
+            position = int(str(selection[0]))
         else:
-            position = 0
-            model = self.treeview.get_model()
-        dialog = Gtk.FileChooserDialog(_('Select one or more image files'),
+            model = self.iconview.get_model()
+            position = len(model)
+        dialog = Gtk.FileChooserDialog(_('Select one or more pdf files'),
                                        self,
                                        Gtk.FileChooserAction.OPEN,
                                        (Gtk.STOCK_CANCEL,
                                         Gtk.ResponseType.CANCEL,
-                                        Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+                                        Gtk.STOCK_OPEN,
+                                        Gtk.ResponseType.OK))
         dialog.set_default_response(Gtk.ResponseType.OK)
         dialog.set_select_multiple(True)
         dialog.set_current_folder(os.getenv('HOME'))
@@ -329,16 +294,30 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
         if response == Gtk.ResponseType.OK:
             filenames = dialog.get_filenames()
             if len(filenames) > 0:
-                for i, filename in enumerate(filenames):
-                    model.insert(position + i + 1, [filename])
+                model = self.iconview.get_model()
+                for filename in filenames:
+                    pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename,
+                                                                    200, 200)
+                    if pixbuf is not None:
+                        position += 1
+                        if self.iconview.get_item_width() < pixbuf.get_width():
+                            self.iconview.set_item_width(pixbuf.get_width())
+                        model.insert(position,
+                                     [pixbuf,
+                                      os.path.basename(filename),
+                                      filename])
         dialog.destroy()
 
     def update_preview_cb(self, file_chooser, preview):
         filename = file_chooser.get_preview_filename()
         try:
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 128, 128)
-            preview.set_from_pixbuf(pixbuf)
-            has_preview = True
+            if os.path.isfile(filename):
+                pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 128,
+                                                                128)
+                preview.set_from_pixbuf(pixbuf)
+                has_preview = True
+            else:
+                has_preview = False
         except Exception as e:
             print(e)
             has_preview = False
@@ -346,17 +325,19 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
         return
 
     def on_button_remove_clicked(self, widget):
-        selection = self.treeview.get_selection()
-        if selection.count_selected_rows() > 0:
-            model, iter = selection.get_selected()
-            model.remove(iter)
+        selection = self.iconview.get_selected_items()
+        if len(selection) > 0:
+            model = self.iconview.get_model()
+            for element in selection:
+                model.remove(model.get_iter(element))
 
     def get_png_files(self):
         files = []
-        iter = self.store.get_iter_first()
+        model = self.iconview.get_model()
+        iter = model.get_iter_first()
         while(iter):
-            files.append(self.store.get_value(iter, 0))
-            iter = self.store.iter_next(iter)
+            files.append(model.get_value(iter, 2))
+            iter = model.iter_next(iter)
         return files
 
     def get_size(self):
@@ -395,3 +376,4 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
 if __name__ == '__main__':
     dialog = CreatePDFFromImagesDialog('Create', [], 'output_file')
     dialog.run()
+    print(dialog.get_png_files())
