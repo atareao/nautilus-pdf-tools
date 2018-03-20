@@ -23,12 +23,13 @@ import gi
 try:
     gi.require_version('Gtk', '3.0')
     gi.require_version('Poppler', '0.18')
+    gi.require_version('GdkPixbuf', '2.0')
 except Exception as e:
     print(e)
     exit(1)
-
 from gi.repository import Gtk
 from gi.repository import Poppler
+from gi.repository import GdkPixbuf
 from miniview import MiniView
 from PIL import Image
 import os
@@ -105,7 +106,7 @@ class WatermarkDialog(Gtk.Dialog):
         table.attach(vbox, 0, 2, 2, 3,
                      xoptions=Gtk.AttachOptions.FILL,
                      yoptions=Gtk.AttachOptions.SHRINK)
-        label = Gtk.Label(_('Watermark')+':')
+        label = Gtk.Label(_('Watermark') + ':')
         label.set_alignment(0, 0.5)
         vbox.pack_start(label, False, False, 0)
         self.entry = Gtk.Entry()
@@ -116,7 +117,7 @@ class WatermarkDialog(Gtk.Dialog):
         button.connect('clicked', self.on_button_clicked)
         vbox.pack_start(button, False, False, 0)
         #
-        label = Gtk.Label(_('Horizontal position')+':')
+        label = Gtk.Label(_('Horizontal position') + ':')
         label.set_alignment(0, 0.5)
         table.attach(label, 0, 1, 3, 4,
                      xoptions=Gtk.AttachOptions.FILL,
@@ -130,7 +131,7 @@ class WatermarkDialog(Gtk.Dialog):
         table.attach(self.horizontal, 1, 2, 3, 4,
                      xoptions=Gtk.AttachOptions.FILL,
                      yoptions=Gtk.AttachOptions.SHRINK)
-        label = Gtk.Label(_('Vertical position')+':')
+        label = Gtk.Label(_('Vertical position') + ':')
         label.set_alignment(0, 0.5)
         table.attach(label, 0, 1, 4, 5,
                      xoptions=Gtk.AttachOptions.FILL,
@@ -144,7 +145,7 @@ class WatermarkDialog(Gtk.Dialog):
                      xoptions=Gtk.AttachOptions.FILL,
                      yoptions=Gtk.AttachOptions.SHRINK)
         #
-        label = Gtk.Label(_('Watermark zoom')+':')
+        label = Gtk.Label(_('Watermark zoom') + ':')
         label.set_alignment(0, 0.5)
         table.attach(label, 0, 1, 5, 6,
                      xoptions=Gtk.AttachOptions.FILL,
@@ -154,12 +155,12 @@ class WatermarkDialog(Gtk.Dialog):
         self.watermark_zoom.connect('value-changed',
                                     self.update_preview)
         self.watermark_zoom.set_adjustment(
-            Gtk.Adjustment(100, 0, 110, 1, 10, 10))
+            Gtk.Adjustment(100, 0, 1010, 1, 10, 10))
         table.attach(self.watermark_zoom, 1, 2, 5, 6,
                      xoptions=Gtk.AttachOptions.FILL,
                      yoptions=Gtk.AttachOptions.SHRINK)
         #
-        label = Gtk.Label(_('Set horizontal margin')+':')
+        label = Gtk.Label(_('Set horizontal margin') + ':')
         label.set_alignment(0, .5)
         table.attach(label, 0, 1, 6, 7,
                      xoptions=Gtk.AttachOptions.FILL,
@@ -172,7 +173,7 @@ class WatermarkDialog(Gtk.Dialog):
                      yoptions=Gtk.AttachOptions.SHRINK)
         self.horizontal_margin.connect('value-changed',
                                        self.update_preview)
-        label = Gtk.Label(_('Set vertical margin')+':')
+        label = Gtk.Label(_('Set vertical margin') + ':')
         label.set_alignment(0, .5)
         table.attach(label, 0, 1, 7, 8,
                      xoptions=Gtk.AttachOptions.FILL,
@@ -222,17 +223,6 @@ class WatermarkDialog(Gtk.Dialog):
             return model[tree_iter][1]
         return 0
 
-    def update_preview_cb(self, file_chooser, preview):
-        filename = file_chooser.get_preview_filename()
-        try:
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 128, 128)
-            preview.set_from_pixbuf(pixbuf)
-            have_preview = True
-        except:
-            have_preview = False
-        file_chooser.set_preview_widget_active(have_preview)
-        return
-
     def on_button_clicked(self, button):
         dialog = Gtk.FileChooserDialog(_('Select one image'),
                                        self,
@@ -253,6 +243,8 @@ class WatermarkDialog(Gtk.Dialog):
                 filter.add_pattern(pattern)
             dialog.add_filter(filter)
         preview = Gtk.Image()
+        dialog.set_preview_widget(preview)
+        dialog.connect('update-preview', self.update_preview_cb, preview)
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
             self.entry.set_text(dialog.get_filename())
@@ -263,12 +255,24 @@ class WatermarkDialog(Gtk.Dialog):
         width, height = im.size
         self.update_preview()
 
+    def update_preview_cb(self, file_chooser, preview):
+        filename = file_chooser.get_preview_filename()
+        try:
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 128, 128)
+            preview.set_from_pixbuf(pixbuf)
+            has_preview = True
+        except Exception as e:
+            print(e)
+            has_preview = False
+        file_chooser.set_preview_widget_active(has_preview)
+        return
+
     def update_preview(self, widget=None):
         file_watermark = self.entry.get_text()
         if file_watermark and os.path.exists(file_watermark):
             self.viewport2.set_image(file_watermark)
             self.viewport2.image_zoom = float(
-                self.watermark_zoom.get_value()/100.0)
+                self.watermark_zoom.get_value() / 100.0)
             self.viewport2.set_image_position_vertical(
                 self.get_vertical_option())
             self.viewport2.set_image_position_horizontal(
@@ -282,6 +286,7 @@ class WatermarkDialog(Gtk.Dialog):
     def close_application(self, widget):
         self.hide()
 
+
 if __name__ == '__main__':
-    dialog = WatermarkDialog()
+    dialog = WatermarkDialog('/home/lorenzo/Escritorio/pdfs/ejemplo_pdf_01.pdf')
     dialog.run()

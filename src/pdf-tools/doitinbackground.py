@@ -30,7 +30,7 @@ class DoitInBackground(IdleObject, Thread):
         'done': (GObject.SIGNAL_RUN_FIRST, GObject.TYPE_NONE, (str,)),
         'interrupted': (GObject.SIGNAL_RUN_FIRST, GObject.TYPE_NONE, ()),
         'finished': (GObject.SIGNAL_RUN_FIRST, GObject.TYPE_NONE, ()),
-        }
+    }
 
     def __init__(self, maker, elements):
         IdleObject.__init__(self)

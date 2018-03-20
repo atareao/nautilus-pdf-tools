@@ -46,7 +46,7 @@ if is_package():
     ROOTDIR = '/usr/share/'
     LANGDIR = os.path.join(ROOTDIR, 'locale-langpack')
     APPDIR = os.path.join(ROOTDIR, 'nautilus-python/extensions/pdf-tools/')
-    ICONDIR = os.path.join(ROOTDIR, 'icons')
+    ICONDIR = os.path.join(APPDIR, 'icons')
     CHANGELOG = os.path.join(APPDIR, 'changelog')
 else:
     ROOTDIR = os.path.dirname(__file__)

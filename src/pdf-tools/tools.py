@@ -35,7 +35,6 @@ from gi.repository import GdkPixbuf
 from gi.repository import Poppler
 from comun import MIMETYPES_PDF, MIMETYPES_PNG, MIMETYPES_IMAGE
 from comun import MMTOPNG, MMTOPIXEL, EXTENSIONS_FROM
-from comun import RESOLUTION, MMTOPDF
 from comun import _
 import os
 import shutil
@@ -159,6 +158,16 @@ def create_image_surface_from_pixbuf(pixbuf, zoom=1.0):
     return surface
 
 
+def get_pixbuf_from_pdf(file_in, height):
+    surface = get_surface_from_pdf(file_in, height)
+    if surface is not None:
+            print(surface.get_width(), surface.get_height())
+            return Gdk.pixbuf_get_from_surface(surface, 0, 0,
+                                               surface.get_width(),
+                                               surface.get_height())
+    return None
+
+
 def get_surface_from_pdf(file_in, height):
     if os.path.isfile(file_in):
         document = Poppler.Document.new_from_file('file://' + file_in, None)
@@ -170,6 +179,7 @@ def get_surface_from_pdf(file_in, height):
                 zoom = height / page_width
             else:
                 zoom = height / page_height
+            print(int(page_width * zoom), int(page_height * zoom))
             image_surface = cairo.ImageSurface(cairo.FORMAT_RGB24,
                                                int(page_width * zoom),
                                                int(page_height * zoom))
@@ -184,7 +194,6 @@ def get_surface_from_pdf(file_in, height):
             context.restore()
             return image_surface
     return None
-
 
 
 def convert_pdf_to_png(file_in):

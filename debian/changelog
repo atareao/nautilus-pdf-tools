@@ -1,8 +1,8 @@
-nautilus-pdf-tools (0.9.0-0extras16.04.5) xenial; urgency=medium
+nautilus-pdf-tools (0.9.0-0extras16.04.7) xenial; urgency=medium
 
   * splitted
 
- -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Tue, 20 Mar 2018 17:47:11 +0100
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Tue, 20 Mar 2018 20:32:58 +0100
 
 nautilus-pdf-tools (0.8.0-0extras15.04.9) vivid; urgency=medium
 
