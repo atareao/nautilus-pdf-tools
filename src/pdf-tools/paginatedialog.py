@@ -116,7 +116,7 @@ class PaginateDialog(Gtk.Dialog):
         button_color.connect('clicked', self.on_button_color_activated)
         vbox1.pack_start(button_color, False, False, 0)
         #
-        label = Gtk.Label(_('Horizontal position')+':')
+        label = Gtk.Label(_('Horizontal position') + ':')
         label.set_alignment(0, .5)
         table.attach(label, 0, 1, 5, 6,
                      xoptions=Gtk.AttachOptions.FILL,
@@ -131,7 +131,7 @@ class PaginateDialog(Gtk.Dialog):
                      xoptions=Gtk.AttachOptions.FILL,
                      yoptions=Gtk.AttachOptions.SHRINK)
         #
-        label = Gtk.Label(_('Vertical position')+':')
+        label = Gtk.Label(_('Vertical position') + ':')
         label.set_alignment(0, .5)
         table.attach(label, 0, 1, 6, 7,
                      xoptions=Gtk.AttachOptions.FILL,
@@ -145,7 +145,7 @@ class PaginateDialog(Gtk.Dialog):
                      xoptions=Gtk.AttachOptions.FILL,
                      yoptions=Gtk.AttachOptions.SHRINK)
         #
-        label = Gtk.Label(_('Set horizontal margin')+':')
+        label = Gtk.Label(_('Set horizontal margin') + ':')
         label.set_alignment(0, .5)
         table.attach(label, 0, 1, 7, 8,
                      xoptions=Gtk.AttachOptions.FILL,
@@ -158,7 +158,7 @@ class PaginateDialog(Gtk.Dialog):
                      yoptions=Gtk.AttachOptions.SHRINK)
         self.horizontal_margin.connect('value-changed',
                                        self.on_margin_changed)
-        label = Gtk.Label(_('Set vertical margin')+':')
+        label = Gtk.Label(_('Set vertical margin') + ':')
         label.set_alignment(0, .5)
         table.attach(label, 0, 1, 8, 9,
                      xoptions=Gtk.AttachOptions.FILL,
@@ -190,20 +190,20 @@ class PaginateDialog(Gtk.Dialog):
             title=_('Select color'),
             flags=Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT)
         dialog.get_color_selection().set_current_color(
-            Gdk.Color(self.viewport2.color[0]*65535,
-                      self.viewport2.color[1]*65535,
-                      self.viewport2.color[2]*65535))
+            Gdk.Color(self.viewport2.color[0] * 65535,
+                      self.viewport2.color[1] * 65535,
+                      self.viewport2.color[2] * 65535))
         dialog.get_color_selection().set_current_alpha(
-            self.viewport2.color[3]*65535)
+            self.viewport2.color[3] * 65535)
         response = dialog.run()
         print(response)
         if response == -5:
             color1 = dialog.get_color_selection().get_current_color()
             color2 = dialog.get_color_selection().get_current_alpha()
-            self.viewport2.color = [color1.red/65535.0,
-                                    color1.green/65535.0,
-                                    color1.blue/65535.0,
-                                    color2/65535.0]
+            self.viewport2.color = [color1.red / 65535.0,
+                                    color1.green / 65535.0,
+                                    color1.blue / 65535.0,
+                                    color2 / 65535.0]
             print(self.viewport2.color)
             self.update_preview()
         dialog.destroy()
@@ -212,9 +212,9 @@ class PaginateDialog(Gtk.Dialog):
         dialog = Gtk.FontSelectionDialog(
             title=_('Select font'),
             flags=Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT)
-        print(self.viewport2.font+' '+str(int(self.viewport2.size)))
+        print(self.viewport2.font + ' ' + str(int(self.viewport2.size)))
         dialog.set_font_name(
-            self.viewport2.font+' '+str(int(self.viewport2.size)))
+            self.viewport2.font + ' ' + str(int(self.viewport2.size)))
         answer = dialog.run()
         if answer == -5:
             fs = dialog.get_font_selection()
@@ -267,6 +267,7 @@ class PaginateDialog(Gtk.Dialog):
 
     def close_application(self, widget):
         self.hide()
+
 
 if __name__ == '__main__':
     dialog = PaginateDialog()

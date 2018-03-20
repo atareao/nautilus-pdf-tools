@@ -165,7 +165,7 @@ def split_pdf(file_in):
     if number_of_pages > 1:
         file_out, ext = os.path.splitext(file_in)
         for i in range(0, number_of_pages):
-            file_out_i = '%s_%s%s' % (file_out, i+1, ext)
+            file_out_i = '%s_%s%s' % (file_out, i + 1, ext)
             pdfsurface = cairo.PDFSurface(file_out_i, 200, 200)
             context = cairo.Context(pdfsurface)
             current_page = document.get_page(i)
@@ -190,8 +190,8 @@ def combine(file_in, file_out, filas=1, columnas=2, width=297,
     margen = float(margen)
     pdfsurface = cairo.PDFSurface(file_out, width, height)
     context = cairo.Context(pdfsurface)
-    for i in range(0, number_of_pages, int(filas*columnas)):
-        page = i-1
+    for i in range(0, number_of_pages, int(filas * columnas)):
+        page = i - 1
         for fila in range(0, int(filas)):
             for columna in range(0, int(columnas)):
                 page += 1
@@ -211,15 +211,15 @@ def aux_combine(page, document, fila, columna, width, height, filas,
     if page < document.get_n_pages():
         current_page = document.get_page(page)
         pdf_width, pdf_height = current_page.get_size()
-        sw = (width-(filas+1.0)*margen)/pdf_width/columnas
-        sh = (height-(columnas+1.0)*margen)/pdf_height/filas
+        sw = (width - (filas + 1.0) * margen) / pdf_width / columnas
+        sh = (height - (columnas + 1.0) * margen) / pdf_height / filas
         if sw < sh:
             scale = sw
         else:
             scale = sh
-        x = float(columna) * width / columnas + (float(columna)+1.0)*margen
+        x = float(columna) * width / columnas + (float(columna) + 1.0) * margen
         y = ((filas - float(fila) - 1.0) * height / float(filas) +
-             (float(fila)+1.0)*margen)
+             (float(fila) + 1.0) * margen)
         context.save()
         context.translate(x, y)
         context.scale(scale, scale)
@@ -257,7 +257,7 @@ def rotate_and_flip_pages(file_pdf_in, degrees=ROTATE_090, flip_vertical=False,
                 else:
                     context.translate(-pdf_width, 0)
             mtr = cairo.Matrix()
-            mtr.rotate(degrees/180.0*math.pi)
+            mtr.rotate(degrees / 180.0 * math.pi)
             context.transform(mtr)
             if degrees == ROTATE_090:
                     context.translate(0.0, -pdf_width)
@@ -286,7 +286,7 @@ def extract_ranges(file_in, file_out, ranges):
     pdfsurface = cairo.PDFSurface(temp_pdf, 200, 200)
     context = cairo.Context(pdfsurface)
     for i in range(0, number_of_pages):
-        if i+1 in pages:
+        if i + 1 in pages:
             current_page = document.get_page(i)
             context.save()
             pdf_width, pdf_height = current_page.get_size()
@@ -300,8 +300,8 @@ def extract_ranges(file_in, file_out, ranges):
     os.remove(temp_pdf)
 
 
-def rotate_some_pages_in_pdf(file_in, file_out, degrees, first_page,
-                             last_page):
+def rotate_some_pages_in_pdf(file_in, file_out, degrees, first_page, last_page,
+                             flip_vertical=False, flip_horizontal=False):
     document = Poppler.Document.new_from_file('file://' + file_in, None)
     if document.get_n_pages() > 0:
         temp_pdf = tools.create_temp_file()
@@ -317,7 +317,7 @@ def rotate_some_pages_in_pdf(file_in, file_out, degrees, first_page,
                 pdfsurface.set_size(pdf_width, pdf_height)
                 context.save()
                 mtr = cairo.Matrix()
-                mtr.rotate(degrees/180.0*math.pi)
+                mtr.rotate(degrees / 180.0 * math.pi)
                 context.transform(mtr)
                 if degrees == ROTATE_090:
                         context.translate(0.0, -pdf_width)
@@ -355,16 +355,16 @@ def rotate_some_pages_in_pdf(file_in, file_out, degrees, first_page,
 def extract_pages(file_in, file_out, first_page, last_page):
     document = Poppler.Document.new_from_file('file://' + file_in, None)
     number_of_pages = document.get_n_pages()
-    if first_page > number_of_pages-1:
-        first_page = number_of_pages-1
+    if first_page > number_of_pages - 1:
+        first_page = number_of_pages - 1
     if last_page < first_page:
         last_page = first_page
-    if last_page > number_of_pages-1:
-        last_page = number_of_pages-1
+    if last_page > number_of_pages - 1:
+        last_page = number_of_pages - 1
     temp_pdf = tools.create_temp_file()
     pdfsurface = cairo.PDFSurface(temp_pdf, 200, 200)
     context = cairo.Context(pdfsurface)
-    for i in range(first_page, last_page+1):
+    for i in range(first_page, last_page + 1):
         current_page = document.get_page(i)
         context.save()
         pdf_width, pdf_height = current_page.get_size()
@@ -381,17 +381,17 @@ def extract_pages(file_in, file_out, first_page, last_page):
 def remove_pages(file_in, file_out, first_page, last_page):
     document = Poppler.Document.new_from_file('file://' + file_in, None)
     number_of_pages = document.get_n_pages()
-    if first_page > number_of_pages-1:
-        first_page = number_of_pages-1
+    if first_page > number_of_pages - 1:
+        first_page = number_of_pages - 1
     if last_page < first_page:
         last_page = first_page
-    if last_page > number_of_pages-1:
-        last_page = number_of_pages-1
+    if last_page > number_of_pages - 1:
+        last_page = number_of_pages - 1
     temp_pdf = tools.create_temp_file()
     pdfsurface = cairo.PDFSurface(temp_pdf, 200, 200)
     context = cairo.Context(pdfsurface)
     for i in range(0, number_of_pages):
-        if i not in list(range(first_page, last_page+1)):
+        if i not in list(range(first_page, last_page + 1)):
             current_page = document.get_page(i)
             context.save()
             pdf_width, pdf_height = current_page.get_size()
@@ -437,7 +437,7 @@ def add_paginate_all_pages(file_pdf_in, color, font, size, horizontal_position,
         context = cairo.Context(pdfsurface)
         for i in range(0, number_of_pages):
             current_page = document.get_page(i)
-            text = '%s/%s' % (i+1, number_of_pages)
+            text = '%s/%s' % (i + 1, number_of_pages)
             pdf_width, pdf_height = current_page.get_size()
             pdfsurface.set_size(pdf_width, pdf_height)
             context.save()
@@ -452,13 +452,13 @@ def add_paginate_all_pages(file_pdf_in, color, font, size, horizontal_position,
             if vertical_position == TOP:
                 y = font_height + vertical_margin
             elif vertical_position == MIDLE:
-                y = (pdf_height + font_height)/2
+                y = (pdf_height + font_height) / 2
             elif vertical_position == BOTTOM:
                 y = pdf_height - vertical_margin
             if horizontal_position == LEFT:
                 x = horizontal_margin
             elif horizontal_position == CENTER:
-                x = (pdf_width - font_width)/2
+                x = (pdf_width - font_width) / 2
             elif horizontal_position == RIGHT:
                 x = pdf_width - font_width + xbearing - horizontal_margin
             context.move_to(x, y)
@@ -501,13 +501,13 @@ def add_textmark_to_all_pages(file_pdf_in, text, color, font, size,
             if vertical_position == TOP:
                 y = font_height + vertical_margin
             elif vertical_position == MIDLE:
-                y = (pdf_height + font_height)/2
+                y = (pdf_height + font_height) / 2
             elif vertical_position == BOTTOM:
                 y = pdf_height - vertical_margin
             if horizontal_position == LEFT:
                 x = horizontal_margin
             elif horizontal_position == CENTER:
-                x = (pdf_width - font_width)/2
+                x = (pdf_width - font_width) / 2
             elif horizontal_position == RIGHT:
                 x = pdf_width - font_width + xbearing - horizontal_margin
             context.move_to(x, y)
@@ -548,17 +548,17 @@ def add_watermark_to_all_pages(file_pdf_in, file_image_in, horizontal_position,
             if vertical_position == TOP:
                 y = vertical_margin
             elif vertical_position == MIDLE:
-                y = (pdf_height - watermark_height/MMTOPIXEL)/2
+                y = (pdf_height - watermark_height / MMTOPIXEL) / 2
             elif vertical_position == BOTTOM:
-                y = pdf_height - watermark_height/MMTOPIXEL - vertical_margin
+                y = pdf_height - watermark_height / MMTOPIXEL - vertical_margin
             if horizontal_position == LEFT:
                 x = horizontal_margin
             elif horizontal_position == CENTER:
-                x = (pdf_width - watermark_width/MMTOPIXEL)/2
+                x = (pdf_width - watermark_width / MMTOPIXEL) / 2
             elif horizontal_position == RIGHT:
-                x = pdf_width - watermark_width/MMTOPIXEL - horizontal_margin
+                x = pdf_width - watermark_width / MMTOPIXEL - horizontal_margin
             context.translate(x, y)
-            context.scale(1.0/MMTOPIXEL, 1.0/MMTOPIXEL)
+            context.scale(1.0 / MMTOPIXEL, 1.0 / MMTOPIXEL)
             context.set_source_surface(watermark_surface)
             context.paint()
             context.restore()

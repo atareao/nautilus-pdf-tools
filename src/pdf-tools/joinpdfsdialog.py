@@ -26,7 +26,6 @@ try:
 except Exception as e:
     print(e)
     exit(1)
-
 from gi.repository import Gtk
 from gi.repository import Gdk
 import os
@@ -64,7 +63,7 @@ class JoinPdfsDialog(Gtk.Dialog):
         table1.set_col_spacings(5)
         table1.set_row_spacings(5)
         frame1.add(table1)
-        label1 = Gtk.Label(_('Output file')+':')
+        label1 = Gtk.Label(_('Output file') + ':')
         label1.set_tooltip_text(_('Select the output file'))
         label1.set_alignment(0, .5)
         table1.attach(label1, 0, 1, 0, 1,
@@ -184,7 +183,7 @@ class JoinPdfsDialog(Gtk.Dialog):
                 if os.path.exists(filename):
                     mime = mimetypes.guess_type(filename)[0]
                     if mime in MIMETYPES_PDF:
-                        model.insert(position+1, [filename])
+                        model.insert(position + 1, [filename])
         return True
 
     def on_button_up_clicked(self, widget):
@@ -204,7 +203,7 @@ class JoinPdfsDialog(Gtk.Dialog):
             model, iter = selection.get_selected()
             treepath = model.get_path(iter)
             path = int(str(treepath))
-            if path < len(model)-1:
+            if path < len(model) - 1:
                 next_path = Gtk.TreePath.new_from_string(str(path + 1))
                 next_iter = model.get_iter(next_path)
                 model.swap(iter, next_iter)
@@ -234,13 +233,31 @@ class JoinPdfsDialog(Gtk.Dialog):
         filter.add_pattern('*.pdf')
         dialog.add_filter(filter)
         preview = Gtk.Image()
+        dialog.set_preview_widget(preview)
+        dialog.connect('update-preview', self.update_preview_cb, preview)
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
             filenames = dialog.get_filenames()
             if len(filenames) > 0:
                 for i, filename in enumerate(filenames):
-                    model.insert(position+i+1, [filename])
+                    model.insert(position + i + 1, [filename])
         dialog.destroy()
+
+    def update_preview_cb(self, file_chooser, preview):
+        filename = file_chooser.get_preview_filename()
+        try:
+            print('---', filename, '---')
+            pixbuf = tools.get_surface_from_pdf(filename, 512)
+            if pixbuf is not None:
+                preview.set_from_surface(pixbuf)
+                has_preview = True
+            else:
+                has_preview = False
+        except Exception as e:
+            print(e)
+            has_preview = False
+        file_chooser.set_preview_widget_active(has_preview)
+        return
 
     def on_button_remove_clicked(self, widget):
         selection = self.treeview.get_selection()
@@ -258,6 +275,7 @@ class JoinPdfsDialog(Gtk.Dialog):
             files.append(self.store.get_value(iter, 0))
             iter = self.store.iter_next(iter)
         return files
+
 
 if __name__ == '__main__':
     dialog = JoinPdfsDialog('Test', [], 'File')

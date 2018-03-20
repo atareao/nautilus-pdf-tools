@@ -23,11 +23,13 @@ import gi
 try:
     gi.require_version('Gtk', '3.0')
     gi.require_version('Gdk', '3.0')
+    gi.require_version('GdkPixbuf', '2.0')
 except Exception as e:
     print(e)
     exit(1)
 from gi.repository import Gtk
 from gi.repository import Gdk
+from gi.repository import GdkPixbuf
 import os
 import comun
 import tools
@@ -59,26 +61,26 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
         table1.set_col_spacings(5)
         table1.set_row_spacings(5)
         frame1.add(table1)
-        label1 = Gtk.Label(_('Paper size')+':')
+        label1 = Gtk.Label(_('Paper size') + ':')
         label1.set_tooltip_text(_('Select the size of the output file'))
         label1.set_alignment(0, .5)
         table1.attach(label1, 0, 1, 0, 1,
                       xoptions=Gtk.AttachOptions.FILL,
                       yoptions=Gtk.AttachOptions.SHRINK)
-        label2 = Gtk.Label(_('Orientation')+':')
+        label2 = Gtk.Label(_('Orientation') + ':')
         label2.set_tooltip_text(_('Select the orientation of the page'))
         label2.set_alignment(0, .5)
         table1.attach(label2, 0, 1, 1, 2,
                       xoptions=Gtk.AttachOptions.FILL,
                       yoptions=Gtk.AttachOptions.SHRINK)
         #
-        label3 = Gtk.Label(_('Margen')+':')
+        label3 = Gtk.Label(_('Margen') + ':')
         label3.set_tooltip_text(_('Select the size of the margin'))
         label3.set_alignment(0, .5)
         table1.attach(label3, 0, 1, 2, 3,
                       xoptions=Gtk.AttachOptions.FILL,
                       yoptions=Gtk.AttachOptions.SHRINK)
-        label4 = Gtk.Label(_('Output file')+':')
+        label4 = Gtk.Label(_('Output file') + ':')
         label4.set_tooltip_text(_('Select the output file'))
         label4.set_alignment(0, .5)
         table1.attach(label4, 0, 1, 3, 4,
@@ -269,7 +271,7 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
                 if os.path.exists(filename):
                     mime = mimetypes.guess_type(filename)[0]
                     if mime in MIMETYPES_IMAGE[_('ALL')]['mimetypes']:
-                        model.insert(position+1, [filename])
+                        model.insert(position + 1, [filename])
         return True
 
     def on_button_up_clicked(self, widget):
@@ -289,7 +291,7 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
             model, iter = selection.get_selected()
             treepath = model.get_path(iter)
             path = int(str(treepath))
-            if path < len(model)-1:
+            if path < len(model) - 1:
                 next_path = Gtk.TreePath.new_from_string(str(path + 1))
                 next_iter = model.get_iter(next_path)
                 model.swap(iter, next_iter)
@@ -321,13 +323,27 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
                 filter.add_pattern(pattern)
             dialog.add_filter(filter)
         preview = Gtk.Image()
+        dialog.set_preview_widget(preview)
+        dialog.connect('update-preview', self.update_preview_cb, preview)
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
             filenames = dialog.get_filenames()
             if len(filenames) > 0:
                 for i, filename in enumerate(filenames):
-                    model.insert(position+i+1, [filename])
+                    model.insert(position + i + 1, [filename])
         dialog.destroy()
+
+    def update_preview_cb(self, file_chooser, preview):
+        filename = file_chooser.get_preview_filename()
+        try:
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 128, 128)
+            preview.set_from_pixbuf(pixbuf)
+            has_preview = True
+        except Exception as e:
+            print(e)
+            has_preview = False
+        file_chooser.set_preview_widget_active(has_preview)
+        return
 
     def on_button_remove_clicked(self, widget):
         selection = self.treeview.get_selection()
@@ -374,6 +390,7 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
 
     def close_application(self, widget):
         self.hide()
+
 
 if __name__ == '__main__':
     dialog = CreatePDFFromImagesDialog('Create', [], 'output_file')

@@ -32,7 +32,7 @@ import sys
 from gi.repository import GdkPixbuf
 import collections
 
-USRDIR = '/opt/extras.ubuntu.com/pdf-tools/'
+USRDIR = '/usr/share/'
 
 
 def is_package():
@@ -43,11 +43,10 @@ APP = 'nautilus-pdf-tools'
 APPNAME = 'Nautilus PDF Tools'
 
 if is_package():
-    ROOTDIR = '/opt/extras.ubuntu.com/pdf-tools/share/'
+    ROOTDIR = '/usr/share/'
     LANGDIR = os.path.join(ROOTDIR, 'locale-langpack')
-    APPDIR = os.path.join(ROOTDIR, APP)
+    APPDIR = os.path.join(ROOTDIR, 'nautilus-python/extensions/pdf-tools/')
     ICONDIR = os.path.join(ROOTDIR, 'icons')
-    SOCIALDIR = os.path.join(ICONDIR, 'social')
     CHANGELOG = os.path.join(APPDIR, 'changelog')
 else:
     ROOTDIR = os.path.dirname(__file__)
@@ -83,10 +82,10 @@ except Exception as e:
 APPNAME = _(APPNAME)
 
 
-RESOLUTION = 110.0/72.0
+RESOLUTION = 110.0 / 72.0
 MMTOPIXEL = 3.779527559055
 MMTOPDF = 4
-MMTOPNG = 1169.0/842.0
+MMTOPNG = 1169.0 / 842.0
 TOP = -1
 MIDLE = 0
 BOTTOM = 1
@@ -121,8 +120,8 @@ for aformat in GdkPixbuf.Pixbuf.get_formats():
             mime_types.append(amimetype)
             all_mime_types.append(amimetype)
     for extension in aformat.get_extensions():
-            patterns.append('*.'+extension)
-            all_paterns.append('*.'+extension)
+            patterns.append('*.' + extension)
+            all_paterns.append('*.' + extension)
     MIMETYPES_IMAGE[aformat.get_description()] = {
         'mimetypes': mime_types, 'patterns': patterns}
 MIMETYPES_IMAGE[_('ALL')] = {

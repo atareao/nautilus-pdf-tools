@@ -23,13 +23,14 @@ import gi
 try:
     gi.require_version('Gtk', '3.0')
     gi.require_version('Poppler', '0.18')
+    gi.require_version('GdkPixbuf', '2.0')
 except Exception as e:
     print(e)
     exit(1)
 from gi.repository import Gtk
 from gi.repository import Poppler
+from gi.repository import GdkPixbuf
 from miniview import MiniView
-import math
 import comun
 from comun import _
 
@@ -96,13 +97,9 @@ class FlipDialog(Gtk.Dialog):
         table.attach(label, 0, 1, 2, 3,
                      xoptions=Gtk.AttachOptions.FILL,
                      yoptions=Gtk.AttachOptions.SHRINK)
-        if comun.GTKVERSION == '3.0':
-            self.switch1 = Gtk.Switch()
-            self.switch1.connect("notify::active",
-                                 self.slider_on_value_changed)
-        else:
-            self.switch1 = Gtk.CheckButton()
-            self.switch1.connect("toggled", self.slider_on_value_changed)
+        self.switch1 = Gtk.Switch()
+        self.switch1.connect("notify::active",
+                             self.slider_on_value_changed)
         self.switch1.set_name('switch1')
         hbox1 = Gtk.HBox()
         hbox1.pack_start(self.switch1, 0, 0, 0)
@@ -115,13 +112,9 @@ class FlipDialog(Gtk.Dialog):
         table.attach(label, 0, 1, 3, 4,
                      xoptions=Gtk.AttachOptions.FILL,
                      yoptions=Gtk.AttachOptions.SHRINK)
-        if comun.GTKVERSION == '3.0':
-            self.switch2 = Gtk.Switch()
-            self.switch2.connect("notify::active",
-                                 self.slider_on_value_changed)
-        else:
-            self.switch2 = Gtk.CheckButton()
-            self.switch2.connect("toggled", self.slider_on_value_changed)
+        self.switch2 = Gtk.Switch()
+        self.switch2.connect("notify::active",
+                             self.slider_on_value_changed)
         self.switch2.set_name('switch2')
         hbox2 = Gtk.HBox()
         hbox2.pack_start(self.switch2, 0, 0, 0)
@@ -197,9 +190,9 @@ class FlipDialog(Gtk.Dialog):
     def on_key_release_event(self, widget, event):
         print((event.keyval))
         if event.keyval == 65451 or event.keyval == 43:
-            self.scale = self.scale*1.1
+            self.scale = self.scale * 1.1
         elif event.keyval == 65453 or event.keyval == 45:
-            self.scale = self.scale*.9
+            self.scale = self.scale * .9
         elif event.keyval == 65456 or event.keyval == 48:
             factor_w = (float(self.scrolledwindow1.get_allocation().width) /
                         float(self.pixbuf1.get_width()))
@@ -209,9 +202,9 @@ class FlipDialog(Gtk.Dialog):
                 factor = factor_w
             else:
                 factor = factor_h
-            self.scale = int(factor*100)
-            w = int(self.pixbuf1.get_width()*factor)
-            h = int(self.pixbuf1.get_height()*factor)
+            self.scale = int(factor * 100)
+            w = int(self.pixbuf1.get_width() * factor)
+            h = int(self.pixbuf1.get_height() * factor)
             #
             self.image1.set_from_pixbuf(
                 self.pixbuf1.scale_simple(w, h, GdkPixbuf.InterpType.BILINEAR))
@@ -220,8 +213,8 @@ class FlipDialog(Gtk.Dialog):
         elif event.keyval == 65457 or event.keyval == 49:
             self.scale = 100
         if self.image1:
-            w = int(self.pixbuf1.get_width()*self.scale/100)
-            h = int(self.pixbuf1.get_height()*self.scale/100)
+            w = int(self.pixbuf1.get_width() * self.scale / 100)
+            h = int(self.pixbuf1.get_height() * self.scale / 100)
             self.image1.set_from_pixbuf(
                 self.pixbuf1.scale_simple(w, h, GdkPixbuf.InterpType.BILINEAR))
             self.image2.set_from_pixbuf(
@@ -229,6 +222,7 @@ class FlipDialog(Gtk.Dialog):
 
     def close(self, widget):
         self.destroy()
+
 
 if __name__ == '__main__':
     dialog = FlipDialog('Test')

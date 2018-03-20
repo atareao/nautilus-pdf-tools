@@ -62,7 +62,7 @@ class ConvertDialog(Gtk.Dialog):
         for extension in MIMETYPES_IMAGE.keys():
             if extension != _('ALL'):
                 options.append([extension])
-        label = Gtk.Label(_('Convert to')+':')
+        label = Gtk.Label(_('Convert to') + ':')
         table1.attach(label, 0, 1, 0, 1,
                       xoptions=Gtk.AttachOptions.EXPAND,
                       yoptions=Gtk.AttachOptions.SHRINK)
@@ -83,6 +83,7 @@ class ConvertDialog(Gtk.Dialog):
 
     def close_application(self, widget):
         self.hide()
+
 
 if __name__ == '__main__':
     dialog = ConvertDialog()

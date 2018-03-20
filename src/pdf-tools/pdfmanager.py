@@ -22,20 +22,11 @@
 import gi
 try:
     gi.require_version('Gtk', '3.0')
-    gi.require_version('GdkPixbuf', '2.0')
-    gi.require_version('Poppler', '0.18')
 except Exception as e:
     print(e)
     exit(1)
-try:
-    import PyPDF2
-    import pypdfapi as pdfapi
-    print('pypdfapi')
-except Exception as e:
-    print(e)
-    import cairoapi as pdfapi
-    print('cairoapi')
 from gi.repository import Gtk
+import cairoapi as pdfapi
 from idleobject import IdleObject
 from resizedialog import ResizeDialog
 from combinedialog import CombineDialog
@@ -250,7 +241,7 @@ class PDFManager(IdleObject):
                 voption = wd.get_vertical_option()
                 horizontal_margin = wd.get_horizontal_margin()
                 vertical_margin = wd.get_vertical_margin()
-                zoom = float(wd.get_watermark_zoom()/100.0)
+                zoom = float(wd.get_watermark_zoom() / 100.0)
                 dialog = Progreso(_('Watermark pdf files'), None, len(files))
                 diboo = DoitInBackgroundWithArgs(
                     cairoapi.add_watermark_to_all_pages, files,
@@ -269,7 +260,6 @@ class PDFManager(IdleObject):
         if len(files) > 0:
             file0 = files[0]
             fd = FlipDialog(_('Rotate files'), file0)
-            degrees = 0
             if fd.run() == Gtk.ResponseType.ACCEPT:
                 fd.hide()
                 if fd.rbutton1.get_active():
@@ -400,6 +390,7 @@ class FileTemp():
 
     def get_uri(self):
         return self.afile
+
 
 if __name__ == '__main__':
     files = [

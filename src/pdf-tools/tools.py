@@ -33,8 +33,9 @@ from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import GdkPixbuf
 from gi.repository import Poppler
-from comun import MIMETYPES_PDF, MIMETYPES_PNG
+from comun import MIMETYPES_PDF, MIMETYPES_PNG, MIMETYPES_IMAGE
 from comun import MMTOPNG, MMTOPIXEL, EXTENSIONS_FROM
+from comun import RESOLUTION, MMTOPDF
 from comun import _
 import os
 import shutil
@@ -104,7 +105,7 @@ def dialog_save_as(title, original_file):
         filter.set_name(_('Pdf files'))
         filter.add_mime_type(mimetype)
         for pattern in mimetypes.guess_all_extensions(mimetype):
-            filter.add_pattern('*'+pattern)
+            filter.add_pattern('*' + pattern)
         dialog.add_filter(filter)
     if dialog.run() == Gtk.ResponseType.OK:
         filename = dialog.get_filename()
@@ -158,6 +159,34 @@ def create_image_surface_from_pixbuf(pixbuf, zoom=1.0):
     return surface
 
 
+def get_surface_from_pdf(file_in, height):
+    if os.path.isfile(file_in):
+        document = Poppler.Document.new_from_file('file://' + file_in, None)
+        number_of_pages = document.get_n_pages()
+        if number_of_pages > 0:
+            current_page = document.get_page(0)
+            page_width, page_height = current_page.get_size()
+            if page_width > page_height:
+                zoom = height / page_width
+            else:
+                zoom = height / page_height
+            image_surface = cairo.ImageSurface(cairo.FORMAT_RGB24,
+                                               int(page_width * zoom),
+                                               int(page_height * zoom))
+            context = cairo.Context(image_surface)
+            context.save()
+            context.set_source_rgba(1.0, 1.0, 1.0, 1.0)
+            context.paint()
+            mtr = cairo.Matrix()
+            mtr.scale(zoom, zoom)
+            context.transform(mtr)
+            current_page.render(context)
+            context.restore()
+            return image_surface
+    return None
+
+
+
 def convert_pdf_to_png(file_in):
     document = Poppler.Document.new_from_file('file://' + file_in, None)
     number_of_pages = document.get_n_pages()
@@ -166,14 +195,14 @@ def convert_pdf_to_png(file_in):
         for i in range(0, number_of_pages):
             current_page = document.get_page(i)
             pdf_width, pdf_height = current_page.get_size()
-            file_out_i = '%s_%s%s' % (file_out, i+1, '.png')
+            file_out_i = '%s_%s%s' % (file_out, i + 1, '.png')
             pngsurface = cairo.ImageSurface(
                 cairo.FORMAT_ARGB32,
                 int(pdf_width * MMTOPNG),
                 int(pdf_height * MMTOPNG))
             context = cairo.Context(pngsurface)
             context.save()
-            context.scale(1.0*MMTOPNG, 1.0*MMTOPNG)
+            context.scale(1.0 * MMTOPNG, 1.0 * MMTOPNG)
             current_page.render(context)
             context.restore()
             pngsurface.flush()
@@ -183,7 +212,6 @@ def convert_pdf_to_png(file_in):
 
 def create_from_images(file_out, images, width=1189, height=1682, margin=0):
     temp_pdf = create_temp_file()
-    temp_png = None
     pdfsurface = cairo.PDFSurface(temp_pdf, width, height)
     context = cairo.Context(pdfsurface)
     for image in images:
@@ -194,8 +222,8 @@ def create_from_images(file_out, images, width=1189, height=1682, margin=0):
             imagesurface = create_image_surface_from_file(image)
         imagesurface_width = imagesurface.get_width()
         imagesurface_height = imagesurface.get_height()
-        scale_x = (imagesurface_width/MMTOPIXEL)/width
-        scale_y = (imagesurface_height/MMTOPIXEL)/height
+        scale_x = (imagesurface_width / MMTOPIXEL) / width
+        scale_y = (imagesurface_height / MMTOPIXEL) / height
         if scale_x > scale_y:
             scale = scale_x
         else:
@@ -204,11 +232,11 @@ def create_from_images(file_out, images, width=1189, height=1682, margin=0):
             scale = scale * 1.05
         elif margin == 2:
             scale = scale * 1.15
-        x = (width - imagesurface_width/MMTOPIXEL/scale)/2
-        y = (height - imagesurface_height/MMTOPIXEL/scale)/2
+        x = (width - imagesurface_width / MMTOPIXEL / scale) / 2
+        y = (height - imagesurface_height / MMTOPIXEL / scale) / 2
         context.save()
         context.translate(x, y)
-        context.scale(1.0/MMTOPIXEL/scale, 1.0/MMTOPIXEL/scale)
+        context.scale(1.0 / MMTOPIXEL / scale, 1.0 / MMTOPIXEL / scale)
         context.set_source_surface(imagesurface)
         context.paint()
         context.restore()
@@ -250,7 +278,7 @@ def get_output_filename(file_in, modificator):
     if os.path.exists(file_in) and os.path.isfile(file_in):
         head, tail = os.path.split(file_in)
         root, ext = os.path.splitext(tail)
-        file_out = os.path.join(head, root+'_'+modificator+ext)
+        file_out = os.path.join(head, root + '_' + modificator + ext)
         return file_out
     return None
 
@@ -270,8 +298,9 @@ def get_num(chain):
     try:
         chain = chain.strip()  # removing spaces
         return int(float(chain))
-    except:
-        return None
+    except Exception as e:
+        print(e)
+    return None
 
 
 def get_ranges(chain):

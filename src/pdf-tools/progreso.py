@@ -91,7 +91,7 @@ class Progreso(Gtk.Dialog, threading.Thread):
 
     def set_todo_label(self, widget, todo_label):
         if len(todo_label) > 35:
-            text = '...'+todo_label[-32:]
+            text = '...' + todo_label[-32:]
         else:
             text = todo_label
         self.label.set_label(text)
@@ -99,7 +99,7 @@ class Progreso(Gtk.Dialog, threading.Thread):
     def set_value(self, value):
         if value >= 0 and value <= self.max_value:
             self.value = value
-            fraction = self.value/self.max_value
+            fraction = self.value / self.max_value
             self.progressbar.set_fraction(fraction)
             if self.value == self.max_value:
                 self.hide()
@@ -109,15 +109,16 @@ class Progreso(Gtk.Dialog, threading.Thread):
 
     def increase(self, *args):
         self.value += 1.0
-        fraction = self.value/self.max_value
+        fraction = self.value / self.max_value
         self.progressbar.set_fraction(fraction)
         if self.value == self.max_value:
             self.hide()
 
     def decrease(self):
         self.value -= 1.0
-        fraction = self.value/self.max_value
+        fraction = self.value / self.max_value
         self.progressbar.set_fraction(fraction)
+
 
 if __name__ == '__main__':
     import time

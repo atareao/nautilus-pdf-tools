@@ -58,21 +58,21 @@ class ResizeDialog(Gtk.Dialog):
         table1.set_row_spacings(5)
         frame1.add(table1)
         #
-        label1 = Gtk.Label(_('Paper size')+':')
+        label1 = Gtk.Label(_('Paper size') + ':')
         label1.set_tooltip_text(_('Select the size of the output file'))
         label1.set_alignment(0, 0.5)
         table1.attach(label1, 0, 1, 0, 1,
                       xoptions=Gtk.AttachOptions.FILL,
                       yoptions=Gtk.AttachOptions.SHRINK)
         #
-        label2 = Gtk.Label(_('Orientation')+':')
+        label2 = Gtk.Label(_('Orientation') + ':')
         label2.set_tooltip_text(_('Select the orientation of the page'))
         label2.set_alignment(0, .5)
         table1.attach(label2, 0, 1, 1, 2,
                       xoptions=Gtk.AttachOptions.FILL,
                       yoptions=Gtk.AttachOptions.SHRINK)
         #
-        label3 = Gtk.Label(_('Output file')+':')
+        label3 = Gtk.Label(_('Output file') + ':')
         label3.set_tooltip_text(_('Select the output file'))
         label3.set_alignment(0, .5)
         table1.attach(label3, 0, 1, 2, 3,
@@ -169,6 +169,7 @@ class ResizeDialog(Gtk.Dialog):
 
     def close_application(self, widget):
         self.hide()
+
 
 if __name__ == '__main__':
     dialog = ResizeDialog('Test', 'afile')

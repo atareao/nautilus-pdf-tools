@@ -32,10 +32,9 @@ from gi.repository import Nautilus as FileManager
 from gi.repository import GObject
 from gi.repository import Gtk
 from gi.repository import GdkPixbuf
-import os
 import sys
 try:
-    sys.path.insert(0, '/opt/extras.ubuntu.com/pdf-tools/share/pdf-tools')
+    sys.path.insert(0, '/usr/share/nautilus-python/extensions/pdf-tools/')
     from pdfmanager import PDFManager
     from comun import APPNAME, ICON, VERSION
     from comun import _
@@ -103,7 +102,6 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
             #
             submenu = FileManager.Menu()
             top_menuitem.set_submenu(submenu)
-            sub_menus = []
             items = [
                 ('01', _('Rotate and flip'), _('rotate_and_flip pdf files'),
                  'rotate'),

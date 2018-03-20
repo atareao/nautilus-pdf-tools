@@ -26,6 +26,7 @@ except Exception as e:
     print(e)
     exit(1)
 from gi.repository import Gtk
+import tools
 import comun
 from comun import _
 
@@ -54,19 +55,19 @@ class CombineDialog(Gtk.Dialog):
         table1.set_row_spacings(5)
         frame1.add(table1)
         #
-        label1 = Gtk.Label(_('Paper size')+':')
+        label1 = Gtk.Label(_('Paper size') + ':')
         label1.set_tooltip_text(_('Select the size of the output file'))
         label1.set_alignment(0, .5)
         table1.attach(label1, 0, 1, 0, 1,
                       xoptions=Gtk.AttachOptions.FILL,
                       yoptions=Gtk.AttachOptions.SHRINK)
-        label2 = Gtk.Label(_('Orientation')+':')
+        label2 = Gtk.Label(_('Orientation') + ':')
         label2.set_tooltip_text(_('Select the orientation of the page'))
         label2.set_alignment(0, .5)
         table1.attach(label2, 0, 1, 1, 2,
                       xoptions=Gtk.AttachOptions.FILL,
                       yoptions=Gtk.AttachOptions.SHRINK)
-        label3 = Gtk.Label(_('Pages in Page')+':')
+        label3 = Gtk.Label(_('Pages in Page') + ':')
         label3.set_tooltip_text(_('Select how many pages in a page'))
         label3.set_alignment(0, .5)
         table1.attach(label3, 0, 1, 2, 3,
@@ -78,25 +79,25 @@ class CombineDialog(Gtk.Dialog):
         table1.attach(label4, 0, 1, 3, 2,
                       xoptions=Gtk.AttachOptions.FILL,
                       yoptions=Gtk.AttachOptions.SHRINK)
-        label5 = Gtk.Label(_('Sort')+':')
+        label5 = Gtk.Label(_('Sort') + ':')
         label5.set_tooltip_text(_('Select the combination sort'))
         label5.set_alignment(0, .5)
         table1.attach(label5, 0, 1, 3, 4,
                       xoptions=Gtk.AttachOptions.FILL,
                       yoptions=Gtk.AttachOptions.SHRINK)
-        label6 = Gtk.Label(_('Set the margin')+':')
+        label6 = Gtk.Label(_('Set the margin') + ':')
         label6.set_tooltip_text(_('The margin to the page in mm'))
         label6.set_alignment(0, .5)
         table1.attach(label6, 0, 1, 4, 5,
                       xoptions=Gtk.AttachOptions.FILL,
                       yoptions=Gtk.AttachOptions.SHRINK)
-        label7 = Gtk.Label(_('Output file')+':')
+        label7 = Gtk.Label(_('Output file') + ':')
         label7.set_tooltip_text(_('Select the output file'))
         label7.set_alignment(0, .5)
         table1.attach(label7, 0, 1, 5, 6,
                       xoptions=Gtk.AttachOptions.FILL,
                       yoptions=Gtk.AttachOptions.SHRINK)
-        liststore = Gtk.ListStore(str,   float, float)
+        liststore = Gtk.ListStore(str, float, float)
         liststore.append([_('A0'), 2383.9, 3370.4])
         liststore.append([_('A1'), 1683.8, 2383.9])
         liststore.append([_('A2'), 1190.6, 1683.8])
@@ -234,6 +235,8 @@ class CombineDialog(Gtk.Dialog):
     def close_application(self, widget):
         self.hide()
 
+
 if __name__ == '__main__':
-    dialog = CombineDialog('test', 'test')
+    dialog = CombineDialog('/home/lorenzo/Escritorio/pdfs/ejemplo_pdf_01.pdf',
+                           '/home/lorenzo/Escritorio/pdfs/salida.pdf')
     dialog.run()
