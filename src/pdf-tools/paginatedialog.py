@@ -37,9 +37,9 @@ from comun import TOP, MIDLE, BOTTOM, LEFT, CENTER, RIGHT
 
 
 class PaginateDialog(Gtk.Dialog):
-    def __init__(self, filename=None):
+    def __init__(self, filename=None, window):
         Gtk.Dialog.__init__(
-            self, _('Paginate'), None,
+            self, _('Paginate'), window,
             Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
             (Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT,
              Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL))

@@ -59,35 +59,35 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
         method"""
         self.pdfmanager = PDFManager()
 
-    def doit(self, menu, option, selected):
+    def doit(self, menu, option, selected, window):
         if option == 'rotate':
-            self.pdfmanager.rotate_or_flip(selected)
+            self.pdfmanager.rotate_or_flip(selected, window)
         elif option == 'watermark':
-            self.pdfmanager.watermark(selected)
+            self.pdfmanager.watermark(selected, window)
         elif option == 'textmark':
-            self.pdfmanager.textmark(selected)
+            self.pdfmanager.textmark(selected, window)
         elif option == 'paginate':
-            self.pdfmanager.paginate(selected)
+            self.pdfmanager.paginate(selected, window)
         elif option == 'rotate pages':
-            self.pdfmanager.rotate_some_pages(selected)
+            self.pdfmanager.rotate_some_pages(selected, window)
         elif option == 'remove pages':
-            self.pdfmanager.remove_some_pages(selected)
+            self.pdfmanager.remove_some_pages(selected, window)
         elif option == 'extract pages':
-            self.pdfmanager.extract_some_pages(selected)
+            self.pdfmanager.extract_some_pages(selected, window)
         elif option == 'join':
-            self.pdfmanager.join_pdf_files(selected)
+            self.pdfmanager.join_pdf_files(selected, window)
         elif option == 'split':
-            self.pdfmanager.split_pdf_files(selected)
+            self.pdfmanager.split_pdf_files(selected, window)
         elif option == 'combine':
-            self.pdfmanager.combine_pdf_pages(selected)
+            self.pdfmanager.combine_pdf_pages(selected, window)
         elif option == 'reduce':
-            self.pdfmanager.reduce(selected)
+            self.pdfmanager.reduce(selected, window)
         elif option == 'resize':
-            self.pdfmanager.resize_pdf_pages(selected)
+            self.pdfmanager.resize_pdf_pages(selected, window)
         elif option == 'convert2png':
-            self.pdfmanager.convert_pdf_file_to_png(selected)
+            self.pdfmanager.convert_pdf_file_to_png(selected, window)
         elif option == 'convert2pdf':
-            self.pdfmanager.create_pdf_from_images(selected)
+            self.pdfmanager.create_pdf_from_images(selected, window)
 
     def get_file_items(self, window, sel_items):
         """Adds the 'Replace in Filenames' menu item to the File Manager
@@ -177,7 +177,8 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
                     name='PdfToolsMenuProvider::Gtk-pdf-tools-' + item[0],
                     label=item[1],
                     tip=item[2])
-                sub_menuitem.connect('activate', self.doit, item[3], sel_items)
+                sub_menuitem.connect('activate',
+                                     self.doit, item[3], sel_items, window)
                 submenu.append_item(sub_menuitem)
             #
             sub_menuitem_98 = FileManager.MenuItem(

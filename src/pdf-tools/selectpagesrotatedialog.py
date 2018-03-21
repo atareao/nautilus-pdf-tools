@@ -32,11 +32,11 @@ from comun import _
 
 
 class SelectPagesRotateDialog(Gtk.Dialog):
-    def __init__(self, title, last_page, afile):
+    def __init__(self, title, last_page, afile, window):
         Gtk.Dialog.__init__(
             self,
             title,
-            None,
+            window,
             Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
             (Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT,
              Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL))
@@ -94,15 +94,19 @@ class SelectPagesRotateDialog(Gtk.Dialog):
                       xoptions=Gtk.AttachOptions.FILL,
                       yoptions=Gtk.AttachOptions.SHRINK)
         self.output_file = Gtk.Button.new_with_label(afile)
-        self.output_file.connect('clicked', self.on_button_output_file_clicked)
+        self.output_file.connect('clicked',
+                                 self.on_button_output_file_clicked,
+                                 window)
         table1.attach(self.output_file, 1, 3, 3, 4,
                       xoptions=Gtk.AttachOptions.FILL,
                       yoptions=Gtk.AttachOptions.SHRINK)
         self.show_all()
 
-    def on_button_output_file_clicked(self, widget):
+    def on_button_output_file_clicked(self, widget, window):
         file_out = tools.dialog_save_as(
-            _('Select file to save new file'), self.output_file.get_label())
+            _('Select file to save new file'),
+            self.output_file.get_label(),
+            window)
         if file_out:
             self.output_file.set_label(file_out)
 

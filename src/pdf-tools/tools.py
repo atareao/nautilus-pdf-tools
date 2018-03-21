@@ -65,9 +65,9 @@ def create_temp_file():
     return tempfile.mkstemp(prefix='tmp_filemanager_pdf_tools_')[1]
 
 
-def dialog_save_as_image(title, original_file):
+def dialog_save_as_image(title, original_file, window):
     dialog = Gtk.FileChooserDialog(title,
-                                   None,
+                                   window,
                                    Gtk.FileChooserAction.SAVE,
                                    (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
                                     Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
@@ -90,9 +90,9 @@ def dialog_save_as_image(title, original_file):
     return filename
 
 
-def dialog_save_as(title, original_file):
+def dialog_save_as(title, original_file, window):
     dialog = Gtk.FileChooserDialog(title,
-                                   None,
+                                   window,
                                    Gtk.FileChooserAction.SAVE,
                                    (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
                                     Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
@@ -116,9 +116,9 @@ def dialog_save_as(title, original_file):
     return filename
 
 
-def dialog_save_as_text(title, original_file):
+def dialog_save_as_text(title, original_file, window):
     dialog = Gtk.FileChooserDialog(title,
-                                   None,
+                                   window,
                                    Gtk.FileChooserAction.SAVE,
                                    (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
                                     Gtk.STOCK_OPEN, Gtk.ResponseType.OK))

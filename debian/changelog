@@ -1,8 +1,9 @@
 nautilus-pdf-tools (0.9.0-0extras16.04.8) xenial; urgency=medium
 
   * Added thumbnails for pdf and images
+  * window a dependency
 
- -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Tue, 20 Mar 2018 21:12:45 +0100
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Wed, 21 Mar 2018 07:49:54 +0100
 
 nautilus-pdf-tools (0.9.0-0extras16.04.7) xenial; urgency=medium
 

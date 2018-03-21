@@ -53,13 +53,13 @@ class PDFManager(IdleObject):
     def __init__(self):
         IdleObject.__init__(self)
 
-    def resize_pdf_pages(self, selected):
+    def resize_pdf_pages(self, selected, window):
         files = tools.get_files(selected)
         if files:
             file_in = files[0]
             filename, filext = os.path.splitext(file_in)
             file_out = filename + '_resized' + filext
-            cd = ResizeDialog(_('Resize pages'), file_out)
+            cd = ResizeDialog(_('Resize pages'), file_out, window)
             if cd.run() == Gtk.ResponseType.ACCEPT:
                 size = cd.get_size()
                 if cd.is_vertical():
@@ -71,7 +71,7 @@ class PDFManager(IdleObject):
                 file_out = cd.get_file_out()
                 cd.destroy()
                 if file_out:
-                    dialog = Progreso(_('Convert pdfs to png'), None, 1)
+                    dialog = Progreso(_('Convert pdfs to png'), window, 1)
                     diboo = DoitInBackgroundOnlyOne(
                         pdfapi.resize, file_in, file_out, width, height)
                     diboo.connect('done', dialog.increase)
@@ -79,9 +79,9 @@ class PDFManager(IdleObject):
                     dialog.run()
             cd.destroy()
 
-    def convert_pdf_file_to_png(self, selected):
+    def convert_pdf_file_to_png(self, selected, window):
         files = tools.get_files(selected)
-        dialog = Progreso(_('Convert pdfs to png'), None, len(files))
+        dialog = Progreso(_('Convert pdfs to png'), window, len(files))
         dib = DoitInBackground(tools.convert_pdf_to_png, files)
         dialog.connect('i-want-stop', dib.stop_it)
         dib.connect('done', dialog.increase)
@@ -89,13 +89,13 @@ class PDFManager(IdleObject):
         dib.start()
         dialog.run()
 
-    def combine_pdf_pages(self, selected):
+    def combine_pdf_pages(self, selected, window):
         files = tools.get_files(selected)
         if files:
             file_in = files[0]
             filename, filext = os.path.splitext(file_in)
             file_out = filename + '_combined' + filext
-            cd = CombineDialog(_('Combine pages'), file_out)
+            cd = CombineDialog(_('Combine pages'), file_out, window)
             if cd.run() == Gtk.ResponseType.ACCEPT:
                 size = cd.get_size()
                 if cd.is_vertical():
@@ -111,7 +111,7 @@ class PDFManager(IdleObject):
                 file_out = cd.get_file_out()
                 cd.destroy()
                 if file_out:
-                    dialog = Progreso(_('Convert pdfs to png'), None, 1)
+                    dialog = Progreso(_('Convert pdfs to png'), window, 1)
                     diboo = DoitInBackgroundOnlyOne(
                         pdfapi.combine, file_in, file_out, filas, columnas,
                         width, height, margen, byrows)
@@ -119,14 +119,14 @@ class PDFManager(IdleObject):
                     diboo.start()
                     dialog.run()
 
-    def create_pdf_from_images(self, selected):
+    def create_pdf_from_images(self, selected, window):
         files = tools.get_files(selected)
         if files:
             file_in = files[0]
             filename, filext = os.path.splitext(file_in)
             file_out = filename + '_from_images.pdf'
             cpfi = CreatePDFFromImagesDialog(
-                _('Create pdf from images'), files, file_out)
+                _('Create pdf from images'), files, file_out, window)
             if cpfi.run() == Gtk.ResponseType.ACCEPT:
                 cpfi.hide()
                 files = cpfi.get_png_files()
@@ -138,7 +138,7 @@ class PDFManager(IdleObject):
                 file_out = cpfi.get_file_out()
                 cpfi.destroy()
                 if file_out:
-                    dialog = Progreso(_('Convert pdfs to png'), None, 1)
+                    dialog = Progreso(_('Convert pdfs to png'), window, 1)
                     diboo = DoitInBackgroundOnlyOne(
                         tools.create_from_images, file_out, files, width,
                         height, margin)
@@ -147,19 +147,19 @@ class PDFManager(IdleObject):
                     dialog.run()
             cpfi.destroy()
 
-    def join_pdf_files(self, selected):
+    def join_pdf_files(self, selected, window):
         files = tools.get_files(selected)
         if files:
             file_in = files[0]
             filename, filext = os.path.splitext(file_in)
             file_out = filename + '_joined_files.pdf'
-            jpd = JoinPdfsDialog(_('Join pdf files'), files, file_out)
+            jpd = JoinPdfsDialog(_('Join pdf files'), files, file_out, window)
             if jpd.run() == Gtk.ResponseType.ACCEPT:
                 files = jpd.get_pdf_files()
                 file_out = jpd.get_file_out()
                 jpd.destroy()
                 if len(files) > 0 and file_out:
-                    dialog = Progreso(_('Join pdf files'), None, 1)
+                    dialog = Progreso(_('Join pdf files'), window, 1)
                     diboo = DoitInBackgroundOnlyOne(
                         pdfapi.join_files, files, file_out)
                     diboo.connect('done', dialog.increase)
@@ -167,11 +167,11 @@ class PDFManager(IdleObject):
                     dialog.run()
             jpd.destroy()
 
-    def paginate(self, selected):
+    def paginate(self, selected, window):
         files = tools.get_files(selected)
         if len(files) > 0:
             file0 = files[0]
-            wd = PaginateDialog(file0)
+            wd = PaginateDialog(file0, window)
             if wd.run() == Gtk.ResponseType.ACCEPT:
                 wd.hide()
                 color = wd.get_color()
@@ -181,7 +181,7 @@ class PDFManager(IdleObject):
                 voption = wd.get_vertical_option()
                 horizontal_margin = wd.get_horizontal_margin()
                 vertical_margin = wd.get_vertical_margin()
-                dialog = Progreso(_('Paginate pdf files'), None, len(files))
+                dialog = Progreso(_('Paginate pdf files'), window, len(files))
                 diboo = DoitInBackgroundWithArgs(
                     cairoapi.add_paginate_all_pages, files, color, font, size,
                     hoption, voption, horizontal_margin, vertical_margin,
@@ -192,9 +192,9 @@ class PDFManager(IdleObject):
                 dialog.run()
             wd.destroy()
 
-    def reduce(self, selected):
+    def reduce(self, selected, window):
         files = tools.get_files(selected)
-        dialog = Progreso(_('Reduce pdf files size'), None, len(files))
+        dialog = Progreso(_('Reduce pdf files size'), window, len(files))
         diboo = DoitInBackground(
             tools.reduce_pdf, files)
         diboo.connect('done', dialog.increase)
@@ -203,11 +203,11 @@ class PDFManager(IdleObject):
         diboo.start()
         dialog.run()
 
-    def textmark(self, selected):
+    def textmark(self, selected, window):
         files = tools.get_files(selected)
         if len(files) > 0:
             file0 = files[0]
-            wd = TextmarkDialog(file0)
+            wd = TextmarkDialog(file0, window)
             if wd.run() == Gtk.ResponseType.ACCEPT:
                 wd.hide()
                 text = wd.get_text()
@@ -218,7 +218,7 @@ class PDFManager(IdleObject):
                 voption = wd.get_vertical_option()
                 horizontal_margin = wd.get_horizontal_margin()
                 vertical_margin = wd.get_vertical_margin()
-                dialog = Progreso(_('Textmark pdf files'), None, len(files))
+                dialog = Progreso(_('Textmark pdf files'), window, len(files))
                 diboo = DoitInBackgroundWithArgs(
                     cairoapi.add_textmark_to_all_pages, files, text, color,
                     font, size, hoption, voption, horizontal_margin,
@@ -230,11 +230,11 @@ class PDFManager(IdleObject):
                 dialog.run()
             wd.destroy()
 
-    def watermark(self, selected):
+    def watermark(self, selected, window):
         files = tools.get_files(selected)
         if len(files) > 0:
             file0 = files[0]
-            wd = WatermarkDialog(file0)
+            wd = WatermarkDialog(file0, window)
             if wd.run() == Gtk.ResponseType.ACCEPT:
                 wd.hide()
                 hoption = wd.get_horizontal_option()
@@ -242,7 +242,7 @@ class PDFManager(IdleObject):
                 horizontal_margin = wd.get_horizontal_margin()
                 vertical_margin = wd.get_vertical_margin()
                 zoom = float(wd.get_watermark_zoom() / 100.0)
-                dialog = Progreso(_('Watermark pdf files'), None, len(files))
+                dialog = Progreso(_('Watermark pdf files'), window, len(files))
                 diboo = DoitInBackgroundWithArgs(
                     cairoapi.add_watermark_to_all_pages, files,
                     wd.get_image_filename(), hoption, voption,
@@ -255,11 +255,11 @@ class PDFManager(IdleObject):
                 dialog.run()
             wd.destroy()
 
-    def rotate_or_flip(self, selected):
+    def rotate_or_flip(self, selected, window):
         files = tools.get_files(selected)
         if len(files) > 0:
             file0 = files[0]
-            fd = FlipDialog(_('Rotate files'), file0)
+            fd = FlipDialog(_('Rotate files'), file0, window)
             if fd.run() == Gtk.ResponseType.ACCEPT:
                 fd.hide()
                 if fd.rbutton1.get_active():
@@ -273,7 +273,7 @@ class PDFManager(IdleObject):
                 flip_vertical = fd.switch1.get_active()
                 flip_horizontal = fd.switch2.get_active()
                 overwrite = fd.rbutton0.get_active()
-                dialog = Progreso(_('Rotate pdf files'), None, len(files))
+                dialog = Progreso(_('Rotate pdf files'), window, len(files))
                 diboo = DoitInBackgroundWithArgs(
                     cairoapi.rotate_and_flip_pages, files, rotate,
                     flip_vertical, flip_horizontal, overwrite)
@@ -284,15 +284,15 @@ class PDFManager(IdleObject):
                 dialog.run()
             fd.destroy()
 
-    def rotate_some_pages(self, selected):
-        files = tools.get_files(selected)
+    def rotate_some_pages(self, selected, window):
+        files = tools.get_files(selected, window)
         if files:
             file0 = files[0]
             filename, filext = os.path.splitext(file0)
             file_out = filename + '_rotated.pdf'
             last_page = cairoapi.get_num_of_pages(file0)
             spd = SelectPagesRotateDialog(_('Rotate some pages'), last_page,
-                                          file_out)
+                                          file_out, window)
             if spd.run() == Gtk.ResponseType.ACCEPT:
                 ranges = tools.get_ranges(spd.entry1.get_text())
                 if spd.rbutton1.get_active():
@@ -303,7 +303,7 @@ class PDFManager(IdleObject):
                     degrees = 180
                 spd.destroy()
                 if len(ranges) > 0:
-                    dialog = Progreso(_('Rotate some pages in pdf'), None, 1)
+                    dialog = Progreso(_('Rotate some pages in pdf'), window, 1)
                     diboo = DoitInBackgroundOnlyOne(
                         pdfapi.rotate_ranges_in_pdf, file0, file_out,
                         degrees, ranges)
@@ -313,7 +313,7 @@ class PDFManager(IdleObject):
             else:
                 spd.destroy()
 
-    def remove_some_pages(self, selected):
+    def remove_some_pages(self, selected, window):
         files = tools.get_files(selected)
         if files:
             file0 = files[0]
@@ -321,13 +321,13 @@ class PDFManager(IdleObject):
             file_out = filename + '_removed_pages.pdf'
             last_page = cairoapi.get_num_of_pages(file0)
             spd = SelectPagesDialog(_('Remove some pages'), last_page,
-                                    file_out)
+                                    file_out, window)
             if spd.run() == Gtk.ResponseType.ACCEPT:
                 ranges = tools.get_ranges(spd.entry1.get_text())
                 file_out = spd.get_file_out()
                 spd.destroy()
                 if len(ranges) > 0:
-                    dialog = Progreso(_('Remove some pages in pdf'), None, 1)
+                    dialog = Progreso(_('Remove some pages in pdf'), window, 1)
                     diboo = DoitInBackgroundOnlyOne(
                         pdfapi.remove_ranges, file0, file_out, ranges)
                     diboo.connect('done', dialog.increase)
@@ -337,10 +337,10 @@ class PDFManager(IdleObject):
             else:
                 spd.destroy()
 
-    def split_pdf_files(self, selected):
+    def split_pdf_files(self, selected, window):
         files = tools.get_files(selected)
         if files:
-            dialog = Progreso(_('Split pdf files'), None, len(files))
+            dialog = Progreso(_('Split pdf files'), window, len(files))
             diboo = DoitInBackground(cairoapi.split_pdf, files)
             diboo.connect('done', dialog.increase)
             diboo.connect('todo', dialog.set_todo_label)
@@ -348,7 +348,7 @@ class PDFManager(IdleObject):
             diboo.start()
             dialog.run()
 
-    def extract_some_pages(self, selected):
+    def extract_some_pages(self, selected, window):
         files = tools.get_files(selected)
         if files:
             file0 = files[0]
@@ -356,13 +356,14 @@ class PDFManager(IdleObject):
             file_out = filename + '_extracted_pages.pdf'
             last_page = cairoapi.get_num_of_pages(file0)
             spd = SelectPagesDialog(_('Extract some pages'), last_page,
-                                    file_out)
+                                    file_out, window)
             if spd.run() == Gtk.ResponseType.ACCEPT:
                 ranges = tools.get_ranges(spd.entry1.get_text())
                 file_out = spd.get_file_out()
                 spd.destroy()
                 if len(ranges) > 0:
-                    dialog = Progreso(_('Extract some pages in pdf'), None, 1)
+                    dialog = Progreso(_('Extract some pages in pdf'),
+                                      window, 1)
                     diboo = DoitInBackgroundOnlyOne(
                         pdfapi.extract_ranges, file0, file_out, ranges)
                     diboo.connect('done', dialog.increase)
@@ -371,7 +372,7 @@ class PDFManager(IdleObject):
             else:
                 spd.destroy()
 
-    def extract_text(self, selected):
+    def extract_text(self, selected, window):
         files = tools.get_files(selected)
         if files:
             file0 = files[0]
@@ -379,7 +380,7 @@ class PDFManager(IdleObject):
             file_out = filename + '.txt'
             print(file_out)
             file_out = tools.dialog_save_as_text(
-                _('Select file to save extracted text'), file_out)
+                _('Select file to save extracted text'), file_out, window)
             if file_out:
                 pdfapi.extract_text(file0, file_out)
 

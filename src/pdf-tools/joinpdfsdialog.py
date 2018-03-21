@@ -22,29 +22,24 @@
 import gi
 try:
     gi.require_version('Gtk', '3.0')
-    gi.require_version('Gdk', '3.0')
     gi.require_version('GdkPixbuf', '2.0')
 except Exception as e:
     print(e)
     exit(1)
 from gi.repository import Gtk
-from gi.repository import Gdk
 from gi.repository import GdkPixbuf
 import os
 import comun
 import tools
-import mimetypes
-from urllib import unquote_plus
 from comun import _
-from comun import MIMETYPES_IMAGE
 
 
 class JoinPdfsDialog(Gtk.Dialog):
-    def __init__(self, title, files, afile):
+    def __init__(self, title, files, afile, window):
         Gtk.Dialog.__init__(
             self,
             title,
-            None,
+            window,
             Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
             (Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT,
              Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL))
@@ -69,7 +64,9 @@ class JoinPdfsDialog(Gtk.Dialog):
                       xoptions=Gtk.AttachOptions.SHRINK,
                       yoptions=Gtk.AttachOptions.SHRINK)
         self.output_file = Gtk.Button.new_with_label(afile)
-        self.output_file.connect('clicked', self.on_button_output_file_clicked)
+        self.output_file.connect('clicked',
+                                 self.on_button_output_file_clicked,
+                                 window)
         table1.attach(self.output_file, 1, 2, 0, 1,
                       xoptions=Gtk.AttachOptions.EXPAND,
                       yoptions=Gtk.AttachOptions.SHRINK)
@@ -145,9 +142,11 @@ class JoinPdfsDialog(Gtk.Dialog):
         #
         self.show_all()
 
-    def on_button_output_file_clicked(self, widget):
+    def on_button_output_file_clicked(self, widget, window):
         file_out = tools.dialog_save_as(
-            _('Select file to save new file'), self.output_file.get_label())
+            _('Select file to save new file'),
+            self.output_file.get_label(),
+            window)
         if file_out:
             self.output_file.set_label(file_out)
 
