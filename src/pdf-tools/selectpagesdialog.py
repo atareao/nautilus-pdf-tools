@@ -32,7 +32,7 @@ from comun import _
 
 
 class SelectPagesDialog(Gtk.Dialog):
-    def __init__(self, title, last_page, afile, window):
+    def __init__(self, title, afile, window):
         Gtk.Dialog.__init__(
             self,
             title,
@@ -40,7 +40,6 @@ class SelectPagesDialog(Gtk.Dialog):
             Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
             (Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT,
              Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL))
-        self.set_size_request(300, 120)
         self.set_resizable(False)
         self.set_icon_from_file(comun.ICON)
         self.connect('destroy', self.close_application)
@@ -51,38 +50,38 @@ class SelectPagesDialog(Gtk.Dialog):
         vbox0.add(notebook)
         frame1 = Gtk.Frame()
         notebook.append_page(frame1, tab_label=Gtk.Label(_('Select Pages')))
-        table1 = Gtk.Table(rows=3, columns=3, homogeneous=False)
-        table1.set_border_width(5)
-        table1.set_col_spacings(5)
-        table1.set_row_spacings(5)
-        frame1.add(table1)
-        label1 = Gtk.Label(_('Pages') + ':')
-        label1.set_tooltip_text(_('Type page number and/or page\nranges\
+
+        grid = Gtk.Grid()
+        grid.set_row_spacing(10)
+        grid.set_column_spacing(10)
+        grid.set_margin_bottom(10)
+        grid.set_margin_left(10)
+        grid.set_margin_right(10)
+        grid.set_margin_top(10)
+        frame1.add(grid)
+
+        label = Gtk.Label(_('Pages') + ':')
+        label.set_tooltip_text(_('Type page number and/or page\nranges\
  separated by commas\ncounting from start of the\ndocument ej. 1,4,6-9'))
-        label1.set_alignment(0, .5)
-        table1.attach(label1, 0, 1, 0, 1,
-                      xoptions=Gtk.AttachOptions.FILL,
-                      yoptions=Gtk.AttachOptions.SHRINK)
+        label.set_alignment(0, .5)
+        grid.attach(label, 0, 0, 1, 1)
+
         self.entry1 = Gtk.Entry()
         self.entry1.set_tooltip_text(_('Type page number and/or page\nranges\
  separated by commas\ncounting from start of the\ndocument ej. 1,4,6-9'))
-        table1.attach(self.entry1, 1, 2, 0, 1,
-                      xoptions=Gtk.AttachOptions.FILL,
-                      yoptions=Gtk.AttachOptions.SHRINK)
-        #
-        label = Gtk.Label(_('Output file') + ':')
-        label.set_tooltip_text(_('Select the output file'))
-        label.set_alignment(0, .5)
-        table1.attach(label, 0, 1, 1, 2,
-                      xoptions=Gtk.AttachOptions.FILL,
-                      yoptions=Gtk.AttachOptions.SHRINK)
-        self.output_file = Gtk.Button.new_with_label(afile)
-        self.output_file.connect('clicked',
-                                 self.on_button_output_file_clicked,
-                                 window)
-        table1.attach(self.output_file, 1, 2, 1, 2,
-                      xoptions=Gtk.AttachOptions.FILL,
-                      yoptions=Gtk.AttachOptions.SHRINK)
+        grid.attach(self.entry1, 1, 0, 1, 1)
+
+        if afile is not None:
+            label = Gtk.Label(_('Output file') + ':')
+            label.set_tooltip_text(_('Select the output file'))
+            label.set_alignment(0, .5)
+            grid.attach(label, 0, 1, 1, 1)
+
+            self.output_file = Gtk.Button.new_with_label(afile)
+            self.output_file.connect('clicked',
+                                     self.on_button_output_file_clicked,
+                                     window)
+            grid.attach(self.output_file, 1, 1, 1, 1)
         self.show_all()
 
     def on_button_output_file_clicked(self, widget, window):
@@ -101,5 +100,5 @@ class SelectPagesDialog(Gtk.Dialog):
 
 
 if __name__ == '__main__':
-    dialog = SelectPagesDialog('Test', 10, 'file1')
+    dialog = SelectPagesDialog('Test', None, None)
     dialog.run()

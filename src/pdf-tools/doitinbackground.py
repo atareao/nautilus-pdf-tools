@@ -36,10 +36,10 @@ import math
 import os
 import shutil
 import mimetypes
-from comun import ROTATE_270
 from comun import MMTOPNG, MMTOPIXEL
 from comun import MIMETYPES_PNG
 from comun import TOP, MIDLE, BOTTOM, LEFT, CENTER, RIGHT
+from comun import ROTATE_000, ROTATE_090, ROTATE_180, ROTATE_270
 
 mimetypes.init()
 
@@ -607,6 +607,282 @@ class DoitInBackgroundWaterMark(DoitInBackgroundBase):
                 os.remove(temp_pdf)
             if self.stop is True:
                     break
+        if self.stop is True:
+            self.emit('interrupted')
+        else:
+            self.emit('finished')
+
+
+class DoitInBackgroundRotateAndFlip(DoitInBackgroundBase):
+    def __init__(self, files, rotate, flip_vertical, flip_horizontal,
+                 extension):
+        DoitInBackgroundBase.__init__(self)
+        self.files = files
+        self.rotate = rotate
+        self.flip_vertical = flip_vertical
+        self.flip_horizontal = flip_horizontal
+        self.extension = extension
+
+    def run(self):
+        total_documents = len(self.files)
+        for index, file_in in enumerate(self.files):
+            self.emit('todo', file_in)
+            document = Poppler.Document.new_from_file('file://' + file_in,
+                                                      None)
+            number_of_pages = document.get_n_pages()
+            if number_of_pages > 0:
+                temp_pdf = tools.create_temp_file()
+                filename, filext = os.path.splitext(file_in)
+                file_out = filename + self.extension + filext
+                pdfsurface = cairo.PDFSurface(temp_pdf, 200, 200)
+                context = cairo.Context(pdfsurface)
+                for i in range(0, document.get_n_pages()):
+                    current_page = document.get_page(i)
+                    if self.rotate == ROTATE_000 or self.rotate == ROTATE_180:
+                        pdf_width, pdf_height = current_page.get_size()
+                    else:
+                        pdf_height, pdf_width = current_page.get_size()
+                    pdfsurface.set_size(pdf_width, pdf_height)
+                    context.save()
+                    if self.flip_vertical:
+                        context.scale(1, -1)
+                        if self.rotate == ROTATE_000 or\
+                                self.rotate == ROTATE_180:
+                            context.translate(0, -pdf_width)
+                        else:
+                            context.translate(0, -pdf_height)
+                    if self.flip_horizontal:
+                        context.scale(-1, 1)
+                        if self.rotate == ROTATE_000 or\
+                                self.rotate == ROTATE_180:
+                            context.translate(-pdf_height, 0)
+                        else:
+                            context.translate(-pdf_width, 0)
+                    mtr = cairo.Matrix()
+                    mtr.rotate(self.rotate / 180.0 * math.pi)
+                    context.transform(mtr)
+                    if self.rotate == ROTATE_090:
+                            context.translate(0.0, -pdf_width)
+                    elif self.rotate == ROTATE_180:
+                            context.translate(-pdf_width, -pdf_height)
+                    elif self.rotate == ROTATE_270:
+                            context.translate(-pdf_height, 0.0)
+                    current_page.render(context)
+                    context.restore()
+                    context.show_page()
+                    self.emit('donef', (float(index) + float(i) / float(
+                        number_of_pages)) / float(total_documents))
+                    if self.stop is True:
+                            break
+                pdfsurface.flush()
+                pdfsurface.finish()
+                shutil.copy(temp_pdf, file_out)
+                os.remove(temp_pdf)
+            if self.stop is True:
+                    break
+        if self.stop is True:
+            self.emit('interrupted')
+        else:
+            self.emit('finished')
+
+
+class DoitInBackgroundSplitFiles(DoitInBackgroundBase):
+    def __init__(self, files):
+        DoitInBackgroundBase.__init__(self)
+        self.files = files
+
+    def run(self):
+        total_documents = len(self.files)
+        if total_documents > 0:
+            for index, file_in in enumerate(self.files):
+                self.emit('todo', file_in)
+                document = Poppler.Document.new_from_file('file://' + file_in,
+                                                          None)
+                number_of_pages = document.get_n_pages()
+                if number_of_pages > 1:
+                    file_out, ext = os.path.splitext(file_in)
+                    for i in range(0, number_of_pages):
+                        file_out_i = '%s_%s%s' % (file_out, i + 1, ext)
+                        pdfsurface = cairo.PDFSurface(file_out_i, 200, 200)
+                        context = cairo.Context(pdfsurface)
+                        current_page = document.get_page(i)
+                        context.save()
+                        pdf_width, pdf_height = current_page.get_size()
+                        pdfsurface.set_size(pdf_width, pdf_height)
+                        current_page.render(context)
+                        context.restore()
+                        context.show_page()
+                        pdfsurface.flush()
+                        pdfsurface.finish()
+                        self.emit('donef', (float(index) + float(i) / float(
+                            number_of_pages)) / float(total_documents))
+                        if self.stop is True:
+                                break
+                if self.stop is True:
+                        break
+        if self.stop is True:
+            self.emit('interrupted')
+        else:
+            self.emit('finished')
+
+
+class DoitInBackgroundRemoveSomePages(DoitInBackgroundBase):
+    def __init__(self, file_in, file_out, ranges):
+        DoitInBackgroundBase.__init__(self)
+        self.file_in = file_in
+        self.file_out = file_out
+        self.ranges = ranges
+
+    def run(self):
+        pages = tools.get_pages_from_ranges(self.ranges)
+        document = Poppler.Document.new_from_file('file://' + self.file_in,
+                                                  None)
+        number_of_pages = document.get_n_pages()
+        self.emit('start', number_of_pages)
+        if number_of_pages > 0:
+            temp_pdf = tools.create_temp_file()
+            pdfsurface = cairo.PDFSurface(temp_pdf, 200, 200)
+            context = cairo.Context(pdfsurface)
+            self.emit('start', number_of_pages)
+            for i in range(0, number_of_pages):
+                self.emit('todo', '{0}/{1}'.format(i, number_of_pages))
+                if i + 1 not in pages:
+                    current_page = document.get_page(i)
+                    context.save()
+                    pdf_width, pdf_height = current_page.get_size()
+                    pdfsurface.set_size(pdf_width, pdf_height)
+                    current_page.render(context)
+                    context.restore()
+                    context.show_page()
+                if self.stop is True:
+                    break
+                self.emit('done', '{0}/{1}'.format(i, number_of_pages))
+            pdfsurface.flush()
+            pdfsurface.finish()
+            shutil.copy(temp_pdf, self.file_out)
+            os.remove(temp_pdf)
+        if self.stop is True:
+            self.emit('interrupted')
+        else:
+            self.emit('finished')
+
+
+class DoitInBackgroundRotateSomePages(DoitInBackgroundBase):
+    def __init__(self, file_in, file_out, degrees, ranges):
+        DoitInBackgroundBase.__init__(self)
+        self.file_in = file_in
+        self.file_out = file_out
+        self.degrees = degrees
+        self.ranges = ranges
+        self.flip_vertical = False
+        self.flip_horizontal = False
+
+    def run(self):
+        pages = tools.get_pages_from_ranges(self.ranges)
+        document = Poppler.Document.new_from_file('file://' + self.file_in,
+                                                  None)
+        number_of_pages = document.get_n_pages()
+        self.emit('start', number_of_pages)
+        if number_of_pages > 0:
+            temp_pdf = tools.create_temp_file()
+            pdfsurface = cairo.PDFSurface(temp_pdf, 200, 200)
+            context = cairo.Context(pdfsurface)
+            for i in range(0, number_of_pages):
+                self.emit('todo', '{0}/{1}'.format(i, number_of_pages))
+                current_page = document.get_page(i)
+                if i + 1 in pages:
+                    if self.degrees == ROTATE_000 or\
+                            self.degrees == ROTATE_180:
+                        pdf_width, pdf_height = current_page.get_size()
+                    else:
+                        pdf_height, pdf_width = current_page.get_size()
+                    pdfsurface.set_size(pdf_width, pdf_height)
+                    context.save()
+                    mtr = cairo.Matrix()
+                    mtr.rotate(self.degrees / 180.0 * math.pi)
+                    context.transform(mtr)
+                    if self.degrees == ROTATE_090:
+                            context.translate(0.0, -pdf_width)
+                    elif self.degrees == ROTATE_180:
+                            context.translate(-pdf_width, -pdf_height)
+                    elif self.degrees == ROTATE_270:
+                            context.translate(-pdf_height, 0.0)
+                    if self.flip_vertical:
+                        context.scale(1, -1)
+                        if self.degrees == ROTATE_000 or\
+                                self.degrees == ROTATE_180:
+                            context.translate(0, -pdf_height)
+                        else:
+                            context.translate(0, -pdf_width)
+                    if self.flip_horizontal:
+                        context.scale(-1, 1)
+                        if self.degrees == ROTATE_000 or\
+                                self.degrees == ROTATE_180:
+                            context.translate(-pdf_width, 0)
+                        else:
+                            context.translate(-pdf_height, 0)
+                    current_page.render(context)
+                    context.restore()
+                else:
+                    context.save()
+                    pdf_width, pdf_height = current_page.get_size()
+                    pdfsurface.set_size(pdf_width, pdf_height)
+                    current_page.render(context)
+                    context.restore()
+                context.show_page()
+                if self.stop is True:
+                    break
+                self.emit('done', '{0}/{1}'.format(i, number_of_pages))
+            pdfsurface.flush()
+            pdfsurface.finish()
+            shutil.copy(temp_pdf, self.file_out)
+            os.remove(temp_pdf)
+        if self.stop is True:
+            self.emit('interrupted')
+        else:
+            self.emit('finished')
+
+
+class DoitInBackgroundExtractSomePages(DoitInBackgroundBase):
+    def __init__(self, files, ranges):
+        DoitInBackgroundBase.__init__(self)
+        self.files = files
+        self.ranges = ranges
+
+    def run(self):
+        total_documents = len(self.files)
+        pages = tools.get_pages_from_ranges(self.ranges)
+        if total_documents > 0 and len(pages) > 0:
+            for index, file_in in enumerate(self.files):
+                self.emit('todo', file_in)
+                document = Poppler.Document.new_from_file('file://' + file_in,
+                                                          None)
+                number_of_pages = document.get_n_pages()
+                if number_of_pages > 1:
+                    filename, filext = os.path.splitext(file_in)
+                    file_out = filename + '_extracted_pages.pdf'
+                    temp_pdf = tools.create_temp_file()
+                    pdfsurface = cairo.PDFSurface(temp_pdf, 200, 200)
+                    context = cairo.Context(pdfsurface)
+                    for i in range(0, number_of_pages):
+                        if i + 1 in pages:
+                            current_page = document.get_page(i)
+                            context.save()
+                            pdf_width, pdf_height = current_page.get_size()
+                            pdfsurface.set_size(pdf_width, pdf_height)
+                            current_page.render(context)
+                            context.restore()
+                            context.show_page()
+                        self.emit('donef', (float(index) + float(i) / float(
+                            number_of_pages)) / float(total_documents))
+                        if self.stop is True:
+                                break
+                    pdfsurface.flush()
+                    pdfsurface.finish()
+                    shutil.copy(temp_pdf, file_out)
+                    os.remove(temp_pdf)
+                if self.stop is True:
+                        break
         if self.stop is True:
             self.emit('interrupted')
         else:

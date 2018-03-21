@@ -33,12 +33,13 @@ from gi.repository import GdkPixbuf
 from miniview import MiniView
 import comun
 from comun import _
+from comun import ROTATE_000, ROTATE_090, ROTATE_180, ROTATE_270
 
 
 class FlipDialog(Gtk.Dialog):
-    def __init__(self, title, filename=None, window=None):
+    def __init__(self, filename=None, window=None):
         Gtk.Dialog.__init__(
-            self, title, window,
+            self, _('Rotate and flid PDF'), window,
             Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
             (Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT,
              Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL))
@@ -46,129 +47,116 @@ class FlipDialog(Gtk.Dialog):
         self.set_resizable(True)
         self.set_icon_from_file(comun.ICON)
         self.connect('destroy', self.close)
-        #
+
         vbox = Gtk.VBox(spacing=5)
         vbox.set_border_width(5)
         self.get_content_area().add(vbox)
-        #
+
         frame = Gtk.Frame()
         vbox.pack_start(frame, True, True, 0)
-        #
-        table = Gtk.Table(rows=2, columns=3, homogeneous=False)
-        table.set_border_width(5)
-        table.set_col_spacings(5)
-        table.set_row_spacings(5)
-        frame.add(table)
-        #
+
+        grid = Gtk.Grid()
+        grid.set_row_spacing(10)
+        grid.set_column_spacing(10)
+        grid.set_margin_bottom(10)
+        grid.set_margin_left(10)
+        grid.set_margin_right(10)
+        grid.set_margin_top(10)
+        frame.add(grid)
+
         frame1 = Gtk.Frame()
-        table.attach(frame1, 0, 1, 0, 1,
-                     xoptions=Gtk.AttachOptions.EXPAND,
-                     yoptions=Gtk.AttachOptions.SHRINK)
+        grid.attach(frame1, 0, 0, 2, 1)
         self.scrolledwindow1 = Gtk.ScrolledWindow()
         self.scrolledwindow1.set_size_request(420, 420)
         self.connect('key-release-event', self.on_key_release_event)
         frame1.add(self.scrolledwindow1)
-        #
+
         self.viewport1 = MiniView()
         self.scrolledwindow1.add(self.viewport1)
-        #
+
         frame2 = Gtk.Frame()
-        table.attach(frame2, 1, 2, 0, 1,
-                     xoptions=Gtk.AttachOptions.EXPAND,
-                     yoptions=Gtk.AttachOptions.SHRINK)
+        grid.attach(frame2, 2, 0, 2, 1)
         scrolledwindow2 = Gtk.ScrolledWindow()
         scrolledwindow2.set_size_request(420, 420)
         self.connect('key-release-event', self.on_key_release_event)
         frame2.add(scrolledwindow2)
-        #
+
         self.viewport2 = MiniView()
         scrolledwindow2.add(self.viewport2)
-        #
+
         self.scale = 100
 
-        #
-        self.rbutton0 = Gtk.CheckButton(_('Overwrite original file?'))
-        table.attach(self.rbutton0, 0, 2, 1, 2,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
-        #
+        label = Gtk.Label(_('Append to file') + ':')
+        label.set_alignment(0, .5)
+        grid.attach(label, 0, 1, 1, 1)
+
+        self.extension = Gtk.Entry()
+        self.extension.set_tooltip_text(_(
+            'Append to file to create output filename'))
+        self.extension.set_text(_('_flip_and_rotated'))
+        grid.attach(self.extension, 1, 1, 1, 1)
+
         label = Gtk.Label(_('Flip vertical'))
         label.set_alignment(0, .5)
-        table.attach(label, 0, 1, 2, 3,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
+        grid.attach(label, 2, 1, 1, 1)
+
         self.switch1 = Gtk.Switch()
         self.switch1.connect("notify::active",
                              self.slider_on_value_changed)
         self.switch1.set_name('switch1')
         hbox1 = Gtk.HBox()
         hbox1.pack_start(self.switch1, 0, 0, 0)
-        table.attach(hbox1, 1, 2, 2, 3,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
-        #
+        grid.attach(hbox1, 3, 1, 1, 1)
+
         label = Gtk.Label(_('Flip horizontal'))
         label.set_alignment(0, .5)
-        table.attach(label, 0, 1, 3, 4,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
+        grid.attach(label, 2, 2, 1, 1)
+
         self.switch2 = Gtk.Switch()
         self.switch2.connect("notify::active",
                              self.slider_on_value_changed)
         self.switch2.set_name('switch2')
         hbox2 = Gtk.HBox()
         hbox2.pack_start(self.switch2, 0, 0, 0)
-        table.attach(hbox2, 1, 2, 3, 4,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
-        #
+        grid.attach(hbox2, 3, 2, 1, 1)
+
         label = Gtk.Label(_('Rotate'))
         label.set_alignment(0, .5)
-        table.attach(label, 0, 1, 4, 5,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
-        table1 = Gtk.Table(rows=1, columns=4, homogeneous=False)
-        table1.set_border_width(5)
-        table1.set_col_spacings(5)
-        table1.set_row_spacings(5)
-        table.attach(table1, 1, 2, 4, 5,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
+        grid.attach(label, 0, 2, 1, 1)
+
+        hbox3 = Gtk.HBox()
+        grid.attach(hbox3, 1, 2, 1, 1)
+
         self.rbutton1 = Gtk.RadioButton.new_with_label_from_widget(None, '0')
         self.rbutton1.set_name('0')
         self.rbutton1.connect("notify::active", self.slider_on_value_changed)
-        table1.attach(self.rbutton1, 0, 1, 0, 1,
-                      xoptions=Gtk.AttachOptions.EXPAND,
-                      yoptions=Gtk.AttachOptions.SHRINK)
+        hbox3.pack_start(self.rbutton1, 0, 0, 0)
+
         self.rbutton2 = Gtk.RadioButton.new_with_label_from_widget(
             self.rbutton1, '90')
         self.rbutton2.set_name('90')
         self.rbutton2.connect("notify::active", self.slider_on_value_changed)
-        table1.attach(self.rbutton2, 1, 2, 0, 1,
-                      xoptions=Gtk.AttachOptions.EXPAND,
-                      yoptions=Gtk.AttachOptions.SHRINK)
+        hbox3.pack_start(self.rbutton2, 0, 0, 0)
+
         self.rbutton3 = Gtk.RadioButton.new_with_label_from_widget(
             self.rbutton1, '180')
         self.rbutton3.set_name('180')
         self.rbutton3.connect("notify::active", self.slider_on_value_changed)
-        table1.attach(self.rbutton3, 2, 3, 0, 1,
-                      xoptions=Gtk.AttachOptions.EXPAND,
-                      yoptions=Gtk.AttachOptions.SHRINK)
+        hbox3.pack_start(self.rbutton3, 0, 0, 0)
+
         self.rbutton4 = Gtk.RadioButton.new_with_label_from_widget(
             self.rbutton1, '270')
         self.rbutton4.set_name('270')
         self.rbutton4.connect("notify::active", self.slider_on_value_changed)
-        table1.attach(self.rbutton4, 3, 4, 0, 1,
-                      xoptions=Gtk.AttachOptions.EXPAND,
-                      yoptions=Gtk.AttachOptions.SHRINK)
-        #
+        hbox3.pack_start(self.rbutton4, 0, 0, 0)
+
         if filename is not None:
             uri = "file://" + filename
             document = Poppler.Document.new_from_file(uri, None)
             if document.get_n_pages() > 0:
                 self.viewport1.set_page(document.get_page(0))
                 self.viewport2.set_page(document.get_page(0))
-        #
+
         print(1)
         self.show_all()
 
@@ -205,7 +193,6 @@ class FlipDialog(Gtk.Dialog):
             self.scale = int(factor * 100)
             w = int(self.pixbuf1.get_width() * factor)
             h = int(self.pixbuf1.get_height() * factor)
-            #
             self.image1.set_from_pixbuf(
                 self.pixbuf1.scale_simple(w, h, GdkPixbuf.InterpType.BILINEAR))
             self.image2.set_from_pixbuf(
@@ -223,7 +210,25 @@ class FlipDialog(Gtk.Dialog):
     def close(self, widget):
         self.destroy()
 
+    def get_extension(self):
+        return self.extension.get_text()
+
+    def get_rotate(self):
+        if self.rbutton2.get_active():
+            return ROTATE_090
+        elif self.rbutton3.get_active():
+            return ROTATE_180
+        elif self.rbutton4.get_active():
+            return ROTATE_270
+        return ROTATE_000
+
+    def get_flip_vertical(self):
+        return self.switch1.get_active()
+
+    def get_flip_horizontal(self):
+        return self.switch2.get_active()
+
 
 if __name__ == '__main__':
-    dialog = FlipDialog('Test')
+    dialog = FlipDialog()
     dialog.run()
