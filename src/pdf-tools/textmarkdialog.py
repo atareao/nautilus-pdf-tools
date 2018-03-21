@@ -37,7 +37,7 @@ from comun import TOP, MIDLE, BOTTOM, LEFT, CENTER, RIGHT
 
 
 class TextmarkDialog(Gtk.Dialog):
-    def __init__(self, filename=None, window):
+    def __init__(self, filename=None, window=None):
         Gtk.Dialog.__init__(
             self,
             _('Textmark'),
@@ -56,32 +56,36 @@ class TextmarkDialog(Gtk.Dialog):
         vbox0.add(notebook)
         frame = Gtk.Frame()
         notebook.append_page(frame, tab_label=Gtk.Label(_('Textmark')))
-        #
-        table = Gtk.Table(rows=4, columns=2, homogeneous=False)
-        table.set_border_width(5)
-        table.set_col_spacings(5)
-        table.set_row_spacings(5)
-        frame.add(table)
-        #
+
+        grid = Gtk.Grid()
+        grid.set_row_spacing(10)
+        grid.set_column_spacing(10)
+        grid.set_margin_bottom(10)
+        grid.set_margin_left(10)
+        grid.set_margin_right(10)
+        grid.set_margin_top(10)
+        frame.add(grid)
+
         frame1 = Gtk.Frame()
-        table.attach(frame1, 0, 1, 0, 1,
-                     xoptions=Gtk.AttachOptions.EXPAND,
-                     yoptions=Gtk.AttachOptions.SHRINK)
+        grid.attach(frame1, 0, 0, 2, 1)
         self.scrolledwindow1 = Gtk.ScrolledWindow()
         self.scrolledwindow1.set_size_request(420, 420)
         frame1.add(self.scrolledwindow1)
+
         self.viewport1 = MiniView()
         self.scrolledwindow1.add(self.viewport1)
+
         frame2 = Gtk.Frame()
-        table.attach(frame2, 1, 2, 0, 1,
-                     xoptions=Gtk.AttachOptions.EXPAND,
-                     yoptions=Gtk.AttachOptions.SHRINK)
+        grid.attach(frame2, 2, 0, 2, 1)
         scrolledwindow2 = Gtk.ScrolledWindow()
         scrolledwindow2.set_size_request(420, 420)
         frame2.add(scrolledwindow2)
+
         self.viewport2 = MiniView()
         scrolledwindow2.add(self.viewport2)
+
         self.scale = 100
+
         vertical_options = Gtk.ListStore(str, int)
         vertical_options.append([_('Top'), TOP])
         vertical_options.append([_('Middle'), MIDLE])
@@ -90,82 +94,82 @@ class TextmarkDialog(Gtk.Dialog):
         horizontal_options.append([_('Left'), LEFT])
         horizontal_options.append([_('Center'), CENTER])
         horizontal_options.append([_('Right'), RIGHT])
-        self.rbutton0 = Gtk.CheckButton(_('Overwrite original file?'))
-        table.attach(self.rbutton0, 0, 2, 1, 2,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
+
+        label = Gtk.Label(_('Append to file') + ':')
+        label.set_alignment(0, .5)
+        grid.attach(label, 0, 1, 1, 1)
+
+        self.extension = Gtk.Entry()
+        self.extension.set_tooltip_text(_(
+            'Append to file to create output filename'))
+        self.extension.set_text(_('_textmarked'))
+        grid.attach(self.extension, 1, 1, 1, 1)
+
         vbox1 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-        table.attach(vbox1, 0, 2, 2, 3,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
-        button_font = Gtk.Button(_('Select Font'))
-        button_font.connect('clicked', self.on_button_font_activated)
+        grid.attach(vbox1, 0, 2, 2, 1)
+
+        button_font = Gtk.Button(_('Select font'))
+        button_font.connect('clicked', self.on_button_font_activated, self)
         vbox1.pack_start(button_font, False, False, 0)
+
         button_color = Gtk.Button(_('Select color'))
-        button_color.connect('clicked', self.on_button_color_activated)
+        button_color.connect('clicked', self.on_button_color_activated, self)
         vbox1.pack_start(button_color, False, False, 0)
+
         vbox3 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-        table.attach(vbox3, 0, 2, 4, 5,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
+        grid.attach(vbox3, 2, 2, 2, 1)
+
         label = Gtk.Label(_('Text') + ':')
         vbox3.pack_start(label, False, False, 0)
+
         self.entry = Gtk.Entry()
         self.entry.set_width_chars(50)
         self.entry.connect('changed', self.on_entry_changed)
         vbox3.pack_start(self.entry, True, True, 0)
+
         label = Gtk.Label(_('Horizontal position') + ':')
         label.set_alignment(0, .5)
-        table.attach(label, 0, 1, 5, 6,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
+        grid.attach(label, 0, 4, 1, 1)
+
         self.horizontal = Gtk.ComboBox.new_with_model_and_entry(
             horizontal_options)
         self.horizontal.set_entry_text_column(0)
         self.horizontal.set_active(0)
         self.horizontal.connect('changed', self.on_value_changed)
-        table.attach(self.horizontal, 1, 2, 5, 6,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
+        grid.attach(self.horizontal, 1, 4, 1, 1)
+
         label = Gtk.Label(_('Vertical position') + ':')
         label.set_alignment(0, .5)
-        table.attach(label, 0, 1, 6, 7,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
-        #
+        grid.attach(label, 2, 4, 1, 1)
+
         self.vertical = Gtk.ComboBox.new_with_model_and_entry(vertical_options)
         self.vertical.set_entry_text_column(0)
         self.vertical.set_active(0)
         self.vertical.connect('changed', self.on_value_changed)
-        table.attach(self.vertical, 1, 2, 6, 7,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
+        grid.attach(self.vertical, 3, 4, 1, 1)
+
         label = Gtk.Label(_('Set horizontal margin') + ':')
         label.set_alignment(0, .5)
-        table.attach(label, 0, 1, 7, 8,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
+        grid.attach(label, 0, 5, 1, 1)
+
         self.horizontal_margin = Gtk.SpinButton()
         self.horizontal_margin.set_adjustment(
             Gtk.Adjustment(5, 0, 100, 1, 10, 10))
-        table.attach(self.horizontal_margin, 1, 2, 7, 8,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
         self.horizontal_margin.connect('value-changed',
                                        self.on_margin_changed)
+        grid.attach(self.horizontal_margin, 1, 5, 1, 1)
+
         label = Gtk.Label(_('Set vertical margin') + ':')
         label.set_alignment(0, .5)
-        table.attach(label, 0, 1, 8, 9,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
+        grid.attach(label, 2, 5, 1, 1)
+
         self.vertical_margin = Gtk.SpinButton()
         self.vertical_margin.set_adjustment(
             Gtk.Adjustment(5, 0, 100, 1, 10, 10))
-        table.attach(self.vertical_margin, 1, 2, 8, 9,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
         self.vertical_margin.connect('value-changed',
                                      self.on_margin_changed)
+        grid.attach(self.vertical_margin, 3, 5, 1, 1)
+
         self.show_all()
         if filename is not None:
             uri = "file://" + filename
@@ -179,8 +183,9 @@ class TextmarkDialog(Gtk.Dialog):
         self.viewport2.text_margin_height = self.vertical_margin.get_value()
         self.update_preview()
 
-    def on_button_color_activated(self, widget):
+    def on_button_color_activated(self, widget, window):
         dialog = Gtk.ColorSelectionDialog(
+            parent=window,
             title=_('Select color'),
             flags=Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT)
         dialog.get_color_selection().set_current_color(
@@ -202,8 +207,9 @@ class TextmarkDialog(Gtk.Dialog):
             self.update_preview()
         dialog.destroy()
 
-    def on_button_font_activated(self, widget):
+    def on_button_font_activated(self, widget, window):
         dialog = Gtk.FontSelectionDialog(
+            parent=window,
             title=_('Select font'),
             flags=Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT)
         print(self.viewport2.font + ' ' + str(int(self.viewport2.size)))
@@ -235,11 +241,11 @@ class TextmarkDialog(Gtk.Dialog):
     def get_text(self):
         return self.entry.get_text()
 
+    def get_extension(self):
+        return self.extension.get_text()
+
     def on_value_changed(self, widget):
         self.update_preview()
-
-    def get_image_filename(self):
-        return self.entry.get_text()
 
     def get_horizontal_option(self):
         tree_iter = self.horizontal.get_active_iter()

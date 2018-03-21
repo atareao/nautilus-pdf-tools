@@ -148,7 +148,9 @@ def create_image_surface_from_file(filename, zoom=1.0):
 
 def create_image_surface_from_pixbuf(pixbuf, zoom=1.0):
     surface = cairo.ImageSurface(
-        cairo.FORMAT_ARGB32, pixbuf.get_width(), pixbuf.get_height())
+        cairo.FORMAT_ARGB32,
+        int(pixbuf.get_width() * zoom),
+        int(pixbuf.get_height() * zoom))
     context = cairo.Context(surface)
     context.save()
     context.scale(zoom, zoom)

@@ -374,6 +374,6 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
 
 
 if __name__ == '__main__':
-    dialog = CreatePDFFromImagesDialog('Create', [], 'output_file')
+    dialog = CreatePDFFromImagesDialog('Create', [], 'output_file', None)
     dialog.run()
     print(dialog.get_png_files())

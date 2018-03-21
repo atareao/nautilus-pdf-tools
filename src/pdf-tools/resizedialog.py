@@ -26,13 +26,12 @@ except Exception as e:
     print(e)
     exit(1)
 from gi.repository import Gtk
-import tools
 import comun
 from comun import _
 
 
 class ResizeDialog(Gtk.Dialog):
-    def __init__(self, title, afile, window):
+    def __init__(self, title, window):
         Gtk.Dialog.__init__(
             self,
             title,
@@ -52,33 +51,28 @@ class ResizeDialog(Gtk.Dialog):
         vbox0.add(notebook)
         frame1 = Gtk.Frame()
         notebook.append_page(frame1, tab_label=Gtk.Label(_('Pages')))
-        table1 = Gtk.Table(rows=3, columns=2, homogeneous=False)
-        table1.set_border_width(5)
-        table1.set_col_spacings(5)
-        table1.set_row_spacings(5)
-        frame1.add(table1)
-        #
+
+        grid = Gtk.Grid()
+        grid.set_row_spacing(10)
+        grid.set_column_spacing(10)
+        grid.set_margin_bottom(10)
+        grid.set_margin_left(10)
+        grid.set_margin_right(10)
+        grid.set_margin_top(10)
+        frame1.add(grid)
+
         label1 = Gtk.Label(_('Paper size') + ':')
-        label1.set_tooltip_text(_('Select the size of the output file'))
         label1.set_alignment(0, 0.5)
-        table1.attach(label1, 0, 1, 0, 1,
-                      xoptions=Gtk.AttachOptions.FILL,
-                      yoptions=Gtk.AttachOptions.SHRINK)
-        #
+        grid.attach(label1, 0, 0, 1, 1)
+
         label2 = Gtk.Label(_('Orientation') + ':')
-        label2.set_tooltip_text(_('Select the orientation of the page'))
         label2.set_alignment(0, .5)
-        table1.attach(label2, 0, 1, 1, 2,
-                      xoptions=Gtk.AttachOptions.FILL,
-                      yoptions=Gtk.AttachOptions.SHRINK)
-        #
-        label3 = Gtk.Label(_('Output file') + ':')
-        label3.set_tooltip_text(_('Select the output file'))
+        grid.attach(label2, 0, 1, 1, 1)
+
+        label3 = Gtk.Label(_('Append to file') + ':')
         label3.set_alignment(0, .5)
-        table1.attach(label3, 0, 1, 2, 3,
-                      xoptions=Gtk.AttachOptions.FILL,
-                      yoptions=Gtk.AttachOptions.SHRINK)
-        #
+        grid.attach(label3, 0, 2, 1, 1)
+
         liststore = Gtk.ListStore(str, float, float)
         liststore.append([_('A0'), 2383.9, 3370.4])
         liststore.append([_('A1'), 1683.8, 2383.9])
@@ -115,43 +109,36 @@ class ResizeDialog(Gtk.Dialog):
         liststore.append([_('Ledger (17x11)'), 1224.0, 792.0])
         liststore.append([_('Tabloid (11x17)'), 792.0, 1224.0])
         self.entry1 = Gtk.ComboBox.new_with_model(model=liststore)
+        self.entry1.set_tooltip_text(_('Select the size of the output file'))
         renderer_text = Gtk.CellRendererText()
         self.entry1.pack_start(renderer_text, True)
         self.entry1.add_attribute(renderer_text, "text", 0)
         self.entry1.set_active(0)
-        table1.attach(self.entry1, 1, 2, 0, 1,
-                      xoptions=Gtk.AttachOptions.FILL,
-                      yoptions=Gtk.AttachOptions.SHRINK)
+
+        grid.attach(self.entry1, 1, 0, 1, 1)
+
         liststore = Gtk.ListStore(str)
         liststore.append([_('Vertical')])
         liststore.append([_('Horizontal')])
         self.entry2 = Gtk.ComboBox.new_with_model(model=liststore)
+        self.entry2.set_tooltip_text(_('Select the orientation of the page'))
         renderer_text = Gtk.CellRendererText()
         self.entry2.pack_start(renderer_text, True)
         self.entry2.add_attribute(renderer_text, "text", 0)
         self.entry2.set_active(0)
-        table1.attach(self.entry2, 1, 2, 1, 2,
-                      xoptions=Gtk.AttachOptions.FILL,
-                      yoptions=Gtk.AttachOptions.SHRINK)
-        self.output_file = Gtk.Button.new_with_label(afile)
-        self.output_file.connect('clicked',
-                                 self.on_button_output_file_clicked,
-                                 window)
-        table1.attach(self.output_file, 1, 2, 2, 3,
-                      xoptions=Gtk.AttachOptions.FILL,
-                      yoptions=Gtk.AttachOptions.SHRINK)
+
+        grid.attach(self.entry2, 1, 1, 1, 1)
+
+        self.extension = Gtk.Entry()
+        self.extension.set_tooltip_text(_(
+            'Append to file to create output filename'))
+        self.extension.set_text(_('_resized'))
+
+        grid.attach(self.extension, 1, 2, 1, 1)
         self.show_all()
 
-    def on_button_output_file_clicked(self, widget, window):
-        file_out = tools.dialog_save_as(
-            _('Select file to save new file'),
-            self.output_file.get_label(),
-            window)
-        if file_out:
-            self.output_file.set_label(file_out)
-
-    def get_file_out(self):
-        return self.output_file.get_label()
+    def get_extension(self):
+        return self.extension.get_text()
 
     def get_size(self):
         tree_iter = self.entry1.get_active_iter()
@@ -176,5 +163,6 @@ class ResizeDialog(Gtk.Dialog):
 
 
 if __name__ == '__main__':
-    dialog = ResizeDialog('Test', 'afile', None)
+    dialog = ResizeDialog('Test', None)
     dialog.run()
+    print(dialog.get_extension())

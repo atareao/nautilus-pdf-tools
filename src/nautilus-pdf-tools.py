@@ -142,7 +142,11 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
                     name='PdfToolsMenuProvider::Gtk-pdf-tools-' + item[0],
                     label=item[1],
                     tip=item[2])
-                sub_menuitem.connect('activate', self.doit, item[3], sel_items)
+                sub_menuitem.connect('activate',
+                                     self.doit,
+                                     item[3],
+                                     sel_items,
+                                     window)
                 submenu.append_item(sub_menuitem)
             #
             sub_menuitem_98 = FileManager.MenuItem(

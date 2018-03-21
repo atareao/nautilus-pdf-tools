@@ -39,7 +39,7 @@ from comun import TOP, MIDLE, BOTTOM, LEFT, CENTER, RIGHT, MIMETYPES_IMAGE
 
 
 class WatermarkDialog(Gtk.Dialog):
-    def __init__(self, filename=None, window):
+    def __init__(self, filename=None, window=None):
         Gtk.Dialog.__init__(
             self,
             _('Watermark'),
@@ -54,138 +54,132 @@ class WatermarkDialog(Gtk.Dialog):
         vbox0 = Gtk.VBox(spacing=5)
         vbox0.set_border_width(5)
         self.get_content_area().add(vbox0)
-        #
+
         notebook = Gtk.Notebook()
         vbox0.add(notebook)
-        #
+
         frame = Gtk.Frame()
         notebook.append_page(frame, tab_label=Gtk.Label(_('Watermark')))
-        #
-        table = Gtk.Table(rows=6, columns=2, homogeneous=False)
-        table.set_border_width(5)
-        table.set_col_spacings(5)
-        table.set_row_spacings(5)
-        frame.add(table)
-        #
+
+        grid = Gtk.Grid()
+        grid.set_row_spacing(10)
+        grid.set_column_spacing(10)
+        grid.set_margin_bottom(10)
+        grid.set_margin_left(10)
+        grid.set_margin_right(10)
+        grid.set_margin_top(10)
+        frame.add(grid)
+
         frame1 = Gtk.Frame()
-        table.attach(frame1, 0, 1, 0, 1,
-                     xoptions=Gtk.AttachOptions.EXPAND,
-                     yoptions=Gtk.AttachOptions.SHRINK)
+        grid.attach(frame1, 0, 0, 2, 1)
         self.scrolledwindow1 = Gtk.ScrolledWindow()
         self.scrolledwindow1.set_size_request(320, 320)
         frame1.add(self.scrolledwindow1)
+
         self.viewport1 = MiniView()
         self.scrolledwindow1.add(self.viewport1)
+
         frame2 = Gtk.Frame()
-        table.attach(frame2, 1, 2, 0, 1,
-                     xoptions=Gtk.AttachOptions.EXPAND,
-                     yoptions=Gtk.AttachOptions.SHRINK)
+        grid.attach(frame2, 2, 0, 2, 1)
         scrolledwindow2 = Gtk.ScrolledWindow()
         scrolledwindow2.set_size_request(320, 320)
         frame2.add(scrolledwindow2)
-        #
+
         self.viewport2 = MiniView()
         scrolledwindow2.add(self.viewport2)
-        #
+
         self.scale = 100
+
         vertical_options = Gtk.ListStore(str, int)
         vertical_options.append([_('Top'), TOP])
         vertical_options.append([_('Middle'), MIDLE])
         vertical_options.append([_('Bottom'), BOTTOM])
-        #
+
         horizontal_options = Gtk.ListStore(str, int)
         horizontal_options.append([_('Left'), LEFT])
         horizontal_options.append([_('Center'), CENTER])
         horizontal_options.append([_('Right'), RIGHT])
-        #
-        self.rbutton0 = Gtk.CheckButton(_('Overwrite original file?'))
-        table.attach(self.rbutton0, 0, 2, 1, 2,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
+
+        label = Gtk.Label(_('Append to file') + ':')
+        label.set_alignment(0, .5)
+        grid.attach(label, 0, 1, 1, 1)
+
+        self.extension = Gtk.Entry()
+        self.extension.set_tooltip_text(_(
+            'Append to file to create output filename'))
+        self.extension.set_text(_('_watermarked'))
+        grid.attach(self.extension, 1, 1, 1, 1)
+
         vbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-        table.attach(vbox, 0, 2, 2, 3,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
+        grid.attach(vbox, 0, 2, 2, 1)
+
         label = Gtk.Label(_('Watermark') + ':')
         label.set_alignment(0, 0.5)
         vbox.pack_start(label, False, False, 0)
+
         self.entry = Gtk.Entry()
         self.entry.set_width_chars(10)
         self.entry.set_sensitive(False)
         vbox.pack_start(self.entry, True, True, 0)
+
         button = Gtk.Button(_('Choose File'))
         button.connect('clicked', self.on_button_clicked)
         vbox.pack_start(button, False, False, 0)
-        #
+
         label = Gtk.Label(_('Horizontal position') + ':')
-        label.set_alignment(0, 0.5)
-        table.attach(label, 0, 1, 3, 4,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
-        #
+        label.set_alignment(0, .5)
+        grid.attach(label, 0, 4, 1, 1)
+
         self.horizontal = Gtk.ComboBox.new_with_model_and_entry(
             horizontal_options)
         self.horizontal.set_entry_text_column(0)
         self.horizontal.set_active(0)
-        self.horizontal.connect('changed', self.update_preview)
-        table.attach(self.horizontal, 1, 2, 3, 4,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
+        self.horizontal.connect('changed', self.on_value_changed)
+        grid.attach(self.horizontal, 1, 4, 1, 1)
+
         label = Gtk.Label(_('Vertical position') + ':')
-        label.set_alignment(0, 0.5)
-        table.attach(label, 0, 1, 4, 5,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
-        #
+        label.set_alignment(0, .5)
+        grid.attach(label, 2, 4, 1, 1)
+
         self.vertical = Gtk.ComboBox.new_with_model_and_entry(vertical_options)
         self.vertical.set_entry_text_column(0)
         self.vertical.set_active(0)
-        self.vertical.connect('changed', self.update_preview)
-        table.attach(self.vertical, 1, 2, 4, 5,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
-        #
+        self.vertical.connect('changed', self.on_value_changed)
+        grid.attach(self.vertical, 3, 4, 1, 1)
+
+        label = Gtk.Label(_('Set horizontal margin') + ':')
+        label.set_alignment(0, .5)
+        grid.attach(label, 0, 5, 1, 1)
+
+        self.horizontal_margin = Gtk.SpinButton()
+        self.horizontal_margin.set_adjustment(
+            Gtk.Adjustment(5, 0, 100, 1, 10, 10))
+        self.horizontal_margin.connect('value-changed',
+                                       self.on_margin_changed)
+        grid.attach(self.horizontal_margin, 1, 5, 1, 1)
+
+        label = Gtk.Label(_('Set vertical margin') + ':')
+        label.set_alignment(0, .5)
+        grid.attach(label, 2, 5, 1, 1)
+
+        self.vertical_margin = Gtk.SpinButton()
+        self.vertical_margin.set_adjustment(
+            Gtk.Adjustment(5, 0, 100, 1, 10, 10))
+        self.vertical_margin.connect('value-changed',
+                                     self.on_margin_changed)
+        grid.attach(self.vertical_margin, 3, 5, 1, 1)
+
         label = Gtk.Label(_('Watermark zoom') + ':')
         label.set_alignment(0, 0.5)
-        table.attach(label, 0, 1, 5, 6,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
-        #
+        grid.attach(label, 0, 6, 1, 1)
+
         self.watermark_zoom = Gtk.SpinButton()
         self.watermark_zoom.connect('value-changed',
                                     self.update_preview)
         self.watermark_zoom.set_adjustment(
             Gtk.Adjustment(100, 0, 1010, 1, 10, 10))
-        table.attach(self.watermark_zoom, 1, 2, 5, 6,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
-        #
-        label = Gtk.Label(_('Set horizontal margin') + ':')
-        label.set_alignment(0, .5)
-        table.attach(label, 0, 1, 6, 7,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
-        self.horizontal_margin = Gtk.SpinButton()
-        self.horizontal_margin.set_adjustment(
-            Gtk.Adjustment(5, 0, 100, 1, 10, 10))
-        table.attach(self.horizontal_margin, 1, 2, 6, 7,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
-        self.horizontal_margin.connect('value-changed',
-                                       self.update_preview)
-        label = Gtk.Label(_('Set vertical margin') + ':')
-        label.set_alignment(0, .5)
-        table.attach(label, 0, 1, 7, 8,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
-        self.vertical_margin = Gtk.SpinButton()
-        self.vertical_margin.set_adjustment(
-            Gtk.Adjustment(5, 0, 100, 1, 10, 10))
-        table.attach(self.vertical_margin, 1, 2, 7, 8,
-                     xoptions=Gtk.AttachOptions.FILL,
-                     yoptions=Gtk.AttachOptions.SHRINK)
-        self.vertical_margin.connect('value-changed',
-                                     self.update_preview)
+        grid.attach(self.watermark_zoom, 1, 6, 1, 1)
+
         self.show_all()
         if filename is not None:
             uri = "file://" + filename
@@ -193,6 +187,11 @@ class WatermarkDialog(Gtk.Dialog):
             if document.get_n_pages() > 0:
                 self.viewport1.set_page(document.get_page(0))
                 self.viewport2.set_page(document.get_page(0))
+
+    def on_margin_changed(self, widget):
+        self.viewport2.text_margin_width = self.horizontal_margin.get_value()
+        self.viewport2.text_margin_height = self.vertical_margin.get_value()
+        self.update_preview()
 
     def on_value_changed(self, widget):
         self.update_preview()
@@ -205,6 +204,9 @@ class WatermarkDialog(Gtk.Dialog):
 
     def get_vertical_margin(self):
         return self.vertical_margin.get_value()
+
+    def get_extension(self):
+        return self.extension.get_text()
 
     def get_image_filename(self):
         return self.entry.get_text()
@@ -249,7 +251,7 @@ class WatermarkDialog(Gtk.Dialog):
         if response == Gtk.ResponseType.OK:
             self.entry.set_text(dialog.get_filename())
         dialog.destroy()
-        ####
+
         file_watermark = self.entry.get_text()
         im = Image.open(file_watermark)
         width, height = im.size

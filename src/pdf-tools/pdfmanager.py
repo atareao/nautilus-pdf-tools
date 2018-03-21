@@ -22,12 +22,15 @@
 import gi
 try:
     gi.require_version('Gtk', '3.0')
+    gi.require_version('GObject', '2.0')
+    gi.require_version('GLib', '2.0')
 except Exception as e:
     print(e)
     exit(1)
 from gi.repository import Gtk
+from gi.repository import GObject
+from gi.repository import GLib
 import cairoapi as pdfapi
-from idleobject import IdleObject
 from resizedialog import ResizeDialog
 from combinedialog import CombineDialog
 from createpdffromImagesdialog import CreatePDFFromImagesDialog
@@ -39,7 +42,11 @@ from flipdialog import FlipDialog
 from selectpagesrotatedialog import SelectPagesRotateDialog
 from selectpagesdialog import SelectPagesDialog
 from doitinbackground import DoitInBackground, DoitInBackgroundOnlyOne,\
-    DoitInBackgroundWithArgs
+    DoitInBackgroundWithArgs, DoItInBackgroundJoinPdf,\
+    DoItInBackgroundResizePages, DoItInBackgroundToPNG,\
+    DoItInBackgroundCreatePDFFromImages, DoItInBackgroundCombine,\
+    DoitInBackgroundPaginage, DoitInBackgroundTextMark,\
+    DoitInBackgroundWaterMark
 from progreso import Progreso
 import cairoapi
 import tools
@@ -48,18 +55,18 @@ from comun import ROTATE_000, ROTATE_090, ROTATE_180, ROTATE_270
 import os
 
 
-class PDFManager(IdleObject):
+class PDFManager(GObject.GObject):
 
     def __init__(self):
-        IdleObject.__init__(self)
+        GObject.GObject.__init__(self)
+
+    def emit(self, *args):
+        GLib.idle_add(GObject.GObject.emit, self, *args)
 
     def resize_pdf_pages(self, selected, window):
         files = tools.get_files(selected)
         if files:
-            file_in = files[0]
-            filename, filext = os.path.splitext(file_in)
-            file_out = filename + '_resized' + filext
-            cd = ResizeDialog(_('Resize pages'), file_out, window)
+            cd = ResizeDialog(_('Resize PDF'), window)
             if cd.run() == Gtk.ResponseType.ACCEPT:
                 size = cd.get_size()
                 if cd.is_vertical():
@@ -68,34 +75,40 @@ class PDFManager(IdleObject):
                 else:
                     width = size[1]
                     height = size[0]
-                file_out = cd.get_file_out()
+                extension = cd.get_extension()
                 cd.destroy()
-                if file_out:
-                    dialog = Progreso(_('Convert pdfs to png'), window, 1)
-                    diboo = DoitInBackgroundOnlyOne(
-                        pdfapi.resize, file_in, file_out, width, height)
-                    diboo.connect('done', dialog.increase)
+                if len(extension) > 0:
+                    dialog = Progreso(_('Resize PDF'), window, 1)
+                    diboo = DoItInBackgroundResizePages(files, extension,
+                                                        width, height)
+                    dialog.connect('i-want-stop', diboo.stop_it)
+                    diboo.connect('start', dialog.set_max_value)
+                    diboo.connect('todo', dialog.set_todo_label)
+                    diboo.connect('donef', dialog.set_fraction)
+                    diboo.connect('finished', dialog.close)
+                    diboo.connect('interrupted', dialog.close)
                     diboo.start()
                     dialog.run()
             cd.destroy()
 
     def convert_pdf_file_to_png(self, selected, window):
         files = tools.get_files(selected)
-        dialog = Progreso(_('Convert pdfs to png'), window, len(files))
-        dib = DoitInBackground(tools.convert_pdf_to_png, files)
-        dialog.connect('i-want-stop', dib.stop_it)
-        dib.connect('done', dialog.increase)
-        dib.connect('todo', dialog.set_todo_label)
-        dib.start()
-        dialog.run()
+        if len(files):
+            dialog = Progreso(_('Convert PDF to PNG'), window, len(files))
+            diboo = DoItInBackgroundToPNG(files)
+            dialog.connect('i-want-stop', diboo.stop_it)
+            diboo.connect('start', dialog.set_max_value)
+            diboo.connect('todo', dialog.set_todo_label)
+            diboo.connect('donef', dialog.set_fraction)
+            diboo.connect('finished', dialog.close)
+            diboo.connect('interrupted', dialog.close)
+            diboo.start()
+            dialog.run()
 
     def combine_pdf_pages(self, selected, window):
         files = tools.get_files(selected)
-        if files:
-            file_in = files[0]
-            filename, filext = os.path.splitext(file_in)
-            file_out = filename + '_combined' + filext
-            cd = CombineDialog(_('Combine pages'), file_out, window)
+        if files and len(files):
+            cd = CombineDialog(_('Combine PDF pages'), window)
             if cd.run() == Gtk.ResponseType.ACCEPT:
                 size = cd.get_size()
                 if cd.is_vertical():
@@ -108,14 +121,19 @@ class PDFManager(IdleObject):
                 columnas = cd.get_columns()
                 byrows = cd.is_sort_by_rows()
                 margen = cd.get_margin()
-                file_out = cd.get_file_out()
+                extension = cd.get_extension()
                 cd.destroy()
-                if file_out:
-                    dialog = Progreso(_('Convert pdfs to png'), window, 1)
-                    diboo = DoitInBackgroundOnlyOne(
-                        pdfapi.combine, file_in, file_out, filas, columnas,
-                        width, height, margen, byrows)
-                    diboo.connect('done', dialog.increase)
+                if len(extension) > 0:
+                    dialog = Progreso(_('Combine PDF pages'), window, 1)
+                    diboo = DoItInBackgroundCombine(files, extension, filas,
+                                                    columnas, width, height,
+                                                    margen, byrows)
+                    dialog.connect('i-want-stop', diboo.stop_it)
+                    diboo.connect('start', dialog.set_max_value)
+                    diboo.connect('todo', dialog.set_todo_label)
+                    diboo.connect('donef', dialog.set_fraction)
+                    diboo.connect('finished', dialog.close)
+                    diboo.connect('interrupted', dialog.close)
                     diboo.start()
                     dialog.run()
 
@@ -126,7 +144,7 @@ class PDFManager(IdleObject):
             filename, filext = os.path.splitext(file_in)
             file_out = filename + '_from_images.pdf'
             cpfi = CreatePDFFromImagesDialog(
-                _('Create pdf from images'), files, file_out, window)
+                _('Create PDF from images'), files, file_out, window)
             if cpfi.run() == Gtk.ResponseType.ACCEPT:
                 cpfi.hide()
                 files = cpfi.get_png_files()
@@ -138,11 +156,20 @@ class PDFManager(IdleObject):
                 file_out = cpfi.get_file_out()
                 cpfi.destroy()
                 if file_out:
-                    dialog = Progreso(_('Convert pdfs to png'), window, 1)
-                    diboo = DoitInBackgroundOnlyOne(
-                        tools.create_from_images, file_out, files, width,
-                        height, margin)
+                    dialog = Progreso(_('Create PDF from images'),
+                                      window,
+                                      len(files))
+                    diboo = DoItInBackgroundCreatePDFFromImages(file_out,
+                                                                files,
+                                                                width,
+                                                                height,
+                                                                margin)
+                    dialog.connect('i-want-stop', diboo.stop_it)
+                    diboo.connect('start', dialog.set_max_value)
+                    diboo.connect('todo', dialog.set_todo_label)
                     diboo.connect('done', dialog.increase)
+                    diboo.connect('finished', dialog.close)
+                    diboo.connect('interrupted', dialog.close)
                     diboo.start()
                     dialog.run()
             cpfi.destroy()
@@ -153,16 +180,19 @@ class PDFManager(IdleObject):
             file_in = files[0]
             filename, filext = os.path.splitext(file_in)
             file_out = filename + '_joined_files.pdf'
-            jpd = JoinPdfsDialog(_('Join pdf files'), files, file_out, window)
+            jpd = JoinPdfsDialog(_('Join PDF files'), files, file_out, window)
             if jpd.run() == Gtk.ResponseType.ACCEPT:
                 files = jpd.get_pdf_files()
                 file_out = jpd.get_file_out()
                 jpd.destroy()
                 if len(files) > 0 and file_out:
-                    dialog = Progreso(_('Join pdf files'), window, 1)
-                    diboo = DoitInBackgroundOnlyOne(
-                        pdfapi.join_files, files, file_out)
-                    diboo.connect('done', dialog.increase)
+                    dialog = Progreso(_('Join PDF files'), window, len(files))
+                    diboo = DoItInBackgroundJoinPdf(files, file_out)
+                    dialog.connect('i-want-stop', diboo.stop_it)
+                    diboo.connect('todo', dialog.set_todo_label)
+                    diboo.connect('donef', dialog.set_fraction)
+                    diboo.connect('finished', dialog.close)
+                    diboo.connect('interrupted', dialog.close)
                     diboo.start()
                     dialog.run()
             jpd.destroy()
@@ -181,24 +211,31 @@ class PDFManager(IdleObject):
                 voption = wd.get_vertical_option()
                 horizontal_margin = wd.get_horizontal_margin()
                 vertical_margin = wd.get_vertical_margin()
-                dialog = Progreso(_('Paginate pdf files'), window, len(files))
-                diboo = DoitInBackgroundWithArgs(
-                    cairoapi.add_paginate_all_pages, files, color, font, size,
-                    hoption, voption, horizontal_margin, vertical_margin,
-                    wd.rbutton0.get_active())
-                diboo.connect('done', dialog.increase)
+                extension = wd.get_extension()
+                dialog = Progreso(_('Paginate PDF'), window, len(files))
+                diboo = DoitInBackgroundPaginage(files, color, font, size,
+                                                 hoption, voption,
+                                                 horizontal_margin,
+                                                 vertical_margin,
+                                                 extension)
                 dialog.connect('i-want-stop', diboo.stop_it)
+                diboo.connect('todo', dialog.set_todo_label)
+                diboo.connect('donef', dialog.set_fraction)
+                diboo.connect('finished', dialog.close)
+                diboo.connect('interrupted', dialog.close)
                 diboo.start()
                 dialog.run()
             wd.destroy()
 
     def reduce(self, selected, window):
         files = tools.get_files(selected)
-        dialog = Progreso(_('Reduce pdf files size'), window, len(files))
+        dialog = Progreso(_('Reduce PDF size'), window, len(files))
         diboo = DoitInBackground(
             tools.reduce_pdf, files)
         diboo.connect('done', dialog.increase)
         diboo.connect('todo', dialog.set_todo_label)
+        diboo.connect('finished', dialog.close)
+        diboo.connect('interrupted', dialog.close)
         dialog.connect('i-want-stop', diboo.stop_it)
         diboo.start()
         dialog.run()
@@ -218,13 +255,16 @@ class PDFManager(IdleObject):
                 voption = wd.get_vertical_option()
                 horizontal_margin = wd.get_horizontal_margin()
                 vertical_margin = wd.get_vertical_margin()
-                dialog = Progreso(_('Textmark pdf files'), window, len(files))
-                diboo = DoitInBackgroundWithArgs(
-                    cairoapi.add_textmark_to_all_pages, files, text, color,
-                    font, size, hoption, voption, horizontal_margin,
-                    vertical_margin, wd.rbutton0.get_active())
-                diboo.connect('done', dialog.increase)
+                extension = wd.get_extension()
+                dialog = Progreso(_('Textmark PDF'), window, len(files))
+                diboo = DoitInBackgroundTextMark(files, text, color, font,
+                                                 size, hoption, voption,
+                                                 horizontal_margin,
+                                                 vertical_margin, extension)
                 diboo.connect('todo', dialog.set_todo_label)
+                diboo.connect('donef', dialog.set_fraction)
+                diboo.connect('finished', dialog.close)
+                diboo.connect('interrupted', dialog.close)
                 dialog.connect('i-want-stop', diboo.stop_it)
                 diboo.start()
                 dialog.run()
@@ -242,14 +282,17 @@ class PDFManager(IdleObject):
                 horizontal_margin = wd.get_horizontal_margin()
                 vertical_margin = wd.get_vertical_margin()
                 zoom = float(wd.get_watermark_zoom() / 100.0)
-                dialog = Progreso(_('Watermark pdf files'), window, len(files))
-                diboo = DoitInBackgroundWithArgs(
-                    cairoapi.add_watermark_to_all_pages, files,
-                    wd.get_image_filename(), hoption, voption,
-                    horizontal_margin, vertical_margin, zoom,
-                    wd.rbutton0.get_active())
-                diboo.connect('done', dialog.increase)
+                image = wd.get_image_filename()
+                extension = wd.get_extension()
+                dialog = Progreso(_('Watermark PDF'), window, len(files))
+                diboo = DoitInBackgroundWaterMark(files, image, hoption,
+                                                  voption, horizontal_margin,
+                                                  vertical_margin, zoom,
+                                                  extension)
                 diboo.connect('todo', dialog.set_todo_label)
+                diboo.connect('donef', dialog.set_fraction)
+                diboo.connect('finished', dialog.close)
+                diboo.connect('interrupted', dialog.close)
                 dialog.connect('i-want-stop', diboo.stop_it)
                 diboo.start()
                 dialog.run()
@@ -259,7 +302,7 @@ class PDFManager(IdleObject):
         files = tools.get_files(selected)
         if len(files) > 0:
             file0 = files[0]
-            fd = FlipDialog(_('Rotate files'), file0, window)
+            fd = FlipDialog(_('Rotate PDF'), file0, window)
             if fd.run() == Gtk.ResponseType.ACCEPT:
                 fd.hide()
                 if fd.rbutton1.get_active():
@@ -273,12 +316,14 @@ class PDFManager(IdleObject):
                 flip_vertical = fd.switch1.get_active()
                 flip_horizontal = fd.switch2.get_active()
                 overwrite = fd.rbutton0.get_active()
-                dialog = Progreso(_('Rotate pdf files'), window, len(files))
+                dialog = Progreso(_('Rotate PDF'), window, len(files))
                 diboo = DoitInBackgroundWithArgs(
                     cairoapi.rotate_and_flip_pages, files, rotate,
                     flip_vertical, flip_horizontal, overwrite)
                 diboo.connect('done', dialog.increase)
                 diboo.connect('todo', dialog.set_todo_label)
+                diboo.connect('finished', dialog.close)
+                diboo.connect('interrupted', dialog.close)
                 dialog.connect('i-want-stop', diboo.stop_it)
                 diboo.start()
                 dialog.run()
@@ -291,7 +336,7 @@ class PDFManager(IdleObject):
             filename, filext = os.path.splitext(file0)
             file_out = filename + '_rotated.pdf'
             last_page = cairoapi.get_num_of_pages(file0)
-            spd = SelectPagesRotateDialog(_('Rotate some pages'), last_page,
+            spd = SelectPagesRotateDialog(_('Rotate PDF'), last_page,
                                           file_out, window)
             if spd.run() == Gtk.ResponseType.ACCEPT:
                 ranges = tools.get_ranges(spd.entry1.get_text())
@@ -303,11 +348,13 @@ class PDFManager(IdleObject):
                     degrees = 180
                 spd.destroy()
                 if len(ranges) > 0:
-                    dialog = Progreso(_('Rotate some pages in pdf'), window, 1)
+                    dialog = Progreso(_('Rotate PDF'), window, 1)
                     diboo = DoitInBackgroundOnlyOne(
                         pdfapi.rotate_ranges_in_pdf, file0, file_out,
                         degrees, ranges)
                     diboo.connect('done', dialog.increase)
+                    diboo.connect('finished', dialog.close)
+                    diboo.connect('interrupted', dialog.close)
                     diboo.start()
                     dialog.run()
             else:
@@ -320,17 +367,19 @@ class PDFManager(IdleObject):
             filename, filext = os.path.splitext(file0)
             file_out = filename + '_removed_pages.pdf'
             last_page = cairoapi.get_num_of_pages(file0)
-            spd = SelectPagesDialog(_('Remove some pages'), last_page,
+            spd = SelectPagesDialog(_('Remove PDF'), last_page,
                                     file_out, window)
             if spd.run() == Gtk.ResponseType.ACCEPT:
                 ranges = tools.get_ranges(spd.entry1.get_text())
                 file_out = spd.get_file_out()
                 spd.destroy()
                 if len(ranges) > 0:
-                    dialog = Progreso(_('Remove some pages in pdf'), window, 1)
+                    dialog = Progreso(_('Remove PDF'), window, 1)
                     diboo = DoitInBackgroundOnlyOne(
                         pdfapi.remove_ranges, file0, file_out, ranges)
                     diboo.connect('done', dialog.increase)
+                    diboo.connect('finished', dialog.close)
+                    diboo.connect('interrupted', dialog.close)
                     diboo.start()
                     dialog.run()
 
@@ -340,10 +389,12 @@ class PDFManager(IdleObject):
     def split_pdf_files(self, selected, window):
         files = tools.get_files(selected)
         if files:
-            dialog = Progreso(_('Split pdf files'), window, len(files))
+            dialog = Progreso(_('Split PDF'), window, len(files))
             diboo = DoitInBackground(cairoapi.split_pdf, files)
             diboo.connect('done', dialog.increase)
             diboo.connect('todo', dialog.set_todo_label)
+            diboo.connect('finished', dialog.close)
+            diboo.connect('interrupted', dialog.close)
             dialog.connect('i-want-stop', diboo.stop_it)
             diboo.start()
             dialog.run()
@@ -355,18 +406,20 @@ class PDFManager(IdleObject):
             filename, filext = os.path.splitext(file0)
             file_out = filename + '_extracted_pages.pdf'
             last_page = cairoapi.get_num_of_pages(file0)
-            spd = SelectPagesDialog(_('Extract some pages'), last_page,
+            spd = SelectPagesDialog(_('Extract pages from PDF'), last_page,
                                     file_out, window)
             if spd.run() == Gtk.ResponseType.ACCEPT:
                 ranges = tools.get_ranges(spd.entry1.get_text())
                 file_out = spd.get_file_out()
                 spd.destroy()
                 if len(ranges) > 0:
-                    dialog = Progreso(_('Extract some pages in pdf'),
+                    dialog = Progreso(_('Extract pages from PDF'),
                                       window, 1)
                     diboo = DoitInBackgroundOnlyOne(
                         pdfapi.extract_ranges, file0, file_out, ranges)
                     diboo.connect('done', dialog.increase)
+                    diboo.connect('finished', dialog.close)
+                    diboo.connect('interrupted', dialog.close)
                     diboo.start()
                     dialog.run()
             else:
@@ -395,19 +448,22 @@ class FileTemp():
 
 if __name__ == '__main__':
     files = [
-        FileTemp('file:///home/lorenzo/Escritorio/ejemplos/sample.pdf'),
-        FileTemp('file:///home/lorenzo/Escritorio/ejemplos/sample_sal.pdf')
+        FileTemp('file:///home/lorenzo/Escritorio/pdfs/otros/2016_prysmiancatalogobt_ 2016.pdf'),
+        FileTemp('file:///home/lorenzo/Escritorio/pdfs/otros/capitulo-g-proteccion-circuitos.pdf'),
+        FileTemp('file:///home/lorenzo/Escritorio/pdfs/otros/guia_bt_anexo_2_sep03R1.pdf')
+        # FileTemp('file:///home/lorenzo/Escritorio/pdfs/otros/guia_bt_anexo_2_sep03R1_01.png'),
+        # FileTemp('file:///home/lorenzo/Escritorio/pdfs/otros/guia_bt_anexo_2_sep03R1_02.png'),
+        # FileTemp('file:///home/lorenzo/Escritorio/pdfs/otros/guia_bt_anexo_2_sep03R1_03.png'),
+        # FileTemp('file:///home/lorenzo/Escritorio/pdfs/otros/guia_bt_anexo_2_sep03R1_04.png'),
+        # FileTemp('file:///home/lorenzo/Escritorio/pdfs/otros/guia_bt_anexo_2_sep03R1_05.png'),
     ]
-    filesimages = [
-        FileTemp('file:///home/lorenzo/Escritorio/ejemplos/sample_11.png'),
-        FileTemp('file:///home/lorenzo/Escritorio/ejemplos/sample_12.png'),
-        FileTemp('file:///home/lorenzo/Escritorio/ejemplos/sample_13.png'),
-        FileTemp('file:///home/lorenzo/Escritorio/ejemplos/sample_14.png'),
-        FileTemp('file:///home/lorenzo/Escritorio/ejemplos/sample_16.png'),
-        FileTemp('file:///home/lorenzo/Escritorio/ejemplos/sample_17.png'),
-        FileTemp('file:///home/lorenzo/Escritorio/ejemplos/sample_18.png'),
-        FileTemp('file:///home/lorenzo/Escritorio/ejemplos/sample_19.png')]
     pdfmanager = PDFManager()
-    # pdfmanager.combine_pdf_pages(files)
-    # pdfmanager.create_pdf_from_images(filesimages)
-    pdfmanager.extract_text(files)
+    # pdfmanager.create_pdf_from_images(files, None)
+    # pdfmanager.join_pdf_files(files, None)
+    # pdfmanager.resize_pdf_pages(files, None)
+    # pdfmanager.convert_pdf_file_to_png(files, None)
+    # pdfmanager.combine_pdf_pages(files, None)
+    # pdfmanager.paginate(files, None)
+    # pdfmanager.reduce(files, None)
+    # pdfmanager.textmark(files, None)
+    pdfmanager.watermark(files, None)

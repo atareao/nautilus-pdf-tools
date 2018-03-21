@@ -36,7 +36,7 @@ from comun import _
 
 
 class FlipDialog(Gtk.Dialog):
-    def __init__(self, title, filename=None, window):
+    def __init__(self, title, filename=None, window=None):
         Gtk.Dialog.__init__(
             self, title, window,
             Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,

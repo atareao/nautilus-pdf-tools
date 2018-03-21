@@ -21,12 +21,14 @@
 
 import gi
 try:
-    gi.require_version('GObject', '2.0')
     gi.require_version('Gtk', '3.0')
+    gi.require_version('GLib', '2.0')
+    gi.require_version('GObject', '2.0')
 except Exception as e:
     print(e)
     exit(1)
 from gi.repository import Gtk
+from gi.repository import GLib
 from gi.repository import GObject
 import threading
 
@@ -82,6 +84,9 @@ class Progreso(Gtk.Dialog, threading.Thread):
         self.max_value = max_value
         self.value = 0.0
 
+    def set_max_value(self, widget, max_value):
+        self.max_value = max_value
+
     def get_stop(self):
         return self.stop
 
@@ -94,30 +99,37 @@ class Progreso(Gtk.Dialog, threading.Thread):
             text = '...' + todo_label[-32:]
         else:
             text = todo_label
-        self.label.set_label(text)
+        GLib.idle_add(self.label.set_label, text)
 
-    def set_value(self, value):
+    def set_value(self, widget, value):
         if value >= 0 and value <= self.max_value:
             self.value = value
             fraction = self.value / self.max_value
-            self.progressbar.set_fraction(fraction)
-            if self.value == self.max_value:
-                self.hide()
+            GLib.idle_add(self.progressbar.set_fraction, fraction)
+
+    def set_fraction(self, widget, fraction):
+        print('****', fraction)
+        if fraction >= 0 and fraction <= 1.0:
+            GLib.idle_add(self.progressbar.set_fraction, fraction)
 
     def close(self, widget=None):
         self.destroy()
 
-    def increase(self, *args):
+    def increase(self, widget, label):
         self.value += 1.0
         fraction = self.value / self.max_value
-        self.progressbar.set_fraction(fraction)
-        if self.value == self.max_value:
-            self.hide()
+        print('====', self.value, self.max_value, fraction, '====')
+        GLib.idle_add(self.progressbar.set_fraction, fraction)
+        if len(label) > 35:
+            text = '...' + label[-32:]
+        else:
+            text = label
+        GLib.idle_add(self.label.set_label, text)
 
     def decrease(self):
         self.value -= 1.0
         fraction = self.value / self.max_value
-        self.progressbar.set_fraction(fraction)
+        GLib.idle_add(self.progressbar.set_fraction, fraction)
 
 
 if __name__ == '__main__':
