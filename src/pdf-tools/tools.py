@@ -259,25 +259,28 @@ def create_from_images(file_out, images, width=1189, height=1682, margin=0):
 
 
 def reduce_pdf(file_in):
-    file_out = get_output_filename(file_in, 'reduced')
-    rutine = 'ghostscript -q  -dNOPAUSE -dBATCH -dSAFER \
-    -sDEVICE=pdfwrite \
-    -dCompatibilityLevel=1.4 \
-    -dPDFSETTINGS=/screen \
-    -dEmbedAllFonts=true \
-    -dSubsetFonts=true \
-    -dDownsampleColorImages=true \
-    -dColorImageResolution=100 \
-    -dColorImageDownsampleType=/Bicubic \
-    -dColorImageResolution=72 \
-    -dGrayImageDownsampleType=/Bicubic \
-    -dGrayImageResolution=72 \
-    -dMonoImageDownsampleType=/Bicubic \
-    -dMonoImageResolution=72 \
-    -sOutputFile=%s %s' % (file_out, file_in)
-    args = shlex.split(rutine)
-    p = subprocess.Popen(args, stdout=subprocess.PIPE)
-    out, err = p.communicate()
+    try:
+        file_out = get_output_filename(file_in, 'reduced')
+        rutine = 'ghostscript -q  -dNOPAUSE -dBATCH -dSAFER \
+        -sDEVICE=pdfwrite \
+        -dCompatibilityLevel=1.4 \
+        -dPDFSETTINGS=/screen \
+        -dEmbedAllFonts=true \
+        -dSubsetFonts=true \
+        -dDownsampleColorImages=true \
+        -dColorImageResolution=100 \
+        -dColorImageDownsampleType=/Bicubic \
+        -dColorImageResolution=72 \
+        -dGrayImageDownsampleType=/Bicubic \
+        -dGrayImageResolution=72 \
+        -dMonoImageDownsampleType=/Bicubic \
+        -dMonoImageResolution=72 \
+        -sOutputFile=%s %s' % (file_out, file_in)
+        args = shlex.split(rutine)
+        p = subprocess.Popen(args, stdout=subprocess.PIPE)
+        out, err = p.communicate()
+    except Exception as e:
+        print(e)
 
 
 def convert2png(file_in, file_out):
