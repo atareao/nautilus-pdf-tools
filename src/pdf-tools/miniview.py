@@ -64,6 +64,8 @@ class MiniView(Gtk.DrawingArea):
         self.text_margin_height = 0
         self.image_margin_width = 0
         self.image_margin_height = 0
+        self.image_width = 0
+        self.image_height = 0
         self.image_zoom = 1.0
         self.image = None
         self.text = None
@@ -127,22 +129,22 @@ class MiniView(Gtk.DrawingArea):
                 context.save()
                 watermark_surface = tools.create_image_surface_from_file(
                     self.image, self.image_zoom)
-                img_height = watermark_surface.get_height()
-                img_width = watermark_surface.get_width()
+                self.image_height = watermark_surface.get_height()
+                self.image_width = watermark_surface.get_width()
                 print(self.or_width, self.or_height)
                 if self.position_vertical == TOP:
                     y = self.image_margin_height
                 elif self.position_vertical == MIDLE:
-                    y = (self.or_height - img_height / MMTOPIXEL) / 2
+                    y = (self.or_height - self.image_height / MMTOPIXEL) / 2
                 elif self.position_vertical == BOTTOM:
-                    y = (self.or_height - img_height / MMTOPIXEL -
+                    y = (self.or_height - self.image_height / MMTOPIXEL -
                          self.image_margin_height)
                 if self.position_horizontal == LEFT:
                     x = self.image_margin_width
                 elif self.position_horizontal == CENTER:
-                    x = (self.or_width - img_width / MMTOPIXEL) / 2
+                    x = (self.or_width - self.image_width / MMTOPIXEL) / 2
                 elif self.position_horizontal == RIGHT:
-                    x = (self.or_width - img_width / MMTOPIXEL -
+                    x = (self.or_width - self.image_width / MMTOPIXEL -
                          self.image_margin_width)
                 context.translate(x * self.zoom, y * self.zoom)
                 context.scale(self.zoom / MMTOPIXEL, self.zoom / MMTOPIXEL)

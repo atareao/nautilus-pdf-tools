@@ -38,6 +38,7 @@ from joinpdfsdialog import JoinPdfsDialog
 from paginatedialog import PaginateDialog
 from textmarkdialog import TextmarkDialog
 from watermarkdialog import WatermarkDialog
+from signdialog import SignDialog
 from flipdialog import FlipDialog
 from selectpagesrotatedialog import SelectPagesRotateDialog
 from selectpagesdialog import SelectPagesDialog
@@ -262,6 +263,30 @@ class PDFManager(GObject.GObject):
                 dialog.run()
             wd.destroy()
 
+    def sign(self, selected, window):
+        files = tools.get_files(selected)
+        if len(files) > 0:
+            file0 = files[0]
+            sd = SignDialog(file0, window)
+            if sd.run() == Gtk.ResponseType.ACCEPT:
+                sd.hide()
+                position_x = sd.original_position_x
+                position_y = sd.original_position_y
+                zoom = sd.get_watermark_zoom()
+                image = sd.get_image_filename()
+                extension = sd.get_extension()
+                dialog = Progreso(_('Sign PDF'), window, len(files))
+                diboo = doitinbackground.DoitInBackgroundSign(
+                    files, image, position_x, position_y, zoom, extension)
+                diboo.connect('todo', dialog.set_todo_label)
+                diboo.connect('donef', dialog.set_fraction)
+                diboo.connect('finished', dialog.close)
+                diboo.connect('interrupted', dialog.close)
+                dialog.connect('i-want-stop', diboo.stop_it)
+                diboo.start()
+                dialog.run()
+            sd.destroy()
+
     def watermark(self, selected, window):
         files = tools.get_files(selected)
         if len(files) > 0:
@@ -430,11 +455,11 @@ class FileTemp():
 
 
 if __name__ == '__main__':
-    directory = 'file:///home/lorenzo/Escritorio/pdfs/otros/'
+    directory = 'file:///home/lorenzo/Escritorio/pdfs/'
     files = [
         # FileTemp(directory + '2016_prysmiancatalogobt_ 2016.pdf'),
-        FileTemp(directory + 'capitulo-g-proteccion-circuitos.pdf'),
-        FileTemp(directory + 'guia_bt_anexo_2_sep03R1.pdf')
+        FileTemp(directory + 'ejemplo_pdf_01.pdf'),
+        # FileTemp(directory + 'guia_bt_anexo_2_sep03R1.pdf')
         # FileTemp(directory + 'guia_bt_anexo_2_sep03R1_01.png'),
         # FileTemp(directory + 'guia_bt_anexo_2_sep03R1_02.png'),
         # FileTemp(directory + 'guia_bt_anexo_2_sep03R1_03.png'),
@@ -449,6 +474,7 @@ if __name__ == '__main__':
         FileTemp(directory + 'guia_bt_anexo_2_sep03R1_05.png'),
     ]
     pdfmanager = PDFManager()
+    '''
     pdfmanager.create_pdf_from_images(images, None)
     pdfmanager.join_pdf_files(files, None)
     pdfmanager.resize_pdf_pages(files, None)
@@ -461,3 +487,5 @@ if __name__ == '__main__':
     pdfmanager.rotate_some_pages(files, None)
     pdfmanager.remove_some_pages(files, None)
     pdfmanager.extract_some_pages(files, None)
+    '''
+    pdfmanager.sign(files, None)

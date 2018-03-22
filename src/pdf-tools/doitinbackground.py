@@ -36,8 +36,8 @@ import math
 import os
 import shutil
 import mimetypes
-from comun import MMTOPNG, MMTOPIXEL
-from comun import MIMETYPES_PNG
+from comun import MMTOPNG, MMTOPIXEL, MMTOPDF
+from comun import MIMETYPES_PNG, RESOLUTION
 from comun import TOP, MIDLE, BOTTOM, LEFT, CENTER, RIGHT
 from comun import ROTATE_000, ROTATE_090, ROTATE_180, ROTATE_270
 
@@ -521,6 +521,68 @@ class DoitInBackgroundTextMark(DoitInBackgroundBase):
                     context.move_to(x, y)
                     context.translate(x, y)
                     context.show_text(self.text)
+                    context.restore()
+                    context.show_page()
+                    self.emit('donef', (float(index) + float(i) / float(
+                        number_of_pages)) / float(total_documents))
+                    if self.stop is True:
+                            break
+                pdfsurface.flush()
+                pdfsurface.finish()
+                shutil.copy(temp_pdf, file_out)
+                os.remove(temp_pdf)
+            if self.stop is True:
+                    break
+        if self.stop is True:
+            self.emit('interrupted')
+        else:
+            self.emit('finished')
+
+
+class DoitInBackgroundSign(DoitInBackgroundBase):
+    def __init__(self, files, image, x, y, zoom, extension):
+        DoitInBackgroundBase.__init__(self)
+        self.files = files
+        self.image = image
+        self.x = x
+        self.y = y
+        self.zoom = float(zoom / 100.0)
+        self.extension = extension
+
+    def run(self):
+        total_documents = len(self.files)
+        for index, file_in in enumerate(self.files):
+            self.emit('todo', file_in)
+            document = Poppler.Document.new_from_file('file://' + file_in,
+                                                      None)
+            number_of_pages = document.get_n_pages()
+            if number_of_pages > 0:
+                temp_pdf = tools.create_temp_file()
+                filename, filext = os.path.splitext(file_in)
+                file_out = filename + self.extension + filext
+                watermark_surface = tools.create_image_surface_from_file(
+                    self.image, self.zoom)
+                watermark_width = watermark_surface.get_width()
+                watermark_height = watermark_surface.get_height()
+                pdfsurface = cairo.PDFSurface(temp_pdf, 200, 200)
+                context = cairo.Context(pdfsurface)
+                for i in range(0, number_of_pages):
+                    current_page = document.get_page(i)
+                    pdf_width, pdf_height = current_page.get_size()
+                    pdfsurface.set_size(pdf_width, pdf_height)
+                    print('*-*-', self.x, self.y, self.zoom)
+                    print('-*-*', pdf_width, pdf_height)
+
+                    context.save()
+                    current_page.render(context)
+                    context.restore()
+                    context.save()
+                    context.translate(self.x * 0.50,
+                                      self.y * 0.55)
+                    context.scale(1 / RESOLUTION / MMTOPIXEL,
+                                  1 / RESOLUTION / MMTOPIXEL)
+                    context.set_source_surface(watermark_surface)
+                    context.paint()
                     context.restore()
                     context.show_page()
                     self.emit('donef', (float(index) + float(i) / float(
