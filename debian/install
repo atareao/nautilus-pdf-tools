@@ -1,4 +1,5 @@
 src/*.py /usr/share/nautilus-python/extensions
 src/pdf-tools/*.py /usr/share/nautilus-python/extensions/pdf-tools
+PyPDF2/PyPDF2/*.py /usr/share/nautilus-python/extensions/pdf-tools/PyPDF2
 data/icons/updf.svg /usr/share/nautilus-python/extensions/pdf-tools/icons
 debian/changelog /usr/share/nautilus-python/extensions/pdf-tools

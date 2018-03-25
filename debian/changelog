@@ -1,8 +1,9 @@
-nautilus-pdf-tools (1.1.0-0extras16.04.0) xenial; urgency=medium
+nautilus-pdf-tools (1.1.0-0extras16.04.1) xenial; urgency=medium
 
   * Sign
+  * Dependencies
 
- -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Thu, 22 Mar 2018 14:16:18 +0100
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sun, 25 Mar 2018 20:19:13 +0200
 
 nautilus-pdf-tools (1.0.0-0extras16.04.1) xenial; urgency=medium
 
