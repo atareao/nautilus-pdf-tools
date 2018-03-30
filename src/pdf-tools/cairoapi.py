@@ -26,6 +26,7 @@ except Exception as e:
     print(e)
     exit(1)
 from gi.repository import Poppler
+from PyPDF2 import PdfFileReader, PdfFileWriter
 import cairo
 import os
 import math
@@ -571,6 +572,33 @@ def add_watermark_to_all_pages(file_pdf_in, file_image_in, horizontal_position,
             shutil.copy(temp_pdf, tools.get_output_filename(
                 file_pdf_in, 'watermarked'))
         os.remove(temp_pdf)
+
+
+def encrypt(file_in, password):
+    document_in = PdfFileReader(open(file_in, 'rb'))
+    document_out = PdfFileWriter()
+    document_out.cloneReaderDocumentRoot(document_in)
+    document_out.encrypt(password)
+    tmp_file = tools.create_temp_file()
+    document_out.write(open(tmp_file, 'wb'))
+    shutil.copy(tmp_file, file_in)
+    os.remove(tmp_file)
+
+
+def decrypt(file_in, password):
+    document_in = PdfFileReader(open(file_in, 'rb'))
+    if document_in.isEncrypted:
+        while True:
+            matched = document_in.decrypt(password)
+            if matched:
+                document_out = PdfFileWriter()
+                document_out.cloneReaderDocumentRoot(document_in)
+                tmp_file = tools.create_temp_file()
+                document_out.write(open(tmp_file, 'wb'))
+                shutil.copy(tmp_file, file_in)
+                os.remove(tmp_file)
+                return True
+    return False
 
 
 if __name__ == '__main__':

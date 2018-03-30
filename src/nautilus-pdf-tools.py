@@ -88,6 +88,10 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
             self.pdfmanager.convert_pdf_file_to_png(selected, window)
         elif option == 'convert2pdf':
             self.pdfmanager.create_pdf_from_images(selected, window)
+        elif option == 'encrypt':
+            self.pdfmanager.encrypt_files(selected, window)
+        elif option == 'decrypt':
+            self.pdfmanager.decrypt_files(selected, window)
 
     def get_file_items(self, window, sel_items):
         """Adds the 'Replace in Filenames' menu item to the File Manager
@@ -136,6 +140,12 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
                 ('13', _('Convert pdf to png'),
                  _('Convert pdf file to png image'),
                  'convert2png'),
+                ('14', _('Encrypt'),
+                 _('Encrypt pdf files'),
+                 'encrypt'),
+                ('15', _('Decrypt'),
+                 _('Decrypt pdf files'),
+                 'decrypt'),
             ]
             for item in items:
                 sub_menuitem = FileManager.MenuItem(
@@ -231,6 +241,7 @@ this program. If not, see <http://www.gnu.org/licenses/>.
         ad.set_program_name(APPNAME)
         ad.run()
         ad.destroy()
+
 
 if __name__ == '__main__':
     '''

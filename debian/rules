@@ -41,7 +41,6 @@ install: build
 	msgfmt po/es.po -o ${CURDIR}/debian/nautilus-pdf-tools/usr/share/locale-langpack/es/LC_MESSAGES/nautilus-pdf-tools.mo
 	msgfmt po/gl.po -o ${CURDIR}/debian/nautilus-pdf-tools/usr/share/locale-langpack/gl/LC_MESSAGES/nautilus-pdf-tools.mo
 	# End comile languages
-
 	# Add here commands to install the package into debian/<packagename>.
 	#$(MAKE) prefix=`pwd`/debian/`dh_listpackages`/usr install
 

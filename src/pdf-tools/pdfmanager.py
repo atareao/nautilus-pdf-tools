@@ -42,6 +42,7 @@ from signdialog import SignDialog
 from flipdialog import FlipDialog
 from selectpagesrotatedialog import SelectPagesRotateDialog
 from selectpagesdialog import SelectPagesDialog
+from passworddialog import PasswordDialog
 import doitinbackground
 from progreso import Progreso
 import cairoapi
@@ -85,6 +86,44 @@ class PDFManager(GObject.GObject):
                     diboo.start()
                     dialog.run()
             cd.destroy()
+
+    def encrypt_files(self, selected, window):
+        pd = PasswordDialog(_('Encrypt files'), window)
+        if pd.run() == Gtk.ResponseType.ACCEPT:
+            password = pd.get_password()
+            pd.destroy()
+            files = tools.get_files(selected)
+            if len(files):
+                dialog = Progreso(_('Encrypt files'), window, len(files))
+                diboo = doitinbackground.DoitInBackgroundEncrypt(files,
+                                                                 password)
+                dialog.connect('i-want-stop', diboo.stop_it)
+                diboo.connect('start', dialog.set_max_value)
+                diboo.connect('todo', dialog.set_todo_label)
+                diboo.connect('done', dialog.increase)
+                diboo.connect('finished', dialog.close)
+                diboo.connect('interrupted', dialog.close)
+                diboo.start()
+                dialog.run()
+
+    def decrypt_files(self, selected, window):
+        pd = PasswordDialog(_('Decrypt files'), window)
+        if pd.run() == Gtk.ResponseType.ACCEPT:
+            password = pd.get_password()
+            pd.destroy()
+            files = tools.get_files(selected)
+            if len(files):
+                dialog = Progreso(_('Dencrypt files'), window, len(files))
+                diboo = doitinbackground.DoitInBackgroundDecrypt(files,
+                                                                 password)
+                dialog.connect('i-want-stop', diboo.stop_it)
+                diboo.connect('start', dialog.set_max_value)
+                diboo.connect('todo', dialog.set_todo_label)
+                diboo.connect('done', dialog.increase)
+                diboo.connect('finished', dialog.close)
+                diboo.connect('interrupted', dialog.close)
+                diboo.start()
+                dialog.run()
 
     def convert_pdf_file_to_png(self, selected, window):
         files = tools.get_files(selected)

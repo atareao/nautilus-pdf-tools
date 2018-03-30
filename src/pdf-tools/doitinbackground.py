@@ -539,6 +539,46 @@ class DoitInBackgroundTextMark(DoitInBackgroundBase):
             self.emit('finished')
 
 
+class DoitInBackgroundEncrypt(DoitInBackgroundBase):
+    def __init__(self, files, password):
+        DoitInBackgroundBase.__init__(self)
+        self.files = files
+        self.password = password
+
+    def run(self):
+        self.emit('start', len(self.files))
+        for file_in in self.files:
+            self.emit('todo', file_in)
+            tools.encrypt(file_in, self.password)
+            self.emit('done', file_in)
+            if self.stop is True:
+                break
+        if self.stop is True:
+            self.emit('interrupted')
+        else:
+            self.emit('finished')
+
+
+class DoitInBackgroundDecrypt(DoitInBackgroundBase):
+    def __init__(self, files, password):
+        DoitInBackgroundBase.__init__(self)
+        self.files = files
+        self.password = password
+
+    def run(self):
+        self.emit('start', len(self.files))
+        for file_in in self.files:
+            self.emit('todo', file_in)
+            tools.decrypt(file_in, self.password)
+            self.emit('done', file_in)
+            if self.stop is True:
+                break
+        if self.stop is True:
+            self.emit('interrupted')
+        else:
+            self.emit('finished')
+
+
 class DoitInBackgroundSign(DoitInBackgroundBase):
     def __init__(self, files, image, x, y, zoom, extension):
         DoitInBackgroundBase.__init__(self)

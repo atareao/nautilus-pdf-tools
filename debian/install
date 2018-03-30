@@ -1,5 +1,6 @@
 src/*.py /usr/share/nautilus-python/extensions
 src/pdf-tools/*.py /usr/share/nautilus-python/extensions/pdf-tools
-PyPDF2/PyPDF2/*.py /usr/share/nautilus-python/extensions/pdf-tools/PyPDF2
 data/icons/updf.svg /usr/share/nautilus-python/extensions/pdf-tools/icons
+data/icons/pdf-tools-password-hide.svg /usr/share/icons/hicolor/scalable/status
+data/icons/pdf-tools-password-show.svg /usr/share/icons/hicolor/scalable/status
 debian/changelog /usr/share/nautilus-python/extensions/pdf-tools
