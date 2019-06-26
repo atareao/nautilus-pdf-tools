@@ -275,7 +275,7 @@ def reduce_pdf(file_in):
         -dGrayImageResolution=72 \
         -dMonoImageDownsampleType=/Bicubic \
         -dMonoImageResolution=72 \
-        -sOutputFile=%s %s' % (file_out, file_in)
+        -sOutputFile="%s" "%s"' % (file_out, file_in)
         args = shlex.split(rutine)
         p = subprocess.Popen(args, stdout=subprocess.PIPE)
         out, err = p.communicate()
@@ -350,7 +350,7 @@ def all_files_are_pdf(items):
     for item in items:
         fileName, fileExtension = os.path.splitext(
             unquote_plus(item.get_uri()[7:]))
-        if fileExtension != '.pdf':
+        if fileExtension.lower() != '.pdf':
             return False
     return True
 
