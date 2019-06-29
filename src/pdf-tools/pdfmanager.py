@@ -32,6 +32,7 @@ from gi.repository import GObject
 from gi.repository import GLib
 import cairoapi as pdfapi
 from resizedialog import ResizeDialog
+from reducedialog import ReduceDialog
 from combinedialog import CombineDialog
 from createpdffromImagesdialog import CreatePDFFromImagesDialog
 from joinpdfsdialog import JoinPdfsDialog
@@ -263,15 +264,25 @@ class PDFManager(GObject.GObject):
 
     def reduce(self, selected, window):
         files = tools.get_files(selected)
-        dialog = Progreso(_('Reduce PDF size'), window, len(files))
-        diboo = doitinbackground.DoitInBackground(tools.reduce_pdf, files)
-        diboo.connect('done', dialog.increase)
-        diboo.connect('todo', dialog.set_todo_label)
-        diboo.connect('finished', dialog.close)
-        diboo.connect('interrupted', dialog.close)
-        dialog.connect('i-want-stop', diboo.stop_it)
-        diboo.start()
-        dialog.run()
+        if files:
+            rd = ReduceDialog(_('Reduce PDF'), window)
+            if rd.run() == Gtk.ResponseType.ACCEPT:
+               dpi = rd.get_dpi()
+
+               append = rd.get_append()
+               rd.destroy()
+               if dpi and dpi != '0' and dpi.isdigit() and len(append) > 0:
+                  dialog = Progreso(_('Reduce PDF size'), window, len(files))
+                  diboo = doitinbackground.DoitInBackgroundReduce(tools.reduce_pdf, files, dpi, append)
+
+                  diboo.connect('done', dialog.increase)
+                  diboo.connect('todo', dialog.set_todo_label)
+                  diboo.connect('finished', dialog.close)
+                  diboo.connect('interrupted', dialog.close)
+                  dialog.connect('i-want-stop', diboo.stop_it)
+                  diboo.start()
+                  dialog.run()
+            rd.destroy()
 
     def textmark(self, selected, window):
         files = tools.get_files(selected)
