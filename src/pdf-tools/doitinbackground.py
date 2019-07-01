@@ -40,6 +40,7 @@ from comun import MMTOPNG, MMTOPIXEL, MMTOPDF
 from comun import MIMETYPES_PNG, RESOLUTION
 from comun import TOP, MIDLE, BOTTOM, LEFT, CENTER, RIGHT
 from comun import ROTATE_000, ROTATE_090, ROTATE_180, ROTATE_270
+import cairoapi
 
 mimetypes.init()
 
@@ -549,7 +550,7 @@ class DoitInBackgroundEncrypt(DoitInBackgroundBase):
         self.emit('start', len(self.files))
         for file_in in self.files:
             self.emit('todo', file_in)
-            tools.encrypt(file_in, self.password)
+            cairoapi.encrypt(file_in, self.password)
             self.emit('done', file_in)
             if self.stop is True:
                 break
@@ -569,7 +570,7 @@ class DoitInBackgroundDecrypt(DoitInBackgroundBase):
         self.emit('start', len(self.files))
         for file_in in self.files:
             self.emit('todo', file_in)
-            tools.decrypt(file_in, self.password)
+            cairoapi.decrypt(file_in, self.password)
             self.emit('done', file_in)
             if self.stop is True:
                 break
