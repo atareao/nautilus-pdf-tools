@@ -8,37 +8,37 @@ msgstr ""
 "Project-Id-Version: nautilus-pdf-tools 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-07-02 11:17+0300\n"
-"PO-Revision-Date: 2016-05-30 17:47+0100\n"
-"Last-Translator: Manuel X. Lemos <mxlemos@openmailbox.org>\n"
-"Language-Team: Galician\n"
-"Language: gl\n"
+"PO-Revision-Date: 2019-07-02 16:12+0300\n"
+"Last-Translator: atareao <lorenzo.carbonell.cerezo@gmail.com>\n"
+"Language-Team: Spanish\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: src/nautilus-pdf-tools.py:103 src/nautilus-pdf-tools.py:179
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:103
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:179
 msgid "Pdf Tools"
-msgstr "Ferramentas PDF"
+msgstr "Робота з PDF"
 
 #: src/nautilus-pdf-tools.py:104 src/nautilus-pdf-tools.py:180
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:104
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:180
 msgid "Tools to manipulate pdf files"
-msgstr "Un conxunto de ferramentas para traballar con ficheiros pdf"
+msgstr "Інструменти для роботи з PDF-файлами"
 
 #: src/nautilus-pdf-tools.py:110
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:110
 msgid "Rotate and flip"
-msgstr "Xirar e voltear"
+msgstr "Повернути і перевернути"
 
 #: src/nautilus-pdf-tools.py:110
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:110
 msgid "rotate_and_flip pdf files"
-msgstr "Xira e voltea ficheiros pdf"
+msgstr "Повернути і перевернути PDF"
 
 #: src/nautilus-pdf-tools.py:112 src/pdf-tools/watermarkdialog.py:45
 #: src/pdf-tools/watermarkdialog.py:62 src/pdf-tools/watermarkdialog.py:116
@@ -47,12 +47,12 @@ msgstr "Xira e voltea ficheiros pdf"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/watermarkdialog.py:62
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/watermarkdialog.py:116
 msgid "Watermark"
-msgstr "Marca de auga"
+msgstr "Водяний знак"
 
 #: src/nautilus-pdf-tools.py:112
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:112
 msgid "Watermark pdffiles"
-msgstr "Engade unha marca de auga ao ficheiro pdf"
+msgstr "Водяний знак"
 
 #: src/nautilus-pdf-tools.py:114 src/pdf-tools/textmarkdialog.py:43
 #: src/pdf-tools/textmarkdialog.py:58
@@ -60,12 +60,12 @@ msgstr "Engade unha marca de auga ao ficheiro pdf"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/textmarkdialog.py:43
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/textmarkdialog.py:58
 msgid "Textmark"
-msgstr "Marca de texto"
+msgstr "Текстовий знак"
 
 #: src/nautilus-pdf-tools.py:114
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:114
 msgid "Textmark pdf files"
-msgstr "Marca ficheiros con texto"
+msgstr "Текстовий знак"
 
 #: src/nautilus-pdf-tools.py:116 src/pdf-tools/paginatedialog.py:42
 #: src/pdf-tools/paginatedialog.py:59
@@ -73,115 +73,112 @@ msgstr "Marca ficheiros con texto"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/paginatedialog.py:42
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/paginatedialog.py:59
 msgid "Paginate"
-msgstr "Paxinar"
+msgstr "Нумерація сторінок"
 
 #: src/nautilus-pdf-tools.py:116
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:116
 msgid "Paginate pdf files"
-msgstr "Paxina ficheiros pdf"
+msgstr "Нумерація сторінок"
 
 #: src/nautilus-pdf-tools.py:118
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:118
 msgid "Rotate pages"
-msgstr "Xirar páxinas"
+msgstr "Повернути сторінки"
 
 #: src/nautilus-pdf-tools.py:119
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:119
 msgid "Rotate pages of the document files"
-msgstr "Xira páxinas de ficheiros pdf"
+msgstr "Повернути сторінки в документі"
 
 #: src/nautilus-pdf-tools.py:121
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:121
 msgid "Remove pages"
-msgstr "Quitar páxinas"
+msgstr "Видалити сторінки"
 
 #: src/nautilus-pdf-tools.py:122
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:122
 msgid "Remove pages of the document files"
-msgstr "Quita algunhas páxinas do documento"
+msgstr "Видалити сторінки в документі"
 
 #: src/nautilus-pdf-tools.py:124
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:124
 msgid "Extract pages"
-msgstr "Extraer páxinas"
+msgstr "Видобути сторінки"
 
 #: src/nautilus-pdf-tools.py:125
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:125
 msgid "Extract pages of the document files"
-msgstr "Extrae páxinas do documento"
+msgstr "Видобути сторінки з документу"
 
 #: src/nautilus-pdf-tools.py:127
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:127
 msgid "Join pdf files"
-msgstr "Unir ficheiros pdf"
+msgstr "Об'єднати PDF-файли"
 
 #: src/nautilus-pdf-tools.py:128
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:128
 msgid "Join pdf files in one document"
-msgstr "Une ficheiros pdf nun único documento"
+msgstr "Об'єднати PDF-файли в один"
 
 #: src/nautilus-pdf-tools.py:130
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:130
 msgid "Split pdf files"
-msgstr "Separar un ficheiro pdf"
+msgstr "Розділити PDF-файл"
 
 #: src/nautilus-pdf-tools.py:131
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:131
 msgid "Split a pdf in several documents"
-msgstr "Separa ficheiros pdf en varios documentos"
+msgstr "Розділити PDF-файл на декілька файлів"
 
 #: src/nautilus-pdf-tools.py:133
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:133
 msgid "Combine pdf pages"
-msgstr "Combinar páxinas"
+msgstr "Об'єднати сторінки"
 
 #: src/nautilus-pdf-tools.py:134
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:134
 msgid "Combine pdf pages in one page"
-msgstr "Combina varias páxinas nunha única"
+msgstr "Об'єднати декілька сторінок в одну "
 
 #: src/nautilus-pdf-tools.py:136
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:136
 msgid "Reduce pdf size"
-msgstr ""
+msgstr "Зменшити розмір PDF"
 
 #: src/nautilus-pdf-tools.py:138
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:138
 msgid "Resize pdf pages"
-msgstr "Redimensionar páxinas"
+msgstr "Змінити розмір PDF"
 
 #: src/nautilus-pdf-tools.py:140
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:140
-#, fuzzy
 msgid "Convert pdf to png"
-msgstr "Convertir a"
+msgstr "Конвертувати PDF в PNG"
 
 #: src/nautilus-pdf-tools.py:141
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:141
 msgid "Convert pdf file to png image"
-msgstr ""
+msgstr "Конвертувати PDF-файл в PNG"
 
 #: src/nautilus-pdf-tools.py:143
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:143
 msgid "Encrypt"
-msgstr ""
+msgstr "Зашифрувати файл"
 
 #: src/nautilus-pdf-tools.py:144
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:144
-#, fuzzy
 msgid "Encrypt pdf files"
-msgstr "Separar un ficheiro pdf"
+msgstr "Зашифрувати PDF"
 
 #: src/nautilus-pdf-tools.py:146
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:146
 msgid "Decrypt"
-msgstr ""
+msgstr "Розшифрувати файл"
 
 #: src/nautilus-pdf-tools.py:147
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:147
-#, fuzzy
 msgid "Decrypt pdf files"
-msgstr "Separar un ficheiro pdf"
+msgstr "Розшифрувати PDF"
 
 #: src/nautilus-pdf-tools.py:169 src/nautilus-pdf-tools.py:170
 #: src/nautilus-pdf-tools.py:205 src/nautilus-pdf-tools.py:206
@@ -190,30 +187,27 @@ msgstr "Separar un ficheiro pdf"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:205
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:206
 msgid "About"
-msgstr "Acerca de..."
+msgstr "Про програму"
 
 #: src/nautilus-pdf-tools.py:185
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:185
-#, fuzzy
 msgid "Convert to pdf"
-msgstr "Convertir a"
+msgstr "Конвертувати в PDF"
 
 #: src/nautilus-pdf-tools.py:186
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:186
-#, fuzzy
 msgid "Convert images to pdf"
-msgstr "Convertir a"
+msgstr "Конвертувати зображення в PDF"
 
 #: src/nautilus-pdf-tools.py:219
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/nautilus-pdf-tools.py:219
-#, fuzzy
 msgid "Nautilus Pdf Tools"
-msgstr "Ferramentas PDF"
+msgstr "Nautilus Pdf Tools"
 
 #: src/pdf-tools/reducedialog.py:45
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/reducedialog.py:45
 msgid "Image resolution"
-msgstr ""
+msgstr "Роздільна здатність зображення"
 
 #: src/pdf-tools/reducedialog.py:49 src/pdf-tools/resizedialog.py:72
 #: src/pdf-tools/signdialog.py:86 src/pdf-tools/flipdialog.py:89
@@ -227,15 +221,13 @@ msgstr ""
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/watermarkdialog.py:103
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/paginatedialog.py:102
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/textmarkdialog.py:98
-#, fuzzy
 msgid "Append to file"
-msgstr "Ficheiro de texto"
+msgstr "Додати до імені файлу"
 
 #: src/pdf-tools/reducedialog.py:54
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/reducedialog.py:54
-#, fuzzy
 msgid "Set dpi to reduce file"
-msgstr "Selecciona o ficheiro para gardar o documento"
+msgstr "Задайте dpi, щоб зменшити файл"
 
 #: src/pdf-tools/reducedialog.py:62 src/pdf-tools/resizedialog.py:134
 #: src/pdf-tools/signdialog.py:92 src/pdf-tools/flipdialog.py:95
@@ -249,9 +241,8 @@ msgstr "Selecciona o ficheiro para gardar o documento"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/watermarkdialog.py:109
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/paginatedialog.py:108
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/textmarkdialog.py:104
-#, fuzzy
 msgid "Append to file to create output filename"
-msgstr "Seleccione o tamaño do ficheiro de saída"
+msgstr "Додати до файлу, щоб створити вихідний файл"
 
 #: src/pdf-tools/resizedialog.py:53 src/pdf-tools/combinedialog.py:51
 #: src/pdf-tools/selectpagesrotatedialog.py:59
@@ -261,7 +252,7 @@ msgstr "Seleccione o tamaño do ficheiro de saída"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/selectpagesrotatedialog.py:59
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/selectpagesdialog.py:63
 msgid "Pages"
-msgstr "Páxinas"
+msgstr "Сторінки"
 
 #: src/pdf-tools/resizedialog.py:64 src/pdf-tools/combinedialog.py:62
 #: src/pdf-tools/createpdffromImagesdialog.py:61
@@ -269,7 +260,7 @@ msgstr "Páxinas"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:62
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:61
 msgid "Paper size"
-msgstr "Tamaño de folla"
+msgstr "Формат аркуша"
 
 #: src/pdf-tools/resizedialog.py:68 src/pdf-tools/combinedialog.py:66
 #: src/pdf-tools/createpdffromImagesdialog.py:67
@@ -277,7 +268,7 @@ msgstr "Tamaño de folla"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:66
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:67
 msgid "Orientation"
-msgstr "Orientación"
+msgstr "Орієнтація"
 
 #: src/pdf-tools/resizedialog.py:77 src/pdf-tools/combinedialog.py:91
 #: src/pdf-tools/createpdffromImagesdialog.py:88
@@ -461,7 +452,7 @@ msgstr "B10"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:113
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:110
 msgid "Letter (8 1/2x11)"
-msgstr "Carta (8 1/2x11)"
+msgstr "Лист (8 1/2x11)"
 
 #: src/pdf-tools/resizedialog.py:100 src/pdf-tools/combinedialog.py:114
 #: src/pdf-tools/createpdffromImagesdialog.py:111
@@ -469,7 +460,7 @@ msgstr "Carta (8 1/2x11)"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:114
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:111
 msgid "Note (8 1/2x11)"
-msgstr "Nota (8 1/2x11)"
+msgstr "Примітка (8 1/2x11)"
 
 #: src/pdf-tools/resizedialog.py:101 src/pdf-tools/combinedialog.py:115
 #: src/pdf-tools/createpdffromImagesdialog.py:112
@@ -477,7 +468,7 @@ msgstr "Nota (8 1/2x11)"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:115
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:112
 msgid "Legal (8 1/2x14)"
-msgstr "Legal (8 1/2x14)"
+msgstr ""
 
 #: src/pdf-tools/resizedialog.py:102 src/pdf-tools/combinedialog.py:116
 #: src/pdf-tools/createpdffromImagesdialog.py:113
@@ -485,7 +476,7 @@ msgstr "Legal (8 1/2x14)"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:116
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:113
 msgid "Executive (8 1/4x10 1/2)"
-msgstr "Executivo (8 1/4x10 1/2)"
+msgstr ""
 
 #: src/pdf-tools/resizedialog.py:103 src/pdf-tools/combinedialog.py:117
 #: src/pdf-tools/createpdffromImagesdialog.py:114
@@ -493,7 +484,7 @@ msgstr "Executivo (8 1/4x10 1/2)"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:117
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:114
 msgid "Halfetter (5 1/2x8 1/2)"
-msgstr "Media carta (5 1/2x8 1/2)"
+msgstr ""
 
 #: src/pdf-tools/resizedialog.py:104 src/pdf-tools/combinedialog.py:118
 #: src/pdf-tools/createpdffromImagesdialog.py:115
@@ -501,7 +492,7 @@ msgstr "Media carta (5 1/2x8 1/2)"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:118
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:115
 msgid "Halfexecutive (5 1/4x7 1/4)"
-msgstr "Medio executivo (5 1/4x7 1/4)"
+msgstr ""
 
 #: src/pdf-tools/resizedialog.py:105 src/pdf-tools/combinedialog.py:119
 #: src/pdf-tools/createpdffromImagesdialog.py:116
@@ -517,7 +508,7 @@ msgstr "11x17 (11x17)"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:120
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:117
 msgid "Statement (5 1/2x8 1/2)"
-msgstr "Media carta, 5 1/2 x 8 1/2 polgadas"
+msgstr ""
 
 #: src/pdf-tools/resizedialog.py:107 src/pdf-tools/combinedialog.py:121
 #: src/pdf-tools/createpdffromImagesdialog.py:118
@@ -525,7 +516,7 @@ msgstr "Media carta, 5 1/2 x 8 1/2 polgadas"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:121
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:118
 msgid "Folio (8 1/2x13)"
-msgstr "Folio (8 1/2x13)"
+msgstr ""
 
 #: src/pdf-tools/resizedialog.py:108 src/pdf-tools/combinedialog.py:122
 #: src/pdf-tools/createpdffromImagesdialog.py:119
@@ -541,7 +532,7 @@ msgstr "10x14 (10x14)"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:123
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:120
 msgid "Ledger (17x11)"
-msgstr "Libro maior, 17 x 11 polgadas"
+msgstr ""
 
 #: src/pdf-tools/resizedialog.py:110 src/pdf-tools/combinedialog.py:124
 #: src/pdf-tools/createpdffromImagesdialog.py:121
@@ -549,7 +540,7 @@ msgstr "Libro maior, 17 x 11 polgadas"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:124
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:121
 msgid "Tabloid (11x17)"
-msgstr "Tabloide, 11 x 17 polgadas"
+msgstr ""
 
 #: src/pdf-tools/resizedialog.py:112 src/pdf-tools/combinedialog.py:126
 #: src/pdf-tools/createpdffromImagesdialog.py:62
@@ -557,7 +548,7 @@ msgstr "Tabloide, 11 x 17 polgadas"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:126
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:62
 msgid "Select the size of the output file"
-msgstr "Seleccione o tamaño do ficheiro de saída"
+msgstr "Виберіть розмір вихідного файлу"
 
 #: src/pdf-tools/resizedialog.py:121 src/pdf-tools/resizedialog.py:157
 #: src/pdf-tools/combinedialog.py:134 src/pdf-tools/combinedialog.py:204
@@ -570,7 +561,7 @@ msgstr "Seleccione o tamaño do ficheiro de saída"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:132
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:357
 msgid "Vertical"
-msgstr "Vertical"
+msgstr "Вертикальна"
 
 #: src/pdf-tools/resizedialog.py:122 src/pdf-tools/combinedialog.py:135
 #: src/pdf-tools/createpdffromImagesdialog.py:133
@@ -578,7 +569,7 @@ msgstr "Vertical"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:135
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:133
 msgid "Horizontal"
-msgstr "Horizontal"
+msgstr "Горизонтальна"
 
 #: src/pdf-tools/resizedialog.py:124 src/pdf-tools/combinedialog.py:137
 #: src/pdf-tools/createpdffromImagesdialog.py:68
@@ -586,7 +577,7 @@ msgstr "Horizontal"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:137
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:68
 msgid "Select the orientation of the page"
-msgstr "Seleccionar a orientación das páxinas"
+msgstr "Виберіть орієнтацію сторінки"
 
 #: src/pdf-tools/resizedialog.py:135
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/resizedialog.py:135
@@ -610,7 +601,7 @@ msgstr ""
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/signdialog.py:108
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/watermarkdialog.py:125
 msgid "Choose File"
-msgstr "Elixe ficheiro"
+msgstr "Виберіть файл"
 
 #: src/pdf-tools/signdialog.py:112
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/signdialog.py:112
@@ -620,15 +611,13 @@ msgstr ""
 #: src/pdf-tools/signdialog.py:167 src/pdf-tools/watermarkdialog.py:229
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/signdialog.py:167
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/watermarkdialog.py:229
-#, fuzzy
 msgid "Select one image"
-msgstr "Páxinas seleccionadas"
+msgstr "Виберіть одне зображення"
 
 #: src/pdf-tools/flipdialog.py:42
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/flipdialog.py:42
-#, fuzzy
 msgid "Rotate and flid PDF"
-msgstr "Xirar e voltear"
+msgstr "Повернути і перевернути PDF"
 
 #: src/pdf-tools/flipdialog.py:96
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/flipdialog.py:96
@@ -638,68 +627,68 @@ msgstr ""
 #: src/pdf-tools/flipdialog.py:99
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/flipdialog.py:99
 msgid "Flip vertical"
-msgstr "Volteo vertical"
+msgstr "Перевернути вертикально"
 
 #: src/pdf-tools/flipdialog.py:111
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/flipdialog.py:111
 msgid "Flip horizontal"
-msgstr "Volteo horizontal"
+msgstr "Перевернути горизонтально"
 
 #: src/pdf-tools/flipdialog.py:123
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/flipdialog.py:123
 msgid "Rotate"
-msgstr "Xirar"
+msgstr "Повернути сторінки"
 
 #: src/pdf-tools/combinedialog.py:70
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:70
 msgid "Pages in Page"
-msgstr "Páxinas por folla"
+msgstr "Сторінок на листі"
 
 #: src/pdf-tools/combinedialog.py:74
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:74
 msgid "by"
-msgstr "por"
+msgstr "на"
 
 #: src/pdf-tools/combinedialog.py:78
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:78
 msgid "Sort"
-msgstr "Ordenar"
+msgstr "Сортувати"
 
 #: src/pdf-tools/combinedialog.py:82
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:82
 msgid "Set the margin"
-msgstr "Establecer a marxe"
+msgstr "Поля"
 
 #: src/pdf-tools/combinedialog.py:145
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:145
 msgid "Select how many pages in a page"
-msgstr "Selecciona cantas páxinas por folla"
+msgstr "Виберіть кількість сторінок на листі"
 
 #: src/pdf-tools/combinedialog.py:151
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:151
 msgid "rows by columns"
-msgstr "filas por columnas"
+msgstr "рядків за стовпцями"
 
 #: src/pdf-tools/combinedialog.py:157 src/pdf-tools/combinedialog.py:219
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:157
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:219
 msgid "By rows"
-msgstr "Por filas"
+msgstr "За рядками"
 
 #: src/pdf-tools/combinedialog.py:158
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:158
 msgid "By columns"
-msgstr "Por columnas"
+msgstr "За стовпцями"
 
 #: src/pdf-tools/combinedialog.py:160
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:160
 msgid "Select the combination sort"
-msgstr "Seleccionar a orde de combinación"
+msgstr "Виберіть сортування"
 
 #: src/pdf-tools/combinedialog.py:168
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:168
 msgid "The margin to the page in mm"
-msgstr "Establece a marxe en mm"
+msgstr "Встановіть розмір полів в мм"
 
 #: src/pdf-tools/combinedialog.py:176
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/combinedialog.py:176
@@ -716,7 +705,7 @@ msgstr ""
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/selectpagesdialog.py:89
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:237
 msgid "Select file to save new file"
-msgstr "Selecciona o ficheiro para gardar o documento"
+msgstr "Виберіть файл, щоб зберегти документ"
 
 #: src/pdf-tools/convertdialog.py:37 src/pdf-tools/convertdialog.py:53
 #: src/pdf-tools/convertdialog.py:65
@@ -724,20 +713,20 @@ msgstr "Selecciona o ficheiro para gardar o documento"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/convertdialog.py:53
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/convertdialog.py:65
 msgid "Convert to"
-msgstr "Convertir a"
+msgstr "Конвертувати в"
 
 #: src/pdf-tools/convertdialog.py:63 src/pdf-tools/comun.py:127
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/convertdialog.py:63
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/comun.py:127
 msgid "ALL"
-msgstr ""
+msgstr "Усі"
 
 #: src/pdf-tools/selectpagesrotatedialog.py:53
 #: src/pdf-tools/selectpagesdialog.py:52
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/selectpagesrotatedialog.py:53
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/selectpagesdialog.py:52
 msgid "Select Pages"
-msgstr "Páxinas seleccionadas"
+msgstr "Сторінки"
 
 #: src/pdf-tools/selectpagesrotatedialog.py:60
 #: src/pdf-tools/selectpagesrotatedialog.py:67
@@ -752,10 +741,8 @@ msgid ""
 "counting from start of the\n"
 "document ej. 1,4,6-9"
 msgstr ""
-"Escribe o número da páxina e/ou o rango\n"
-"das páxinas separadas por comas comezando\n"
-"a contar dende o inicio do documento, por\n"
-"exemplo 1,4,6-9"
+"Введіть номер сторінки та/або сторінку\n"
+"діапазони,розділені комами пр.1,4,6-9 "
 
 #: src/pdf-tools/selectpagesrotatedialog.py:90
 #: src/pdf-tools/joinpdfsdialog.py:60 src/pdf-tools/selectpagesdialog.py:75
@@ -764,9 +751,8 @@ msgstr ""
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/joinpdfsdialog.py:60
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/selectpagesdialog.py:75
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:80
-#, fuzzy
 msgid "Output file"
-msgstr "Xira ficheiros"
+msgstr "Вихідний файл"
 
 #: src/pdf-tools/selectpagesrotatedialog.py:91
 #: src/pdf-tools/joinpdfsdialog.py:61 src/pdf-tools/selectpagesdialog.py:76
@@ -775,9 +761,8 @@ msgstr "Xira ficheiros"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/joinpdfsdialog.py:61
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/selectpagesdialog.py:76
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:81
-#, fuzzy
 msgid "Select the output file"
-msgstr "Seleccione o tamaño do ficheiro de saída"
+msgstr "Виберіть вихідний файл"
 
 #: src/pdf-tools/watermarkdialog.py:94 src/pdf-tools/paginatedialog.py:93
 #: src/pdf-tools/textmarkdialog.py:90
@@ -785,7 +770,7 @@ msgstr "Seleccione o tamaño do ficheiro de saída"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/paginatedialog.py:93
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/textmarkdialog.py:90
 msgid "Top"
-msgstr "Superior"
+msgstr "Зверху"
 
 #: src/pdf-tools/watermarkdialog.py:95 src/pdf-tools/paginatedialog.py:94
 #: src/pdf-tools/textmarkdialog.py:91
@@ -793,7 +778,7 @@ msgstr "Superior"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/paginatedialog.py:94
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/textmarkdialog.py:91
 msgid "Middle"
-msgstr "Medio"
+msgstr "Посередині"
 
 #: src/pdf-tools/watermarkdialog.py:96 src/pdf-tools/paginatedialog.py:95
 #: src/pdf-tools/textmarkdialog.py:92
@@ -801,7 +786,7 @@ msgstr "Medio"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/paginatedialog.py:95
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/textmarkdialog.py:92
 msgid "Bottom"
-msgstr "Inferior"
+msgstr "Знизу"
 
 #: src/pdf-tools/watermarkdialog.py:99 src/pdf-tools/paginatedialog.py:98
 #: src/pdf-tools/textmarkdialog.py:94
@@ -809,7 +794,7 @@ msgstr "Inferior"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/paginatedialog.py:98
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/textmarkdialog.py:94
 msgid "Left"
-msgstr "Esquerda"
+msgstr "Зліва"
 
 #: src/pdf-tools/watermarkdialog.py:100 src/pdf-tools/paginatedialog.py:99
 #: src/pdf-tools/textmarkdialog.py:95
@@ -817,7 +802,7 @@ msgstr "Esquerda"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/paginatedialog.py:99
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/textmarkdialog.py:95
 msgid "Center"
-msgstr "Centro"
+msgstr "У центрі"
 
 #: src/pdf-tools/watermarkdialog.py:101 src/pdf-tools/paginatedialog.py:100
 #: src/pdf-tools/textmarkdialog.py:96
@@ -825,13 +810,12 @@ msgstr "Centro"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/paginatedialog.py:100
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/textmarkdialog.py:96
 msgid "Right"
-msgstr "Dereita"
+msgstr "Зправа"
 
 #: src/pdf-tools/watermarkdialog.py:110
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/watermarkdialog.py:110
-#, fuzzy
 msgid "_watermarked"
-msgstr "Marca de auga"
+msgstr ""
 
 #: src/pdf-tools/watermarkdialog.py:129 src/pdf-tools/paginatedialog.py:121
 #: src/pdf-tools/textmarkdialog.py:130
@@ -839,7 +823,7 @@ msgstr "Marca de auga"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/paginatedialog.py:121
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/textmarkdialog.py:130
 msgid "Horizontal position"
-msgstr "Posición horizontal"
+msgstr "Горизонтальна позиція"
 
 #: src/pdf-tools/watermarkdialog.py:140 src/pdf-tools/paginatedialog.py:132
 #: src/pdf-tools/textmarkdialog.py:141
@@ -847,37 +831,33 @@ msgstr "Posición horizontal"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/paginatedialog.py:132
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/textmarkdialog.py:141
 msgid "Vertical position"
-msgstr "Posición vertical"
+msgstr "Вертикальна позиція"
 
 #: src/pdf-tools/watermarkdialog.py:150 src/pdf-tools/paginatedialog.py:142
 #: src/pdf-tools/textmarkdialog.py:151
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/watermarkdialog.py:150
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/paginatedialog.py:142
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/textmarkdialog.py:151
-#, fuzzy
 msgid "Set horizontal margin"
-msgstr "Establecer a marxe"
+msgstr "Горизонтальне поле"
 
 #: src/pdf-tools/watermarkdialog.py:161 src/pdf-tools/paginatedialog.py:153
 #: src/pdf-tools/textmarkdialog.py:162
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/watermarkdialog.py:161
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/paginatedialog.py:153
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/textmarkdialog.py:162
-#, fuzzy
 msgid "Set vertical margin"
-msgstr "Establecer a marxe"
+msgstr "Вертикальне поле"
 
 #: src/pdf-tools/watermarkdialog.py:172
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/watermarkdialog.py:172
-#, fuzzy
 msgid "Watermark zoom"
-msgstr "Marca de auga"
+msgstr "Масштаб водяного знаку"
 
 #: src/pdf-tools/paginatedialog.py:109
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/paginatedialog.py:109
-#, fuzzy
 msgid "_paginated"
-msgstr "Paxinar"
+msgstr ""
 
 #: src/pdf-tools/paginatedialog.py:114 src/pdf-tools/paginatedialog.py:204
 #: src/pdf-tools/textmarkdialog.py:111 src/pdf-tools/textmarkdialog.py:213
@@ -886,7 +866,7 @@ msgstr "Paxinar"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/textmarkdialog.py:111
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/textmarkdialog.py:213
 msgid "Select font"
-msgstr "Seleccionar tipo de letra"
+msgstr "Вибрати шрифт"
 
 #: src/pdf-tools/paginatedialog.py:117 src/pdf-tools/paginatedialog.py:180
 #: src/pdf-tools/textmarkdialog.py:115 src/pdf-tools/textmarkdialog.py:189
@@ -895,286 +875,208 @@ msgstr "Seleccionar tipo de letra"
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/textmarkdialog.py:115
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/textmarkdialog.py:189
 msgid "Select color"
-msgstr "Selecciona cor"
+msgstr "Вибрати колір"
 
 #: src/pdf-tools/tools.py:104 src/pdf-tools/joinpdfsdialog.py:193
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/tools.py:104
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/joinpdfsdialog.py:193
 msgid "Pdf files"
-msgstr "Ficheiros PDF"
+msgstr "Pdf-файли"
 
 #: src/pdf-tools/tools.py:129
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/tools.py:129
 msgid "Text file"
-msgstr "Ficheiro de texto"
+msgstr "Текстовий файл"
 
 #: src/pdf-tools/joinpdfsdialog.py:99
 #: src/pdf-tools/createpdffromImagesdialog.py:188
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/joinpdfsdialog.py:99
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:188
 msgid "Up"
-msgstr "Arriba"
+msgstr "Угору"
 
 #: src/pdf-tools/joinpdfsdialog.py:107
 #: src/pdf-tools/createpdffromImagesdialog.py:196
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/joinpdfsdialog.py:107
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:196
 msgid "Down"
-msgstr "Abaixo"
+msgstr "Вниз"
 
 #: src/pdf-tools/joinpdfsdialog.py:115
 #: src/pdf-tools/createpdffromImagesdialog.py:204
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/joinpdfsdialog.py:115
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:204
 msgid "Add"
-msgstr "Engadir"
+msgstr "Додати"
 
 #: src/pdf-tools/joinpdfsdialog.py:123
 #: src/pdf-tools/createpdffromImagesdialog.py:212
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/joinpdfsdialog.py:123
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:212
 msgid "Remove"
-msgstr "Quitar"
+msgstr "Видалити"
 
 #: src/pdf-tools/joinpdfsdialog.py:182
 #: src/pdf-tools/createpdffromImagesdialog.py:272
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/joinpdfsdialog.py:182
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:272
 msgid "Select one or more pdf files"
-msgstr "Selecciona un ou máis ficheiros pdf"
+msgstr "Виберіть один або кілька файлів PDF"
 
 #: src/pdf-tools/passworddialog.py:50 src/pdf-tools/passworddialog.py:61
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/passworddialog.py:50
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/passworddialog.py:61
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
 
 #: src/pdf-tools/passworddialog.py:67
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/passworddialog.py:67
 msgid "Set password"
-msgstr ""
+msgstr "Введіть пароль"
 
 #: src/pdf-tools/createpdffromImagesdialog.py:74
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:74
 msgid "Margen"
-msgstr ""
+msgstr "Поля"
 
 #: src/pdf-tools/createpdffromImagesdialog.py:75
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:75
-#, fuzzy
 msgid "Select the size of the margin"
-msgstr "Seleccione o tamaño do ficheiro de saída"
+msgstr "Виберіть розмір полів"
 
 #: src/pdf-tools/createpdffromImagesdialog.py:143
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:143
-#, fuzzy
 msgid "No margin"
-msgstr "Establecer a marxe"
+msgstr "Без полів"
 
 #: src/pdf-tools/createpdffromImagesdialog.py:144
 #: src/pdf-tools/createpdffromImagesdialog.py:366
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:144
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:366
 msgid "small margin"
-msgstr ""
+msgstr "Малі поля"
 
 #: src/pdf-tools/createpdffromImagesdialog.py:145
 #: src/pdf-tools/createpdffromImagesdialog.py:368
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:145
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/createpdffromImagesdialog.py:368
 msgid "big margin"
-msgstr ""
+msgstr "Великі поля"
 
 #: src/pdf-tools/textmarkdialog.py:105
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/textmarkdialog.py:105
-#, fuzzy
 msgid "_textmarked"
-msgstr "Marca de texto"
+msgstr ""
 
 #: src/pdf-tools/textmarkdialog.py:122
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/textmarkdialog.py:122
 msgid "Text"
-msgstr "Texto"
+msgstr "Введіть текст"
 
 #: src/pdf-tools/pdfmanager.py:66 src/pdf-tools/pdfmanager.py:78
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:66
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:78
-#, fuzzy
 msgid "Resize PDF"
-msgstr "Redimensionar páxinas"
+msgstr "Змінити розмір файлу"
 
 #: src/pdf-tools/pdfmanager.py:92 src/pdf-tools/pdfmanager.py:98
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:92
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:98
-#, fuzzy
 msgid "Encrypt files"
-msgstr "Ficheiros PNG"
+msgstr "Зашифрувати PDF"
 
 #: src/pdf-tools/pdfmanager.py:111
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:111
-#, fuzzy
 msgid "Decrypt files"
-msgstr "Ficheiro de texto"
+msgstr "Розшифрувати PDF"
 
 #: src/pdf-tools/pdfmanager.py:117
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:117
-#, fuzzy
 msgid "Dencrypt files"
-msgstr "Ficheiro de texto"
+msgstr "Розшифрувати файл"
 
 #: src/pdf-tools/pdfmanager.py:132
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:132
-#, fuzzy
 msgid "Convert PDF to PNG"
-msgstr "Convertir a"
+msgstr "Конвертувати PDF - в PNG"
 
 #: src/pdf-tools/pdfmanager.py:146 src/pdf-tools/pdfmanager.py:162
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:146
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:162
-#, fuzzy
 msgid "Combine PDF pages"
-msgstr "Combinar varias páxinas por folla"
+msgstr "Об'єднати сторінки"
 
 #: src/pdf-tools/pdfmanager.py:182 src/pdf-tools/pdfmanager.py:194
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:182
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:194
-#, fuzzy
 msgid "Create PDF from images"
-msgstr "Paxina ficheiros pdf"
+msgstr "Створити PDF з зображень"
 
 #: src/pdf-tools/pdfmanager.py:219 src/pdf-tools/pdfmanager.py:225
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:219
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:225
-#, fuzzy
 msgid "Join PDF files"
-msgstr "Unir ficheiros pdf"
+msgstr "Об'єднати PDF"
 
 #: src/pdf-tools/pdfmanager.py:252
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:252
-#, fuzzy
 msgid "Paginate PDF"
-msgstr "Paxinar"
+msgstr "Додати нумерацію сторінок"
 
 #: src/pdf-tools/pdfmanager.py:268
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:268
-#, fuzzy
 msgid "Reduce PDF"
-msgstr "Redimensionar páxinas"
+msgstr "Зменшити розмір файлу"
 
 #: src/pdf-tools/pdfmanager.py:275
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:275
 msgid "Reduce PDF size"
-msgstr ""
+msgstr "Зменшити розмір PDF"
 
 #: src/pdf-tools/pdfmanager.py:303
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:303
-#, fuzzy
 msgid "Textmark PDF"
-msgstr "Marca de texto"
+msgstr "Додати текстовий знак"
 
 #: src/pdf-tools/pdfmanager.py:328
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:328
-#, fuzzy
 msgid "Sign PDF"
-msgstr "Paxinar"
+msgstr ""
 
 #: src/pdf-tools/pdfmanager.py:354
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:354
-#, fuzzy
 msgid "Watermark PDF"
-msgstr "Marca de auga"
+msgstr "Водяний знак"
 
 #: src/pdf-tools/pdfmanager.py:378
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:378
-#, fuzzy
 msgid "Rotate and flip PDF"
-msgstr "Xirar e voltear"
+msgstr "Повернути і перевернути pdf-файли"
 
 #: src/pdf-tools/pdfmanager.py:397 src/pdf-tools/pdfmanager.py:409
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:397
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:409
-#, fuzzy
 msgid "Rotate PDF"
-msgstr "Xirar"
+msgstr "Повернути сторінки"
 
 #: src/pdf-tools/pdfmanager.py:428 src/pdf-tools/pdfmanager.py:435
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:428
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:435
-#, fuzzy
 msgid "Remove PDF"
-msgstr "Quitar"
+msgstr "Видалити сторінки"
 
 #: src/pdf-tools/pdfmanager.py:452
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:452
 msgid "Split PDF"
-msgstr ""
+msgstr "Розділити PDF"
 
 #: src/pdf-tools/pdfmanager.py:466 src/pdf-tools/pdfmanager.py:472
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:466
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:472
-#, fuzzy
 msgid "Extract pages from PDF"
-msgstr "Extraer páxinas"
+msgstr "Видобути сторінки з документу"
 
 #: src/pdf-tools/pdfmanager.py:494
 #: debian/nautilus-pdf-tools/usr/share/nautilus-python/extensions/pdf-tools/pdfmanager.py:494
 msgid "Select file to save extracted text"
-msgstr "Selecciona un ficheiro para gardar as páxinas extraídas"
-
-#~ msgid "Pdf file"
-#~ msgstr "Ficheiro Pdf"
-
-#~ msgid "Overwrite original file?"
-#~ msgstr "Sobrescribir o ficheiro orixinal?"
-
-#~ msgid "Select Font"
-#~ msgstr "Selecciona tipo de letra"
-
-#, fuzzy
-#~ msgid "Convert pdfs to png"
-#~ msgstr "Convertir a"
-
-#, fuzzy
-#~ msgid "Watermark pdf files"
-#~ msgstr "Engade unha marca de auga ao ficheiro pdf"
-
-#~ msgid "Rotate files"
-#~ msgstr "Xira ficheiros"
-
-#, fuzzy
-#~ msgid "Rotate pdf files"
-#~ msgstr "Xira ficheiros"
-
-#~ msgid "Rotate some pages"
-#~ msgstr "Xirar algunhas páxinas"
-
-#, fuzzy
-#~ msgid "Rotate some pages in pdf"
-#~ msgstr "Xirar algunhas páxinas"
-
-#~ msgid "Remove some pages"
-#~ msgstr "Quitar algunhas páxinas"
-
-#, fuzzy
-#~ msgid "Remove some pages in pdf"
-#~ msgstr "Quitar algunhas páxinas"
-
-#~ msgid "Extract some pages"
-#~ msgstr "Extraer algunhas páxinas"
-
-#, fuzzy
-#~ msgid "Extract some pages in pdf"
-#~ msgstr "Extraer algunhas páxinas"
-
-#, fuzzy
-#~ msgid "Select one or more image files"
-#~ msgstr "Selecciona un ou máis ficheiros pdf"
-
-#~ msgid "Please choose a file"
-#~ msgstr "Por favor selecciona un ficheiro"
-
-#~ msgid "Tools to manage pdf files"
-#~ msgstr "Un conxunto de ferramentas para traballar con ficheiros pdf"
-
-#~ msgid "Select file to save extracted pages"
-#~ msgstr "Selecciona o ficheiro para gardar as páxinas extraídas"
+msgstr "Виберіть файл, щоб зберегти видобутий текст"
