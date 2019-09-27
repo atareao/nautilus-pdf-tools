@@ -258,9 +258,9 @@ def create_from_images(file_out, images, width=1189, height=1682, margin=0):
     os.remove(temp_pdf)
 
 
-def reduce_pdf(file_in):
+def reduce_pdf(file_in, dpi, append):
     try:
-        file_out = get_output_filename(file_in, 'reduced')
+        file_out = get_output_filename(file_in, append)
         rutine = 'ghostscript -q  -dNOPAUSE -dBATCH -dSAFER \
         -sDEVICE=pdfwrite \
         -dCompatibilityLevel=1.4 \
@@ -270,12 +270,12 @@ def reduce_pdf(file_in):
         -dDownsampleColorImages=true \
         -dColorImageResolution=100 \
         -dColorImageDownsampleType=/Bicubic \
-        -dColorImageResolution=72 \
+        -dColorImageResolution="%s" \
         -dGrayImageDownsampleType=/Bicubic \
-        -dGrayImageResolution=72 \
+        -dGrayImageResolution="%s" \
         -dMonoImageDownsampleType=/Bicubic \
-        -dMonoImageResolution=72 \
-        -sOutputFile=%s %s' % (file_out, file_in)
+        -dMonoImageResolution="%s" \
+        -sOutputFile="%s" "%s"' % (dpi, dpi, dpi, file_out, file_in)
         args = shlex.split(rutine)
         p = subprocess.Popen(args, stdout=subprocess.PIPE)
         out, err = p.communicate()
@@ -292,7 +292,7 @@ def get_output_filename(file_in, modificator):
     if os.path.exists(file_in) and os.path.isfile(file_in):
         head, tail = os.path.split(file_in)
         root, ext = os.path.splitext(tail)
-        file_out = os.path.join(head, root + '_' + modificator + ext)
+        file_out = os.path.join(head, root + modificator + ext)
         return file_out
     return None
 
@@ -350,7 +350,7 @@ def all_files_are_pdf(items):
     for item in items:
         fileName, fileExtension = os.path.splitext(
             unquote_plus(item.get_uri()[7:]))
-        if fileExtension != '.pdf':
+        if fileExtension.lower() != '.pdf':
             return False
     return True
 

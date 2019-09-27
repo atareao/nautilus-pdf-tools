@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-pdf-tools 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-27 19:38+0200\n"
+"POT-Creation-Date: 2019-09-27 19:53+0200\n"
 "PO-Revision-Date: 2012-02-26 19:31+0100\n"
 "Last-Translator: atareao <lorenzo.carbonell.cerezo@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -208,6 +208,29 @@ msgstr "Selecciona uno o mas archivos pdf"
 msgid "Pdf files"
 msgstr "Archivos Pdf"
 
+#: src/pdf-tools/reducedialog.py:45
+msgid "Image resolution"
+msgstr ""
+
+#: src/pdf-tools/reducedialog.py:49 src/pdf-tools/resizedialog.py:72
+#: src/pdf-tools/flipdialog.py:89 src/pdf-tools/paginatedialog.py:102
+#: src/pdf-tools/textmarkdialog.py:98 src/pdf-tools/combinedialog.py:86
+#: src/pdf-tools/signdialog.py:86 src/pdf-tools/watermarkdialog.py:103
+msgid "Append to file"
+msgstr "Añadir al archivo"
+
+#: src/pdf-tools/reducedialog.py:54
+#, fuzzy
+msgid "Set dpi to reduce file"
+msgstr "Selecciona el archivo para guardar el documento"
+
+#: src/pdf-tools/reducedialog.py:62 src/pdf-tools/resizedialog.py:134
+#: src/pdf-tools/flipdialog.py:95 src/pdf-tools/paginatedialog.py:108
+#: src/pdf-tools/textmarkdialog.py:104 src/pdf-tools/combinedialog.py:175
+#: src/pdf-tools/signdialog.py:92 src/pdf-tools/watermarkdialog.py:109
+msgid "Append to file to create output filename"
+msgstr "Añade al nombre del archivo para crear el archivo de salida"
+
 #: src/pdf-tools/resizedialog.py:53 src/pdf-tools/selectpagesrotatedialog.py:59
 #: src/pdf-tools/combinedialog.py:51 src/pdf-tools/selectpagesdialog.py:63
 msgid "Pages"
@@ -222,13 +245,6 @@ msgstr "Tamaño de hoja"
 #: src/pdf-tools/createpdffromImagesdialog.py:67
 msgid "Orientation"
 msgstr "Orientación"
-
-#: src/pdf-tools/resizedialog.py:72 src/pdf-tools/flipdialog.py:89
-#: src/pdf-tools/paginatedialog.py:102 src/pdf-tools/textmarkdialog.py:98
-#: src/pdf-tools/combinedialog.py:86 src/pdf-tools/signdialog.py:86
-#: src/pdf-tools/watermarkdialog.py:103
-msgid "Append to file"
-msgstr "Añadir al archivo"
 
 #: src/pdf-tools/resizedialog.py:77 src/pdf-tools/combinedialog.py:91
 #: src/pdf-tools/createpdffromImagesdialog.py:88
@@ -422,13 +438,6 @@ msgstr "Horizontal"
 msgid "Select the orientation of the page"
 msgstr "Selecciona la orientación de las páginas"
 
-#: src/pdf-tools/resizedialog.py:134 src/pdf-tools/flipdialog.py:95
-#: src/pdf-tools/paginatedialog.py:108 src/pdf-tools/textmarkdialog.py:104
-#: src/pdf-tools/combinedialog.py:175 src/pdf-tools/signdialog.py:92
-#: src/pdf-tools/watermarkdialog.py:109
-msgid "Append to file to create output filename"
-msgstr "Añade al nombre del archivo para crear el archivo de salida"
-
 #: src/pdf-tools/resizedialog.py:135
 msgid "_resized"
 msgstr "_redimensionado"
@@ -609,79 +618,84 @@ msgstr "Establece el margen en mm"
 msgid "_combined"
 msgstr "_combinado"
 
-#: src/pdf-tools/pdfmanager.py:65 src/pdf-tools/pdfmanager.py:77
+#: src/pdf-tools/pdfmanager.py:66 src/pdf-tools/pdfmanager.py:78
 msgid "Resize PDF"
 msgstr "Redimensiona PDF"
 
-#: src/pdf-tools/pdfmanager.py:91 src/pdf-tools/pdfmanager.py:97
+#: src/pdf-tools/pdfmanager.py:92 src/pdf-tools/pdfmanager.py:98
 msgid "Encrypt files"
 msgstr "Cifra archivos"
 
-#: src/pdf-tools/pdfmanager.py:110
+#: src/pdf-tools/pdfmanager.py:111
 msgid "Decrypt files"
 msgstr "Descifra archivos"
 
-#: src/pdf-tools/pdfmanager.py:116
+#: src/pdf-tools/pdfmanager.py:117
 msgid "Dencrypt files"
 msgstr "Cifra archivos"
 
-#: src/pdf-tools/pdfmanager.py:131
+#: src/pdf-tools/pdfmanager.py:132
 msgid "Convert PDF to PNG"
 msgstr "Convertir PDF a PNG"
 
-#: src/pdf-tools/pdfmanager.py:145 src/pdf-tools/pdfmanager.py:161
+#: src/pdf-tools/pdfmanager.py:146 src/pdf-tools/pdfmanager.py:162
 msgid "Combine PDF pages"
 msgstr "Combina páginas PDF"
 
-#: src/pdf-tools/pdfmanager.py:181 src/pdf-tools/pdfmanager.py:193
+#: src/pdf-tools/pdfmanager.py:182 src/pdf-tools/pdfmanager.py:194
 msgid "Create PDF from images"
 msgstr "Crea PDF a partir de imágenes"
 
-#: src/pdf-tools/pdfmanager.py:218 src/pdf-tools/pdfmanager.py:224
+#: src/pdf-tools/pdfmanager.py:219 src/pdf-tools/pdfmanager.py:225
 msgid "Join PDF files"
 msgstr "Une archivos pdf"
 
-#: src/pdf-tools/pdfmanager.py:251
+#: src/pdf-tools/pdfmanager.py:252
 msgid "Paginate PDF"
 msgstr "Paginación de PDF"
 
-#: src/pdf-tools/pdfmanager.py:266
+#: src/pdf-tools/pdfmanager.py:268
+#, fuzzy
+msgid "Reduce PDF"
+msgstr "Reduce el tamaño del PDF"
+
+#: src/pdf-tools/pdfmanager.py:275
 msgid "Reduce PDF size"
 msgstr "Reduce el tamaño del PDF"
 
-#: src/pdf-tools/pdfmanager.py:292
+#: src/pdf-tools/pdfmanager.py:303
 msgid "Textmark PDF"
 msgstr "Marcado de texto de PDF"
 
-#: src/pdf-tools/pdfmanager.py:317
+#: src/pdf-tools/pdfmanager.py:328
 msgid "Sign PDF"
 msgstr "Firma PDF"
 
-#: src/pdf-tools/pdfmanager.py:343
+#: src/pdf-tools/pdfmanager.py:354
 msgid "Watermark PDF"
 msgstr "Marca de agua de PDF"
 
-#: src/pdf-tools/pdfmanager.py:367
+#: src/pdf-tools/pdfmanager.py:378
 msgid "Rotate and flip PDF"
 msgstr "Gira y voltea PDF"
 
-#: src/pdf-tools/pdfmanager.py:386 src/pdf-tools/pdfmanager.py:398
+#: src/pdf-tools/pdfmanager.py:397 src/pdf-tools/pdfmanager.py:409
 msgid "Rotate PDF"
 msgstr "Gira PDF"
 
-#: src/pdf-tools/pdfmanager.py:417 src/pdf-tools/pdfmanager.py:424
+#: src/pdf-tools/pdfmanager.py:428 src/pdf-tools/pdfmanager.py:435
 msgid "Remove PDF"
 msgstr "Quita PDF"
 
-#: src/pdf-tools/pdfmanager.py:441
+#: src/pdf-tools/pdfmanager.py:452
 msgid "Split PDF"
 msgstr "Divide PDF"
 
-#: src/pdf-tools/pdfmanager.py:455 src/pdf-tools/pdfmanager.py:461
+#: src/pdf-tools/pdfmanager.py:466 src/pdf-tools/pdfmanager.py:472
 msgid "Extract pages from PDF"
 msgstr "Extrae páginas de PDF"
 
-#: src/pdf-tools/pdfmanager.py:483
+#: src/pdf-tools/pdfmanager.py:494
 msgid "Select file to save extracted text"
 msgstr "Selecciona el archivo para guardar el texto extraído"
 
