@@ -1,9 +1,9 @@
-nautilus-pdf-tools (1.2.0-0extras19.04.0) disco; urgency=medium
+nautilus-pdf-tools (1.2.0-0extras19.04.1) disco; urgency=medium
 
   * add dependecy
   * fixed a bug with menu initialization GObject
 
- -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Fri, 27 Sep 2019 19:37:26 +0200
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Fri, 27 Sep 2019 19:54:57 +0200
 
 nautilus-pdf-tools (1.2.0-0extras16.04.0) xenial; urgency=medium
 
