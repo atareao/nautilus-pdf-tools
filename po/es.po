@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-pdf-tools 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-30 21:01+0200\n"
+"POT-Creation-Date: 2019-09-27 19:38+0200\n"
 "PO-Revision-Date: 2012-02-26 19:31+0100\n"
 "Last-Translator: atareao <lorenzo.carbonell.cerezo@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -17,143 +17,143 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/nautilus-pdf-tools.py:103 src/nautilus-pdf-tools.py:179
+#: src/nautilus-pdf-tools.py:104 src/nautilus-pdf-tools.py:180
 msgid "Pdf Tools"
 msgstr "Herramientas Pdf"
 
-#: src/nautilus-pdf-tools.py:104 src/nautilus-pdf-tools.py:180
+#: src/nautilus-pdf-tools.py:105 src/nautilus-pdf-tools.py:181
 msgid "Tools to manipulate pdf files"
 msgstr "Un conjunto de herramientas para trabajar con archivos pdf"
 
-#: src/nautilus-pdf-tools.py:110
+#: src/nautilus-pdf-tools.py:111
 msgid "Rotate and flip"
 msgstr "Gira y voltea"
 
-#: src/nautilus-pdf-tools.py:110
+#: src/nautilus-pdf-tools.py:111
 msgid "rotate_and_flip pdf files"
 msgstr "Gira y voltea archivos pdf"
 
-#: src/nautilus-pdf-tools.py:112 src/pdf-tools/watermarkdialog.py:45
+#: src/nautilus-pdf-tools.py:113 src/pdf-tools/watermarkdialog.py:45
 #: src/pdf-tools/watermarkdialog.py:62 src/pdf-tools/watermarkdialog.py:116
 msgid "Watermark"
 msgstr "Marca de agua"
 
-#: src/nautilus-pdf-tools.py:112
+#: src/nautilus-pdf-tools.py:113
 msgid "Watermark pdffiles"
 msgstr "Selecciona uno o mas archivos pdf"
 
-#: src/nautilus-pdf-tools.py:114 src/pdf-tools/textmarkdialog.py:43
+#: src/nautilus-pdf-tools.py:115 src/pdf-tools/textmarkdialog.py:43
 #: src/pdf-tools/textmarkdialog.py:58
 msgid "Textmark"
 msgstr "Marca de texto"
 
-#: src/nautilus-pdf-tools.py:114
+#: src/nautilus-pdf-tools.py:115
 msgid "Textmark pdf files"
 msgstr "Marca archivos con texto"
 
-#: src/nautilus-pdf-tools.py:116 src/pdf-tools/paginatedialog.py:42
+#: src/nautilus-pdf-tools.py:117 src/pdf-tools/paginatedialog.py:42
 #: src/pdf-tools/paginatedialog.py:59
 msgid "Paginate"
 msgstr "Paginación"
 
-#: src/nautilus-pdf-tools.py:116
+#: src/nautilus-pdf-tools.py:117
 msgid "Paginate pdf files"
 msgstr "Pagina archivos pdf"
 
-#: src/nautilus-pdf-tools.py:118
+#: src/nautilus-pdf-tools.py:119
 msgid "Rotate pages"
 msgstr "Gira algunas páginas"
 
-#: src/nautilus-pdf-tools.py:119
+#: src/nautilus-pdf-tools.py:120
 msgid "Rotate pages of the document files"
 msgstr "Gira páginas de archivos pdf"
 
-#: src/nautilus-pdf-tools.py:121
+#: src/nautilus-pdf-tools.py:122
 msgid "Remove pages"
 msgstr "Quita páginas"
 
-#: src/nautilus-pdf-tools.py:122
+#: src/nautilus-pdf-tools.py:123
 msgid "Remove pages of the document files"
 msgstr "Quita algunas páginas del documento"
 
-#: src/nautilus-pdf-tools.py:124
+#: src/nautilus-pdf-tools.py:125
 msgid "Extract pages"
 msgstr "Extrae páginas"
 
-#: src/nautilus-pdf-tools.py:125
+#: src/nautilus-pdf-tools.py:126
 msgid "Extract pages of the document files"
 msgstr "Extrae páginas del documento"
 
-#: src/nautilus-pdf-tools.py:127
+#: src/nautilus-pdf-tools.py:128
 msgid "Join pdf files"
 msgstr "Une archivos pdf"
 
-#: src/nautilus-pdf-tools.py:128
+#: src/nautilus-pdf-tools.py:129
 msgid "Join pdf files in one document"
 msgstr "Une archivos pdf en un único documento"
 
-#: src/nautilus-pdf-tools.py:130
+#: src/nautilus-pdf-tools.py:131
 msgid "Split pdf files"
 msgstr "Separa un archivo pdf"
 
-#: src/nautilus-pdf-tools.py:131
+#: src/nautilus-pdf-tools.py:132
 msgid "Split a pdf in several documents"
 msgstr "Separa un archivo pdf en varios documentos"
 
-#: src/nautilus-pdf-tools.py:133
+#: src/nautilus-pdf-tools.py:134
 msgid "Combine pdf pages"
 msgstr "Combina varias paginas por hoja"
 
-#: src/nautilus-pdf-tools.py:134
+#: src/nautilus-pdf-tools.py:135
 msgid "Combine pdf pages in one page"
 msgstr "Combina varias páginas en una única"
 
-#: src/nautilus-pdf-tools.py:136
+#: src/nautilus-pdf-tools.py:137
 msgid "Reduce pdf size"
 msgstr "Reduce el tamaño del pdf"
 
-#: src/nautilus-pdf-tools.py:138
+#: src/nautilus-pdf-tools.py:139
 msgid "Resize pdf pages"
 msgstr "Redimensiona páginas"
 
-#: src/nautilus-pdf-tools.py:140
+#: src/nautilus-pdf-tools.py:141
 msgid "Convert pdf to png"
 msgstr "Convertir pdf a png"
 
-#: src/nautilus-pdf-tools.py:141
+#: src/nautilus-pdf-tools.py:142
 msgid "Convert pdf file to png image"
 msgstr "Convertir un archivo pdf a imágenes png"
 
-#: src/nautilus-pdf-tools.py:143
+#: src/nautilus-pdf-tools.py:144
 msgid "Encrypt"
 msgstr "Cifra"
 
-#: src/nautilus-pdf-tools.py:144
+#: src/nautilus-pdf-tools.py:145
 msgid "Encrypt pdf files"
 msgstr "Cifra archivos pdf"
 
-#: src/nautilus-pdf-tools.py:146
+#: src/nautilus-pdf-tools.py:147
 msgid "Decrypt"
 msgstr "Descifra"
 
-#: src/nautilus-pdf-tools.py:147
+#: src/nautilus-pdf-tools.py:148
 msgid "Decrypt pdf files"
 msgstr "Descifra archivos pdf"
 
-#: src/nautilus-pdf-tools.py:169 src/nautilus-pdf-tools.py:170
-#: src/nautilus-pdf-tools.py:205 src/nautilus-pdf-tools.py:206
+#: src/nautilus-pdf-tools.py:170 src/nautilus-pdf-tools.py:171
+#: src/nautilus-pdf-tools.py:206 src/nautilus-pdf-tools.py:207
 msgid "About"
 msgstr "Acerca de..."
 
-#: src/nautilus-pdf-tools.py:185
+#: src/nautilus-pdf-tools.py:186
 msgid "Convert to pdf"
 msgstr "Convertir a pdf"
 
-#: src/nautilus-pdf-tools.py:186
+#: src/nautilus-pdf-tools.py:187
 msgid "Convert images to pdf"
 msgstr "Convertir imágenes a un pdf"
 
-#: src/nautilus-pdf-tools.py:219
+#: src/nautilus-pdf-tools.py:220
 msgid "Nautilus Pdf Tools"
 msgstr "Herramientas Pdf"
 

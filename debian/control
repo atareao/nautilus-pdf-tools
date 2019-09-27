@@ -11,6 +11,7 @@ Architecture: all
 Depends: ${misc:Depends}, ${python:Depends},
 	python,
 	python-gi,
+	python-gi-cairo,
 	python-cairo,
 	python-pil,
 	gir1.2-gtk-3.0,

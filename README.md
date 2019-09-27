@@ -1,29 +1,90 @@
-# nautilus-pdf-tools
+<h1 align="center">Welcome to nautilus-pdf-tools 👋</h1>
+<p>
+  <img src="https://img.shields.io/badge/version-1.2.0-blue.svg?cacheSeconds=2592000" />
+  <a href="https://www.atareao.es/aplicacion/pdf-tools-o-modificar-pdf-en-linux/">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" target="_blank" />
+  </a>
+  <a href="https://twitter.com/atareao">
+    <img alt="Twitter: atareao" src="https://img.shields.io/twitter/follow/atareao.svg?style=social" target="_blank" />
+  </a>
+</p>
 
-A set of tools to work with PDF documents from Nautilus
+> A set of tools to work with PDF documents from Nautilus
 
-For more information, please visit our website:
+### 🏠 [Homepage](https://github.com/atareao/nautilus-pdf-tools)
 
-https://github.com/atareao/nautilus-pdf-tools
-or
-http://www.atareao.es
+## Install
 
-## Requirements
+### Nautilus
 
-Required dependencies:
-
+```sh
+sudo add-apt-repository ppa:atareao/nautilus-extensions
+sudo apt update
+sudo apt install nautilus-pdf-tools
+nautilus -q
 ```
-python
-python-gi
-gir1.2-gtk-3.0
-gir1.2-gdkpixbuf-2.0
-gir1.2-nautilus-3.0
-gir1.2-poppler-0.18
-python-nautilus
+
+### Nemo
+
+```sh
+sudo add-apt-repository ppa:atareao/nemo-extensions
+sudo apt update
+sudo apt install nemo-pdf-tools
+nautilus -q
 ```
 
-## Download
+### Caja
 
-Download the package:
+```sh
+sudo add-apt-repository ppa:atareao/caja-extensions
+sudo apt update
+sudo apt install caja-pdf-tools
+nautilus -q
+```
 
-$ git clone https://github.com/atareao/nautilus-pdf-tools.git
+### Requirements
+
+Common required dependencies,
+
+* python
+* python-gi
+* python-gi-cairo
+* python-cairo
+* python-pil
+* gir1.2-gtk-3.0
+* gir1.2-gdkpixbuf-2.0
+* gir1.2-poppler-0.18
+* python-pypdf2
+
+#### Only for Nautilus
+
+* gir1.2-nautilus-3.0
+* python-nautilus
+
+#### Only for Nemo
+
+* gir1.2-nemo-3.0
+* python-nemo
+
+#### Only for Caja
+
+* gir1.2-caja-3.0
+* python-caja
+
+## Author
+
+👤 **Lorenzo Carbonell &lt;a.k.a. atareao&gt;**
+
+* Twitter: [@atareao](https://twitter.com/atareao)
+* Github: [@atareao](https://github.com/atareao)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/atareao/nautilus-pdf-tools/issues).
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_

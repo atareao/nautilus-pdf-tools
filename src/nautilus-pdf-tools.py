@@ -57,6 +57,7 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
     def __init__(self):
         """File Manager crashes if a plugin doesn't implement the __init__
         method"""
+        GObject.Object.__init__(self)
         self.pdfmanager = PDFManager()
 
     def doit(self, menu, option, selected, window):
