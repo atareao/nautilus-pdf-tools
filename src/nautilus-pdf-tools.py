@@ -252,10 +252,3 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
         ad.set_program_name(APPNAME)
         ad.run()
         ad.destroy()
-
-
-if __name__ == '__main__':
-    '''
-    cd = CreatePDFFromImagesDialog('Test')
-    cd.run()
-    '''
