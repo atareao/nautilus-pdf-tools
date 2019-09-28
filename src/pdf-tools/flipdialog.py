@@ -106,7 +106,7 @@ class FlipDialog(BaseDialog):
         self.check_this = Gtk.RadioButton.new_from_widget(None)
         self.check_this.connect("notify::active", self.slider_on_value_changed,
                                 'This page')
-        check, row, textBox = set_option_rotate_apply('This page',
+        check, row, _ = set_option_rotate_apply('This page',
                                                       self.check_this)
         self.popover_listbox.add(row)
         self.check_all, row, textBox = set_option_rotate_apply(
@@ -138,7 +138,7 @@ class FlipDialog(BaseDialog):
                               '0')
         check, row =set_option_rotate_row('0', self.rotate_0)
         self.popover_listbox.add(row)
-        
+
         self.rotate_90, row = set_option_rotate_row('90', None, self.rotate_0)
         self.popover_listbox.add(row)
 

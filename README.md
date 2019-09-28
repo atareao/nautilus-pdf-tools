@@ -44,7 +44,7 @@ nautilus -q
 
 Common required dependencies,
 
-* python
+*  python
 * python-gi
 * python-gi-cairo
 * python-cairo
