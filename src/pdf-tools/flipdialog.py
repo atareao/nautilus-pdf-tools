@@ -28,211 +28,210 @@ try:
     gi.require_version('Gtk', '3.0')
     gi.require_version('Poppler', '0.18')
     gi.require_version('GdkPixbuf', '2.0')
+    gi.require_version('Gio', '2.0')
 except Exception as e:
     print(e)
     exit(1)
 from gi.repository import Gtk
 from gi.repository import Poppler
 from gi.repository import GdkPixbuf
+from gi.repository import Gio
+import os
 from miniview import MiniView
 import comun
 from comun import _
 from comun import ROTATE_000, ROTATE_090, ROTATE_180, ROTATE_270
+from tools import center_dialog
+from tools import get_ranges
+from tools import get_pages_from_ranges
+from tools import str2int
+from basedialog import BaseDialog
+class PageOptions():
+    def __init__(self, rotation_angle, flip_horizontal, flip_vertical):
+        self.rotation_angle = rotation_angle
+        self.flip_horizontal= flip_horizontal
+        self.flip_vertical = flip_vertical
 
-
-class FlipDialog(Gtk.Dialog):
+class FlipDialog(BaseDialog):
     def __init__(self, filename=None, window=None):
-        Gtk.Dialog.__init__(
-            self, _('Rotate and flid PDF'), window,
-            Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
-            (Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT,
-             Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL))
-        self.set_default_size(800, 400)
-        self.set_resizable(True)
-        self.set_icon_from_file(comun.ICON)
-        self.connect('destroy', self.close)
-
-        vbox = Gtk.VBox(spacing=5)
-        vbox.set_border_width(5)
-        self.get_content_area().add(vbox)
-
-        frame = Gtk.Frame()
-        vbox.pack_start(frame, True, True, 0)
-
-        grid = Gtk.Grid()
-        grid.set_row_spacing(10)
-        grid.set_column_spacing(10)
-        grid.set_margin_bottom(10)
-        grid.set_margin_left(10)
-        grid.set_margin_right(10)
-        grid.set_margin_top(10)
-        frame.add(grid)
-
-        frame1 = Gtk.Frame()
-        grid.attach(frame1, 0, 0, 2, 1)
-        self.scrolledwindow1 = Gtk.ScrolledWindow()
-        self.scrolledwindow1.set_size_request(420, 420)
-        self.connect('key-release-event', self.on_key_release_event)
-        frame1.add(self.scrolledwindow1)
-
-        self.viewport1 = MiniView()
-        self.scrolledwindow1.add(self.viewport1)
-
-        frame2 = Gtk.Frame()
-        grid.attach(frame2, 2, 0, 2, 1)
-        scrolledwindow2 = Gtk.ScrolledWindow()
-        scrolledwindow2.set_size_request(420, 420)
-        self.connect('key-release-event', self.on_key_release_event)
-        frame2.add(scrolledwindow2)
-
-        self.viewport2 = MiniView()
-        scrolledwindow2.add(self.viewport2)
-
-        self.scale = 100
-
-        label = Gtk.Label(_('Append to file') + ':')
-        label.set_alignment(0, .5)
-        grid.attach(label, 0, 1, 1, 1)
-
-        self.extension = Gtk.Entry()
-        self.extension.set_tooltip_text(_(
-            'Append to file to create output filename'))
-        self.extension.set_text(_('_flip_and_rotated'))
-        grid.attach(self.extension, 1, 1, 1, 1)
-
-        label = Gtk.Label(_('Flip vertical'))
-        label.set_alignment(0, .5)
-        grid.attach(label, 2, 1, 1, 1)
-
-        self.switch1 = Gtk.Switch()
-        self.switch1.connect("notify::active",
-                             self.slider_on_value_changed)
-        self.switch1.set_name('switch1')
-        hbox1 = Gtk.HBox()
-        hbox1.pack_start(self.switch1, 0, 0, 0)
-        grid.attach(hbox1, 3, 1, 1, 1)
-
-        label = Gtk.Label(_('Flip horizontal'))
-        label.set_alignment(0, .5)
-        grid.attach(label, 2, 2, 1, 1)
-
-        self.switch2 = Gtk.Switch()
-        self.switch2.connect("notify::active",
-                             self.slider_on_value_changed)
-        self.switch2.set_name('switch2')
-        hbox2 = Gtk.HBox()
-        hbox2.pack_start(self.switch2, 0, 0, 0)
-        grid.attach(hbox2, 3, 2, 1, 1)
-
-        label = Gtk.Label(_('Rotate'))
-        label.set_alignment(0, .5)
-        grid.attach(label, 0, 2, 1, 1)
-
-        hbox3 = Gtk.HBox()
-        grid.attach(hbox3, 1, 2, 1, 1)
-
-        self.rbutton1 = Gtk.RadioButton.new_with_label_from_widget(None, '0')
-        self.rbutton1.set_name('0')
-        self.rbutton1.connect("notify::active", self.slider_on_value_changed)
-        hbox3.pack_start(self.rbutton1, 0, 0, 0)
-
-        self.rbutton2 = Gtk.RadioButton.new_with_label_from_widget(
-            self.rbutton1, '90')
-        self.rbutton2.set_name('90')
-        self.rbutton2.connect("notify::active", self.slider_on_value_changed)
-        hbox3.pack_start(self.rbutton2, 0, 0, 0)
-
-        self.rbutton3 = Gtk.RadioButton.new_with_label_from_widget(
-            self.rbutton1, '180')
-        self.rbutton3.set_name('180')
-        self.rbutton3.connect("notify::active", self.slider_on_value_changed)
-        hbox3.pack_start(self.rbutton3, 0, 0, 0)
-
-        self.rbutton4 = Gtk.RadioButton.new_with_label_from_widget(
-            self.rbutton1, '270')
-        self.rbutton4.set_name('270')
-        self.rbutton4.connect("notify::active", self.slider_on_value_changed)
-        hbox3.pack_start(self.rbutton4, 0, 0, 0)
-
-        if filename is not None:
-            uri = "file://" + filename
-            document = Poppler.Document.new_from_file(uri, None)
-            if document.get_n_pages() > 0:
-                self.viewport1.set_page(document.get_page(0))
-                self.viewport2.set_page(document.get_page(0))
-
-        print(1)
-        self.show_all()
-
-    def slider_on_value_changed(self, widget, calue):
-        print(widget.get_name())
-        if widget.get_name() == 'switch1':
-            self.viewport2.set_flip_vertical(self.switch1.get_active())
-        elif widget.get_name() == 'switch2':
-            self.viewport2.set_flip_horizontal(self.switch2.get_active())
-        elif widget.get_name() == '0':
-            self.viewport2.set_rotation_angle(0.0)
-        elif widget.get_name() == '90':
-            self.viewport2.set_rotation_angle(1.0)
-        elif widget.get_name() == '180':
-            self.viewport2.set_rotation_angle(2.0)
-        elif widget.get_name() == '270':
-            self.viewport2.set_rotation_angle(3.0)
-
-    def on_key_release_event(self, widget, event):
-        print((event.keyval))
-        if event.keyval == 65451 or event.keyval == 43:
-            self.scale = self.scale * 1.1
-        elif event.keyval == 65453 or event.keyval == 45:
-            self.scale = self.scale * .9
-        elif event.keyval == 65456 or event.keyval == 48:
-            factor_w = (float(self.scrolledwindow1.get_allocation().width) /
-                        float(self.pixbuf1.get_width()))
-            factor_h = (float(self.scrolledwindow1.get_allocation().height) /
-                        float(self.pixbuf1.get_height()))
-            if factor_w < factor_h:
-                factor = factor_w
+        BaseDialog.__init__(self, _('Rotate and flid PDF'), filename, window)
+    
+    def set_page(self, page):
+        if self.document.get_n_pages() > 0 and \
+                page < self.document.get_n_pages() and\
+                page >= 0:
+            self.no_page = page
+            self.show_page.set_text(str(self.no_page + 1))
+            self.show_title_page.set_text(str(self.no_page + 1))
+            if str(self.no_page) in self.pages.keys():
+                rotation_angle = self.pages[str(self.no_page)].rotation_angle
+                flip_horizontal = self.pages[str(self.no_page)].flip_horizontal
+                flip_vertical = self.pages[str(self.no_page)].flip_vertical
             else:
-                factor = factor_h
-            self.scale = int(factor * 100)
-            w = int(self.pixbuf1.get_width() * factor)
-            h = int(self.pixbuf1.get_height() * factor)
-            self.image1.set_from_pixbuf(
-                self.pixbuf1.scale_simple(w, h, GdkPixbuf.InterpType.BILINEAR))
-            self.image2.set_from_pixbuf(
-                self.pixbuf2.scale_simple(w, h, GdkPixbuf.InterpType.BILINEAR))
-        elif event.keyval == 65457 or event.keyval == 49:
-            self.scale = 100
-        if self.image1:
-            w = int(self.pixbuf1.get_width() * self.scale / 100)
-            h = int(self.pixbuf1.get_height() * self.scale / 100)
-            self.image1.set_from_pixbuf(
-                self.pixbuf1.scale_simple(w, h, GdkPixbuf.InterpType.BILINEAR))
-            self.image2.set_from_pixbuf(
-                self.pixbuf2.scale_simple(w, h, GdkPixbuf.InterpType.BILINEAR))
+                rotation_angle = 0
+                flip_horizontal = False
+                flip_vertical = False
+            self.viewport1.set_page(self.document.get_page(self.no_page),
+                                    rotation_angle, flip_horizontal,
+                                    flip_vertical)
 
-    def close(self, widget):
-        self.destroy()
+    def init_adicional_popover(self):
 
-    def get_extension(self):
-        return self.extension.get_text()
+        def set_title_row(texto, gray=False):
+            if gray:
+                label = Gtk.Label()
+                label.set_markup(
+                    '<span foreground="gray">{}</span>'.format(texto))
+            else:
+                label = Gtk.Label(texto)
+            label.set_width_chars(10)
+            label.set_alignment(0, 0.5)
+            row = Gtk.ListBoxRow()
+            hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
+            row.add(hbox)
+            hbox.pack_start(label, True, True, 0)
+            return row
 
-    def get_rotate(self):
-        if self.rbutton2.get_active():
-            return ROTATE_090
-        elif self.rbutton3.get_active():
-            return ROTATE_180
-        elif self.rbutton4.get_active():
-            return ROTATE_270
-        return ROTATE_000
+        self.popover_listbox.add(set_title_row(_('Apply'), True))
 
-    def get_flip_vertical(self):
-        return self.switch1.get_active()
+        def set_option_rotate_apply(texto, check=None,
+                                    parent=None, entry=False):
+            row = Gtk.ListBoxRow()
+            hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
+            row.add(hbox)
+            label = Gtk.Label(texto, xalign=0)
+            if check is None:
+                check = Gtk.RadioButton.new_from_widget(parent)
+                check.connect("notify::active", self.slider_on_value_changed,
+                              str(texto))
+            hbox.pack_start(label, True, True, 0)
+            
+            if entry:
+                textBox = Gtk.Entry()
+                hbox.pack_start(textBox, True, True, 0)
+            else:
+                textBox = None
+            hbox.pack_start(check, False, True, 0)
+            return check, row, textBox
 
-    def get_flip_horizontal(self):
-        return self.switch2.get_active()
+        self.check_this = Gtk.RadioButton.new_from_widget(None)
+        self.check_this.connect("notify::active", self.slider_on_value_changed,
+                                'This page')
+        check, row, textBox = set_option_rotate_apply('This page',
+                                                      self.check_this)
+        self.popover_listbox.add(row)
+        self.check_all, row, textBox = set_option_rotate_apply(
+            _('All'), None, self.check_this)
+        self.popover_listbox.add(row)
+        self.check_range, row, self.range = set_option_rotate_apply(
+            _('Range'), None, self.check_this, True)
+        self.popover_listbox.add(row)
 
+        self.popover_listbox.add(self.set_separator())
+
+        self.popover_listbox.add(set_title_row(_('Rotate'), True))
+
+        def set_option_rotate_row(texto, check=None, parent=None):
+            row = Gtk.ListBoxRow()
+            hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
+            row.add(hbox)
+            label = Gtk.Label(texto, xalign=0)
+            if check is None:
+                check = Gtk.RadioButton.new_from_widget(parent)
+                check.connect("notify::active", self.slider_on_value_changed,
+                              str(texto))
+            hbox.pack_start(label, True, True, 0)
+            hbox.pack_start(check, False, True, 0)
+            return check, row
+
+        self.rotate_0 = Gtk.RadioButton.new_from_widget(None)
+        self.rotate_0.connect("notify::active", self.slider_on_value_changed,
+                              '0')
+        check, row =set_option_rotate_row('0', self.rotate_0)
+        self.popover_listbox.add(row)
+        
+        self.rotate_90, row = set_option_rotate_row('90', None, self.rotate_0)
+        self.popover_listbox.add(row)
+
+        self.rotate_180, row = set_option_rotate_row('180', None,
+                                                     self.rotate_0)
+        self.popover_listbox.add(row)
+
+        self.rotate_270, row = set_option_rotate_row('270', None,
+                                                     self.rotate_0)
+        self.popover_listbox.add(row)
+
+        self.popover_listbox.add(self.set_separator())
+        self.popover_listbox.add(set_title_row(_('Flip'), True))
+
+        def set_option_flip_row(texto):
+            row = Gtk.ListBoxRow()
+            hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
+            row.add(hbox)
+            label = Gtk.Label(texto, xalign=0)
+            check = Gtk.Switch()
+            check.connect("notify::active", self.slider_on_value_changed,
+                          texto)
+            hbox.pack_start(label, True, True, 0)
+            hbox.pack_start(check, False, True, 0)
+            return check, row
+
+        self.check_vertical, row = set_option_flip_row(_('Vertical'))
+        self.popover_listbox.add(row)
+        self.check_horizontal, row = set_option_flip_row(_('Horizontal'))
+        self.popover_listbox.add(row)
+
+        self.popover_listbox.add(self.set_separator())
+        self.popover_listbox.add(set_title_row(_('File name'), True))
+
+        row = Gtk.ListBoxRow()
+        hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
+        row.add(hbox)
+        label = Gtk.Label(_('Add to file'), xalign=0)
+        text = Gtk.Entry()
+        hbox.pack_start(label, True, True, 0)
+        hbox.pack_start(text, False, True, 0)
+        self.popover_listbox.add(row)
+
+    def slider_on_value_changed(self, widget, value, name):
+        flip_horizontal = self.check_horizontal.get_active()
+        flip_vertical = self.check_vertical.get_active()
+        if name == '90':
+            rotation_angle = 1.0
+        elif name == '180':
+            rotation_angle = 2.0
+        elif name == '270':
+            rotation_angle = 3.0
+        else:
+            rotation_angle = 0.0
+        update = False
+        if self.check_this.get_active():
+            update = True
+            self.pages[str(self.no_page)] = PageOptions(rotation_angle,
+                                                        flip_horizontal,
+                                                        flip_vertical)
+        elif self.check_all.get_active():
+            update = True
+            for i in range(0, self.document.get_n_pages()):
+                self.pages[str(i)] = PageOptions(rotation_angle,
+                                                 flip_horizontal,
+                                                 flip_vertical)
+        elif self.check_range.get_active():
+            text = self.range.get_text()
+            if text:
+                ranges = get_ranges(text)
+                pages = get_pages_from_ranges(ranges)
+                update = (str(self.no_page) in self.pages.keys())
+                for i in pages:
+                    self.pages[str(i)] = PageOptions(rotation_angle,
+                                                     flip_horizontal,
+                                                     flip_vertical)
+        if update:
+            self.viewport1.rotation_angle = rotation_angle
+            self.viewport1.flip_horizontal = flip_horizontal
+            self.viewport1.flip_vertical = flip_vertical
+            self.viewport1.queue_draw()
 
 if __name__ == '__main__':
-    dialog = FlipDialog()
+    dialog = FlipDialog(comun.SAMPLE)
     dialog.run()

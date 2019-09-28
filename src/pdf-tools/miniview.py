@@ -43,7 +43,7 @@ from comun import RESOLUTION, MMTOPIXEL, TOP,\
 
 class MiniView(Gtk.DrawingArea):
 
-    def __init__(self, width=400.0, height=420.00, margin=10.0, border=2.0,
+    def __init__(self, width=600.0, height=630.00, margin=10.0, border=1.0,
                  force=False):
         Gtk.DrawingArea.__init__(self)
         self.add_events(
@@ -201,13 +201,16 @@ class MiniView(Gtk.DrawingArea):
                                   self.margin_height)
             cr.paint()
 
-    def set_page(self, page):
+    def set_page(self, page, rotation_angle=0, flip_horizontal=False,
+            flip_vertical=False):
         self.page = page
-        self.rotation_angle = 0.0
         self.drawings = []
         self.or_width, self.or_height = self.page.get_size()
         self.or_width = int(self.or_width * RESOLUTION)
         self.or_height = int(self.or_height * RESOLUTION)
+        self.rotation_angle = rotation_angle
+        self.flip_horizontal = flip_horizontal
+        self.flip_vertical = flip_vertical
         self.queue_draw()
 
     def set_rotation_angle(self, rotation_angle):
