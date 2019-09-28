@@ -46,6 +46,16 @@ from tools import get_ranges
 from tools import get_pages_from_ranges
 from tools import str2int
 
+
+    def set_separator():
+        row = Gtk.ListBoxRow()
+        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        vbox.pack_start(Gtk.Separator(), True, True, 0)
+        vbox.set_margin_top(10)
+        vbox.set_margin_bottom(10)
+        row.add(vbox)
+        return row
+
 class BaseDialog(Gtk.Dialog):
     def __init__(self, title= '', filename=None, window=None):
         Gtk.Dialog.__init__(self, title, window)
@@ -83,7 +93,7 @@ class BaseDialog(Gtk.Dialog):
 
         self.show_all()
         center_dialog(self)
-    
+
     def set_page(self, page):
         if self.document.get_n_pages() > 0 and \
                 page < self.document.get_n_pages() and\
@@ -204,21 +214,12 @@ class BaseDialog(Gtk.Dialog):
             name='go-last-symbolic'), Gtk.IconSize.BUTTON))
         button3.connect('clicked', self.last_page)
         hbox.pack_start(button3, True, True, 0)
-        self.popover_listbox.add(self.set_separator())
+        self.popover_listbox.add(set_separator())
 
         self.init_adicional_popover()
 
         popover.show_all()
         return popover
-
-    def set_separator(self):
-        row = Gtk.ListBoxRow()
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        vbox.pack_start(Gtk.Separator(), True, True, 0)
-        vbox.set_margin_top(10)
-        vbox.set_margin_bottom(10)
-        row.add(vbox)
-        return row
 
     def init_adicional_popover(self):
         pass

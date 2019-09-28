@@ -298,7 +298,7 @@ def reduce_pdf(file_in, dpi, append):
         -sOutputFile="%s" "%s"' % (dpi, dpi, dpi, file_out, file_in)
         args = shlex.split(rutine)
         p = subprocess.Popen(args, stdout=subprocess.PIPE)
-        out, err = p.communicate()
+        out, _ = p.communicate()
     except Exception as e:
         print(e)
 
