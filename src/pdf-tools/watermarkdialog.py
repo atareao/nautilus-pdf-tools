@@ -40,7 +40,7 @@ import os
 import comun
 from comun import _
 from comun import TOP, MIDLE, BOTTOM, LEFT, CENTER, RIGHT, MIMETYPES_IMAGE
-
+from tools import update_preview_cb
 
 class WatermarkDialog(Gtk.Dialog):
     def __init__(self, filename=None, window=None):
@@ -250,7 +250,7 @@ class WatermarkDialog(Gtk.Dialog):
             dialog.add_filter(filtert)
         preview = Gtk.Image()
         dialog.set_preview_widget(preview)
-        dialog.connect('update-preview', self.update_preview_cb, preview)
+        dialog.connect('update-preview', update_preview_cb, preview)
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
             self.entry.set_text(dialog.get_filename())
@@ -260,18 +260,6 @@ class WatermarkDialog(Gtk.Dialog):
         im = Image.open(file_watermark)
         width, height = im.size
         self.update_preview()
-
-    def update_preview_cb(self, file_chooser, preview):
-        filename = file_chooser.get_preview_filename()
-        try:
-            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 128, 128)
-            preview.set_from_pixbuf(pixbuf)
-            has_preview = True
-        except Exception as e:
-            print(e)
-            has_preview = False
-        file_chooser.set_preview_widget_active(has_preview)
-        return
 
     def update_preview(self, widget=None):
         file_watermark = self.entry.get_text()

@@ -37,6 +37,7 @@ import comun
 import tools
 from comun import _
 from comun import MIMETYPES_IMAGE
+from tools import update_preview_cb
 
 
 class CreatePDFFromImagesDialog(Gtk.Dialog):
@@ -293,7 +294,7 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
             dialog.add_filter(filtert)
         preview = Gtk.Image()
         dialog.set_preview_widget(preview)
-        dialog.connect('update-preview', self.update_preview_cb, preview)
+        dialog.connect('update-preview', update_preview_cb, preview)
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
             filenames = dialog.get_filenames()
@@ -311,22 +312,6 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
                                       os.path.basename(filename),
                                       filename])
         dialog.destroy()
-
-    def update_preview_cb(self, file_chooser, preview):
-        filename = file_chooser.get_preview_filename()
-        try:
-            if os.path.isfile(filename):
-                pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 128,
-                                                                128)
-                preview.set_from_pixbuf(pixbuf)
-                has_preview = True
-            else:
-                has_preview = False
-        except Exception as e:
-            print(e)
-            has_preview = False
-        file_chooser.set_preview_widget_active(has_preview)
-        return
 
     def on_button_remove_clicked(self, widget):
         selection = self.iconview.get_selected_items()

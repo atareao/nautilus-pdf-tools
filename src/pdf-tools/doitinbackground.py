@@ -40,7 +40,7 @@ import math
 import os
 import shutil
 import mimetypes
-from comun import MMTOPNG, MMTOPIXEL, MMTOPDF
+from comun import MMTOPNG, MMTOPIXEL
 from comun import MIMETYPES_PNG, RESOLUTION
 from comun import TOP, MIDLE, BOTTOM, LEFT, CENTER, RIGHT
 from comun import ROTATE_000, ROTATE_090, ROTATE_180, ROTATE_270
@@ -312,7 +312,6 @@ class DoItInBackgroundCreatePDFFromImages(DoitInBackgroundBase):
         self.emit('start', self.files)
         for image in self.files:
             self.emit('todo', image)
-            basename, extension = os.path.splitext(image)
             if mimetypes.guess_type(image)[0] in MIMETYPES_PNG:
                 imagesurface = cairo.ImageSurface.create_from_png(image)
             else:
@@ -607,8 +606,6 @@ class DoitInBackgroundSign(DoitInBackgroundBase):
                 file_out = filename + self.extension + filext
                 watermark_surface = tools.create_image_surface_from_file(
                     self.image, self.zoom)
-                watermark_width = watermark_surface.get_width()
-                watermark_height = watermark_surface.get_height()
                 pdfsurface = cairo.PDFSurface(temp_pdf, 200, 200)
                 context = cairo.Context(pdfsurface)
                 for i in range(0, number_of_pages):

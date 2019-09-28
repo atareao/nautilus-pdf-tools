@@ -36,6 +36,7 @@ import os
 import comun
 import tools
 from comun import _
+from tools import update_preview_cb
 
 
 class JoinPdfsDialog(Gtk.Dialog):
@@ -200,7 +201,7 @@ class JoinPdfsDialog(Gtk.Dialog):
         dialog.add_filter(filtert)
         preview = Gtk.Image()
         dialog.set_preview_widget(preview)
-        dialog.connect('update-preview', self.update_preview_cb, preview)
+        dialog.connect('update-preview', update_preview_cb, preview)
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
             filenames = dialog.get_filenames()
@@ -217,22 +218,6 @@ class JoinPdfsDialog(Gtk.Dialog):
                                       os.path.basename(filename),
                                       filename])
         dialog.destroy()
-
-    def update_preview_cb(self, file_chooser, preview):
-        filename = file_chooser.get_preview_filename()
-        try:
-            print('---', filename, '---')
-            pixbuf = tools.get_surface_from_pdf(filename, 250)
-            if pixbuf is not None:
-                preview.set_from_surface(pixbuf)
-                has_preview = True
-            else:
-                has_preview = False
-        except Exception as e:
-            print(e)
-            has_preview = False
-        file_chooser.set_preview_widget_active(has_preview)
-        return
 
     def on_button_remove_clicked(self, widget):
         selection = self.iconview.get_selected_items()
@@ -255,6 +240,6 @@ class JoinPdfsDialog(Gtk.Dialog):
 
 
 if __name__ == '__main__':
-    dialog = JoinPdfsDialog('Test', [], 'File')
+    dialog = JoinPdfsDialog('Test', [], 'File', None)
     dialog.run()
     print(dialog.get_pdf_files())
