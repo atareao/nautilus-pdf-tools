@@ -79,13 +79,13 @@ def dialog_save_as_image(title, original_file, window):
     dialog.set_current_folder(os.path.dirname(original_file))
     dialog.set_filename(original_file)
     for aMimetype in MIMETYPES_IMAGE.keys():
-        filter = Gtk.FileFilter()
-        filter.set_name(aMimetype)
+        filtert = Gtk.FileFilter()
+        filtert.set_name(aMimetype)
         for mime_type in MIMETYPES_IMAGE[aMimetype]['mimetypes']:
-            filter.add_mime_type(mime_type)
+            filtert.add_mime_type(mime_type)
         for pattern in MIMETYPES_IMAGE[aMimetype]['patterns']:
-            filter.add_pattern(pattern)
-        dialog.add_filter(filter)
+            filtert.add_pattern(pattern)
+        dialog.add_filter(filtert)
     if dialog.run() == Gtk.ResponseType.OK:
         filename = dialog.get_filename()
     else:
@@ -104,12 +104,12 @@ def dialog_save_as(title, original_file, window):
     dialog.set_current_folder(os.path.dirname(original_file))
     dialog.set_filename(original_file)
     for mimetype in MIMETYPES_PDF:
-        filter = Gtk.FileFilter()
-        filter.set_name(_('Pdf files'))
-        filter.add_mime_type(mimetype)
+        filtert = Gtk.FileFilter()
+        filtert.set_name(_('Pdf files'))
+        filtert.add_mime_type(mimetype)
         for pattern in mimetypes.guess_all_extensions(mimetype):
-            filter.add_pattern('*' + pattern)
-        dialog.add_filter(filter)
+            filtert.add_pattern('*' + pattern)
+        dialog.add_filter(filtert)
     if dialog.run() == Gtk.ResponseType.OK:
         filename = dialog.get_filename()
         if not filename.endswith('.pdf'):
@@ -129,12 +129,12 @@ def dialog_save_as_text(title, original_file, window):
     dialog.set_default_response(Gtk.ResponseType.OK)
     dialog.set_current_folder(os.path.dirname(original_file))
     dialog.set_filename(original_file)
-    filter = Gtk.FileFilter()
-    filter.set_name(_('Text file'))
-    filter.add_mime_type('text/plain')
-    filter.add_pattern('*.txt')
-    dialog.add_filter(filter)
-    dialog.set_filter(filter)
+    filtert = Gtk.FileFilter()
+    filtert.set_name(_('Text file'))
+    filtert.add_mime_type('text/plain')
+    filtert.add_pattern('*.txt')
+    dialog.add_filter(filtert)
+    dialog.set_filter(filtert)
     if dialog.run() == Gtk.ResponseType.OK:
         filename = dialog.get_filename()
         if not filename.endswith('.txt'):

@@ -241,13 +241,13 @@ class WatermarkDialog(Gtk.Dialog):
         dialog.set_select_multiple(False)
         dialog.set_current_folder(os.getenv('HOME'))
         for aMimetype in MIMETYPES_IMAGE.keys():
-            filter = Gtk.FileFilter()
-            filter.set_name(aMimetype)
+            filtert = Gtk.FileFilter()
+            filtert.set_name(aMimetype)
             for mime_type in MIMETYPES_IMAGE[aMimetype]['mimetypes']:
-                filter.add_mime_type(mime_type)
+                filtert.add_mime_type(mime_type)
             for pattern in MIMETYPES_IMAGE[aMimetype]['patterns']:
-                filter.add_pattern(pattern)
-            dialog.add_filter(filter)
+                filtert.add_pattern(pattern)
+            dialog.add_filter(filtert)
         preview = Gtk.Image()
         dialog.set_preview_widget(preview)
         dialog.connect('update-preview', self.update_preview_cb, preview)

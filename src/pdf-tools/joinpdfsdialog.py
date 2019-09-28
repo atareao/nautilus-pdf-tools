@@ -193,11 +193,11 @@ class JoinPdfsDialog(Gtk.Dialog):
         dialog.set_default_response(Gtk.ResponseType.OK)
         dialog.set_select_multiple(True)
         dialog.set_current_folder(os.getenv('HOME'))
-        filter = Gtk.FileFilter()
-        filter.set_name(_('Pdf files'))
-        filter.add_mime_type('application/pdf')
-        filter.add_pattern('*.pdf')
-        dialog.add_filter(filter)
+        filtert = Gtk.FileFilter()
+        filtert.set_name(_('Pdf files'))
+        filtert.add_mime_type('application/pdf')
+        filtert.add_pattern('*.pdf')
+        dialog.add_filter(filtert)
         preview = Gtk.Image()
         dialog.set_preview_widget(preview)
         dialog.connect('update-preview', self.update_preview_cb, preview)
@@ -247,10 +247,10 @@ class JoinPdfsDialog(Gtk.Dialog):
     def get_pdf_files(self):
         files = []
         model = self.iconview.get_model()
-        iter = model.get_iter_first()
-        while(iter):
-            files.append(model.get_value(iter, 2))
-            iter = model.iter_next(iter)
+        itert = model.get_iter_first()
+        while(itert):
+            files.append(model.get_value(itert, 2))
+            itert = model.iter_next(itert)
         return files
 
 
