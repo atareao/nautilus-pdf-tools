@@ -63,6 +63,7 @@ else:
     CHANGELOG = os.path.join(DEBIANDIR, 'changelog')
 
 ICON = os.path.join(ICONDIR, 'updf.svg')
+SAMPLE = os.path.abspath('sample/sample.pdf')
 
 f = open(CHANGELOG, 'r')
 line = f.readline()

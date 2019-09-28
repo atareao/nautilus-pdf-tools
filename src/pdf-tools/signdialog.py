@@ -4,17 +4,17 @@
 # This file is part of nautilus-pdf-tools
 #
 # Copyright (c) 2012-2019 Lorenzo Carbonell Cerezo <a.k.a. atareao>
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -40,17 +40,15 @@ import os
 import comun
 from comun import _
 from comun import MIMETYPES_IMAGE, MMTOPIXEL
-
+from utils import center_dialog
 
 class SignDialog(Gtk.Dialog):
     def __init__(self, filename=None, window=None):
-        Gtk.Dialog.__init__(
-            self,
-            _('Sign'),
-            window,
-            Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
-            (Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT,
-             Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL))
+        Gtk.Dialog.__init__(self, _('Sign'), window)
+        self.set_modal(True)
+        self.set_destroy_with_parent(True)
+        self.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
+        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
         self.set_resizable(False)
         self.set_icon_from_file(comun.ICON)
         self.connect('destroy', self.close_application)
@@ -58,11 +56,8 @@ class SignDialog(Gtk.Dialog):
         vbox0.set_border_width(5)
         self.get_content_area().add(vbox0)
 
-        notebook = Gtk.Notebook()
-        vbox0.add(notebook)
-
         frame = Gtk.Frame()
-        notebook.append_page(frame, tab_label=Gtk.Label(_('Sign')))
+        vbox0.add(frame)
 
         grid = Gtk.Grid()
         grid.set_row_spacing(10)
@@ -129,12 +124,14 @@ class SignDialog(Gtk.Dialog):
         self.original_position_x = 0
         self.original_position_y = 0
 
-        self.show_all()
         if filename is not None:
             uri = "file://" + filename
             document = Poppler.Document.new_from_file(uri, None)
             if document.get_n_pages() > 0:
                 self.viewport1.set_page(document.get_page(0))
+
+        center_dialog(self)
+        self.show_all()
 
     def on_viewport1_clicked(self, widget, event):
         if self.viewport1.image_width > 0 and self.viewport1.image_height > 0:
@@ -226,5 +223,6 @@ class SignDialog(Gtk.Dialog):
 
 
 if __name__ == '__main__':
-    dialog = SignDialog('/home/lorenzo/Escritorio/pdfs/ejemplo_pdf_01.pdf')
+    print(comun.SAMPLE)
+    dialog = SignDialog(comun.SAMPLE)
     dialog.run()
