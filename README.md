@@ -4,11 +4,11 @@
 [![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)](https://www.atareao.es/aplicacion/pdf-tools-o-modificar-pdf-en-linux/)
 [![Twitter: atareao](https://img.shields.io/twitter/follow/atareao.svg?style=social)](https://twitter.com/atareao)
 
-
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e8b6f27e6b404f05b379c7690c140a3c)](https://www.codacy.com/manual/atareao/nautilus-pdf-tools?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=atareao/nautilus-pdf-tools&amp;utm_campaign=Badge_Grade)
 [![CodeFactor](https://www.codefactor.io/repository/github/atareao/nautilus-pdf-tools/badge/master)](https://www.codefactor.io/repository/github/atareao/nautilus-pdf-tools/overview/master)
 
 > A set of tools to work with PDF documents from Nautilus
+
 
 ### 🏠 [Homepage](https://github.com/atareao/nautilus-pdf-tools)
 
@@ -45,25 +45,25 @@ nautilus -q
 
 Common required dependencies,
 
-* python
-* python-gi
-* python-gi-cairo
-* python-cairo
-* python-pil
-* gir1.2-gtk-3.0
-* gir1.2-gdkpixbuf-2.0
-* gir1.2-poppler-0.18
-* python-pypdf2
+  * python
+  * python-gi
+  * python-gi-cairo
+  * python-cairo
+  * python-pil
+  * gir1.2-gtk-3.0
+  * gir1.2-gdkpixbuf-2.0
+  * gir1.2-poppler-0.18
+  * python-pypdf2
 
 #### Only for Nautilus
 
-* gir1.2-nautilus-3.0
-* python-nautilus
+  * gir1.2-nautilus-3.0
+  * python-nautilus
 
 #### Only for Nemo
 
-* gir1.2-nemo-3.0
-* python-nemo
+  * gir1.2-nemo-3.0
+  * python-nemo
 
 #### Only for Caja
 
