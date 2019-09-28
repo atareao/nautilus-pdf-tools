@@ -219,7 +219,7 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
         self.button4.connect('clicked', self.on_button_remove_clicked)
         vbox2.pack_start(self.button4, False, False, 0)
 
-        if len(files) > 0:
+        if files:
             position = 0
             model = self.iconview.get_model()
             for filename in files:
@@ -249,7 +249,7 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
 
     def on_button_up_clicked(self, widget):
         selection = self.iconview.get_selected_items()
-        if len(selection) > 0:
+        if selection:
             model = self.iconview.get_model()
             selected_iter = model.get_iter(selection[0])
             previous_iter = model.iter_previous(selected_iter)
@@ -258,7 +258,7 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
 
     def on_button_down_clicked(self, widget):
         selection = self.iconview.get_selected_items()
-        if len(selection) > 0:
+        if selection:
             model = self.iconview.get_model()
             selected_iter = model.get_iter(selection[0])
             next_iter = model.iter_next(selected_iter)
@@ -267,7 +267,7 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
 
     def on_button_add_clicked(self, widget):
         selection = self.iconview.get_selected_items()
-        if len(selection) > 0:
+        if selection:
             model = self.iconview.get_model()
             position = int(str(selection[0]))
         else:
@@ -284,20 +284,20 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
         dialog.set_select_multiple(True)
         dialog.set_current_folder(os.getenv('HOME'))
         for aMimetype in MIMETYPES_IMAGE.keys():
-            filter = Gtk.FileFilter()
-            filter.set_name(aMimetype)
+            filtert = Gtk.FileFilter()
+            filtert.set_name(aMimetype)
             for mime_type in MIMETYPES_IMAGE[aMimetype]['mimetypes']:
-                filter.add_mime_type(mime_type)
+                filtert.add_mime_type(mime_type)
             for pattern in MIMETYPES_IMAGE[aMimetype]['patterns']:
-                filter.add_pattern(pattern)
-            dialog.add_filter(filter)
+                filtert.add_pattern(pattern)
+            dialog.add_filter(filtert)
         preview = Gtk.Image()
         dialog.set_preview_widget(preview)
         dialog.connect('update-preview', self.update_preview_cb, preview)
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
             filenames = dialog.get_filenames()
-            if len(filenames) > 0:
+            if filenames:
                 model = self.iconview.get_model()
                 for filename in filenames:
                     pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename,
@@ -330,7 +330,7 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
 
     def on_button_remove_clicked(self, widget):
         selection = self.iconview.get_selected_items()
-        if len(selection) > 0:
+        if selection:
             model = self.iconview.get_model()
             for element in selection:
                 model.remove(model.get_iter(element))
@@ -338,10 +338,10 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
     def get_png_files(self):
         files = []
         model = self.iconview.get_model()
-        iter = model.get_iter_first()
-        while(iter):
-            files.append(model.get_value(iter, 2))
-            iter = model.iter_next(iter)
+        itera = model.get_iter_first()
+        while(itera):
+            files.append(model.get_value(itera, 2))
+            itera = model.iter_next(itera)
         return files
 
     def get_size(self):

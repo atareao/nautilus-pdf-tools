@@ -105,7 +105,7 @@ class DoitInBackground(DoitInBackgroundBase):
 
     def run(self):
         print(2)
-        if len(self.elements) > 0:
+        if self.elements:
             self.stop = False
             for an_element in self.elements:
                 self.emit('todo', str(an_element))
@@ -1006,7 +1006,7 @@ class DoitInBackgroundWithArgs(DoitInBackgroundBase):
 
     def run(self):
         print(2)
-        if len(self.elements) > 0:
+        if self.elements:
             self.stop = False
             for an_element in self.elements:
                 self.emit('todo', str(an_element))

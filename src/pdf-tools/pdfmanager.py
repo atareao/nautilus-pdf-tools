@@ -78,7 +78,7 @@ class PDFManager(GObject.GObject):
                     height = size[0]
                 extension = cd.get_extension()
                 cd.destroy()
-                if len(extension) > 0:
+                if extension:
                     dialog = Progreso(_('Resize PDF'), window, 1)
                     diboo = doitinbackground.DoItInBackgroundResizePages(
                         files, extension, width, height)
@@ -98,7 +98,7 @@ class PDFManager(GObject.GObject):
             password = pd.get_password()
             pd.destroy()
             files = tools.get_files(selected)
-            if len(files):
+            if files:
                 dialog = Progreso(_('Encrypt files'), window, len(files))
                 diboo = doitinbackground.DoitInBackgroundEncrypt(files,
                                                                  password)
@@ -117,7 +117,7 @@ class PDFManager(GObject.GObject):
             password = pd.get_password()
             pd.destroy()
             files = tools.get_files(selected)
-            if len(files):
+            if files:
                 dialog = Progreso(_('Dencrypt files'), window, len(files))
                 diboo = doitinbackground.DoitInBackgroundDecrypt(files,
                                                                  password)
@@ -132,7 +132,7 @@ class PDFManager(GObject.GObject):
 
     def convert_pdf_file_to_png(self, selected, window):
         files = tools.get_files(selected)
-        if len(files):
+        if files:
             dialog = Progreso(_('Convert PDF to PNG'), window, len(files))
             diboo = doitinbackground.DoItInBackgroundToPNG(files)
             dialog.connect('i-want-stop', diboo.stop_it)
@@ -146,7 +146,7 @@ class PDFManager(GObject.GObject):
 
     def combine_pdf_pages(self, selected, window):
         files = tools.get_files(selected)
-        if files and len(files):
+        if files:
             cd = CombineDialog(_('Combine PDF pages'), window)
             if cd.run() == Gtk.ResponseType.ACCEPT:
                 size = cd.get_size()
@@ -162,7 +162,7 @@ class PDFManager(GObject.GObject):
                 margen = cd.get_margin()
                 extension = cd.get_extension()
                 cd.destroy()
-                if len(extension) > 0:
+                if extension:
                     dialog = Progreso(_('Combine PDF pages'), window, 1)
                     diboo = doitinbackground.DoItInBackgroundCombine(
                         files, extension, filas, columnas, width, height,
@@ -225,7 +225,7 @@ class PDFManager(GObject.GObject):
                 files = jpd.get_pdf_files()
                 file_out = jpd.get_file_out()
                 jpd.destroy()
-                if len(files) > 0 and file_out:
+                if files and file_out:
                     dialog = Progreso(_('Join PDF files'), window, len(files))
                     diboo = doitinbackground.DoItInBackgroundJoinPdf(
                         files, file_out)
@@ -240,7 +240,7 @@ class PDFManager(GObject.GObject):
 
     def paginate(self, selected, window):
         files = tools.get_files(selected)
-        if len(files) > 0:
+        if files:
             file0 = files[0]
             wd = PaginateDialog(file0, window)
             if wd.run() == Gtk.ResponseType.ACCEPT:
@@ -275,7 +275,7 @@ class PDFManager(GObject.GObject):
 
                append = rd.get_append()
                rd.destroy()
-               if dpi and dpi != '0' and dpi.isdigit() and len(append) > 0:
+               if dpi and dpi != '0' and dpi.isdigit() and append:
                   dialog = Progreso(_('Reduce PDF size'), window, len(files))
                   diboo = doitinbackground.DoitInBackgroundReduce(tools.reduce_pdf, files, dpi, append)
 
@@ -290,7 +290,7 @@ class PDFManager(GObject.GObject):
 
     def textmark(self, selected, window):
         files = tools.get_files(selected)
-        if len(files) > 0:
+        if files:
             file0 = files[0]
             wd = TextmarkDialog(file0, window)
             if wd.run() == Gtk.ResponseType.ACCEPT:
@@ -319,7 +319,7 @@ class PDFManager(GObject.GObject):
 
     def sign(self, selected, window):
         files = tools.get_files(selected)
-        if len(files) > 0:
+        if files:
             file0 = files[0]
             sd = SignDialog(file0, window)
             if sd.run() == Gtk.ResponseType.ACCEPT:
@@ -343,7 +343,7 @@ class PDFManager(GObject.GObject):
 
     def watermark(self, selected, window):
         files = tools.get_files(selected)
-        if len(files) > 0:
+        if files:
             file0 = files[0]
             wd = WatermarkDialog(file0, window)
             if wd.run() == Gtk.ResponseType.ACCEPT:
@@ -370,7 +370,7 @@ class PDFManager(GObject.GObject):
 
     def rotate_or_flip(self, selected, window):
         files = tools.get_files(selected)
-        if len(files) > 0:
+        if files:
             file0 = files[0]
             fd = FlipDialog(file0, window)
             if fd.run() == Gtk.ResponseType.ACCEPT:
@@ -409,7 +409,7 @@ class PDFManager(GObject.GObject):
                 else:
                     degrees = 180
                 spd.destroy()
-                if len(ranges) > 0:
+                if ranges:
                     dialog = Progreso(_('Rotate PDF'), window, 1)
                     diboo = doitinbackground.DoitInBackgroundRotateSomePages(
                         file0, file_out, degrees, ranges)
@@ -435,7 +435,7 @@ class PDFManager(GObject.GObject):
                 ranges = tools.get_ranges(spd.entry1.get_text())
                 file_out = spd.get_file_out()
                 spd.destroy()
-                if len(ranges) > 0:
+                if ranges:
                     dialog = Progreso(_('Remove PDF'), window, 1)
                     diboo = doitinbackground.DoitInBackgroundRemoveSomePages(
                         file0, file_out, ranges)
@@ -466,13 +466,13 @@ class PDFManager(GObject.GObject):
 
     def extract_some_pages(self, selected, window):
         files = tools.get_files(selected)
-        if len(files) > 0:
+        if files:
             spd = SelectPagesDialog(_('Extract pages from PDF'),
                                     None, window)
             if spd.run() == Gtk.ResponseType.ACCEPT:
                 ranges = tools.get_ranges(spd.entry1.get_text())
                 spd.destroy()
-                if len(ranges) > 0:
+                if ranges:
                     dialog = Progreso(_('Extract pages from PDF'),
                                       window, 1)
                     diboo = doitinbackground.DoitInBackgroundExtractSomePages(
