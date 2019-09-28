@@ -160,8 +160,8 @@ class MiniView(Gtk.DrawingArea):
                 context.set_source_rgba(*self.color)
                 context.select_font_face(self.font)
                 context.set_font_size(self.size)
-                xbearing, ybearing, font_width, font_height, xadvance,\
-                    yadvance = context.text_extents(self.text)
+                xbearing, _, font_width, font_height, _,\
+                    _ = context.text_extents(self.text)
                 if self.position_vertical == TOP:
                     y = self.text_margin_height + font_height
                 elif self.position_vertical == MIDLE:
