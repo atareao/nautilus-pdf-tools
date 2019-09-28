@@ -270,7 +270,7 @@ class TextmarkDialog(Gtk.Dialog):
 
     def update_preview(self):
         text = self.entry.get_text()
-        if len(text) > 0:
+        if text:
             self.viewport2.set_text(self.entry.get_text())
             self.viewport2.set_image_position_vertical(
                 self.get_vertical_option())

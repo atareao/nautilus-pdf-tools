@@ -959,7 +959,7 @@ class DoitInBackgroundExtractSomePages(DoitInBackgroundBase):
     def run(self):
         total_documents = len(self.files)
         pages = tools.get_pages_from_ranges(self.ranges)
-        if total_documents > 0 and len(pages) > 0:
+        if total_documents > 0 and pages:
             for index, file_in in enumerate(self.files):
                 self.emit('todo', file_in)
                 document = Poppler.Document.new_from_file('file://' + file_in,

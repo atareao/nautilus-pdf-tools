@@ -130,7 +130,7 @@ class JoinPdfsDialog(Gtk.Dialog):
         button4.connect('clicked', self.on_button_remove_clicked)
         vbox2.pack_start(button4, False, False, 0)
         #
-        if len(files) > 0:
+        if files:
             position = 0
             model = self.iconview.get_model()
             for filename in files:
@@ -159,7 +159,7 @@ class JoinPdfsDialog(Gtk.Dialog):
 
     def on_button_up_clicked(self, widget):
         selection = self.iconview.get_selected_items()
-        if len(selection) > 0:
+        if selection:
             model = self.iconview.get_model()
             selected_iter = model.get_iter(selection[0])
             previous_iter = model.iter_previous(selected_iter)
@@ -168,7 +168,7 @@ class JoinPdfsDialog(Gtk.Dialog):
 
     def on_button_down_clicked(self, widget):
         selection = self.iconview.get_selected_items()
-        if len(selection) > 0:
+        if selection:
             model = self.iconview.get_model()
             selected_iter = model.get_iter(selection[0])
             next_iter = model.iter_next(selected_iter)
@@ -177,7 +177,7 @@ class JoinPdfsDialog(Gtk.Dialog):
 
     def on_button_add_clicked(self, widget):
         selection = self.iconview.get_selected_items()
-        if len(selection) > 0:
+        if selection:
             model = self.iconview.get_model()
             position = int(str(selection[0]))
         else:
@@ -204,7 +204,7 @@ class JoinPdfsDialog(Gtk.Dialog):
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
             filenames = dialog.get_filenames()
-            if len(filenames) > 0:
+            if filenames:
                 model = self.iconview.get_model()
                 for filename in filenames:
                     pixbuf = tools.get_pixbuf_from_pdf(filename, 200)
@@ -236,7 +236,7 @@ class JoinPdfsDialog(Gtk.Dialog):
 
     def on_button_remove_clicked(self, widget):
         selection = self.iconview.get_selected_items()
-        if len(selection) > 0:
+        if selection:
             model = self.iconview.get_model()
             for element in selection:
                 model.remove(model.get_iter(element))

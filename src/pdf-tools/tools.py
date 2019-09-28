@@ -307,7 +307,7 @@ def get_files(files_in):
         file_in = unquote_plus(file_in.get_uri()[7:])
         if os.path.isfile(file_in):
             files.append(file_in)
-    if len(files) > 0:
+    if files:
         return files
     return None
 
