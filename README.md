@@ -12,6 +12,8 @@
   </a>
 </p>
 
+[![CodeFactor](https://www.codefactor.io/repository/github/atareao/nautilus-pdf-tools/badge/master)](https://www.codefactor.io/repository/github/atareao/nautilus-pdf-tools/overview/master)
+
 > A set of tools to work with PDF documents from Nautilus
 
 ### 🏠 [Homepage](https://github.com/atareao/nautilus-pdf-tools)
