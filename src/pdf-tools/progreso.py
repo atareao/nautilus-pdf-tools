@@ -52,12 +52,12 @@ class Progreso(Gtk.Dialog, threading.Thread):
         vbox = Gtk.VBox(spacing=5)
         vbox.set_border_width(5)
         self.get_content_area().add(vbox)
-        #
+
         frame1 = Gtk.Frame()
         vbox.pack_start(frame1, True, True, 0)
         table = Gtk.Table(2, 2, False)
         frame1.add(table)
-        #
+
         self.label = Gtk.Label()
         table.attach(self.label, 0, 2, 0, 1,
                      xpadding=5,
@@ -66,7 +66,7 @@ class Progreso(Gtk.Dialog, threading.Thread):
                      yoptions=Gtk.AttachOptions.EXPAND)
         if label is not None:
             self.label.set_label(label)
-        #
+
         self.progressbar = Gtk.ProgressBar()
         self.progressbar.set_size_request(300, 0)
         table.attach(self.progressbar, 0, 1, 1, 2,

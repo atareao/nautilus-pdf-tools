@@ -105,7 +105,7 @@ class JoinPdfsDialog(Gtk.Dialog):
             Gtk.Image.new_from_stock(Gtk.STOCK_GO_UP, Gtk.IconSize.BUTTON))
         button1.connect('clicked', self.on_button_up_clicked)
         vbox2.pack_start(button1, False, False, 0)
-        #
+
         button2 = Gtk.Button()
         button2.set_size_request(40, 40)
         button2.set_tooltip_text(_('Down'))
@@ -113,7 +113,7 @@ class JoinPdfsDialog(Gtk.Dialog):
             Gtk.STOCK_GO_DOWN, Gtk.IconSize.BUTTON))
         button2.connect('clicked', self.on_button_down_clicked)
         vbox2.pack_start(button2, False, False, 0)
-        #
+
         button3 = Gtk.Button()
         button3.set_size_request(40, 40)
         button3.set_tooltip_text(_('Add'))
@@ -121,7 +121,7 @@ class JoinPdfsDialog(Gtk.Dialog):
             Gtk.STOCK_ADD, Gtk.IconSize.BUTTON))
         button3.connect('clicked', self.on_button_add_clicked)
         vbox2.pack_start(button3, False, False, 0)
-        #
+
         button4 = Gtk.Button()
         button4.set_size_request(40, 40)
         button4.set_tooltip_text(_('Remove'))
@@ -129,7 +129,7 @@ class JoinPdfsDialog(Gtk.Dialog):
             Gtk.STOCK_REMOVE, Gtk.IconSize.BUTTON))
         button4.connect('clicked', self.on_button_remove_clicked)
         vbox2.pack_start(button4, False, False, 0)
-        #
+
         if files:
             position = 0
             model = self.iconview.get_model()
@@ -143,7 +143,7 @@ class JoinPdfsDialog(Gtk.Dialog):
                                  [pixbuf,
                                   os.path.basename(filename),
                                   filename])
-        #
+
         self.show_all()
 
     def on_button_output_file_clicked(self, widget, window):

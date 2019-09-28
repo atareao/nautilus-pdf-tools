@@ -108,7 +108,7 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
                 label=_('Pdf Tools'),
                 tip=_('Tools to manipulate pdf files'),
                 icon='Gtk-find-and-replace')
-            #
+
             submenu = FileManager.Menu()
             top_menuitem.set_submenu(submenu)
             items = [
@@ -163,12 +163,12 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
                                      sel_items,
                                      window)
                 submenu.append_item(sub_menuitem)
-            #
+
             sub_menuitem_98 = FileManager.MenuItem(
                 name='PdfToolsMenuProvider::Gtk-None',
                 label=SEPARATOR)
             submenu.append_item(sub_menuitem_98)
-            #
+
             sub_menuitem_99 = FileManager.MenuItem(
                 name='PdfToolsMenuProvider::Gtk-pdf-tools-99',
                 label=_('About'),
@@ -176,7 +176,7 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
                 icon='Gtk-find-and-replace')
             sub_menuitem_99.connect('activate', self.about)
             submenu.append_item(sub_menuitem_99)
-            #
+
             return top_menuitem,
         elif tools.all_files_are_images(sel_items):
             top_menuitem = FileManager.MenuItem(
@@ -199,12 +199,12 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
                 sub_menuitem.connect('activate',
                                      self.doit, item[3], sel_items, window)
                 submenu.append_item(sub_menuitem)
-            #
+
             sub_menuitem_98 = FileManager.MenuItem(
                 name='PdfToolsMenuProvider::Gtk-None',
                 label=SEPARATOR)
             submenu.append_item(sub_menuitem_98)
-            #
+
             sub_menuitem_99 = FileManager.MenuItem(
                 name='PdfToolsMenuProvider::Gtk-pdf-tools-99',
                 label=_('About'),
@@ -212,7 +212,7 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
                 icon='Gtk-find-and-replace')
             sub_menuitem_99.connect('activate', self.about)
             submenu.append_item(sub_menuitem_99)
-            #
+
             return top_menuitem,
         return
 

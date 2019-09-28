@@ -74,7 +74,7 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
         table1.attach(label2, 0, 1, 1, 2,
                       xoptions=Gtk.AttachOptions.FILL,
                       yoptions=Gtk.AttachOptions.SHRINK)
-        #
+
         label3 = Gtk.Label(_('Margen') + ':')
         label3.set_tooltip_text(_('Select the size of the margin'))
         label3.set_alignment(0, .5)
@@ -87,7 +87,7 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
         table1.attach(label4, 0, 1, 3, 4,
                       xoptions=Gtk.AttachOptions.FILL,
                       yoptions=Gtk.AttachOptions.SHRINK)
-        #
+
         liststore = Gtk.ListStore(str, float, float)
         liststore.append([_('A0'), 2383.9, 3370.4])
         liststore.append([_('A1'), 1683.8, 2383.9])
@@ -131,7 +131,7 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
         table1.attach(self.entry1, 1, 2, 0, 1,
                       xoptions=Gtk.AttachOptions.FILL,
                       yoptions=Gtk.AttachOptions.SHRINK)
-        #
+
         liststore = Gtk.ListStore(str)
         liststore.append([_('Vertical')])
         liststore.append([_('Horizontal')])
@@ -162,10 +162,10 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
         table1.attach(self.output_file, 1, 2, 3, 4,
                       xoptions=Gtk.AttachOptions.FILL,
                       yoptions=Gtk.AttachOptions.SHRINK)
-        #
+
         hbox = Gtk.HBox()
         vbox0.pack_start(hbox, True, True, 0)
-        #
+
         scrolledwindow = Gtk.ScrolledWindow()
         scrolledwindow.set_policy(
             Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
@@ -186,7 +186,7 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
         vbox2 = Gtk.VBox(spacing=0)
         vbox2.set_border_width(5)
         hbox.pack_start(vbox2, False, False, 0)
-        #
+
         self.button1 = Gtk.Button()
         self.button1.set_size_request(40, 40)
         self.button1.set_tooltip_text(_('Up'))
@@ -194,7 +194,7 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
             Gtk.Image.new_from_stock(Gtk.STOCK_GO_UP, Gtk.IconSize.BUTTON))
         self.button1.connect('clicked', self.on_button_up_clicked)
         vbox2.pack_start(self.button1, False, False, 0)
-        #
+
         self.button2 = Gtk.Button()
         self.button2.set_size_request(40, 40)
         self.button2.set_tooltip_text(_('Down'))
@@ -202,7 +202,7 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
             Gtk.Image.new_from_stock(Gtk.STOCK_GO_DOWN, Gtk.IconSize.BUTTON))
         self.button2.connect('clicked', self.on_button_down_clicked)
         vbox2.pack_start(self.button2, False, False, 0)
-        #
+
         self.button3 = Gtk.Button()
         self.button3.set_size_request(40, 40)
         self.button3.set_tooltip_text(_('Add'))
@@ -210,7 +210,7 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
             Gtk.Image.new_from_stock(Gtk.STOCK_ADD, Gtk.IconSize.BUTTON))
         self.button3.connect('clicked', self.on_button_add_clicked)
         vbox2.pack_start(self.button3, False, False, 0)
-        #
+
         self.button4 = Gtk.Button()
         self.button4.set_size_request(40, 40)
         self.button4.set_tooltip_text(_('Remove'))

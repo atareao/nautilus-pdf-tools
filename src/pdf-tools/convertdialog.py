@@ -49,19 +49,19 @@ class ConvertDialog(Gtk.Dialog):
         vbox0 = Gtk.VBox(spacing=5)
         vbox0.set_border_width(5)
         self.get_content_area().add(vbox0)
-        #
+
         notebook = Gtk.Notebook()
         vbox0.add(notebook)
-        #
+
         frame1 = Gtk.Frame()
         notebook.append_page(frame1, tab_label=Gtk.Label(_('Convert to')))
-        #
+
         table1 = Gtk.Table(rows=1, columns=2, homogeneous=False)
         table1.set_border_width(5)
         table1.set_col_spacings(5)
         table1.set_row_spacings(5)
         frame1.add(table1)
-        #
+
         options = Gtk.ListStore(str)
         for extension in MIMETYPES_IMAGE.keys():
             if extension != _('ALL'):

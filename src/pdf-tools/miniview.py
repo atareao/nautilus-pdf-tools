@@ -188,7 +188,7 @@ class MiniView(Gtk.DrawingArea):
                      self.page_height + 2.0 * self.border)
         cr.stroke()
         cr.restore()
-        #
+
         if self.flip_vertical:
             cr.scale(1, -1)
             cr.translate(0, -(2 * self.margin_height + self.page_height))
