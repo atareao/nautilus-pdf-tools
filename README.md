@@ -9,8 +9,7 @@
 
 > A set of tools to work with PDF documents from Nautilus
 
-
-### 🏠 [Homepage](https://github.com/atareao/nautilus-pdf-tools)
+## 🏠 [Homepage](https://github.com/atareao/nautilus-pdf-tools)
 
 ## Install
 
@@ -45,15 +44,15 @@ nautilus -q
 
 Common required dependencies,
 
-  * python
-  * python-gi
-  * python-gi-cairo
-  * python-cairo
-  * python-pil
-  * gir1.2-gtk-3.0
-  * gir1.2-gdkpixbuf-2.0
-  * gir1.2-poppler-0.18
-  * python-pypdf2
+* python
+* python-gi
+* python-gi-cairo
+* python-cairo
+* python-pil
+* gir1.2-gtk-3.0
+* gir1.2-gdkpixbuf-2.0
+* gir1.2-poppler-0.18
+* python-pypdf2
 
 #### Only for Nautilus
 
