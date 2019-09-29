@@ -27,13 +27,11 @@ import gi
 try:
     gi.require_version('Gtk', '3.0')
     gi.require_version('Poppler', '0.18')
-    gi.require_version('GdkPixbuf', '2.0')
 except Exception as e:
     print(e)
     exit(1)
 from gi.repository import Gtk
 from gi.repository import Poppler
-from gi.repository import GdkPixbuf
 from miniview import MiniView
 from PIL import Image
 import os
@@ -256,9 +254,6 @@ class WatermarkDialog(Gtk.Dialog):
             self.entry.set_text(dialog.get_filename())
         dialog.destroy()
 
-        file_watermark = self.entry.get_text()
-        im = Image.open(file_watermark)
-        width, height = im.size
         self.update_preview()
 
     def update_preview(self, widget=None):

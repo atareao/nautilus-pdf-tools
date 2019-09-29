@@ -99,7 +99,6 @@ class DoitInBackground(DoitInBackgroundBase):
 
     def __init__(self, maker, elements):
         DoitInBackgroundBase.__init__(self)
-        Thread.__init__(self)
         self.maker = maker
         self.elements = elements
 
@@ -200,7 +199,7 @@ class DoItInBackgroundToPNG(DoitInBackgroundBase):
                                                       None)
             number_of_pages = document.get_n_pages()
             if number_of_pages > 0:
-                file_out, ext = os.path.splitext(file_in)
+                file_out, _ = os.path.splitext(file_in)
                 zeros = len(str(number_of_pages))
                 for i in range(0, number_of_pages):
                     current_page = document.get_page(i)
@@ -432,8 +431,8 @@ class DoitInBackgroundPaginage(DoitInBackgroundBase):
                     context.set_source_rgba(*self.color)
                     context.select_font_face(self.font)
                     context.set_font_size(self.size)
-                    xbearing, ybearing, font_width, font_height,\
-                        xadvance, yadvance = context.text_extents(text)
+                    xbearing, _, font_width, font_height,\
+                        _, _ = context.text_extents(text)
                     if self.vertical_position == TOP:
                         y = font_height + self.vertical_margin
                     elif self.vertical_position == MIDLE:
@@ -507,8 +506,8 @@ class DoitInBackgroundTextMark(DoitInBackgroundBase):
                     context.set_source_rgba(*self.color)
                     context.select_font_face(self.font)
                     context.set_font_size(self.size)
-                    xbearing, ybearing, font_width, font_height,\
-                        xadvance, yadvance = context.text_extents(self.text)
+                    xbearing, _, font_width, font_height,\
+                        _, _ = context.text_extents(self.text)
                     if self.vertical_position == TOP:
                         y = font_height + self.vertical_margin
                     elif self.vertical_position == MIDLE:
@@ -963,7 +962,7 @@ class DoitInBackgroundExtractSomePages(DoitInBackgroundBase):
                                                           None)
                 number_of_pages = document.get_n_pages()
                 if number_of_pages > 1:
-                    filename, filext = os.path.splitext(file_in)
+                    filename, _ = os.path.splitext(file_in)
                     file_out = filename + '_extracted_pages.pdf'
                     temp_pdf = tools.create_temp_file()
                     pdfsurface = cairo.PDFSurface(temp_pdf, 200, 200)

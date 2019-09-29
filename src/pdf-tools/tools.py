@@ -298,7 +298,7 @@ def reduce_pdf(file_in, dpi, append):
         -sOutputFile="%s" "%s"' % (dpi, dpi, dpi, file_out, file_in)
         args = shlex.split(rutine)
         p = subprocess.Popen(args, stdout=subprocess.PIPE)
-        out, _ = p.communicate()
+        p.communicate()
     except Exception as e:
         print(e)
 
@@ -386,7 +386,7 @@ def all_files_are_pdf(items):
 
 def all_files_are_images(items):
     for item in items:
-        fileName, fileExtension = os.path.splitext(
+        _, fileExtension = os.path.splitext(
             unquote_plus(item.get_uri()[7:]))
         if fileExtension.lower() in EXTENSIONS_FROM:
             return True

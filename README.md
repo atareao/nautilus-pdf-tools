@@ -44,7 +44,7 @@ nautilus -q
 
 Common required dependencies,
 
-*  python
+* python
 * python-gi
 * python-gi-cairo
 * python-cairo
@@ -56,13 +56,13 @@ Common required dependencies,
 
 #### Only for Nautilus
 
-  * gir1.2-nautilus-3.0
-  * python-nautilus
+* gir1.2-nautilus-3.0
+* * python-nautilus
 
 #### Only for Nemo
 
-  * gir1.2-nemo-3.0
-  * python-nemo
+* gir1.2-nemo-3.0
+* python-nemo
 
 #### Only for Caja
 

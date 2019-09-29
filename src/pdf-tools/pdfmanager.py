@@ -50,7 +50,6 @@ from selectpagesdialog import SelectPagesDialog
 from passworddialog import PasswordDialog
 import doitinbackground
 from progreso import Progreso
-import cairoapi
 import tools
 from comun import _
 import os
@@ -397,7 +396,7 @@ class PDFManager(GObject.GObject):
             file0 = files[0]
             filename, filext = os.path.splitext(file0)
             file_out = filename + '_rotated.pdf'
-            last_page = cairoapi.get_num_of_pages(file0)
+            last_page = pdfapi.get_num_of_pages(file0)
             spd = SelectPagesRotateDialog(_('Rotate PDF'), last_page,
                                           file_out, window)
             if spd.run() == Gtk.ResponseType.ACCEPT:
@@ -455,7 +454,7 @@ class PDFManager(GObject.GObject):
         if files:
             dialog = Progreso(_('Split PDF'), window, len(files))
             diboo = doitinbackground.DoitInBackground(
-                cairoapi.split_pdf, files)
+                pdfapi.split_pdf, files)
             diboo.connect('done', dialog.increase)
             diboo.connect('todo', dialog.set_todo_label)
             diboo.connect('finished', dialog.close)

@@ -452,7 +452,7 @@ def add_paginate_all_pages(file_pdf_in, color, font, size, horizontal_position,
             context.set_source_rgba(*color)
             context.select_font_face(font)
             context.set_font_size(size)
-            xbearing, ybearing, font_width, font_height, xadvance, yadvance =\
+            xbearing, _, font_width, font_height, _, _ =\
                 context.text_extents(text)
             if vertical_position == TOP:
                 y = font_height + vertical_margin
