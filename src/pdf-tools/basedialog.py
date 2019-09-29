@@ -41,15 +41,27 @@ from comun import _
 from tools import center_dialog
 from tools import str2int
 
+HEIGHT = 25
+
 def generate_widget_row(text, widget=None):
     row = Gtk.ListBoxRow()
     hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
     row.add(hbox)
     label = Gtk.Label(text, xalign=0)
+    label.set_size_request(0, HEIGHT)
     hbox.pack_start(label, True, True, 0)
     if widget is not None:
         hbox.pack_start(widget, False, True, 0)
     return row
+
+
+def generate_simple_button_row(text, callback):
+    row = Gtk.ListBoxRow()
+    button = Gtk.Button.new_with_label(text)
+    button.connect('clicked', callback)
+    row.add(button)
+    return button, row
+
 
 def generate_separator_row():
     row = Gtk.ListBoxRow()
@@ -67,6 +79,7 @@ def generate_title_row(text, gray=False):
             '<span foreground="gray">{}</span>'.format(text))
     else:
         label = Gtk.Label(text)
+    label.set_size_request(0, HEIGHT)
     label.set_width_chars(10)
     label.set_alignment(0, 0.5)
     row = Gtk.ListBoxRow()
@@ -95,6 +108,7 @@ def generate_check_entry_row(text, parent, callback=None):
     hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
     row.add(hbox)
     label = Gtk.Label(text, xalign=0)
+    label.set_size_request(0, HEIGHT)
     entry = Gtk.Entry()
     check = Gtk.RadioButton.new_from_widget(parent)
     if callback is not None:
@@ -111,6 +125,21 @@ def generate_swith_row(text, callback=None):
         switch.connect("notify::active", callback, str(text))
     row = generate_widget_row(text, switch)
     return switch, row
+
+def generate_button_row(text, callback=None):
+    button = Gtk.Button()
+    if callback is not None:
+        button.connect('clicked', callback)
+    row = generate_widget_row(text, button)
+    return button, row
+
+def generate_spinbutton_row(text, callback=None):
+    spinButton = Gtk.SpinButton()
+    if callback is not None:
+        spinButton.connect('change-value', callback, str(text))
+    row = generate_widget_row(text, spinButton)
+    return spinButton, row
+
 
 def generate_button(icon, tooltip_text, callback):
     button = Gtk.Button()

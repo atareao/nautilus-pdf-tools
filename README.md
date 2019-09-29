@@ -28,7 +28,7 @@ nautilus -q
 sudo add-apt-repository ppa:atareao/nemo-extensions
 sudo apt update
 sudo apt install nemo-pdf-tools
-nautilus -q
+nemo -q
 ```
 
 ### Caja
@@ -37,7 +37,7 @@ nautilus -q
 sudo add-apt-repository ppa:atareao/caja-extensions
 sudo apt update
 sudo apt install caja-pdf-tools
-nautilus -q
+caja -q
 ```
 
 ### Requirements

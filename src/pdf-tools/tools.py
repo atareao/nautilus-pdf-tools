@@ -51,7 +51,7 @@ from urllib import unquote_plus
 
 mimetypes.init()
 
-def update_preview_cb(file_chooser, preview):
+def update_pdf_preview_cb(file_chooser, preview):
     filename = file_chooser.get_preview_filename()
     try:
         print('---', filename, '---')
@@ -67,6 +67,21 @@ def update_preview_cb(file_chooser, preview):
     file_chooser.set_preview_widget_active(has_preview)
     return
 
+def update_image_preview_cb(file_chooser, preview):
+    filename = file_chooser.get_preview_filename()
+    try:
+        print('---', filename, '---')
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 250, 250)
+        if pixbuf is not None:
+            preview.set_from_pixbuf(pixbuf)
+            has_preview = True
+        else:
+            has_preview = False
+    except Exception as e:
+        print(e)
+        has_preview = False
+    file_chooser.set_preview_widget_active(has_preview)
+    return
 
 def get_pages_from_ranges(ranges):
     pages = []

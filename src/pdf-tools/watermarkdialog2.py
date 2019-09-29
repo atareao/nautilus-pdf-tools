@@ -32,12 +32,16 @@ except Exception as e:
 from gi.repository import Gtk
 import os
 import comun
+from comun import MMTOPIXEL
 from comun import _
+from comun import MIMETYPES_IMAGE
 from tools import get_ranges
 from tools import get_pages_from_ranges
+from tools import update_image_preview_cb
 from basedialog import BaseDialog, generate_separator_row, generate_title_row
 from basedialog import generate_swith_row, generate_check_entry_row
 from basedialog import generate_check_row, generate_entry_row
+from basedialog import generate_button_row, generate_spinbutton_row, generate_simple_button_row
 
 
 class PageOptions():
@@ -50,7 +54,9 @@ class PageOptions():
 class WatermarkDialog(BaseDialog):
     def __init__(self, filename=None, window=None):
         BaseDialog.__init__(self, _('Watermark'), filename, window)
-    
+        self.viewport1.connect('button-release-event',
+                               self.on_viewport1_clicked)
+
     def set_page(self, page):
         if self.document.get_n_pages() > 0 and \
                 page < self.document.get_n_pages() and\
@@ -69,57 +75,85 @@ class WatermarkDialog(BaseDialog):
         self.popover_listbox.add(generate_title_row(_('Apply'), True))
 
         self.check_this, row = generate_check_row(_('This page'), None,
-                                                  self.slider_on_value_changed)
+                                                  self.on_values_changed)
         self.popover_listbox.add(row)
         self.check_all, row = generate_check_row(_('All'), self.check_this,
-                                                  self.slider_on_value_changed)
+                                                  self.on_values_changed)
         self.popover_listbox.add(row)
         self.check_range, self.range, row = generate_check_entry_row(
-            _('Range'), self.check_this, self.slider_on_value_changed)
+            _('Range'), self.check_this, self.on_values_changed)
         self.popover_listbox.add(row)
 
         self.popover_listbox.add(generate_separator_row())
 
-        self.popover_listbox.add(generate_title_row(_('Rotate'), True))
+        self.popover_listbox.add(generate_title_row(_('Watermark'), True))
 
-    def slider_on_value_changed(self, widget, value, name):
-        flip_horizontal = self.check_horizontal.get_active()
-        flip_vertical = self.check_vertical.get_active()
-        if name == '90':
-            rotation_angle = 1.0
-        elif name == '180':
-            rotation_angle = 2.0
-        elif name == '270':
-            rotation_angle = 3.0
+        self.zoom_entry, row = generate_spinbutton_row(_('Zoom'),
+                                                       self.on_values_changed)
+        self.zoom_entry.set_adjustment(Gtk.Adjustment(1, 100, 1000, 1, 100, 0))
+        self.popover_listbox.add(row)
+        self.file_entry, row = generate_button_row(
+            _('Watermark'), self.on_button_watermark_clicked)
+        self.file_entry.set_label(_('Select watermark file'))
+        self.popover_listbox.add(row)
+        self.clear, row = generate_simple_button_row(_('Clear watermark'),
+                                              self.on_clear_watermark)
+        self.popover_listbox.add(row)
+
+
+    def on_clear_watermark(self, button):
+        self.zoom_entry.set_value(1)
+        self.file_entry.set_label(_('Select watermark file'))
+        del self.pages[str(self.no_page)]
+        self.on_values_changed(None, None, None)
+
+    def on_button_watermark_clicked(self, button):
+        dialog = Gtk.FileChooserDialog(_('Select one image'),
+                                       self,
+                                       Gtk.FileChooserAction.OPEN,
+                                       (Gtk.STOCK_CANCEL,
+                                        Gtk.ResponseType.CANCEL,
+                                        Gtk.STOCK_OPEN,
+                                        Gtk.ResponseType.OK))
+        dialog.set_default_response(Gtk.ResponseType.OK)
+        dialog.set_select_multiple(False)
+        dialog.set_current_folder(os.getenv('HOME'))
+        for aMimetype in MIMETYPES_IMAGE.keys():
+            filtert = Gtk.FileFilter()
+            filtert.set_name(aMimetype)
+            for mime_type in MIMETYPES_IMAGE[aMimetype]['mimetypes']:
+                filtert.add_mime_type(mime_type)
+            for pattern in MIMETYPES_IMAGE[aMimetype]['patterns']:
+                filtert.add_pattern(pattern)
+            dialog.add_filter(filtert)
+        preview = Gtk.Image()
+        dialog.set_preview_widget(preview)
+        dialog.connect('update-preview', update_image_preview_cb, preview)
+        response = dialog.run()
+        if response == Gtk.ResponseType.OK:
+            self.file_entry.set_label(dialog.get_filename())
+            self.on_values_changed(None, None, None)
+        dialog.destroy()
+
+    def on_values_changed(self, widget, value, name):
+        zoom = self.zoom_entry.get_value()
+        file_watermark = self.file_entry.get_label()
+        if file_watermark and os.path.exists(file_watermark):
+            if str(self.no_page) in self.pages.keys():
+                x = self.pages[str(self.no_page)].x
+                y = self.pages[str(self.no_page)].y
+            else:
+                x = 0
+                y = 0
+            self.pages[str(self.no_page)] = PageOptions(x, y, zoom,
+                                                        file_watermark)
         else:
-            rotation_angle = 0.0
-        update = False
-        if self.check_this.get_active():
-            update = True
-            self.pages[str(self.no_page)] = PageOptions(rotation_angle,
-                                                        flip_horizontal,
-                                                        flip_vertical)
-        elif self.check_all.get_active():
-            update = True
-            for i in range(0, self.document.get_n_pages()):
-                self.pages[str(i)] = PageOptions(rotation_angle,
-                                                 flip_horizontal,
-                                                 flip_vertical)
-        elif self.check_range.get_active():
-            text = self.range.get_text()
-            if text:
-                ranges = get_ranges(text)
-                pages = get_pages_from_ranges(ranges)
-                update = (str(self.no_page) in self.pages.keys())
-                for i in pages:
-                    self.pages[str(i)] = PageOptions(rotation_angle,
-                                                     flip_horizontal,
-                                                     flip_vertical)
-        if update:
-            self.viewport1.rotation_angle = rotation_angle
-            self.viewport1.flip_horizontal = flip_horizontal
-            self.viewport1.flip_vertical = flip_vertical
-            self.viewport1.queue_draw()
+            x = 0
+            y = 0
+            zoom = 1
+            file_watermark = None
+            del self.pages[str(self.no_page)]
+        self.update_preview(x, y, zoom, file_watermark)
 
     def update_preview(self, x, y, zoom, file_watermark):
         if file_watermark and os.path.exists(file_watermark):
@@ -127,7 +161,47 @@ class WatermarkDialog(BaseDialog):
             self.viewport1.image_zoom = float(zoom / 100.0)
             self.viewport1.image_margin_width = x
             self.viewport1.image_margin_height = y
-            self.viewport1.refresh()
+        else:
+            self.viewport1.set_image(None)
+        self.viewport1.refresh()
+
+    def on_viewport1_clicked(self, widget, event):
+        if self.viewport1.image_width > 0 and self.viewport1.image_height > 0:
+            deltay = abs(self.viewport1.get_allocation().height -
+                         self.viewport1.page_height) / 2.0
+            deltax = abs(self.viewport1.get_allocation().width -
+                         self.viewport1.page_width) / 2.0
+            position_x = (event.x - deltax)
+            position_y = (event.y - deltay)
+            original_position_x = (event.x - deltax) / self.viewport1.zoom
+            original_position_y = (event.y - deltay) / self.viewport1.zoom
+            iw = self.viewport1.image_width * self.viewport1.zoom / MMTOPIXEL
+            ih = self.viewport1.image_height * self.viewport1.zoom / MMTOPIXEL
+            position_x -= iw / 2.0
+            position_y -= ih / 2.0
+            position_x = position_x / self.viewport1.zoom
+            position_y = position_y / self.viewport1.zoom
+            print(original_position_x, original_position_y)
+            zoom = self.zoom_entry.get_value()
+            file_watermark = self.file_entry.get_label()
+            if file_watermark and os.path.exists(file_watermark):
+                if str(self.no_page) in self.pages.keys():
+                    x = self.pages[str(self.no_page)].x
+                    y = self.pages[str(self.no_page)].y
+                else:
+                    x = 0
+                    y = 0
+                self.pages[str(self.no_page)] = PageOptions(position_x,
+                                                            position_y, zoom,
+                                                            file_watermark)
+            else:
+                x = 0
+                y = 0
+                zoom = 1
+                file_watermark = None
+                del self.pages[str(self.no_page)]
+            self.update_preview(position_x, position_y, zoom, file_watermark)
+
 
 if __name__ == '__main__':
     dialog = WatermarkDialog(comun.SAMPLE)
