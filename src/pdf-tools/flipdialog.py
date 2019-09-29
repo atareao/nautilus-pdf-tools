@@ -36,7 +36,7 @@ from tools import get_ranges
 from tools import get_pages_from_ranges
 from basedialog import BaseDialog, generate_separator_row, generate_title_row
 from basedialog import generate_swith_row, generate_check_entry_row
-from basedialog import generate_check_row
+from basedialog import generate_check_row, generate_entry_row
 class PageOptions():
     def __init__(self, rotation_angle, flip_horizontal, flip_vertical):
         self.rotation_angle = rotation_angle
@@ -83,19 +83,6 @@ class FlipDialog(BaseDialog):
 
         self.popover_listbox.add(generate_title_row(_('Rotate'), True))
 
-        def set_option_rotate_row(texto, check=None, parent=None):
-            row = Gtk.ListBoxRow()
-            hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
-            row.add(hbox)
-            label = Gtk.Label(texto, xalign=0)
-            if check is None:
-                check = Gtk.RadioButton.new_from_widget(parent)
-                check.connect("notify::active", self.slider_on_value_changed,
-                              str(texto))
-            hbox.pack_start(label, True, True, 0)
-            hbox.pack_start(check, False, True, 0)
-            return check, row
-
         self.rotate_0, row = generate_check_row(
             '0', None, self.slider_on_value_changed)
         self.popover_listbox.add(row)
@@ -112,18 +99,6 @@ class FlipDialog(BaseDialog):
         self.popover_listbox.add(generate_separator_row())
         self.popover_listbox.add(generate_title_row(_('Flip'), True))
 
-        def set_option_flip_row(texto):
-            row = Gtk.ListBoxRow()
-            hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
-            row.add(hbox)
-            label = Gtk.Label(texto, xalign=0)
-            check = Gtk.Switch()
-            check.connect("notify::active", self.slider_on_value_changed,
-                          texto)
-            hbox.pack_start(label, True, True, 0)
-            hbox.pack_start(check, False, True, 0)
-            return check, row
-
         self.check_vertical, row = generate_swith_row(
             _('Vertical'), self.slider_on_value_changed)
         self.popover_listbox.add(row)
@@ -134,13 +109,7 @@ class FlipDialog(BaseDialog):
         self.popover_listbox.add(generate_separator_row())
         self.popover_listbox.add(generate_title_row(_('File name'), True))
 
-        row = Gtk.ListBoxRow()
-        hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
-        row.add(hbox)
-        label = Gtk.Label(_('Add to file'), xalign=0)
-        self.add_to_file = Gtk.Entry()
-        hbox.pack_start(label, True, True, 0)
-        hbox.pack_start(self.add_to_file, False, True, 0)
+        self.add_to_file, row = generate_entry_row(_('Add to file'))
         self.popover_listbox.add(row)
 
     def slider_on_value_changed(self, widget, value, name):

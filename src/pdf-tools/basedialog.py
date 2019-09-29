@@ -84,7 +84,7 @@ def generate_title_row(text, gray=False):
 def generate_entry_row(text):
     textBox = Gtk.Entry()
     row = generate_widget_row(text, textBox)
-    return row, textBox
+    return textBox, row
 
 
 def generate_check_row(text, parent=None, callback=None):
