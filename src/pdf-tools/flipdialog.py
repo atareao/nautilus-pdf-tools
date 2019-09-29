@@ -23,13 +23,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import gi
-try:
-    gi.require_version('Gtk', '3.0')
-except Exception as e:
-    print(e)
-    exit(1)
-from gi.repository import Gtk
 import comun
 from comun import _
 from tools import get_ranges
