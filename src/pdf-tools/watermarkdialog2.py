@@ -30,22 +30,24 @@ except Exception as e:
     print(e)
     exit(1)
 from gi.repository import Gtk
+import os
 import comun
 from comun import _
 from tools import get_ranges
 from tools import get_pages_from_ranges
-from basedialog import BaseDialog, generate_separator_row, generate_title_row
-from basedialog import generate_swith_row, generate_check_entry_row
-from basedialog import generate_check_row
-class PageOptions():
-    def __init__(self, rotation_angle, flip_horizontal, flip_vertical):
-        self.rotation_angle = rotation_angle
-        self.flip_horizontal= flip_horizontal
-        self.flip_vertical = flip_vertical
+from basedialog import BaseDialog, set_separator, set_title_row
 
-class FlipDialog(BaseDialog):
+
+class PageOptions():
+    def __init__(self, x, y, zoom, afile):
+        self.x = x
+        self.y = y
+        self.zoom = zoom
+        self.file = afile
+
+class WatermarkDialog(BaseDialog):
     def __init__(self, filename=None, window=None):
-        BaseDialog.__init__(self, _('Rotate and flid PDF'), filename, window)
+        BaseDialog.__init__(self, _('Watermark'), filename, window)
     
     def set_page(self, page):
         if self.document.get_n_pages() > 0 and \
@@ -54,34 +56,53 @@ class FlipDialog(BaseDialog):
             self.no_page = page
             self.show_page.set_text(str(self.no_page + 1))
             self.show_title_page.set_text(str(self.no_page + 1))
+            self.viewport1.set_page(self.document.get_page(self.no_page))
             if str(self.no_page) in self.pages.keys():
-                rotation_angle = self.pages[str(self.no_page)].rotation_angle
-                flip_horizontal = self.pages[str(self.no_page)].flip_horizontal
-                flip_vertical = self.pages[str(self.no_page)].flip_vertical
-            else:
-                rotation_angle = 0
-                flip_horizontal = False
-                flip_vertical = False
-            self.viewport1.set_page(self.document.get_page(self.no_page),
-                                    rotation_angle, flip_horizontal,
-                                    flip_vertical)
+                self.update_preview(self.pages[str(self.no_page)].x,
+                                    self.pages[str(self.no_page)].y,
+                                    self.pages[str(self.no_page)].zoom,
+                                    self.pages[str(self.no_page)].file)
 
     def init_adicional_popover(self):
-        self.popover_listbox.add(generate_title_row(_('Apply'), True))
 
-        self.check_this, row = generate_check_row(_('This page'), None,
-                                                  self.slider_on_value_changed)
+
+        self.popover_listbox.add(set_title_row(_('Apply'), True))
+
+        def set_option_rotate_apply(texto, check=None,
+                                    parent=None, entry=False):
+            row = Gtk.ListBoxRow()
+            hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
+            row.add(hbox)
+            label = Gtk.Label(texto, xalign=0)
+            if check is None:
+                check = Gtk.RadioButton.new_from_widget(parent)
+                check.connect("notify::active", self.slider_on_value_changed,
+                              str(texto))
+            hbox.pack_start(label, True, True, 0)
+            
+            if entry:
+                textBox = Gtk.Entry()
+                hbox.pack_start(textBox, True, True, 0)
+            else:
+                textBox = None
+            hbox.pack_start(check, False, True, 0)
+            return check, row, textBox
+
+        self.check_this = Gtk.RadioButton.new_from_widget(None)
+        self.check_this.connect("notify::active", self.slider_on_value_changed,
+                                'This page')
+        row = set_option_rotate_apply('This page', self.check_this)[1]
         self.popover_listbox.add(row)
-        self.check_all, row = generate_check_row(_('All'), self.check_this,
-                                                  self.slider_on_value_changed)
+        self.check_all, row = set_option_rotate_apply(
+            _('All'), None, self.check_this)[0:2]
         self.popover_listbox.add(row)
-        self.check_range, self.range, row = generate_check_entry_row(
-            _('Range'), self.check_this, self.slider_on_value_changed)
+        self.check_range, row, self.range = set_option_rotate_apply(
+            _('Range'), None, self.check_this, True)
         self.popover_listbox.add(row)
 
-        self.popover_listbox.add(generate_separator_row())
+        self.popover_listbox.add(set_separator())
 
-        self.popover_listbox.add(generate_title_row(_('Rotate'), True))
+        self.popover_listbox.add(set_title_row(_('Rotate'), True))
 
         def set_option_rotate_row(texto, check=None, parent=None):
             row = Gtk.ListBoxRow()
@@ -96,21 +117,25 @@ class FlipDialog(BaseDialog):
             hbox.pack_start(check, False, True, 0)
             return check, row
 
-        self.rotate_0, row = generate_check_row(
-            '0', None, self.slider_on_value_changed)
-        self.popover_listbox.add(row)
-        self.rotate_90, row = generate_check_row(
-            '90', self.rotate_0, self.slider_on_value_changed)
-        self.popover_listbox.add(row)
-        self.rotate_180, row = generate_check_row(
-            '180', self.rotate_0, self.slider_on_value_changed)
-        self.popover_listbox.add(row)
-        self.rotate_270, row = generate_check_row(
-            '270', self.rotate_0, self.slider_on_value_changed)
+        self.rotate_0 = Gtk.RadioButton.new_from_widget(None)
+        self.rotate_0.connect("notify::active", self.slider_on_value_changed,
+                              '0')
+        row = set_option_rotate_row('0', self.rotate_0)[1]
         self.popover_listbox.add(row)
 
-        self.popover_listbox.add(generate_separator_row())
-        self.popover_listbox.add(generate_title_row(_('Flip'), True))
+        self.rotate_90, row = set_option_rotate_row('90', None, self.rotate_0)
+        self.popover_listbox.add(row)
+
+        self.rotate_180, row = set_option_rotate_row('180', None,
+                                                     self.rotate_0)
+        self.popover_listbox.add(row)
+
+        self.rotate_270, row = set_option_rotate_row('270', None,
+                                                     self.rotate_0)
+        self.popover_listbox.add(row)
+
+        self.popover_listbox.add(set_separator())
+        self.popover_listbox.add(set_title_row(_('Flip'), True))
 
         def set_option_flip_row(texto):
             row = Gtk.ListBoxRow()
@@ -124,15 +149,13 @@ class FlipDialog(BaseDialog):
             hbox.pack_start(check, False, True, 0)
             return check, row
 
-        self.check_vertical, row = generate_swith_row(
-            _('Vertical'), self.slider_on_value_changed)
+        self.check_vertical, row = set_option_flip_row(_('Vertical'))
         self.popover_listbox.add(row)
-        self.check_horizontal, row = generate_swith_row(
-            _('Horizontal'), self.slider_on_value_changed)
+        self.check_horizontal, row = set_option_flip_row(_('Horizontal'))
         self.popover_listbox.add(row)
 
-        self.popover_listbox.add(generate_separator_row())
-        self.popover_listbox.add(generate_title_row(_('File name'), True))
+        self.popover_listbox.add(set_separator())
+        self.popover_listbox.add(set_title_row(_('File name'), True))
 
         row = Gtk.ListBoxRow()
         hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
@@ -182,6 +205,14 @@ class FlipDialog(BaseDialog):
             self.viewport1.flip_vertical = flip_vertical
             self.viewport1.queue_draw()
 
+    def update_preview(self, x, y, zoom, file_watermark):
+        if file_watermark and os.path.exists(file_watermark):
+            self.viewport1.set_image(file_watermark)
+            self.viewport1.image_zoom = float(zoom / 100.0)
+            self.viewport1.image_margin_width = x
+            self.viewport1.image_margin_height = y
+            self.viewport1.refresh()
+
 if __name__ == '__main__':
-    dialog = FlipDialog(comun.SAMPLE)
+    dialog = WatermarkDialog(comun.SAMPLE)
     dialog.run()

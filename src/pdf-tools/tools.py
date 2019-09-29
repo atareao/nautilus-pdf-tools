@@ -55,7 +55,7 @@ def update_preview_cb(file_chooser, preview):
     filename = file_chooser.get_preview_filename()
     try:
         print('---', filename, '---')
-        pixbuf = tools.get_surface_from_pdf(filename, 250)
+        pixbuf = get_surface_from_pdf(filename, 250)
         if pixbuf is not None:
             preview.set_from_surface(pixbuf)
             has_preview = True

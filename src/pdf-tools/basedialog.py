@@ -46,15 +46,85 @@ from tools import get_ranges
 from tools import get_pages_from_ranges
 from tools import str2int
 
+def generate_widget_row(text, widget=None):
+    row = Gtk.ListBoxRow()
+    hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
+    row.add(hbox)
+    label = Gtk.Label(text, xalign=0)
+    hbox.pack_start(label, True, True, 0)
+    if widget is not None:
+        hbox.pack_start(widget, False, True, 0)
+    return row
 
-    def set_separator():
-        row = Gtk.ListBoxRow()
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        vbox.pack_start(Gtk.Separator(), True, True, 0)
-        vbox.set_margin_top(10)
-        vbox.set_margin_bottom(10)
-        row.add(vbox)
-        return row
+def generate_separator_row():
+    row = Gtk.ListBoxRow()
+    vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+    vbox.pack_start(Gtk.Separator(), True, True, 0)
+    vbox.set_margin_top(10)
+    vbox.set_margin_bottom(10)
+    row.add(vbox)
+    return row
+
+def generate_title_row(text, gray=False):
+    if gray:
+        label = Gtk.Label()
+        label.set_markup(
+            '<span foreground="gray">{}</span>'.format(text))
+    else:
+        label = Gtk.Label(text)
+    label.set_width_chars(10)
+    label.set_alignment(0, 0.5)
+    row = Gtk.ListBoxRow()
+    hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
+    row.add(hbox)
+    hbox.pack_start(label, True, True, 0)
+    return row
+
+
+def generate_entry_row(text):
+    textBox = Gtk.Entry()
+    row = generate_widget_row(text, textBox)
+    return row, textBox
+
+
+def generate_check_row(text, parent=None, callback=None):
+    check = Gtk.RadioButton.new_from_widget(parent)
+    if callback is not None:
+        check.connect("notify::active", callback, str(text))
+    row = generate_widget_row(text, check)
+    return check, row
+
+
+def generate_check_entry_row(text, parent, callback=None):
+    row = Gtk.ListBoxRow()
+    hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
+    row.add(hbox)
+    label = Gtk.Label(text, xalign=0)
+    entry = Gtk.Entry()
+    check = Gtk.RadioButton.new_from_widget(parent)
+    if callback is not None:
+        check.connect("notify::active", callback, str(text))
+    hbox.pack_start(label, True, True, 0)
+    hbox.pack_start(entry, True, True, 0)
+    hbox.pack_start(check, False, True, 0)
+    return check, entry, row
+
+
+def generate_swith_row(text, callback=None):
+    switch = Gtk.Switch()
+    if callback is not None:
+        switch.connect("notify::active", callback, str(text))
+    row = generate_widget_row(text, switch)
+    return switch, row
+
+def generate_button(icon, tooltip_text, callback):
+    button = Gtk.Button()
+    button.set_tooltip_text(tooltip_text)
+    button.set_image(Gtk.Image.new_from_gicon(Gio.ThemedIcon(
+        name=icon), Gtk.IconSize.BUTTON))
+    button.connect('clicked', callback)
+    return button
+
 
 class BaseDialog(Gtk.Dialog):
     def __init__(self, title= '', filename=None, window=None):
@@ -122,18 +192,11 @@ class BaseDialog(Gtk.Dialog):
         self.hb.set_title(self.get_title())
         self.set_titlebar(self.hb)
 
-        button0 = Gtk.Button()
-        button0.set_tooltip_text(_('First page'))
-        button0.set_image(Gtk.Image.new_from_gicon(Gio.ThemedIcon(
-            name='go-first-symbolic'), Gtk.IconSize.BUTTON))
-        button0.connect('clicked', self.first_page)
+        button0 = generate_button('go-first-symbolic', _('First page'),
+                                  self.first_page)
         self.hb.pack_start(button0)
-
-        button1 = Gtk.Button()
-        button1.set_tooltip_text(_('Previous page'))
-        button1.set_image(Gtk.Image.new_from_gicon(Gio.ThemedIcon(
-            name='go-previous-symbolic'), Gtk.IconSize.BUTTON))
-        button1.connect('clicked', self.previous_page)
+        button1 = generate_button('go-previous-symbolic', _('Previous page'),
+                                  self.previous_page)
         self.hb.pack_start(button1)
 
         self.show_title_page = Gtk.Entry()
@@ -143,18 +206,12 @@ class BaseDialog(Gtk.Dialog):
         self.show_title_page.connect('activate', self.on_current_page_activate)
         self.hb.pack_start(self.show_title_page)
 
-        button2 = Gtk.Button()
-        button2.set_tooltip_text(_('Next page'))
-        button2.set_image(Gtk.Image.new_from_gicon(Gio.ThemedIcon(
-            name='go-next-symbolic'), Gtk.IconSize.BUTTON))
-        button2.connect('clicked', self.next_page)
+        button2 = generate_button('go-next-symbolic', _('Next page'),
+                                  self.next_page)
         self.hb.pack_start(button2)
 
-        button3 = Gtk.Button()
-        button3.set_tooltip_text(_('Last page'))
-        button3.set_image(Gtk.Image.new_from_gicon(Gio.ThemedIcon(
-            name='go-last-symbolic'), Gtk.IconSize.BUTTON))
-        button3.connect('clicked', self.last_page)
+        button3 = generate_button('go-last-symbolic', _('Last page'),
+                                  self.last_page)
         self.hb.pack_start(button3)
 
         popover = self.create_popover()
@@ -181,18 +238,12 @@ class BaseDialog(Gtk.Dialog):
         row.add(hbox)
         self.popover_listbox.add(row)
 
-        button0 = Gtk.Button()
-        button0.set_tooltip_text(_('First page'))
-        button0.set_image(Gtk.Image.new_from_gicon(Gio.ThemedIcon(
-            name='go-first-symbolic'), Gtk.IconSize.BUTTON))
-        button0.connect('clicked', self.first_page)
+        button0 = generate_button('go-first-symbolic', _('First page'),
+                                  self.first_page)
         hbox.pack_start(button0, True, True, 0)
 
-        button1 = Gtk.Button()
-        button1.set_tooltip_text(_('Previous page'))
-        button1.set_image(Gtk.Image.new_from_gicon(Gio.ThemedIcon(
-            name='go-previous-symbolic'), Gtk.IconSize.BUTTON))
-        button1.connect('clicked', self.previous_page)
+        button1 = generate_button('go-previous-symbolic', _('Previous page'),
+                                  self.previous_page)
         hbox.pack_start(button1, True, True, 0)
 
         self.show_page = Gtk.Entry()
@@ -201,20 +252,14 @@ class BaseDialog(Gtk.Dialog):
         self.show_page.connect('activate', self.on_current_page_activate)
         hbox.pack_start(self.show_page, True, True, 0)
 
-        button2 = Gtk.Button()
-        button2.set_tooltip_text(_('Next page'))
-        button2.set_image(Gtk.Image.new_from_gicon(Gio.ThemedIcon(
-            name='go-next-symbolic'), Gtk.IconSize.BUTTON))
-        button2.connect('clicked', self.next_page)
+        button2 = generate_button('go-next-symbolic', _('Next page'),
+                                  self.next_page)
         hbox.pack_start(button2, True, True, 0)
 
-        button3 = Gtk.Button()
-        button3.set_tooltip_text(_('Last page'))
-        button3.set_image(Gtk.Image.new_from_gicon(Gio.ThemedIcon(
-            name='go-last-symbolic'), Gtk.IconSize.BUTTON))
-        button3.connect('clicked', self.last_page)
+        button3 = generate_button('go-last-symbolic', _('Last page'),
+                                  self.last_page)
         hbox.pack_start(button3, True, True, 0)
-        self.popover_listbox.add(set_separator())
+        self.popover_listbox.add(generate_separator_row())
 
         self.init_adicional_popover()
 

@@ -57,7 +57,7 @@ Common required dependencies,
 #### Only for Nautilus
 
 * gir1.2-nautilus-3.0
-* * python-nautilus
+* python-nautilus
 
 #### Only for Nemo
 
