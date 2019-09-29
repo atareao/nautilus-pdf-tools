@@ -34,11 +34,21 @@ import cairo
 import os
 import shutil
 import tools
+from PyPDF2 import PdfFileWriter, PdfFileReader
 
 
 def get_num_of_pages(file_in):
     document = Poppler.Document.new_from_file('file://' + file_in, None)
     return document.get_n_pages()
+
+
+def extractText(file_in):
+    text = ''
+    document_in = PdfFileReader(open(file_in, 'rb'))
+    for i in range(0, document_in.getNumPages()):
+        page = document_in.getPage(i)
+        text += '\n' + page.extractText()
+    return text
 
 
 def split_pdf(file_in):
@@ -86,3 +96,6 @@ def decrypt(file_in, password):
                 os.remove(tmp_file)
                 return True
     return False
+
+if __name__ == '__main__':
+    print(extractText('/home/lorenzo/Documentos/el_quijote.txt.pdf'))
