@@ -40,7 +40,32 @@ class PageOptions():
 
         self.text_text = text_text
         self.text_color = text_color
+        text_font = ' '.join(text_font.split(' ')[:-1])
         self.text_font = text_font
         self.text_size = text_size
-        self.text_x = 0
-        self.text_y = 0
+        self.text_x = text_x
+        self.text_y = text_y
+
+    def __str__(self):
+        text  = 'Rotation_angle: {}\n'
+        text += 'Flip horizontal: {}\n'
+        text += 'Flip vertical: {}\n'
+        text += '--- Image ---\n'
+        text += 'Image: {}\n'
+        text += 'x: {}\n'
+        text += 'y: {}\n'
+        text += 'zoom: {}\n'
+        text += '--- Text ---\n'
+        text += 'Text: {}\n'
+        text += 'x: {}\n'
+        text += 'y: {}\n'
+        text += 'font: {}\n'
+        text += 'size: {}\n'
+        text += 'color: {}\n'
+        text = text.format(self.rotation_angle, self.flip_horizontal,
+                    self.flip_vertical, self.image_file, self.image_x,
+                    self.image_y, self.image_zoom, self.text_text, self.text_x,
+                    self.text_y, self.text_font, self.text_size,
+                     self.text_color)
+        return text
+

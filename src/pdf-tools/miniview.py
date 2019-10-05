@@ -133,12 +133,13 @@ class MiniView(Gtk.DrawingArea):
             if self.pageOptions.text_text:
                 context.save()
                 context.set_source_rgba(*self.pageOptions.text_color)
+                print(self.pageOptions.text_font)
                 context.select_font_face(self.pageOptions.text_font)
-                context.set_font_size(self.pageOptions.text_size)
-                _, _, font_width, font_height, _,\
+                context.set_font_size(self.pageOptions.text_size * 1.5)
+                x_bearing, y_bearing, font_width, font_height, _,\
                     _ = context.text_extents(self.pageOptions.text_text)
-                y = self.pageOptions.text_y + font_height / 2
-                x = self.pageOptions.text_x - font_width / 2
+                y = self.pageOptions.text_y + (font_height + y_bearing) / 2
+                x = self.pageOptions.text_x - (font_width + x_bearing) / 2
                 context.move_to(x * self.zoom, y * self.zoom)
                 context.translate(x * self.zoom, y * self.zoom)
                 context.scale(self.zoom, self.zoom)

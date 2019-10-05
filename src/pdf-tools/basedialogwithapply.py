@@ -41,7 +41,7 @@ from basedialog import generate_check_row, generate_entry_row
 class BaseDialogWithApply(BaseDialog):
     def __init__(self, title= '', filename=None, window=None):
         BaseDialog.__init__(self, title, filename, window)
-    
+
     def set_page(self, page):
         if self.document.get_n_pages() > 0 and \
                 page < self.document.get_n_pages() and\

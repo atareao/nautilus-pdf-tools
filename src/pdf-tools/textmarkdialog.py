@@ -27,261 +27,135 @@ import gi
 try:
     gi.require_version('Gtk', '3.0')
     gi.require_version('Gdk', '3.0')
-    gi.require_version('Poppler', '0.18')
 except Exception as e:
     print(e)
     exit(1)
 from gi.repository import Gtk
 from gi.repository import Gdk
-from gi.repository import Poppler
-from miniview import MiniView
+import os
 import comun
 from comun import _
-from comun import TOP, MIDLE, BOTTOM, LEFT, CENTER, RIGHT
+from comun import MIMETYPES_IMAGE
+from tools import get_ranges
+from tools import get_pages_from_ranges
+from tools import update_preview_cb
+from pageoptions import PageOptions
+from basedialogwithapply import BaseDialogWithApply
+from basedialog import generate_title_row, generate_entry_row
+from basedialog import generate_widget_row, generate_widget_row
 
 
-class TextmarkDialog(Gtk.Dialog):
-    def __init__(self, filename=None, window=None):
-        Gtk.Dialog.__init__(
-            self,
-            _('Textmark'),
-            window,
-            Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
-            (Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT,
-             Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL))
-        self.set_size_request(500, 140)
-        self.set_resizable(False)
-        self.set_icon_from_file(comun.ICON)
-        self.connect('destroy', self.close_application)
-        vbox0 = Gtk.VBox(spacing=5)
-        vbox0.set_border_width(5)
-        self.get_content_area().add(vbox0)
-        notebook = Gtk.Notebook()
-        vbox0.add(notebook)
-        frame = Gtk.Frame()
-        notebook.append_page(frame, tab_label=Gtk.Label(_('Textmark')))
+class TextmarkDialog(BaseDialogWithApply):
+    def __init__(self, title=_('Textmark'), filename=None, window=None):
+        BaseDialogWithApply.__init__(self, title, filename, window)
+        self.x = 0.0
+        self.y = 0.0
+        self.viewport1.connect('button-release-event',
+                               self.on_viewport1_clicked)
 
-        grid = Gtk.Grid()
-        grid.set_row_spacing(10)
-        grid.set_column_spacing(10)
-        grid.set_margin_bottom(10)
-        grid.set_margin_left(10)
-        grid.set_margin_right(10)
-        grid.set_margin_top(10)
-        frame.add(grid)
+    def set_page(self, page):
+        if self.document.get_n_pages() > 0 and \
+                page < self.document.get_n_pages() and\
+                page >= 0:
+            self.no_page = page
+            self.show_page.set_text(str(self.no_page + 1))
+            self.show_title_page.set_text(str(self.no_page + 1))
+            if str(self.no_page) in self.pages.keys():
+                self.x = self.pages[str(self.no_page)].text_x
+                self.y = self.pages[str(self.no_page)].text_y
+                font = self.pages[str(self.no_page)].text_font
+                size = self.pages[str(self.no_page)].text_size
+                color = self.pages[str(self.no_page)].text_color
+                text = self.pages[str(self.no_page)].text_text
+                self.button_font.set_font(font + ' ' + str(size))
+                self.button_color.set_rgba(color)
+                self.textmark.set_text(text)
+                pageOptions = self.pages[str(self.no_page)]
+            else:
+                self.reset()
+                pageOptions = PageOptions(text_x=0, text_y=0,
+                                          text_font='Ubuntu', text_size=12,
+                                          text_color=Gdk.RGBA(0, 0, 0, 1),
+                                          text_text='')
+            self.viewport1.set_page(self.document.get_page(self.no_page),
+                                    pageOptions)
 
-        frame1 = Gtk.Frame()
-        grid.attach(frame1, 0, 0, 2, 1)
-        self.scrolledwindow1 = Gtk.ScrolledWindow()
-        self.scrolledwindow1.set_size_request(420, 420)
-        frame1.add(self.scrolledwindow1)
+    def reset(self):
+        self.x = 0.0
+        self.y = 0.0
+        self.button_font.set_font('Ubuntu 12')
+        self.button_color = Gtk.ColorButton.new_with_rgba(Gdk.RGBA(0, 0, 0, 1))
+        self.textmark.set_text('')
 
-        self.viewport1 = MiniView()
-        self.scrolledwindow1.add(self.viewport1)
+    def init_adicional_popover(self):
+        BaseDialogWithApply.init_adicional_popover(self)
+        self.popover_listbox.add(generate_title_row(_('Textmark'), True))
 
-        frame2 = Gtk.Frame()
-        grid.attach(frame2, 2, 0, 2, 1)
-        scrolledwindow2 = Gtk.ScrolledWindow()
-        scrolledwindow2.set_size_request(420, 420)
-        frame2.add(scrolledwindow2)
 
-        self.viewport2 = MiniView()
-        scrolledwindow2.add(self.viewport2)
+        self.button_font = Gtk.FontButton()
+        self.button_font.set_size_request(165, 25)
+        self.button_font.set_font('Ubuntu 12')
+        row = generate_widget_row(_('Font'), self.button_font)
+        self.popover_listbox.add(row)
 
-        self.scale = 100
+        self.button_color = Gtk.ColorButton. new_with_rgba(Gdk.RGBA(0, 0, 0, 1))
+        self.button_color.set_size_request(165, 25)
+        row = generate_widget_row(_('Color'), self.button_color)
+        self.popover_listbox.add(row)
 
-        vertical_options = Gtk.ListStore(str, int)
-        vertical_options.append([_('Top'), TOP])
-        vertical_options.append([_('Middle'), MIDLE])
-        vertical_options.append([_('Bottom'), BOTTOM])
-        horizontal_options = Gtk.ListStore(str, int)
-        horizontal_options.append([_('Left'), LEFT])
-        horizontal_options.append([_('Center'), CENTER])
-        horizontal_options.append([_('Right'), RIGHT])
+        self.textmark, row = generate_entry_row(_('Textmark'))
+        self.popover_listbox.add(row)
 
-        label = Gtk.Label(_('Append to file') + ':')
-        label.set_alignment(0, .5)
-        grid.attach(label, 0, 1, 1, 1)
+    def on_apply_clicked(self, widget, clear=False):
+        if clear:
+            self.reset()
+        text = self.textmark.get_text()
+        color = self.button_color.get_rgba()
+        font = self.button_font.get_font()
+        size = int(self.button_font.get_font_desc().get_size()/1000)
+        x = self.x
+        y = self.y
+        to_update = []
+        if self.check_this.get_active():
+            to_update = [ self.no_page]
+        elif self.check_all.get_active():
+            to_update = range(0, self.document.get_n_pages())
+        elif self.check_range.get_active():
+            text = self.range.get_text()
+            if text:
+                to_update = get_pages_from_ranges(get_ranges(text))
+        for i in to_update:
+            if clear:
+                del self.pages[str(i)]
+            else:
+                self.pages[str(i)] = PageOptions(text_text=text,
+                    text_color=color, text_font=font, text_size=size,
+                    text_x=x, text_y=y)
+        if self.no_page in to_update:
+            self.preview()
 
-        self.extension = Gtk.Entry()
-        self.extension.set_tooltip_text(_(
-            'Append to file to create output filename'))
-        self.extension.set_text(_('_textmarked'))
-        grid.attach(self.extension, 1, 1, 1, 1)
+    def preview(self):
+        text = self.textmark.get_text()
+        color = self.button_color.get_rgba()
+        font = self.button_font.get_font()
+        size = int(self.button_font.get_font_desc().get_size()/1000)
+        self.viewport1.set_page_options(PageOptions(text_text=text,
+                    text_color=color, text_font=font, text_size=size,
+                    text_x=self.x, text_y=self.y))
 
-        vbox1 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-        grid.attach(vbox1, 0, 2, 2, 1)
-
-        button_font = Gtk.Button(_('Select font'))
-        button_font.connect('clicked', self.on_button_font_activated, self)
-        vbox1.pack_start(button_font, False, False, 0)
-
-        button_color = Gtk.Button(_('Select color'))
-        button_color.connect('clicked', self.on_button_color_activated, self)
-        vbox1.pack_start(button_color, False, False, 0)
-
-        vbox3 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-        grid.attach(vbox3, 2, 2, 2, 1)
-
-        label = Gtk.Label(_('Text') + ':')
-        vbox3.pack_start(label, False, False, 0)
-
-        self.entry = Gtk.Entry()
-        self.entry.set_width_chars(50)
-        self.entry.connect('changed', self.on_entry_changed)
-        vbox3.pack_start(self.entry, True, True, 0)
-
-        label = Gtk.Label(_('Horizontal position') + ':')
-        label.set_alignment(0, .5)
-        grid.attach(label, 0, 4, 1, 1)
-
-        self.horizontal = Gtk.ComboBox.new_with_model_and_entry(
-            horizontal_options)
-        self.horizontal.set_entry_text_column(0)
-        self.horizontal.set_active(0)
-        self.horizontal.connect('changed', self.on_value_changed)
-        grid.attach(self.horizontal, 1, 4, 1, 1)
-
-        label = Gtk.Label(_('Vertical position') + ':')
-        label.set_alignment(0, .5)
-        grid.attach(label, 2, 4, 1, 1)
-
-        self.vertical = Gtk.ComboBox.new_with_model_and_entry(vertical_options)
-        self.vertical.set_entry_text_column(0)
-        self.vertical.set_active(0)
-        self.vertical.connect('changed', self.on_value_changed)
-        grid.attach(self.vertical, 3, 4, 1, 1)
-
-        label = Gtk.Label(_('Set horizontal margin') + ':')
-        label.set_alignment(0, .5)
-        grid.attach(label, 0, 5, 1, 1)
-
-        self.horizontal_margin = Gtk.SpinButton()
-        self.horizontal_margin.set_adjustment(
-            Gtk.Adjustment(5, 0, 100, 1, 10, 10))
-        self.horizontal_margin.connect('value-changed',
-                                       self.on_margin_changed)
-        grid.attach(self.horizontal_margin, 1, 5, 1, 1)
-
-        label = Gtk.Label(_('Set vertical margin') + ':')
-        label.set_alignment(0, .5)
-        grid.attach(label, 2, 5, 1, 1)
-
-        self.vertical_margin = Gtk.SpinButton()
-        self.vertical_margin.set_adjustment(
-            Gtk.Adjustment(5, 0, 100, 1, 10, 10))
-        self.vertical_margin.connect('value-changed',
-                                     self.on_margin_changed)
-        grid.attach(self.vertical_margin, 3, 5, 1, 1)
-
-        self.show_all()
-        if filename is not None:
-            uri = "file://" + filename
-            document = Poppler.Document.new_from_file(uri, None)
-            if document.get_n_pages() > 0:
-                self.viewport1.set_page(document.get_page(0))
-                self.viewport2.set_page(document.get_page(0))
-
-    def on_margin_changed(self, widget):
-        self.viewport2.text_margin_width = self.horizontal_margin.get_value()
-        self.viewport2.text_margin_height = self.vertical_margin.get_value()
-        self.update_preview()
-
-    def on_button_color_activated(self, widget, window):
-        dialog = Gtk.ColorSelectionDialog(
-            parent=window,
-            title=_('Select color'),
-            flags=Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT)
-        dialog.get_color_selection().set_current_color(
-            Gdk.Color(self.viewport2.color[0] * 65535,
-                      self.viewport2.color[1] * 65535,
-                      self.viewport2.color[2] * 65535))
-        dialog.get_color_selection().set_current_alpha(
-            self.viewport2.color[3] * 65535)
-        response = dialog.run()
-        print(response)
-        if response == -5:
-            color1 = dialog.get_color_selection().get_current_color()
-            color2 = dialog.get_color_selection().get_current_alpha()
-            self.viewport2.color = [color1.red / 65535.0,
-                                    color1.green / 65535.0,
-                                    color1.blue / 65535.0,
-                                    color2 / 65535.0]
-            print(self.viewport2.color)
-            self.update_preview()
-        dialog.destroy()
-
-    def on_button_font_activated(self, widget, window):
-        dialog = Gtk.FontSelectionDialog(
-            parent=window,
-            title=_('Select font'),
-            flags=Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT)
-        print(self.viewport2.font + ' ' + str(int(self.viewport2.size)))
-        dialog.set_font_name(
-            self.viewport2.font + ' ' + str(int(self.viewport2.size)))
-        answer = dialog.run()
-        if answer == -5:
-            fs = dialog.get_font_selection()
-            self.viewport2.font = ' '.join(fs.get_font_name().split()[:-1])
-            self.viewport2.size = float(fs.get_font_name().split()[-1])
-            self.update_preview()
-        dialog.destroy()
-
-    def get_horizontal_margin(self):
-        return self.horizontal_margin.get_value()
-
-    def get_vertical_margin(self):
-        return self.vertical_margin.get_value()
-
-    def get_color(self):
-        return self.viewport2.color
-
-    def get_font(self):
-        return self.viewport2.font
-
-    def get_size(self):
-        return self.viewport2.size
-
-    def get_text(self):
-        return self.entry.get_text()
-
-    def get_extension(self):
-        return self.extension.get_text()
-
-    def on_value_changed(self, widget):
-        self.update_preview()
-
-    def get_horizontal_option(self):
-        tree_iter = self.horizontal.get_active_iter()
-        if tree_iter is not None:
-            model = self.horizontal.get_model()
-            return model[tree_iter][1]
-        return 0
-
-    def get_vertical_option(self):
-        tree_iter = self.vertical.get_active_iter()
-        if tree_iter is not None:
-            model = self.vertical.get_model()
-            return model[tree_iter][1]
-        return 0
-
-    def on_entry_changed(self, widget):
-        self.update_preview()
-
-    def update_preview(self):
-        text = self.entry.get_text()
-        if text:
-            self.viewport2.set_text(self.entry.get_text())
-            self.viewport2.set_image_position_vertical(
-                self.get_vertical_option())
-            self.viewport2.set_image_position_horizontal(
-                self.get_horizontal_option())
-            self.viewport2.refresh()
-
-    def close_application(self, widget):
-        self.hide()
-
+    def on_viewport1_clicked(self, widget, event):
+        deltay = abs(self.viewport1.get_allocation().height -
+                        self.viewport1.page_height) / 2.0
+        deltax = abs(self.viewport1.get_allocation().width -
+                        self.viewport1.page_width) / 2.0
+        position_x = (event.x - deltax)
+        position_y = (event.y - deltay)
+        position_x = position_x / self.viewport1.zoom
+        position_y = position_y / self.viewport1.zoom
+        self.x = position_x
+        self.y = position_y
+        self.preview()
 
 if __name__ == '__main__':
-    dialog = TextmarkDialog()
+    dialog = TextmarkDialog(filename='/home/lorenzo/Documentos/ejemplo.pdf')
     dialog.run()

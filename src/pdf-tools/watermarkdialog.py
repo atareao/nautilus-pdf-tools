@@ -32,7 +32,6 @@ except Exception as e:
 from gi.repository import Gtk
 import os
 import comun
-from comun import MMTOPIXEL
 from comun import _
 from comun import MIMETYPES_IMAGE
 from tools import get_ranges
@@ -45,8 +44,8 @@ from basedialog import generate_button_row, generate_spinbutton_row
 
 
 class WatermarkDialog(BaseDialogWithApply):
-    def __init__(self, filename=None, window=None):
-        BaseDialogWithApply.__init__(self, _('Watermark'), filename, window)
+    def __init__(self, title=_('Watermark'), filename=None, window=None):
+        BaseDialogWithApply.__init__(self, title, filename, window)
         self.x = 0.0
         self.y = 0.0
         self.viewport1.connect('button-release-event',
@@ -172,5 +171,5 @@ class WatermarkDialog(BaseDialogWithApply):
 
 
 if __name__ == '__main__':
-    dialog = WatermarkDialog(comun.SAMPLE)
+    dialog = WatermarkDialog(filename=comun.SAMPLE)
     dialog.run()
