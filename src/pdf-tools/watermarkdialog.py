@@ -26,208 +26,107 @@
 import gi
 try:
     gi.require_version('Gtk', '3.0')
-    gi.require_version('Poppler', '0.18')
 except Exception as e:
     print(e)
     exit(1)
 from gi.repository import Gtk
-from gi.repository import Poppler
-from miniview import MiniView
-from PIL import Image
 import os
 import comun
+from comun import MMTOPIXEL
 from comun import _
-from comun import TOP, MIDLE, BOTTOM, LEFT, CENTER, RIGHT, MIMETYPES_IMAGE
+from comun import MIMETYPES_IMAGE
+from tools import get_ranges
+from tools import get_pages_from_ranges
 from tools import update_preview_cb
+from pageoptions import PageOptions
+from basedialogwithapply import BaseDialogWithApply
+from basedialog import generate_title_row, generate_simple_button_row
+from basedialog import generate_button_row, generate_spinbutton_row
 
-class WatermarkDialog(Gtk.Dialog):
+
+class WatermarkDialog(BaseDialogWithApply):
     def __init__(self, filename=None, window=None):
-        Gtk.Dialog.__init__(
-            self,
-            _('Watermark'),
-            window,
-            Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
-            (Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT,
-             Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL))
-        self.set_size_request(500, 140)
-        self.set_resizable(False)
-        self.set_icon_from_file(comun.ICON)
-        self.connect('destroy', self.close_application)
-        vbox0 = Gtk.VBox(spacing=5)
-        vbox0.set_border_width(5)
-        self.get_content_area().add(vbox0)
+        BaseDialogWithApply.__init__(self, _('Watermark'), filename, window)
+        self.x = 0.0
+        self.y = 0.0
+        self.viewport1.connect('button-release-event',
+                               self.on_viewport1_clicked)
 
-        notebook = Gtk.Notebook()
-        vbox0.add(notebook)
+    def set_page(self, page):
+        if self.document.get_n_pages() > 0 and \
+                page < self.document.get_n_pages() and\
+                page >= 0:
+            self.no_page = page
+            self.show_page.set_text(str(self.no_page + 1))
+            self.show_title_page.set_text(str(self.no_page + 1))
+            if str(self.no_page) in self.pages.keys():
+                self.x = self.pages[str(self.no_page)].image_x
+                self.y = self.pages[str(self.no_page)].image_y
+                self.zoom_entry.set_value(self.pages[str(self.no_page)].image_zoom * 100.0)
+                self.file_entry.set_label(self.pages[str(self.no_page)].image_file)
+                pageOptions = self.pages[str(self.no_page)]
+            else:
+                self.reset()
+                pageOptions = PageOptions(image_x=0, image_y=0, image_zoom=1.0,
+                                          image_file=None)
+            self.viewport1.set_page(self.document.get_page(self.no_page),
+                                    pageOptions)
 
-        frame = Gtk.Frame()
-        notebook.append_page(frame, tab_label=Gtk.Label(_('Watermark')))
+    def reset(self):
+        self.x = 0.0
+        self.y = 0.0
+        self.zoom_entry.set_value(100.0)
+        self.file_entry.set_label(_('Select watermark file'))
 
-        grid = Gtk.Grid()
-        grid.set_row_spacing(10)
-        grid.set_column_spacing(10)
-        grid.set_margin_bottom(10)
-        grid.set_margin_left(10)
-        grid.set_margin_right(10)
-        grid.set_margin_top(10)
-        frame.add(grid)
 
-        frame1 = Gtk.Frame()
-        grid.attach(frame1, 0, 0, 2, 1)
-        self.scrolledwindow1 = Gtk.ScrolledWindow()
-        self.scrolledwindow1.set_size_request(320, 320)
-        frame1.add(self.scrolledwindow1)
+    def init_adicional_popover(self):
+        BaseDialogWithApply.init_adicional_popover(self)
+        self.popover_listbox.add(generate_title_row(_('Watermark'), True))
 
-        self.viewport1 = MiniView()
-        self.scrolledwindow1.add(self.viewport1)
+        self.zoom_entry, row = generate_spinbutton_row(_('Zoom'), None)
+        self.zoom_entry.set_adjustment(Gtk.Adjustment(1, 100, 1000, 1, 100, 0))
+        self.popover_listbox.add(row)
+        self.file_entry, row = generate_button_row(
+            _('Watermark'), self.on_button_watermark_clicked)
+        self.file_entry.set_label(_('Select watermark file'))
+        self.popover_listbox.add(row)
 
-        frame2 = Gtk.Frame()
-        grid.attach(frame2, 2, 0, 2, 1)
-        scrolledwindow2 = Gtk.ScrolledWindow()
-        scrolledwindow2.set_size_request(320, 320)
-        frame2.add(scrolledwindow2)
 
-        self.viewport2 = MiniView()
-        scrolledwindow2.add(self.viewport2)
+    def on_apply_clicked(self, widget, clear=False):
+        if clear:
+            self.reset()
+        file_watermark = self.file_entry.get_label()
+        if not os.path.exists(file_watermark):
+            file_watermark = None
+        zoom = float(self.zoom_entry.get_value() / 100.0)
+        to_update = []
+        if self.check_this.get_active():
+            to_update = [ self.no_page]
+        elif self.check_all.get_active():
+            to_update = range(0, self.document.get_n_pages())
+        elif self.check_range.get_active():
+            text = self.range.get_text()
+            if text:
+                to_update = get_pages_from_ranges(get_ranges(text))
+        for i in to_update:
+            if clear:
+                del self.pages[str(i)]
+            else:
+                self.pages[str(i)] = PageOptions(image_x=self.x,
+                    image_y=self.y, image_zoom=zoom, image_file=file_watermark)
+        if self.no_page in to_update:
+            self.preview()
 
-        self.scale = 100
+    def preview(self):
+        file_watermark = self.file_entry.get_label()
+        zoom = float(self.zoom_entry.get_value() / 100.0)
+        if not os.path.exists(file_watermark):
+            file_watermark = None
+        self.viewport1.set_page_options(PageOptions(
+            image_x=self.x, image_y=self.y, image_zoom=zoom,
+            image_file=file_watermark))
 
-        vertical_options = Gtk.ListStore(str, int)
-        vertical_options.append([_('Top'), TOP])
-        vertical_options.append([_('Middle'), MIDLE])
-        vertical_options.append([_('Bottom'), BOTTOM])
-
-        horizontal_options = Gtk.ListStore(str, int)
-        horizontal_options.append([_('Left'), LEFT])
-        horizontal_options.append([_('Center'), CENTER])
-        horizontal_options.append([_('Right'), RIGHT])
-
-        label = Gtk.Label(_('Append to file') + ':')
-        label.set_alignment(0, .5)
-        grid.attach(label, 0, 1, 1, 1)
-
-        self.extension = Gtk.Entry()
-        self.extension.set_tooltip_text(_(
-            'Append to file to create output filename'))
-        self.extension.set_text(_('_watermarked'))
-        grid.attach(self.extension, 1, 1, 1, 1)
-
-        vbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-        grid.attach(vbox, 0, 2, 2, 1)
-
-        label = Gtk.Label(_('Watermark') + ':')
-        label.set_alignment(0, 0.5)
-        vbox.pack_start(label, False, False, 0)
-
-        self.entry = Gtk.Entry()
-        self.entry.set_width_chars(10)
-        self.entry.set_sensitive(False)
-        vbox.pack_start(self.entry, True, True, 0)
-
-        button = Gtk.Button(_('Choose File'))
-        button.connect('clicked', self.on_button_clicked)
-        vbox.pack_start(button, False, False, 0)
-
-        label = Gtk.Label(_('Horizontal position') + ':')
-        label.set_alignment(0, .5)
-        grid.attach(label, 0, 4, 1, 1)
-
-        self.horizontal = Gtk.ComboBox.new_with_model_and_entry(
-            horizontal_options)
-        self.horizontal.set_entry_text_column(0)
-        self.horizontal.set_active(0)
-        self.horizontal.connect('changed', self.on_value_changed)
-        grid.attach(self.horizontal, 1, 4, 1, 1)
-
-        label = Gtk.Label(_('Vertical position') + ':')
-        label.set_alignment(0, .5)
-        grid.attach(label, 2, 4, 1, 1)
-
-        self.vertical = Gtk.ComboBox.new_with_model_and_entry(vertical_options)
-        self.vertical.set_entry_text_column(0)
-        self.vertical.set_active(0)
-        self.vertical.connect('changed', self.on_value_changed)
-        grid.attach(self.vertical, 3, 4, 1, 1)
-
-        label = Gtk.Label(_('Set horizontal margin') + ':')
-        label.set_alignment(0, .5)
-        grid.attach(label, 0, 5, 1, 1)
-
-        self.horizontal_margin = Gtk.SpinButton()
-        self.horizontal_margin.set_adjustment(
-            Gtk.Adjustment(5, 0, 100, 1, 10, 10))
-        self.horizontal_margin.connect('value-changed',
-                                       self.on_margin_changed)
-        grid.attach(self.horizontal_margin, 1, 5, 1, 1)
-
-        label = Gtk.Label(_('Set vertical margin') + ':')
-        label.set_alignment(0, .5)
-        grid.attach(label, 2, 5, 1, 1)
-
-        self.vertical_margin = Gtk.SpinButton()
-        self.vertical_margin.set_adjustment(
-            Gtk.Adjustment(5, 0, 100, 1, 10, 10))
-        self.vertical_margin.connect('value-changed',
-                                     self.on_margin_changed)
-        grid.attach(self.vertical_margin, 3, 5, 1, 1)
-
-        label = Gtk.Label(_('Watermark zoom') + ':')
-        label.set_alignment(0, 0.5)
-        grid.attach(label, 0, 6, 1, 1)
-
-        self.watermark_zoom = Gtk.SpinButton()
-        self.watermark_zoom.connect('value-changed',
-                                    self.update_preview)
-        self.watermark_zoom.set_adjustment(
-            Gtk.Adjustment(100, 0, 1010, 1, 10, 10))
-        grid.attach(self.watermark_zoom, 1, 6, 1, 1)
-
-        self.show_all()
-        if filename is not None:
-            uri = "file://" + filename
-            document = Poppler.Document.new_from_file(uri, None)
-            if document.get_n_pages() > 0:
-                self.viewport1.set_page(document.get_page(0))
-                self.viewport2.set_page(document.get_page(0))
-
-    def on_margin_changed(self, widget):
-        self.viewport2.text_margin_width = self.horizontal_margin.get_value()
-        self.viewport2.text_margin_height = self.vertical_margin.get_value()
-        self.update_preview()
-
-    def on_value_changed(self, widget):
-        self.update_preview()
-
-    def get_watermark_zoom(self):
-        return self.watermark_zoom.get_value()
-
-    def get_horizontal_margin(self):
-        return self.horizontal_margin.get_value()
-
-    def get_vertical_margin(self):
-        return self.vertical_margin.get_value()
-
-    def get_extension(self):
-        return self.extension.get_text()
-
-    def get_image_filename(self):
-        return self.entry.get_text()
-
-    def get_horizontal_option(self):
-        tree_iter = self.horizontal.get_active_iter()
-        if tree_iter is not None:
-            model = self.horizontal.get_model()
-            return model[tree_iter][1]
-        return 0
-
-    def get_vertical_option(self):
-        tree_iter = self.vertical.get_active_iter()
-        if tree_iter is not None:
-            model = self.vertical.get_model()
-            return model[tree_iter][1]
-        return 0
-
-    def on_button_clicked(self, button):
+    def on_button_watermark_clicked(self, button):
         dialog = Gtk.FileChooserDialog(_('Select one image'),
                                        self,
                                        Gtk.FileChooserAction.OPEN,
@@ -238,6 +137,7 @@ class WatermarkDialog(Gtk.Dialog):
         dialog.set_default_response(Gtk.ResponseType.OK)
         dialog.set_select_multiple(False)
         dialog.set_current_folder(os.getenv('HOME'))
+        png_filtert = None
         for aMimetype in MIMETYPES_IMAGE.keys():
             filtert = Gtk.FileFilter()
             filtert.set_name(aMimetype)
@@ -246,37 +146,31 @@ class WatermarkDialog(Gtk.Dialog):
             for pattern in MIMETYPES_IMAGE[aMimetype]['patterns']:
                 filtert.add_pattern(pattern)
             dialog.add_filter(filtert)
+            if aMimetype == 'PNG':
+                png_filtert = filtert
         preview = Gtk.Image()
         dialog.set_preview_widget(preview)
+        dialog.set_filter(png_filtert)
         dialog.connect('update-preview', update_preview_cb, preview)
         response = dialog.run()
         if response == Gtk.ResponseType.OK:
-            self.entry.set_text(dialog.get_filename())
+            self.file_entry.set_label(dialog.get_filename())
         dialog.destroy()
 
-        self.update_preview()
-
-    def update_preview(self, widget=None):
-        file_watermark = self.entry.get_text()
-        if file_watermark and os.path.exists(file_watermark):
-            self.viewport2.set_image(file_watermark)
-            self.viewport2.image_zoom = float(
-                self.watermark_zoom.get_value() / 100.0)
-            self.viewport2.set_image_position_vertical(
-                self.get_vertical_option())
-            self.viewport2.set_image_position_horizontal(
-                self.get_horizontal_option())
-            self.viewport2.image_margin_width =\
-                self.horizontal_margin.get_value()
-            self.viewport2.image_margin_height =\
-                self.vertical_margin.get_value()
-            self.viewport2.refresh()
-
-    def close_application(self, widget):
-        self.hide()
+    def on_viewport1_clicked(self, widget, event):
+        deltay = abs(self.viewport1.get_allocation().height -
+                        self.viewport1.page_height) / 2.0
+        deltax = abs(self.viewport1.get_allocation().width -
+                        self.viewport1.page_width) / 2.0
+        position_x = (event.x - deltax)
+        position_y = (event.y - deltay)
+        position_x = position_x / self.viewport1.zoom
+        position_y = position_y / self.viewport1.zoom
+        self.x = position_x
+        self.y = position_y
+        self.preview()
 
 
 if __name__ == '__main__':
-    dialog = WatermarkDialog(
-        '/home/lorenzo/Escritorio/pdfs/ejemplo_pdf_01.pdf')
+    dialog = WatermarkDialog(comun.SAMPLE)
     dialog.run()
