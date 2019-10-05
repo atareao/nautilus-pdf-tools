@@ -36,18 +36,16 @@ import os
 import comun
 import tools
 from comun import _
-from tools import update_preview_cb
+from tools import update_preview_cb, center_dialog
 
 
 class JoinPdfsDialog(Gtk.Dialog):
     def __init__(self, title, files, afile, window):
-        Gtk.Dialog.__init__(
-            self,
-            title,
-            window,
-            Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
-            (Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT,
-             Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL))
+        Gtk.Dialog.__init__(self, title, window)
+        self.set_modal(True)
+        self.set_destroy_with_parent(True)
+        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
+        self.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
         self.set_icon_from_file(comun.ICON)
         self.connect('destroy', self.close_application)
 
@@ -146,6 +144,7 @@ class JoinPdfsDialog(Gtk.Dialog):
                                   filename])
 
         self.show_all()
+        center_dialog(self)
 
     def on_button_output_file_clicked(self, widget, window):
         file_out = tools.dialog_save_as(

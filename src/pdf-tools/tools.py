@@ -78,7 +78,7 @@ def get_pages_from_ranges(ranges):
     pages = []
     for rang in ranges:
         if len(rang) > 1:
-            for i in range(rang[0], rang[1] + 1):
+            for i in range(rang[0], rang[1]):
                 if i not in pages:
                     pages.append(i)
         else:

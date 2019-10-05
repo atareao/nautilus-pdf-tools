@@ -390,37 +390,6 @@ class PDFManager(GObject.GObject):
                 dialog.run()
             fd.destroy()
 
-    def rotate_some_pages(self, selected, window):
-        files = tools.get_files(selected)
-        if files:
-            file0 = files[0]
-            filename, filext = os.path.splitext(file0)
-            file_out = filename + '_rotated.pdf'
-            last_page = pdfapi.get_num_of_pages(file0)
-            spd = SelectPagesRotateDialog(_('Rotate PDF'), last_page,
-                                          file_out, window)
-            if spd.run() == Gtk.ResponseType.ACCEPT:
-                ranges = tools.get_ranges(spd.entry1.get_text())
-                if spd.rbutton1.get_active():
-                    degrees = 270
-                elif spd.rbutton2.get_active():
-                    degrees = 90
-                else:
-                    degrees = 180
-                spd.destroy()
-                if ranges:
-                    dialog = Progreso(_('Rotate PDF'), window, 1)
-                    diboo = doitinbackground.DoitInBackgroundRotateSomePages(
-                        file0, file_out, degrees, ranges)
-                    diboo.connect('start', dialog.set_max_value)
-                    diboo.connect('done', dialog.increase)
-                    diboo.connect('finished', dialog.close)
-                    diboo.connect('interrupted', dialog.close)
-                    dialog.connect('i-want-stop', diboo.stop_it)
-                    diboo.start()
-                    dialog.run()
-            else:
-                spd.destroy()
 
     def remove_some_pages(self, selected, window):
         files = tools.get_files(selected)

@@ -73,6 +73,8 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
             self.pdfmanager.textmark(selected, window)
         elif option == 'paginate':
             self.pdfmanager.paginate(selected, window)
+        elif option == 'sign':
+            self.pdfmanager.sign(selected, window)
         elif option == 'rotate pages':
             self.pdfmanager.rotate_some_pages(selected, window)
         elif option == 'remove pages':
@@ -108,50 +110,51 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
                 label=_('Pdf Tools'),
                 tip=_('Tools to manipulate pdf files'),
                 icon='Gtk-find-and-replace')
-
             submenu = FileManager.Menu()
             top_menuitem.set_submenu(submenu)
-            items = [
-                ('01', _('Rotate and flip'), _('rotate_and_flip pdf files'),
-                 'rotate'),
-                ('02', _('Watermark'), _('Watermark pdffiles'),
-                 'watermark'),
-                ('03', _('Textmark'), _('Textmark pdf files'),
-                 'textmark'),
-                ('04', _('Paginate'), _('Paginate pdf files'),
-                 'paginate'),
-                ('05', _('Rotate pages'),
-                 _('Rotate pages of the document files'),
-                 'rotate pages'),
-                ('06', _('Remove pages'),
-                 _('Remove pages of the document files'),
-                 'remove pages'),
-                ('07', _('Extract pages'),
-                 _('Extract pages of the document files'),
-                 'extract pages'),
-                ('08', _('Join pdf files'),
-                 _('Join pdf files in one document'),
-                 'join'),
-                ('09', _('Split pdf files'),
-                 _('Split a pdf in several documents'),
-                 'split'),
-                ('10', _('Combine pdf pages'),
-                 _('Combine pdf pages in one page'),
-                 'combine'),
-                ('11', _('Reduce pdf size'), _('Reduce pdf size'),
-                 'reduce'),
-                ('12', _('Resize pdf pages'), _('Resize pdf pages'),
-                 'resize'),
-                ('13', _('Convert pdf to png'),
-                 _('Convert pdf file to png image'),
-                 'convert2png'),
-                ('14', _('Encrypt'),
-                 _('Encrypt pdf files'),
-                 'encrypt'),
-                ('15', _('Decrypt'),
-                 _('Decrypt pdf files'),
-                 'decrypt'),
-            ]
+            if len(self_items) == 1:
+                items = [
+                    ('01', _('Rotate and flip'), _('rotate_and_flip pdf files'),
+                    'rotate'),
+                    ('02', _('Watermark'), _('Watermark pdf files'),
+                    'watermark'),
+                    ('03', _('Textmark'), _('Textmark pdf files'),
+                    'textmark'),
+                    ('04', _('Paginate'), _('Paginate pdf files'),
+                    'paginate'),
+                    ('05', _('Sign'), _('Sign pdf files'),
+                    'sign'),
+                ]
+            else:
+                items = [
+                    ('06', _('Remove pages'),
+                    _('Remove pages of the document files'),
+                    'remove pages'),
+                    ('07', _('Extract pages'),
+                    _('Extract pages of the document files'),
+                    'extract pages'),
+                    ('08', _('Join pdf files'),
+                    _('Join pdf files in one document'),
+                    'join'),
+                    ('09', _('Split pdf files'),
+                    _('Split a pdf in several documents'),
+                    'split'),
+                    ('10', _('Combine pdf pages'),
+                    _('Combine pdf pages in one page'),
+                    'combine'),
+                    ('11', _('Reduce pdf size'), _('Reduce pdf size'),
+                    'reduce'),
+                    ('12', _('Resize pdf pages'), _('Resize pdf pages'),
+                    'resize'),
+                    ('13', _('Convert pdf to png'),
+                    _('Convert pdf file to png image'),
+                    'convert2png'),
+                    ('14', _('Encrypt'),
+                    _('Encrypt pdf files'),
+                    'encrypt'),
+                    ('15', _('Decrypt'),
+                    _('Decrypt pdf files'),
+                    'decrypt'),
             for item in items:
                 sub_menuitem = FileManager.MenuItem(
                     name='PdfToolsMenuProvider::Gtk-pdf-tools-' + item[0],

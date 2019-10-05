@@ -33,17 +33,16 @@ from gi.repository import Gtk
 import comun
 import tools
 from comun import _
+from tools import center_dialog
 
 
 class SelectPagesDialog(Gtk.Dialog):
     def __init__(self, title, afile, window):
-        Gtk.Dialog.__init__(
-            self,
-            title,
-            window,
-            Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
-            (Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT,
-             Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL))
+        Gtk.Dialog.__init__(self, title, window)
+        self.set_modal(True)
+        self.set_destroy_with_parent(True)
+        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
+        self.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
         self.set_resizable(False)
         self.set_icon_from_file(comun.ICON)
         self.connect('destroy', self.close_application)
@@ -87,6 +86,7 @@ class SelectPagesDialog(Gtk.Dialog):
                                      window)
             grid.attach(self.output_file, 1, 1, 1, 1)
         self.show_all()
+        center_dialog(self)
 
     def on_button_output_file_clicked(self, widget, window):
         file_out = tools.dialog_save_as(

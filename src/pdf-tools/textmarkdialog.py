@@ -115,17 +115,15 @@ class TextmarkDialog(BaseDialogWithApply):
         size = int(self.button_font.get_font_desc().get_size()/1000)
         x = self.x
         y = self.y
-        to_update = []
         if self.check_this.get_active():
             to_update = [ self.no_page]
         elif self.check_all.get_active():
             to_update = range(0, self.document.get_n_pages())
         elif self.check_range.get_active():
-            text = self.range.get_text()
-            if text:
-                to_update = get_pages_from_ranges(get_ranges(text))
+            to_update = get_pages_from_ranges(
+                get_ranges(self.range.get_text()))
         for i in to_update:
-            if clear:
+            if clear and str(i) in self.pages.keys():
                 del self.pages[str(i)]
             else:
                 self.pages[str(i)] = PageOptions(text_text=text,
@@ -157,5 +155,5 @@ class TextmarkDialog(BaseDialogWithApply):
         self.preview()
 
 if __name__ == '__main__':
-    dialog = TextmarkDialog(filename='/home/lorenzo/Documentos/ejemplo.pdf')
+    dialog = TextmarkDialog(filename=comun.SAMPLE)
     dialog.run()

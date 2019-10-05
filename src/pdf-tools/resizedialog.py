@@ -32,18 +32,16 @@ except Exception as e:
 from gi.repository import Gtk
 import comun
 from comun import _
+from tools import center_dialog
 
 
 class ResizeDialog(Gtk.Dialog):
     def __init__(self, title, window):
-        Gtk.Dialog.__init__(
-            self,
-            title,
-            window,
-            Gtk.DialogFlags.MODAL |
-            Gtk.DialogFlags.DESTROY_WITH_PARENT,
-            (Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT,
-             Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL))
+        Gtk.Dialog.__init__(self, title, window)
+        self.set_modal(True)
+        self.set_destroy_with_parent(True)
+        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
+        self.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
         self.set_size_request(350, 150)
         self.set_resizable(False)
         self.set_icon_from_file(comun.ICON)
@@ -140,6 +138,7 @@ class ResizeDialog(Gtk.Dialog):
 
         grid.attach(self.extension, 1, 2, 1, 1)
         self.show_all()
+        center_dialog(self)
 
     def get_extension(self):
         return self.extension.get_text()

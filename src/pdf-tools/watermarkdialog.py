@@ -98,17 +98,15 @@ class WatermarkDialog(BaseDialogWithApply):
         if not os.path.exists(file_watermark):
             file_watermark = None
         zoom = float(self.zoom_entry.get_value() / 100.0)
-        to_update = []
         if self.check_this.get_active():
             to_update = [ self.no_page]
         elif self.check_all.get_active():
             to_update = range(0, self.document.get_n_pages())
         elif self.check_range.get_active():
-            text = self.range.get_text()
-            if text:
-                to_update = get_pages_from_ranges(get_ranges(text))
+            to_update = get_pages_from_ranges(
+                get_ranges(self.range.get_text()))
         for i in to_update:
-            if clear:
+            if clear and str(i) in self.pages.keys():
                 del self.pages[str(i)]
             else:
                 self.pages[str(i)] = PageOptions(image_x=self.x,

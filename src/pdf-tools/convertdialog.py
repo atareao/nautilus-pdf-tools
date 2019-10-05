@@ -33,15 +33,16 @@ from gi.repository import Gtk
 import comun
 from comun import MIMETYPES_IMAGE
 from comun import _
+from tools import center_dialog
 
 
 class ConvertDialog(Gtk.Dialog):
-    def __init__(self):
-        Gtk.Dialog.__init__(
-            self, _('Convert to'), None,
-            Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
-            (Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT,
-             Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL))
+    def __init__(self, window=None):
+        Gtk.Dialog.__init__(self, _('Convert to'), window)
+        self.set_modal(True)
+        self.set_destroy_with_parent(True)
+        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
+        self.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
         self.set_size_request(300, 140)
         self.set_resizable(False)
         self.set_icon_from_file(comun.ICON)
@@ -77,6 +78,7 @@ class ConvertDialog(Gtk.Dialog):
                       xoptions=Gtk.AttachOptions.EXPAND,
                       yoptions=Gtk.AttachOptions.SHRINK)
         self.show_all()
+        center_dialog(self)
 
     def get_convert_to(self):
         tree_iter = self.convert_to.get_active_iter()

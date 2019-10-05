@@ -33,17 +33,16 @@ from gi.repository import Gtk
 import comun
 import tools
 from comun import _
+from tools import center_dialog
 
 
 class SelectPagesRotateDialog(Gtk.Dialog):
     def __init__(self, title, last_page, afile, window):
-        Gtk.Dialog.__init__(
-            self,
-            title,
-            window,
-            Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
-            (Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT,
-             Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL))
+        Gtk.Dialog.__init__(self, title, window)
+        self.set_modal(True)
+        self.set_destroy_with_parent(True)
+        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
+        self.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
         self.set_size_request(300, 140)
         self.set_resizable(False)
         self.set_icon_from_file(comun.ICON)
@@ -105,6 +104,7 @@ class SelectPagesRotateDialog(Gtk.Dialog):
                       xoptions=Gtk.AttachOptions.FILL,
                       yoptions=Gtk.AttachOptions.SHRINK)
         self.show_all()
+        cente_dialog(self)
 
     def on_button_output_file_clicked(self, widget, window):
         file_out = tools.dialog_save_as(
