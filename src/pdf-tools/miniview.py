@@ -36,6 +36,7 @@ from gi.repository import Gdk
 import cairo
 import math
 import tools
+from pageoptions import PageOptions
 
 from comun import RESOLUTION, MMTOPIXEL, TOP,\
     MIDLE, BOTTOM, LEFT, CENTER, RIGHT
@@ -43,7 +44,7 @@ from comun import RESOLUTION, MMTOPIXEL, TOP,\
 
 class MiniView(Gtk.DrawingArea):
 
-    def __init__(self, width=600.0, height=630.00, margin=10.0, border=1.0,
+    def __init__(self, width=630.0, height=630.00, margin=10, border=1.0,
                  force=False):
         Gtk.DrawingArea.__init__(self)
         self.add_events(
@@ -53,7 +54,6 @@ class MiniView(Gtk.DrawingArea):
         self.height = height
         self.width = width
         self.image_surface = None
-        self.margin = margin
         self.border = border
         self.page = None
         self.zoom = 1
@@ -64,20 +64,8 @@ class MiniView(Gtk.DrawingArea):
         self.page_height = -1
         self.margin_width = -1
         self.margin_height = -1
-        self.text_margin_width = 0
-        self.text_margin_height = 0
-        self.image_margin_width = 0
-        self.image_margin_height = 0
-        self.image_width = 0
-        self.image_height = 0
-        self.image_zoom = 1.0
-        self.image = None
-        self.text = None
-        self.color = [0, 0, 0, 1]
-        self.font = 'Ubuntu'
-        self.size = 12
-        self.position_vertical = TOP
-        self.position_horizontal = LEFT
+        self.margin = margin
+        self.pageOptions = PageOptions()
         self.connect('draw', self.on_expose, None)
         self.set_size_request(self.width, self.height)
 
@@ -117,68 +105,44 @@ class MiniView(Gtk.DrawingArea):
             mtr.rotate(self.rotation_angle * math.pi / 2.0)
             mtr.scale(self.zoom * RESOLUTION, self.zoom * RESOLUTION)
             context.transform(mtr)
-            if self.rotation_angle == 1.0:
+            if self.pageOptions.rotation_angle == 1.0:
                     context.translate(
                         0.0, -self.page_width / self.zoom / RESOLUTION)
-            elif self.rotation_angle == 2.0:
+            elif self.pageOptions.rotation_angle == 2.0:
                     context.translate(
                         -self.page_width / self.zoom / RESOLUTION,
                         -self.page_height / self.zoom / RESOLUTION)
-            elif self.rotation_angle == 3.0:
+            elif self.pageOptions.rotation_angle == 3.0:
                     context.translate(
                         -self.page_height / self.zoom / RESOLUTION, 0.0)
             self.page.render(context)
             context.restore()
-            if self.image:
+            if self.pageOptions.image_file:
                 context.save()
                 watermark_surface = tools.create_image_surface_from_file(
-                    self.image, self.image_zoom)
-                self.image_height = watermark_surface.get_height()
-                self.image_width = watermark_surface.get_width()
-                print(self.or_width, self.or_height)
-                if self.position_vertical == TOP:
-                    y = self.image_margin_height
-                elif self.position_vertical == MIDLE:
-                    y = (self.or_height - self.image_height / MMTOPIXEL) / 2
-                elif self.position_vertical == BOTTOM:
-                    y = (self.or_height - self.image_height / MMTOPIXEL -
-                         self.image_margin_height)
-                if self.position_horizontal == LEFT:
-                    x = self.image_margin_width
-                elif self.position_horizontal == CENTER:
-                    x = (self.or_width - self.image_width / MMTOPIXEL) / 2
-                elif self.position_horizontal == RIGHT:
-                    x = (self.or_width - self.image_width / MMTOPIXEL -
-                         self.image_margin_width)
+                    self.pageOptions.image_file, self.pageOptions.image_zoom)
+                image_height = watermark_surface.get_height()
+                image_width = watermark_surface.get_width()
+                y = self.pageOptions.image_y - image_height / MMTOPIXEL / 2
+                x = self.pageOptions.image_x - image_width / MMTOPIXEL / 2
                 context.translate(x * self.zoom, y * self.zoom)
                 context.scale(self.zoom / MMTOPIXEL, self.zoom / MMTOPIXEL)
                 context.set_source_surface(watermark_surface)
                 context.paint()
                 context.restore()
-            if self.text:
+            if self.pageOptions.text_text:
                 context.save()
-                context.set_source_rgba(*self.color)
-                context.select_font_face(self.font)
-                context.set_font_size(self.size)
-                xbearing, _, font_width, font_height, _,\
-                    _ = context.text_extents(self.text)
-                if self.position_vertical == TOP:
-                    y = self.text_margin_height + font_height
-                elif self.position_vertical == MIDLE:
-                    y = (self.or_height + font_height) / 2
-                elif self.position_vertical == BOTTOM:
-                    y = self.or_height - self.text_margin_height
-                if self.position_horizontal == LEFT:
-                    x = self.text_margin_width
-                elif self.position_horizontal == CENTER:
-                    x = (self.or_width - font_width) / 2
-                elif self.position_horizontal == RIGHT:
-                    x = (self.or_width - font_width + xbearing -
-                         self.text_margin_width)
+                context.set_source_rgba(*self.pageOptions.text_color)
+                context.select_font_face(self.pageOptions.text_font)
+                context.set_font_size(self.pageOptions.text_size)
+                _, _, font_width, font_height, _,\
+                    _ = context.text_extents(self.pageOptions.text_text)
+                y = self.pageOptions.text_y + font_height / 2
+                x = self.pageOptions.text_x - font_width / 2
                 context.move_to(x * self.zoom, y * self.zoom)
                 context.translate(x * self.zoom, y * self.zoom)
                 context.scale(self.zoom, self.zoom)
-                context.show_text(self.text)
+                context.show_text(self.pageOptions.text_text)
                 context.restore()
         cr.save()
         cr.set_source_rgba(0.0, 0.0, 0.0, 0.5)
@@ -189,10 +153,10 @@ class MiniView(Gtk.DrawingArea):
         cr.stroke()
         cr.restore()
 
-        if self.flip_vertical:
+        if self.pageOptions.flip_vertical:
             cr.scale(1, -1)
             cr.translate(0, -(2 * self.margin_height + self.page_height))
-        if self.flip_horizontal:
+        if self.pageOptions.flip_horizontal:
             cr.scale(-1, 1)
             cr.translate(-(2 * self.margin_width + self.page_width), 0)
         if self.page:
@@ -201,45 +165,15 @@ class MiniView(Gtk.DrawingArea):
                                   self.margin_height)
             cr.paint()
 
-    def set_page(self, page, rotation_angle=0, flip_horizontal=False,
-            flip_vertical=False):
+    def set_page(self, page, pageOptions):
         self.page = page
         self.drawings = []
         self.or_width, self.or_height = self.page.get_size()
         self.or_width = int(self.or_width * RESOLUTION)
         self.or_height = int(self.or_height * RESOLUTION)
-        self.rotation_angle = rotation_angle
-        self.flip_horizontal = flip_horizontal
-        self.flip_vertical = flip_vertical
+        self.pageOptions = pageOptions
         self.queue_draw()
-
-    def set_rotation_angle(self, rotation_angle):
-        self.rotation_angle = rotation_angle
-        self.queue_draw()
-
-    def set_flip_horizontal(self, flip_horizontal):
-        self.flip_horizontal = flip_horizontal
-        self.queue_draw()
-
-    def set_flip_vertical(self, flip_vertical):
-        self.flip_vertical = flip_vertical
-        self.queue_draw()
-
-    def set_image_position_vertical(self, position_vertical):
-        self.position_vertical = position_vertical
-        self.queue_draw()
-
-    def set_image_position_horizontal(self, position_horizontal):
-        self.position_horizontal = position_horizontal
-        self.queue_draw()
-
-    def set_text(self, text):
-        self.text = text
-        self.queue_draw()
-
-    def set_image(self, image):
-        self.image = image
-        self.queue_draw()
-
-    def refresh(self):
+    
+    def set_page_options(self, pageOptions):
+        self.pageOptions = pageOptions
         self.queue_draw()

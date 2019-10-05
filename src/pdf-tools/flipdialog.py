@@ -27,19 +27,23 @@ import comun
 from comun import _
 from tools import get_ranges
 from tools import get_pages_from_ranges
-from basedialog import BaseDialog, generate_separator_row, generate_title_row
-from basedialog import generate_swith_row, generate_check_entry_row
-from basedialog import generate_check_row, generate_entry_row
+from basedialogwithapply import BaseDialogWithApply
+from basedialog import generate_separator_row, generate_title_row
+from basedialog import generate_swith_row, generate_check_row, generate_entry_row
+
+
 class PageOptions():
     def __init__(self, rotation_angle, flip_horizontal, flip_vertical):
         self.rotation_angle = rotation_angle
         self.flip_horizontal= flip_horizontal
         self.flip_vertical = flip_vertical
 
-class FlipDialog(BaseDialog):
+
+class FlipDialog(BaseDialogWithApply):
     def __init__(self, filename=None, window=None):
-        BaseDialog.__init__(self, _('Rotate and flid PDF'), filename, window)
-    
+        BaseDialogWithApply.__init__(self, _('Rotate and flid PDF'),
+                                     filename, window)
+
     def set_page(self, page):
         if self.document.get_n_pages() > 0 and \
                 page < self.document.get_n_pages() and\
@@ -51,52 +55,52 @@ class FlipDialog(BaseDialog):
                 rotation_angle = self.pages[str(self.no_page)].rotation_angle
                 flip_horizontal = self.pages[str(self.no_page)].flip_horizontal
                 flip_vertical = self.pages[str(self.no_page)].flip_vertical
+                self.check_horizontal.set_active(flip_horizontal)
+                self.check_vertical.set_active(flip_vertical)
+                if rotation_angle == 0.0:
+                    self.rotate_0.set_active(True)
+                elif rotation_angle == 1.0:
+                    self.rotate_90.set_active(True)
+                elif rotation_angle == 2.0:
+                    self.rotate_180.set_active(True)
+                elif rotation_angle == 3.0:
+                    self.rotate_270.set_active(True)
             else:
                 rotation_angle = 0
                 flip_horizontal = False
                 flip_vertical = False
+                self.check_horizontal.set_active(False)
+                self.check_vertical.set_active(False)
+                self.rotate_0.set_active(True)
             self.viewport1.set_page(self.document.get_page(self.no_page),
                                     rotation_angle, flip_horizontal,
                                     flip_vertical)
 
     def init_adicional_popover(self):
-        self.popover_listbox.add(generate_title_row(_('Apply'), True))
-
-        self.check_this, row = generate_check_row(_('This page'), None,
-                                                  self.slider_on_value_changed)
-        self.popover_listbox.add(row)
-        self.check_all, row = generate_check_row(_('All'), self.check_this,
-                                                  self.slider_on_value_changed)
-        self.popover_listbox.add(row)
-        self.check_range, self.range, row = generate_check_entry_row(
-            _('Range'), self.check_this, self.slider_on_value_changed)
-        self.popover_listbox.add(row)
-
-        self.popover_listbox.add(generate_separator_row())
-
+        BaseDialogWithApply.init_adicional_popover(self)
         self.popover_listbox.add(generate_title_row(_('Rotate'), True))
 
         self.rotate_0, row = generate_check_row(
-            '0', None, self.slider_on_value_changed)
+            '0', None, None)
         self.popover_listbox.add(row)
         self.rotate_90, row = generate_check_row(
-            '90', self.rotate_0, self.slider_on_value_changed)
+            '90', self.rotate_0, None)
         self.popover_listbox.add(row)
         self.rotate_180, row = generate_check_row(
-            '180', self.rotate_0, self.slider_on_value_changed)
+            '180', self.rotate_0, None)
         self.popover_listbox.add(row)
         self.rotate_270, row = generate_check_row(
-            '270', self.rotate_0, self.slider_on_value_changed)
+            '270', self.rotate_0, None)
         self.popover_listbox.add(row)
 
         self.popover_listbox.add(generate_separator_row())
         self.popover_listbox.add(generate_title_row(_('Flip'), True))
 
         self.check_vertical, row = generate_swith_row(
-            _('Vertical'), self.slider_on_value_changed)
+            _('Vertical'), None)
         self.popover_listbox.add(row)
         self.check_horizontal, row = generate_swith_row(
-            _('Horizontal'), self.slider_on_value_changed)
+            _('Horizontal'), None)
         self.popover_listbox.add(row)
 
         self.popover_listbox.add(generate_separator_row())
@@ -105,40 +109,38 @@ class FlipDialog(BaseDialog):
         self.add_to_file, row = generate_entry_row(_('Add to file'))
         self.popover_listbox.add(row)
 
-    def slider_on_value_changed(self, widget, value, name):
+    def on_apply_clicked(self, widget, clear=False):
+        if clear:
+            self.check_horizontal.set_active(False)
+            self.check_vertical.set_active(False)
+            self.rotate_0.set_active(True)
         flip_horizontal = self.check_horizontal.get_active()
         flip_vertical = self.check_vertical.get_active()
-        if name == '90':
+        if self.rotate_90.get_active():
             rotation_angle = 1.0
-        elif name == '180':
+        elif self.rotate_180.get_active():
             rotation_angle = 2.0
-        elif name == '270':
+        elif self.rotate_270.get_active():
             rotation_angle = 3.0
         else:
             rotation_angle = 0.0
-        update = False
+        to_update = []
         if self.check_this.get_active():
-            update = True
-            self.pages[str(self.no_page)] = PageOptions(rotation_angle,
-                                                        flip_horizontal,
-                                                        flip_vertical)
+            to_update = [ self.no_page]
         elif self.check_all.get_active():
-            update = True
-            for i in range(0, self.document.get_n_pages()):
-                self.pages[str(i)] = PageOptions(rotation_angle,
-                                                 flip_horizontal,
-                                                 flip_vertical)
+            to_update = range(0, self.document.get_n_pages())
         elif self.check_range.get_active():
             text = self.range.get_text()
             if text:
-                ranges = get_ranges(text)
-                pages = get_pages_from_ranges(ranges)
-                update = (str(self.no_page) in self.pages.keys())
-                for i in pages:
-                    self.pages[str(i)] = PageOptions(rotation_angle,
-                                                     flip_horizontal,
-                                                     flip_vertical)
-        if update:
+                to_update = get_pages_from_ranges(get_ranges(text))
+        for i in to_update:
+            if clear:
+                del self.pages[str(i)]
+            else:
+                self.pages[str(i)] = PageOptions(rotation_angle,
+                                                 flip_horizontal,
+                                                 flip_vertical)
+        if self.no_page in to_update:
             self.viewport1.rotation_angle = rotation_angle
             self.viewport1.flip_horizontal = flip_horizontal
             self.viewport1.flip_vertical = flip_vertical

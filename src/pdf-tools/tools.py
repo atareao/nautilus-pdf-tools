@@ -48,30 +48,20 @@ import mimetypes
 import shlex
 import subprocess
 from urllib import unquote_plus
+from comun import ALL_MIMETYPES_IMAGE
 
 mimetypes.init()
 
-def update_pdf_preview_cb(file_chooser, preview):
-    filename = file_chooser.get_preview_filename()
-    try:
-        print('---', filename, '---')
-        pixbuf = get_surface_from_pdf(filename, 250)
-        if pixbuf is not None:
-            preview.set_from_surface(pixbuf)
-            has_preview = True
-        else:
-            has_preview = False
-    except Exception as e:
-        print(e)
-        has_preview = False
-    file_chooser.set_preview_widget_active(has_preview)
-    return
 
-def update_image_preview_cb(file_chooser, preview):
+def update_preview_cb(file_chooser, preview):
     filename = file_chooser.get_preview_filename()
     try:
-        print('---', filename, '---')
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 250, 250)
+        if os.path.isdir(filename):
+            pixbuf = None
+        elif mimetypes.guess_type(filename)[0] in MIMETYPES_PDF:
+            pixbuf = get_pixbuf_from_pdf(filename, 250)
+        elif mimetypes.guess_type(filename)[0] in ALL_MIMETYPES_IMAGE:
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 250, 250)
         if pixbuf is not None:
             preview.set_from_pixbuf(pixbuf)
             has_preview = True
@@ -82,6 +72,7 @@ def update_image_preview_cb(file_chooser, preview):
         has_preview = False
     file_chooser.set_preview_widget_active(has_preview)
     return
+
 
 def get_pages_from_ranges(ranges):
     pages = []

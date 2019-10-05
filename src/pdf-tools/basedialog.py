@@ -102,7 +102,6 @@ def generate_check_row(text, parent=None, callback=None):
     row = generate_widget_row(text, check)
     return check, row
 
-
 def generate_check_entry_row(text, parent, callback=None):
     row = Gtk.ListBoxRow()
     hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
@@ -301,6 +300,8 @@ class BaseDialog(Gtk.Dialog):
             self.show_page.set_text(str(self.no_page + 1))
             self.show_title_page.set_text(str(self.no_page + 1))
 
+    def get_options_for_pages(self):
+        return self.pages
 
     def close(self, widget):
         self.destroy()
