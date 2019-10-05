@@ -37,56 +37,39 @@ import comun
 import tools
 from comun import _
 from comun import MIMETYPES_IMAGE
-from tools import update_preview_cb, center_dialog
+from tools import update_preview_cb
+from basicdialog import BasicDialog
 
 
-class CreatePDFFromImagesDialog(Gtk.Dialog):
+class CreatePDFFromImagesDialog(BasicDialog):
     def __init__(self, title, files, afile, window):
-        Gtk.Dialog.__init__(self, title, window)
-        self.set_modal(True)
-        self.set_destroy_with_parent(True)
-        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
-        self.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
+        self.files = files
+        self.afile = afile
+        self.main_window = window
+        BasicDialog.__init__(self, title, window)
+        self.set_size_request(400, 600)
 
-        self.set_icon_from_file(comun.ICON)
-        self.connect('destroy', self.close_application)
-
-        vbox0 = Gtk.VBox(spacing=5)
-        vbox0.set_border_width(5)
-        self.get_content_area().add(vbox0)
-
-        frame1 = Gtk.Frame()
-        vbox0.add(frame1)
-        table1 = Gtk.Table(rows=4, columns=2, homogeneous=False)
-        table1.set_border_width(5)
-        table1.set_col_spacings(5)
-        table1.set_row_spacings(5)
-        frame1.add(table1)
+    def init_ui(self):
+        BasicDialog.init_ui(self)
         label1 = Gtk.Label(_('Paper size') + ':')
         label1.set_tooltip_text(_('Select the size of the output file'))
         label1.set_alignment(0, .5)
-        table1.attach(label1, 0, 1, 0, 1,
-                      xoptions=Gtk.AttachOptions.FILL,
-                      yoptions=Gtk.AttachOptions.SHRINK)
+        self.grid.attach(label1, 0, 0, 1, 1)
+
         label2 = Gtk.Label(_('Orientation') + ':')
         label2.set_tooltip_text(_('Select the orientation of the page'))
         label2.set_alignment(0, .5)
-        table1.attach(label2, 0, 1, 1, 2,
-                      xoptions=Gtk.AttachOptions.FILL,
-                      yoptions=Gtk.AttachOptions.SHRINK)
+        self.grid.attach(label2, 0, 1, 1, 1)
 
         label3 = Gtk.Label(_('Margen') + ':')
         label3.set_tooltip_text(_('Select the size of the margin'))
         label3.set_alignment(0, .5)
-        table1.attach(label3, 0, 1, 2, 3,
-                      xoptions=Gtk.AttachOptions.FILL,
-                      yoptions=Gtk.AttachOptions.SHRINK)
+        self.grid.attach(label3, 0, 2, 1, 1)
+
         label4 = Gtk.Label(_('Output file') + ':')
         label4.set_tooltip_text(_('Select the output file'))
         label4.set_alignment(0, .5)
-        table1.attach(label4, 0, 1, 3, 4,
-                      xoptions=Gtk.AttachOptions.FILL,
-                      yoptions=Gtk.AttachOptions.SHRINK)
+        self.grid.attach(label4, 0, 3, 1, 1)
 
         liststore = Gtk.ListStore(str, float, float)
         liststore.append([_('A0'), 2383.9, 3370.4])
@@ -128,9 +111,7 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
         self.entry1.pack_start(renderer_text, True)
         self.entry1.add_attribute(renderer_text, "text", 0)
         self.entry1.set_active(0)
-        table1.attach(self.entry1, 1, 2, 0, 1,
-                      xoptions=Gtk.AttachOptions.FILL,
-                      yoptions=Gtk.AttachOptions.SHRINK)
+        self.grid.attach(self.entry1, 1, 1, 1, 1)
 
         liststore = Gtk.ListStore(str)
         liststore.append([_('Vertical')])
@@ -140,9 +121,8 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
         self.entry2.pack_start(renderer_text, True)
         self.entry2.add_attribute(renderer_text, "text", 0)
         self.entry2.set_active(0)
-        table1.attach(self.entry2, 1, 2, 1, 2,
-                      xoptions=Gtk.AttachOptions.FILL,
-                      yoptions=Gtk.AttachOptions.SHRINK)
+        self.grid.attach(self.entry2, 1, 2, 1, 1)
+
         liststore = Gtk.ListStore(str)
         liststore.append([_('No margin')])
         liststore.append([_('small margin')])
@@ -152,19 +132,17 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
         self.entry3.pack_start(renderer_text, True)
         self.entry3.add_attribute(renderer_text, "text", 0)
         self.entry3.set_active(0)
-        table1.attach(self.entry3, 1, 2, 2, 3,
-                      xoptions=Gtk.AttachOptions.FILL,
-                      yoptions=Gtk.AttachOptions.SHRINK)
-        self.output_file = Gtk.Button.new_with_label(afile)
+        self.grid.attach(self.entry3, 1, 3, 1, 1)
+
+        self.output_file = Gtk.Button.new_with_label(self.afile)
         self.output_file.connect('clicked',
                                  self.on_button_output_file_clicked,
-                                 window)
-        table1.attach(self.output_file, 1, 2, 3, 4,
-                      xoptions=Gtk.AttachOptions.FILL,
-                      yoptions=Gtk.AttachOptions.SHRINK)
+                                 self.main_window)
+        self.grid.attach(self.output_file, 0, 4, 2, 1)
 
         hbox = Gtk.HBox()
-        vbox0.pack_start(hbox, True, True, 0)
+        self.grid.attach(hbox, 0, 5, 2, 8)
+        # vbox0.pack_start(hbox, True, True, 0)
 
         scrolledwindow = Gtk.ScrolledWindow()
         scrolledwindow.set_policy(
@@ -219,10 +197,10 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
         self.button4.connect('clicked', self.on_button_remove_clicked)
         vbox2.pack_start(self.button4, False, False, 0)
 
-        if files:
+        if self.files:
             position = 0
             model = self.iconview.get_model()
-            for filename in files:
+            for filename in self.files:
                 pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename,
                                                                 200, 200)
                 if pixbuf is not None:
@@ -233,7 +211,6 @@ class CreatePDFFromImagesDialog(Gtk.Dialog):
                                  [pixbuf,
                                   os.path.basename(filename),
                                   filename])
-
         self.show_all()
 
     def on_button_output_file_clicked(self, widget, window):

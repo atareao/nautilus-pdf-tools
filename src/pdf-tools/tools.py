@@ -397,15 +397,3 @@ def all_files_are_images(items):
         if fileExtension.lower() in EXTENSIONS_FROM:
             return True
     return False
-
-def center_dialog(dialog):
-    dialog.hide()
-    monitor = Gdk.Display.get_primary_monitor(Gdk.Display.get_default())
-    scale = monitor.get_scale_factor()
-    monitor_width = monitor.get_geometry().width / scale
-    monitor_height = monitor.get_geometry().height / scale
-    width = dialog.get_preferred_width()[0]
-    height = dialog.get_preferred_height()[0]
-    print(width, height)
-    dialog.move((monitor_width - width)/2, (monitor_height - height)/2)
-    dialog.show()

@@ -33,64 +33,44 @@ from gi.repository import Gtk
 import tools
 import comun
 from comun import _
-from tools import center_dialog
+from basicdialog import BasicDialog
 
 
-class CombineDialog(Gtk.Dialog):
+class CombineDialog(BasicDialog):
     def __init__(self, title, window):
-        Gtk.Dialog.__init__(self, title, window)
-        self.set_modal(True)
-        self.set_destroy_with_parent(True)
-        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
-        self.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
+        BasicDialog.__init__(self, title, window)
         self.set_size_request(350, 150)
-        self.set_resizable(False)
-        self.set_icon_from_file(comun.ICON)
-        self.connect('destroy', self.close_application)
-        vbox0 = Gtk.VBox(spacing=5)
-        vbox0.set_border_width(5)
-        self.get_content_area().add(vbox0)
-        notebook = Gtk.Notebook()
-        vbox0.add(notebook)
-        frame1 = Gtk.Frame()
-        notebook.append_page(frame1, tab_label=Gtk.Label(_('Pages')))
 
-        grid = Gtk.Grid()
-        grid.set_row_spacing(10)
-        grid.set_column_spacing(10)
-        grid.set_margin_bottom(10)
-        grid.set_margin_left(10)
-        grid.set_margin_right(10)
-        grid.set_margin_top(10)
-        frame1.add(grid)
+    def init_ui(self):
+        BasicDialog.init_ui(self)
 
         label1 = Gtk.Label(_('Paper size') + ':')
         label1.set_alignment(0, .5)
-        grid.attach(label1, 0, 0, 1, 1)
+        self.grid.attach(label1, 0, 0, 1, 1)
 
         label2 = Gtk.Label(_('Orientation') + ':')
         label2.set_alignment(0, .5)
-        grid.attach(label2, 0, 1, 1, 1)
+        self.grid.attach(label2, 0, 1, 1, 1)
 
         label3 = Gtk.Label(_('Pages in Page') + ':')
         label3.set_alignment(0, .5)
-        grid.attach(label3, 0, 2, 1, 1)
+        self.grid.attach(label3, 0, 2, 1, 1)
 
         label4 = Gtk.Label(_('by'))
         label4.set_alignment(.5, .5)
-        grid.attach(label4, 2, 2, 1, 1)
+        self.grid.attach(label4, 2, 2, 1, 1)
 
         label5 = Gtk.Label(_('Sort') + ':')
         label5.set_alignment(0, .5)
-        grid.attach(label5, 0, 4, 1, 1)
+        self.grid.attach(label5, 0, 4, 1, 1)
 
         label6 = Gtk.Label(_('Set the margin') + ':')
         label6.set_alignment(0, .5)
-        grid.attach(label6, 0, 5, 1, 1)
+        self.grid.attach(label6, 0, 5, 1, 1)
 
         label7 = Gtk.Label(_('Append to file') + ':')
         label7.set_alignment(0, .5)
-        grid.attach(label7, 0, 6, 1, 1)
+        self.grid.attach(label7, 0, 6, 1, 1)
 
         liststore = Gtk.ListStore(str, float, float)
         liststore.append([_('A0'), 2383.9, 3370.4])
@@ -133,7 +113,7 @@ class CombineDialog(Gtk.Dialog):
         self.entry1.pack_start(renderer_text, True)
         self.entry1.add_attribute(renderer_text, "text", 0)
         self.entry1.set_active(0)
-        grid.attach(self.entry1, 1, 0, 4, 1)
+        self.grid.attach(self.entry1, 1, 0, 4, 1)
 
         liststore = Gtk.ListStore(str)
         liststore.append([_('Vertical')])
@@ -144,19 +124,19 @@ class CombineDialog(Gtk.Dialog):
         self.entry2.pack_start(renderer_text, True)
         self.entry2.add_attribute(renderer_text, "text", 0)
         self.entry2.set_active(0)
-        grid.attach(self.entry2, 1, 1, 4, 1)
+        self.grid.attach(self.entry2, 1, 1, 4, 1)
 
         self.entry3 = Gtk.SpinButton()
         self.entry3.set_tooltip_text(_('Select how many pages in a page'))
         self.entry3.set_adjustment(Gtk.Adjustment(1, 1, 100, 1, 10, 10))
         self.entry3.set_value(1)
-        grid.attach(self.entry3, 1, 2, 1, 1)
+        self.grid.attach(self.entry3, 1, 2, 1, 1)
 
         self.entry4 = Gtk.SpinButton()
         self.entry4.set_tooltip_text(_('rows by columns'))
         self.entry4.set_adjustment(Gtk.Adjustment(1, 1, 100, 1, 10, 10))
         self.entry4.set_value(2)
-        grid.attach(self.entry4, 3, 2, 1, 1)
+        self.grid.attach(self.entry4, 3, 2, 1, 1)
 
         liststore = Gtk.ListStore(str)
         liststore.append([_('By rows')])
@@ -167,21 +147,19 @@ class CombineDialog(Gtk.Dialog):
         self.entry5.pack_start(renderer_text, True)
         self.entry5.add_attribute(renderer_text, "text", 0)
         self.entry5.set_active(0)
-        grid.attach(self.entry5, 1, 4, 4, 1)
+        self.grid.attach(self.entry5, 1, 4, 4, 1)
 
         self.entry6 = Gtk.SpinButton()
         self.entry6.set_tooltip_text(_('The margin to the page in mm'))
         self.entry6.set_adjustment(Gtk.Adjustment(0, 0, 100, 1, 10, 10))
         self.entry6.set_value(0)
-        grid.attach(self.entry6, 1, 5, 1, 1)
+        self.grid.attach(self.entry6, 1, 5, 1, 1)
 
         self.extension = Gtk.Entry()
         self.extension.set_tooltip_text(_(
             'Append to file to create output filename'))
         self.extension.set_text(_('_combined'))
-        grid.attach(self.extension, 1, 6, 4, 1)
-        self.show_all()
-        center_dialog(self)
+        self.grid.attach(self.extension, 1, 6, 4, 1)
 
     def on_button_output_file_clicked(self, widget, window):
         file_out = tools.dialog_save_as(

@@ -35,28 +35,24 @@ from gi.repository import Gtk
 from gi.repository import GLib
 from gi.repository import GObject
 import threading
+from basicdialog import BasicDialog
 
 
-class Progreso(Gtk.Dialog, threading.Thread):
+class Progreso(BasicDialog, threading.Thread):
     __gsignals__ = {
         'i-want-stop': (GObject.SIGNAL_RUN_FIRST, GObject.TYPE_NONE, ()),
     }
 
     def __init__(self, title, parent, max_value, label=None):
-        Gtk.Dialog.__init__(self, title, parent)
-        self.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+        BasicDialog.__init__(self, title, parent)
         self.set_size_request(330, 30)
-        self.set_resizable(False)
-        self.connect('destroy', self.close)
         # self.set_modal(True)
         vbox = Gtk.VBox(spacing=5)
         vbox.set_border_width(5)
         self.get_content_area().add(vbox)
 
-        frame1 = Gtk.Frame()
-        vbox.pack_start(frame1, True, True, 0)
         table = Gtk.Table(2, 2, False)
-        frame1.add(table)
+        vbox.add(table)
 
         self.label = Gtk.Label()
         table.attach(self.label, 0, 2, 0, 1,

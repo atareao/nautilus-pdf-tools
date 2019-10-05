@@ -33,26 +33,15 @@ from gi.repository import Gtk
 import comun
 from comun import _
 import os
-from tools import center_dialog
+from basicdialog import BasicDialog
 
-
-class PasswordDialog(Gtk.Dialog):
+class PasswordDialog(BasicDialog):
     def __init__(self, title, window):
-        Gtk.Dialog.__init__(self, title, window)
-        self.set_modal(True)
-        self.set_destroy_with_parent(True)
-        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
-        self.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
-        self.set_resizable(False)
-        self.set_icon_from_file(comun.ICON)
-        self.connect('destroy', self.close_application)
+        BasicDialog.__init__(self, title, window)
+
         vbox0 = Gtk.VBox(spacing=5)
         vbox0.set_border_width(5)
         self.get_content_area().add(vbox0)
-        notebook = Gtk.Notebook()
-        vbox0.add(notebook)
-        frame1 = Gtk.Frame()
-        notebook.append_page(frame1, tab_label=Gtk.Label(_('Password')))
 
         grid = Gtk.Grid()
         grid.set_row_spacing(10)
@@ -61,7 +50,7 @@ class PasswordDialog(Gtk.Dialog):
         grid.set_margin_left(10)
         grid.set_margin_right(10)
         grid.set_margin_top(10)
-        frame1.add(grid)
+        vbox0.add(grid)
 
         label1 = Gtk.Label(_('Password') + ':')
         label1.set_alignment(0, .5)
@@ -87,7 +76,6 @@ class PasswordDialog(Gtk.Dialog):
         grid.attach(button_visibility, 2, 0, 1, 1)
 
         self.show_all()
-        center_dialog(self)
 
     def on_button_visibility_clicked(self, widget):
         if comun.is_package():

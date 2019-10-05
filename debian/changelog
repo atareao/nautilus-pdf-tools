@@ -1,3 +1,9 @@
+nautilus-pdf-tools (1.2.9-0extras19.04.00) disco; urgency=medium
+
+  * New vy to new version
+
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Sat, 05 Oct 2019 20:55:22 +0200
+
 nautilus-pdf-tools (1.2.0-0extras19.04.1) disco; urgency=medium
 
   * add dependecy

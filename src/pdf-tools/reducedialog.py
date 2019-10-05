@@ -32,26 +32,16 @@ except Exception as e:
 from gi.repository import Gtk
 import comun
 from comun import _
-from tools import center_dialog
+from basicdialog import BasicDialog
 
-class ReduceDialog(Gtk.Dialog):
+class ReduceDialog(BasicDialog):
     def __init__(self, title, window):
-        Gtk.Dialog.__init__(self, title, window)
-        self.set_modal(True)
-        self.set_destroy_with_parent(True)
-        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
-        self.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
+        BasicDialog.__init__(self, title, window)
         self.set_size_request(200, 150)
-        self.set_resizable(False)
-        self.set_icon_from_file(comun.ICON)
-        self.set_default_response(Gtk.ResponseType.ACCEPT)
-        self.connect('destroy', self.close_application)
+
         vbox0 = Gtk.VBox(spacing=5)
         vbox0.set_border_width(5)
         self.get_content_area().add(vbox0)
-
-        frame1 = Gtk.Frame()
-        vbox0.add(frame1)
 
         grid = Gtk.Grid()
         grid.set_row_spacing(10)
@@ -60,7 +50,7 @@ class ReduceDialog(Gtk.Dialog):
         grid.set_margin_left(10)
         grid.set_margin_right(10)
         grid.set_margin_top(10)
-        frame1.add(grid)
+        vbox0.add(grid)
 
         label1 = Gtk.Label(_('Image resolution') + ':')
         label1.set_alignment(0, .5)
@@ -84,7 +74,6 @@ class ReduceDialog(Gtk.Dialog):
         grid.attach(self.append_entry, 1, 1, 1, 1)
 
         self.show_all()
-        center_dialog(self)
 
     def get_dpi(self):
         return self.dpi_entry.get_text()

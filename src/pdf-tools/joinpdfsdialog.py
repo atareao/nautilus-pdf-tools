@@ -36,30 +36,23 @@ import os
 import comun
 import tools
 from comun import _
-from tools import update_preview_cb, center_dialog
+from tools import update_preview_cb
+from basicdialog import BasicDialog
 
 
-class JoinPdfsDialog(Gtk.Dialog):
+class JoinPdfsDialog(BasicDialog):
     def __init__(self, title, files, afile, window):
-        Gtk.Dialog.__init__(self, title, window)
-        self.set_modal(True)
-        self.set_destroy_with_parent(True)
-        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
-        self.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
-        self.set_icon_from_file(comun.ICON)
-        self.connect('destroy', self.close_application)
+        BasicDialog.__init__(self, title, window)
 
         vbox0 = Gtk.VBox(spacing=5)
         vbox0.set_border_width(5)
         self.get_content_area().add(vbox0)
 
-        frame1 = Gtk.Frame()
-        vbox0.pack_start(frame1, True, True, 0)
         table1 = Gtk.Table(rows=1, columns=2, homogeneous=False)
         table1.set_border_width(5)
         table1.set_col_spacings(5)
         table1.set_row_spacings(5)
-        frame1.add(table1)
+        vbox0.add(table1)
         label1 = Gtk.Label(_('Output file') + ':')
         label1.set_tooltip_text(_('Select the output file'))
         label1.set_alignment(0, .5)
@@ -144,7 +137,6 @@ class JoinPdfsDialog(Gtk.Dialog):
                                   filename])
 
         self.show_all()
-        center_dialog(self)
 
     def on_button_output_file_clicked(self, widget, window):
         file_out = tools.dialog_save_as(

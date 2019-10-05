@@ -33,52 +33,27 @@ from gi.repository import Gtk
 import comun
 from comun import MIMETYPES_IMAGE
 from comun import _
-from tools import center_dialog
+from basicdialog import BasicDialog
 
 
-class ConvertDialog(Gtk.Dialog):
+class ConvertDialog(BasicDialog):
     def __init__(self, window=None):
-        Gtk.Dialog.__init__(self, _('Convert to'), window)
-        self.set_modal(True)
-        self.set_destroy_with_parent(True)
-        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
-        self.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
-        self.set_size_request(300, 140)
-        self.set_resizable(False)
-        self.set_icon_from_file(comun.ICON)
-        self.connect('destroy', self.close_application)
-        vbox0 = Gtk.VBox(spacing=5)
-        vbox0.set_border_width(5)
-        self.get_content_area().add(vbox0)
+        BasicDialog.__init__(self, _('Convert to'), window)
+        self.set_size_request(300, 80)
 
-        notebook = Gtk.Notebook()
-        vbox0.add(notebook)
-
-        frame1 = Gtk.Frame()
-        notebook.append_page(frame1, tab_label=Gtk.Label(_('Convert to')))
-
-        table1 = Gtk.Table(rows=1, columns=2, homogeneous=False)
-        table1.set_border_width(5)
-        table1.set_col_spacings(5)
-        table1.set_row_spacings(5)
-        frame1.add(table1)
+    def init_ui(self):
+        BasicDialog.init_ui(self)
 
         options = Gtk.ListStore(str)
         for extension in MIMETYPES_IMAGE.keys():
             if extension != _('ALL'):
                 options.append([extension])
         label = Gtk.Label(_('Convert to') + ':')
-        table1.attach(label, 0, 1, 0, 1,
-                      xoptions=Gtk.AttachOptions.EXPAND,
-                      yoptions=Gtk.AttachOptions.SHRINK)
+        self.grid.attach(label, 0, 0, 1, 1)
         self.convert_to = Gtk.ComboBox.new_with_model_and_entry(options)
         self.convert_to.set_entry_text_column(0)
         self.convert_to.set_active(0)
-        table1.attach(self.convert_to, 1, 2, 0, 1,
-                      xoptions=Gtk.AttachOptions.EXPAND,
-                      yoptions=Gtk.AttachOptions.SHRINK)
-        self.show_all()
-        center_dialog(self)
+        self.grid.attach(self.convert_to, 1, 0, 1, 1)
 
     def get_convert_to(self):
         tree_iter = self.convert_to.get_active_iter()

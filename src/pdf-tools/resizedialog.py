@@ -32,27 +32,16 @@ except Exception as e:
 from gi.repository import Gtk
 import comun
 from comun import _
-from tools import center_dialog
+from basicdialog import BasicDialog
 
-
-class ResizeDialog(Gtk.Dialog):
+class ResizeDialog(BasicDialog):
     def __init__(self, title, window):
-        Gtk.Dialog.__init__(self, title, window)
-        self.set_modal(True)
-        self.set_destroy_with_parent(True)
-        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
-        self.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
+        BasicDialog.__init__(self, title, window)
         self.set_size_request(350, 150)
-        self.set_resizable(False)
-        self.set_icon_from_file(comun.ICON)
-        self.connect('destroy', self.close_application)
+
         vbox0 = Gtk.VBox(spacing=5)
         vbox0.set_border_width(5)
         self.get_content_area().add(vbox0)
-        notebook = Gtk.Notebook()
-        vbox0.add(notebook)
-        frame1 = Gtk.Frame()
-        notebook.append_page(frame1, tab_label=Gtk.Label(_('Pages')))
 
         grid = Gtk.Grid()
         grid.set_row_spacing(10)
@@ -61,7 +50,7 @@ class ResizeDialog(Gtk.Dialog):
         grid.set_margin_left(10)
         grid.set_margin_right(10)
         grid.set_margin_top(10)
-        frame1.add(grid)
+        vbox0.add(grid)
 
         label1 = Gtk.Label(_('Paper size') + ':')
         label1.set_alignment(0, 0.5)
@@ -138,7 +127,6 @@ class ResizeDialog(Gtk.Dialog):
 
         grid.attach(self.extension, 1, 2, 1, 1)
         self.show_all()
-        center_dialog(self)
 
     def get_extension(self):
         return self.extension.get_text()

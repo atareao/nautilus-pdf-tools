@@ -38,8 +38,8 @@ import os
 from miniview import MiniView
 import comun
 from comun import _
-from tools import center_dialog
 from tools import str2int
+from basicdialog import BasicDialog
 
 HEIGHT = 25
 
@@ -149,17 +149,10 @@ def generate_button(icon, tooltip_text, callback):
     return button
 
 
-class BaseDialog(Gtk.Dialog):
+class BaseDialog(BasicDialog):
     def __init__(self, title= '', filename=None, window=None):
-        Gtk.Dialog.__init__(self, title, window)
-        self.set_modal(True)
-        self.set_destroy_with_parent(True)
-        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
-        self.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
+        BasicDialog.__init__(self, title, window)
         self.set_default_size(600, 600)
-        self.set_resizable(True)
-        self.set_icon_from_file(comun.ICON)
-        self.connect('destroy', self.close)
 
         hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
         hbox.set_border_width(10)
@@ -185,7 +178,6 @@ class BaseDialog(Gtk.Dialog):
             self.set_page(0)
 
         self.show_all()
-        center_dialog(self)
 
     def set_page(self, page):
         if self.document.get_n_pages() > 0 and \
@@ -287,6 +279,7 @@ class BaseDialog(Gtk.Dialog):
         self.init_adicional_popover()
 
         popover.show_all()
+        popover.hide()
         return popover
 
     def init_adicional_popover(self):
