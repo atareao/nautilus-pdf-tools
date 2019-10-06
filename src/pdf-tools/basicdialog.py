@@ -27,7 +27,7 @@ import gi
 try:
     gi.require_version('Gtk', '3.0')
     gi.require_version('Gdk', '3.0')
-except Exception as e:
+except ValueError as e:
     print(e)
     exit(1)
 from gi.repository import Gdk, Gtk

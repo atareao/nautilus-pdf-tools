@@ -27,8 +27,8 @@ import gi
 try:
     gi.require_version('Gtk', '2.0')
     gi.require_version('Poppler', '0.18')
-    gi.require_version('Gio', '2.0')
-except Exception as e:
+    gi.require_version('Gio', '4.0')
+except ValueError as e:
     print(e)
     exit(1)
 from gi.repository import Gio, Gtk, Poppler

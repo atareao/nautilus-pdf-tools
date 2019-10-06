@@ -29,7 +29,7 @@ try:
     gi.require_version('GObject', '2.0')
     gi.require_version('Gtk', '3.0')
     gi.require_version('GdkPixbuf', '2.0')
-except Exception as e:
+except ValueError as e:
     print(e)
     exit(1)
 from gi.repository import GdkPixbuf, GObject, Gtk
