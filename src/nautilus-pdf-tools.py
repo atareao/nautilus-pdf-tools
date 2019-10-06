@@ -153,6 +153,7 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
                     ('15', _('Decrypt'),
                     _('Decrypt pdf files'),
                     'decrypt'),
+                ]
             for item in items:
                 sub_menuitem = FileManager.MenuItem(
                     name='PdfToolsMenuProvider::Gtk-pdf-tools-' + item[0],
