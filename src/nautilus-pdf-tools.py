@@ -111,7 +111,7 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
                 icon='Gtk-find-and-replace')
             submenu = FileManager.Menu()
             top_menuitem.set_submenu(submenu)
-            if len(self_items) == 1:
+            if len(sel_items) == 1:
                 items = [
                     ('01', _('Rotate and flip'), _('rotate_and_flip pdf files'),
                     'rotate'),
@@ -124,37 +124,37 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
                     ('05', _('Sign'), _('Sign pdf files'),
                     'sign'),
                 ]
-            else:
-                items = [
-                    ('06', _('Remove pages'),
-                    _('Remove pages of the document files'),
-                    'remove pages'),
-                    ('07', _('Extract pages'),
-                    _('Extract pages of the document files'),
-                    'extract pages'),
-                    ('08', _('Join pdf files'),
-                    _('Join pdf files in one document'),
-                    'join'),
-                    ('09', _('Split pdf files'),
-                    _('Split a pdf in several documents'),
-                    'split'),
-                    ('10', _('Combine pdf pages'),
-                    _('Combine pdf pages in one page'),
-                    'combine'),
-                    ('11', _('Reduce pdf size'), _('Reduce pdf size'),
-                    'reduce'),
-                    ('12', _('Resize pdf pages'), _('Resize pdf pages'),
-                    'resize'),
-                    ('13', _('Convert pdf to png'),
-                    _('Convert pdf file to png image'),
-                    'convert2png'),
-                    ('14', _('Encrypt'),
-                    _('Encrypt pdf files'),
-                    'encrypt'),
-                    ('15', _('Decrypt'),
-                    _('Decrypt pdf files'),
-                    'decrypt'),
-                ]
+            moreitems = [
+                ('06', _('Remove pages'),
+                _('Remove pages of the document files'),
+                'remove pages'),
+                ('07', _('Extract pages'),
+                _('Extract pages of the document files'),
+                'extract pages'),
+                ('08', _('Join pdf files'),
+                _('Join pdf files in one document'),
+                'join'),
+                ('09', _('Split pdf files'),
+                _('Split a pdf in several documents'),
+                'split'),
+                ('10', _('Combine pdf pages'),
+                _('Combine pdf pages in one page'),
+                'combine'),
+                ('11', _('Reduce pdf size'), _('Reduce pdf size'),
+                'reduce'),
+                ('12', _('Resize pdf pages'), _('Resize pdf pages'),
+                'resize'),
+                ('13', _('Convert pdf to png'),
+                _('Convert pdf file to png image'),
+                'convert2png'),
+                ('14', _('Encrypt'),
+                _('Encrypt pdf files'),
+                'encrypt'),
+                ('15', _('Decrypt'),
+                _('Decrypt pdf files'),
+                'decrypt'),
+            ]
+            items = items + moreitems
             for item in items:
                 sub_menuitem = FileManager.MenuItem(
                     name='PdfToolsMenuProvider::Gtk-pdf-tools-' + item[0],
@@ -177,7 +177,7 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
                 label=_('About'),
                 tip=_('About'),
                 icon='Gtk-find-and-replace')
-            sub_menuitem_99.connect('activate', self.about)
+            sub_menuitem_99.connect('activate', about)
             submenu.append_item(sub_menuitem_99)
 
             return top_menuitem,
@@ -244,8 +244,8 @@ def about(widget):
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 ''')
-    ad.set_website('http://www.atareao.es')
-    ad.set_website_label('http://www.atareao.es')
+    ad.set_website('https://www.atareao.es')
+    ad.set_website_label('atareao.es')
     ad.set_authors([
         'Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>'])
     ad.set_documenters([
