@@ -42,32 +42,25 @@ from basicdialog import BasicDialog
 
 class JoinPdfsDialog(BasicDialog):
     def __init__(self, title, files, afile, window):
+        self.files = files
+        self.afile = afile
+        self.main_window = window
         BasicDialog.__init__(self, title, window)
 
-        vbox0 = Gtk.VBox(spacing=5)
-        vbox0.set_border_width(5)
-        self.get_content_area().add(vbox0)
+    def init_ui(self):
+        BasicDialog.init_ui(self)
 
-        table1 = Gtk.Table(rows=1, columns=2, homogeneous=False)
-        table1.set_border_width(5)
-        table1.set_col_spacings(5)
-        table1.set_row_spacings(5)
-        vbox0.add(table1)
         label1 = Gtk.Label(_('Output file') + ':')
         label1.set_tooltip_text(_('Select the output file'))
         label1.set_alignment(0, .5)
-        table1.attach(label1, 0, 1, 0, 1,
-                      xoptions=Gtk.AttachOptions.SHRINK,
-                      yoptions=Gtk.AttachOptions.SHRINK)
-        self.output_file = Gtk.Button.new_with_label(afile)
+        self.grid.attach(label1, 0, 0, 1, 1)
+        self.output_file = Gtk.Button.new_with_label(self.afile)
         self.output_file.connect('clicked',
                                  self.on_button_output_file_clicked,
-                                 window)
-        table1.attach(self.output_file, 1, 2, 0, 1,
-                      xoptions=Gtk.AttachOptions.EXPAND,
-                      yoptions=Gtk.AttachOptions.SHRINK)
+                                 self.main_window)
+        self.grid.attach(self.output_file, 1, 0, 3, 1)
         hbox = Gtk.HBox()
-        vbox0.pack_start(hbox, True, True, 0)
+        self.grid.attach(hbox, 0, 1, 4, 2)
 
         scrolledwindow = Gtk.ScrolledWindow()
         scrolledwindow.set_policy(
@@ -122,10 +115,10 @@ class JoinPdfsDialog(BasicDialog):
         button4.connect('clicked', self.on_button_remove_clicked)
         vbox2.pack_start(button4, False, False, 0)
 
-        if files:
+        if self.files:
             position = 0
             model = self.iconview.get_model()
-            for filename in files:
+            for filename in self.files:
                 pixbuf = tools.get_pixbuf_from_pdf(filename, 200)
                 if pixbuf is not None:
                     position += 1

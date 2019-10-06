@@ -39,27 +39,17 @@ class PasswordDialog(BasicDialog):
     def __init__(self, title, window):
         BasicDialog.__init__(self, title, window)
 
-        vbox0 = Gtk.VBox(spacing=5)
-        vbox0.set_border_width(5)
-        self.get_content_area().add(vbox0)
-
-        grid = Gtk.Grid()
-        grid.set_row_spacing(10)
-        grid.set_column_spacing(10)
-        grid.set_margin_bottom(10)
-        grid.set_margin_left(10)
-        grid.set_margin_right(10)
-        grid.set_margin_top(10)
-        vbox0.add(grid)
+    def init_ui(self):
+        BasicDialog.init_ui(self)
 
         label1 = Gtk.Label(_('Password') + ':')
         label1.set_alignment(0, .5)
-        grid.attach(label1, 0, 0, 1, 1)
+        self.grid.attach(label1, 0, 0, 1, 1)
 
         self.entry = Gtk.Entry()
         self.entry.set_tooltip_text(_(
             'Set password'))
-        grid.attach(self.entry, 1, 0, 1, 1)
+        self.grid.attach(self.entry, 1, 0, 1, 1)
 
         self.image = Gtk.Image()
         if comun.is_package():
@@ -73,7 +63,7 @@ class PasswordDialog(BasicDialog):
         button_visibility.add(self.image)
         button_visibility.connect('clicked',
                                   self.on_button_visibility_clicked)
-        grid.attach(button_visibility, 2, 0, 1, 1)
+        self.grid.attach(button_visibility, 2, 0, 1, 1)
 
         self.show_all()
 

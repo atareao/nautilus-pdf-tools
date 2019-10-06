@@ -33,60 +33,41 @@ from gi.repository import Gtk
 import comun
 import tools
 from comun import _
-from tools import center_dialog
+from basicdialog import BasicDialog
 
 
-class SelectPagesDialog(Gtk.Dialog):
+class SelectPagesDialog(BasicDialog):
     def __init__(self, title, afile, window):
-        Gtk.Dialog.__init__(self, title, window)
-        self.set_modal(True)
-        self.set_destroy_with_parent(True)
-        self.add_button(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
-        self.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
-        self.set_resizable(False)
-        self.set_icon_from_file(comun.ICON)
-        self.connect('destroy', self.close_application)
-        vbox0 = Gtk.VBox(spacing=5)
-        vbox0.set_border_width(5)
-        self.get_content_area().add(vbox0)
-        notebook = Gtk.Notebook()
-        vbox0.add(notebook)
-        frame1 = Gtk.Frame()
-        notebook.append_page(frame1, tab_label=Gtk.Label(_('Select Pages')))
+        self.afile = afile
+        self.main_window = window
+        BasicDialog.__init__(self, title, window)
 
-        grid = Gtk.Grid()
-        grid.set_row_spacing(10)
-        grid.set_column_spacing(10)
-        grid.set_margin_bottom(10)
-        grid.set_margin_left(10)
-        grid.set_margin_right(10)
-        grid.set_margin_top(10)
-        frame1.add(grid)
+    def init_ui(self):
+        BasicDialog.init_ui(self)
 
         label = Gtk.Label(_('Pages') + ':')
         label.set_tooltip_text(_('Type page number and/or page\nranges\
  separated by commas\ncounting from start of the\ndocument ej. 1,4,6-9'))
         label.set_alignment(0, .5)
-        grid.attach(label, 0, 0, 1, 1)
+        self.grid.attach(label, 0, 0, 1, 1)
 
         self.entry1 = Gtk.Entry()
         self.entry1.set_tooltip_text(_('Type page number and/or page\nranges\
  separated by commas\ncounting from start of the\ndocument ej. 1,4,6-9'))
-        grid.attach(self.entry1, 1, 0, 1, 1)
+        self.grid.attach(self.entry1, 1, 0, 1, 1)
 
-        if afile is not None:
+        if self.afile is not None:
             label = Gtk.Label(_('Output file') + ':')
             label.set_tooltip_text(_('Select the output file'))
             label.set_alignment(0, .5)
-            grid.attach(label, 0, 1, 1, 1)
+            self.grid.attach(label, 0, 1, 1, 1)
 
-            self.output_file = Gtk.Button.new_with_label(afile)
+            self.output_file = Gtk.Button.new_with_label(self.afile)
             self.output_file.connect('clicked',
                                      self.on_button_output_file_clicked,
-                                     window)
-            grid.attach(self.output_file, 1, 1, 1, 1)
+                                     self.main_window)
+            self.grid.attach(self.output_file, 1, 1, 1, 1)
         self.show_all()
-        center_dialog(self)
 
     def on_button_output_file_clicked(self, widget, window):
         file_out = tools.dialog_save_as(

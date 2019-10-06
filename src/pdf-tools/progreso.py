@@ -44,45 +44,33 @@ class Progreso(BasicDialog, threading.Thread):
     }
 
     def __init__(self, title, parent, max_value, label=None):
+        self.max_value = max_value
+        self.text_label = label
+        self.stop = False
+        self.value = 0.0
         BasicDialog.__init__(self, title, parent)
         self.set_size_request(330, 30)
-        # self.set_modal(True)
-        vbox = Gtk.VBox(spacing=5)
-        vbox.set_border_width(5)
-        self.get_content_area().add(vbox)
 
-        table = Gtk.Table(2, 2, False)
-        vbox.add(table)
+    def init_ui(self):
+        BasicDialog.init_ui(self)
+
 
         self.label = Gtk.Label()
-        table.attach(self.label, 0, 2, 0, 1,
-                     xpadding=5,
-                     ypadding=5,
-                     xoptions=Gtk.AttachOptions.SHRINK,
-                     yoptions=Gtk.AttachOptions.EXPAND)
-        if label is not None:
-            self.label.set_label(label)
+        self.grid.attach(self.label, 0, 0, 1, 1)
+        if self.text_label is not None:
+            self.label.set_label(self.text_label)
 
         self.progressbar = Gtk.ProgressBar()
         self.progressbar.set_size_request(300, 0)
-        table.attach(self.progressbar, 0, 1, 1, 2,
-                     xpadding=5,
-                     ypadding=5,
-                     xoptions=Gtk.AttachOptions.SHRINK,
-                     yoptions=Gtk.AttachOptions.EXPAND)
+        self.grid.attach(self.progressbar, 0, 1, 1, 1)
+
         button_stop = Gtk.Button()
         button_stop.set_size_request(40, 40)
         button_stop.set_image(
             Gtk.Image.new_from_stock(Gtk.STOCK_STOP, Gtk.IconSize.BUTTON))
         button_stop.connect('clicked', self.on_button_stop_clicked)
-        table.attach(button_stop, 1, 2, 1, 2,
-                     xpadding=5,
-                     ypadding=5,
-                     xoptions=Gtk.AttachOptions.SHRINK)
-        self.stop = False
-        self.show_all()
-        self.max_value = max_value
-        self.value = 0.0
+        self.grid.attach(button_stop, 1, 0, 1, 3)
+
 
     def set_max_value(self, widget, max_value):
         self.max_value = max_value

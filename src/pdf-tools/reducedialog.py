@@ -39,31 +39,21 @@ class ReduceDialog(BasicDialog):
         BasicDialog.__init__(self, title, window)
         self.set_size_request(200, 150)
 
-        vbox0 = Gtk.VBox(spacing=5)
-        vbox0.set_border_width(5)
-        self.get_content_area().add(vbox0)
-
-        grid = Gtk.Grid()
-        grid.set_row_spacing(10)
-        grid.set_column_spacing(10)
-        grid.set_margin_bottom(10)
-        grid.set_margin_left(10)
-        grid.set_margin_right(10)
-        grid.set_margin_top(10)
-        vbox0.add(grid)
+    def init_ui(self):
+        BasicDialog.init_ui(self)
 
         label1 = Gtk.Label(_('Image resolution') + ':')
         label1.set_alignment(0, .5)
-        grid.attach(label1, 0, 0, 1, 1)
+        self.grid.attach(label1, 0, 0, 1, 1)
 
         label2 = Gtk.Label(_('Append to file') + ':')
         label2.set_alignment(0, .5)
-        grid.attach(label2, 0, 1, 1, 1)
+        self.grid.attach(label2, 0, 1, 1, 1)
 
         self.dpi_entry = Gtk.Entry()
         self.dpi_entry.set_tooltip_text(_('Set dpi to reduce file'))
         self.dpi_entry.set_text('100')
-        grid.attach(self.dpi_entry, 1, 0, 1, 1)
+        self.grid.attach(self.dpi_entry, 1, 0, 1, 1)
 
         self.dpi_entry.set_activates_default(True)
         self.dpi_entry.grab_focus()
@@ -71,7 +61,7 @@ class ReduceDialog(BasicDialog):
         self.append_entry = Gtk.Entry()
         self.append_entry.set_tooltip_text(_('Append to file to create output filename'))
         self.append_entry.set_text('_reduced')
-        grid.attach(self.append_entry, 1, 1, 1, 1)
+        self.grid.attach(self.append_entry, 1, 1, 1, 1)
 
         self.show_all()
 

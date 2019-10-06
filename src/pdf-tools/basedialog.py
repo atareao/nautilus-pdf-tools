@@ -151,16 +151,16 @@ def generate_button(icon, tooltip_text, callback):
 
 class BaseDialog(BasicDialog):
     def __init__(self, title= '', filename=None, window=None):
+        self.filename = filename
         BasicDialog.__init__(self, title, window)
         self.set_default_size(600, 600)
 
-        hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=50)
-        hbox.set_border_width(10)
-        self.get_content_area().add(hbox)
+    def init_ui(self):
+        BasicDialog.init_ui(self)
 
         self.scrolledwindow1 = Gtk.ScrolledWindow()
         self.scrolledwindow1.set_size_request(630, 630)
-        hbox.pack_start(self.scrolledwindow1, False, False, 0)
+        self.grid.attach(self.scrolledwindow1, 0, 0, 1, 1)
 
         self.viewport1 = MiniView()
         self.scrolledwindow1.add(self.viewport1)
@@ -171,10 +171,10 @@ class BaseDialog(BasicDialog):
 
         self.init_headerbar()
 
-        if filename is not None:
-            uri = "file://" + filename
+        if self.filename is not None:
+            uri = "file://" + self.filename
             self.document = Poppler.Document.new_from_file(uri, None)
-            self.hb.set_subtitle(os.path.basename(filename))
+            self.hb.set_subtitle(os.path.basename(self.filename))
             self.set_page(0)
 
         self.show_all()
