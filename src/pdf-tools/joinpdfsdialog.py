@@ -30,14 +30,12 @@ try:
 except Exception as e:
     print(e)
     exit(1)
-from gi.repository import Gtk
-from gi.repository import GdkPixbuf
+from gi.repository import GdkPixbuf, Gtk
 import os
-import comun
 import tools
+from basicdialog import BasicDialog
 from comun import _
 from tools import update_preview_cb
-from basicdialog import BasicDialog
 
 
 class JoinPdfsDialog(BasicDialog):

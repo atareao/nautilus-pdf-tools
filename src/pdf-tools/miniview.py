@@ -23,7 +23,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-
 import gi
 try:
     gi.require_version('Gtk', '3.0')
@@ -31,15 +30,12 @@ try:
 except Exception as e:
     print(e)
     exit(1)
-from gi.repository import Gtk
-from gi.repository import Gdk
-import cairo
+from gi.repository import Gdk, Gtk
 import math
+import cairo
 import tools
+from comun import MMTOPIXEL, RESOLUTION
 from pageoptions import PageOptions
-
-from comun import RESOLUTION, MMTOPIXEL, TOP,\
-    MIDLE, BOTTOM, LEFT, CENTER, RIGHT
 
 
 class MiniView(Gtk.DrawingArea):

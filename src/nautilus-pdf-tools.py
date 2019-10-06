@@ -32,10 +32,8 @@ try:
 except Exception as e:
     print(e)
     exit(1)
+from gi.repository import GdkPixbuf, GObject, Gtk
 from gi.repository import Nautilus as FileManager
-from gi.repository import GObject
-from gi.repository import Gtk
-from gi.repository import GdkPixbuf
 import sys
 try:
     sys.path.insert(0, '/usr/share/nautilus-python/extensions/pdf-tools/')

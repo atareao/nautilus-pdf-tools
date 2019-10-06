@@ -22,6 +22,8 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
+import cairo
 import gi
 try:
     gi.require_version('GObject', '2.0')
@@ -30,21 +32,18 @@ try:
 except Exception as e:
     print(e)
     exit(1)
-from gi.repository import GObject
-from gi.repository import GLib
-from gi.repository import Poppler
-from threading import Thread
-import tools
-import cairo
+from gi.repository import GLib, GObject, Poppler
 import math
+import mimetypes
 import os
 import shutil
-import mimetypes
-from comun import MMTOPNG, MMTOPIXEL
-from comun import MIMETYPES_PNG, RESOLUTION
-from comun import TOP, MIDLE, BOTTOM, LEFT, CENTER, RIGHT
-from comun import ROTATE_000, ROTATE_090, ROTATE_180, ROTATE_270
+from threading import Thread
 import cairoapi
+import tools
+from comun import (BOTTOM, CENTER, LEFT, MIDLE, MIMETYPES_PNG, MMTOPIXEL,
+                   MMTOPNG, RESOLUTION, RIGHT, ROTATE_000, ROTATE_090,
+                   ROTATE_180, ROTATE_270, TOP)
+
 
 mimetypes.init()
 

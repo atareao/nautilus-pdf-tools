@@ -31,12 +31,12 @@ except Exception as e:
     exit(1)
 from gi.repository import Gtk
 import comun
+from basedialog import (BaseDialog, generate_check_entry_row,
+                        generate_check_row,
+                        generate_separator_row,
+                        generate_title_row)
 from comun import _
-from tools import get_ranges
-from tools import get_pages_from_ranges
-from basedialog import BaseDialog, generate_separator_row, generate_title_row
-from basedialog import generate_swith_row, generate_check_entry_row
-from basedialog import generate_check_row, generate_entry_row
+
 
 class BaseDialogWithApply(BaseDialog):
     def __init__(self, title= '', filename=None, window=None):

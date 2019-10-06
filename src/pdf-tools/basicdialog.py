@@ -30,10 +30,8 @@ try:
 except Exception as e:
     print(e)
     exit(1)
-from gi.repository import Gtk
-from gi.repository import Gdk
+from gi.repository import Gdk, Gtk
 import comun
-
 
 class BasicDialog(Gtk.Dialog):
     def __init__(self, title, window=None):

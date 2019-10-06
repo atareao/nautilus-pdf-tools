@@ -23,6 +23,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+
 import gi
 try:
     gi.require_version('GObject', '2.0')
@@ -33,22 +34,19 @@ try:
 except Exception as e:
     print(e)
     exit(1)
-from gi.repository import Gtk
-from gi.repository import Gdk
-from gi.repository import GdkPixbuf
-from gi.repository import Poppler
-from comun import MIMETYPES_PDF, MIMETYPES_PNG, MIMETYPES_IMAGE
-from comun import MMTOPNG, MMTOPIXEL, EXTENSIONS_FROM
-from comun import _
-import os
-import shutil
-import cairo
-import tempfile
+from gi.repository import Gdk, GdkPixbuf, Gtk, Poppler
 import mimetypes
+import os
 import shlex
+import shutil
 import subprocess
+import tempfile
 from urllib import unquote_plus
-from comun import ALL_MIMETYPES_IMAGE
+import cairo
+from comun import (ALL_MIMETYPES_IMAGE, EXTENSIONS_FROM, MIMETYPES_IMAGE,
+                   MIMETYPES_PDF, MIMETYPES_PNG, MMTOPIXEL, MMTOPNG, _)
+
+
 
 mimetypes.init()
 

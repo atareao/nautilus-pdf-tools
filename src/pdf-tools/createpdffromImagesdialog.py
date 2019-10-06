@@ -30,16 +30,13 @@ try:
 except Exception as e:
     print(e)
     exit(1)
-from gi.repository import Gtk
-from gi.repository import GdkPixbuf
-import os
-import comun
-import tools
-from comun import _
-from comun import MIMETYPES_IMAGE
-from tools import update_preview_cb
-from basicdialog import BasicDialog
+from gi.repository import GdkPixbuf, Gtk
 
+import tools
+from basicdialog import BasicDialog
+from comun import MIMETYPES_IMAGE, _
+from tools import update_preview_cb
+import os
 
 class CreatePDFFromImagesDialog(BasicDialog):
     def __init__(self, title, files, afile, window):

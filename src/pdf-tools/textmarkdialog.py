@@ -30,19 +30,15 @@ try:
 except Exception as e:
     print(e)
     exit(1)
-from gi.repository import Gtk
-from gi.repository import Gdk
-import os
+from gi.repository import Gdk, Gtk
+
 import comun
-from comun import _
-from comun import MIMETYPES_IMAGE
-from tools import get_ranges
-from tools import get_pages_from_ranges
-from tools import update_preview_cb
-from pageoptions import PageOptions
+from basedialog import (generate_entry_row, generate_title_row,
+                        generate_widget_row)
 from basedialogwithapply import BaseDialogWithApply
-from basedialog import generate_title_row, generate_entry_row
-from basedialog import generate_widget_row, generate_widget_row
+from comun import _
+from pageoptions import PageOptions
+from tools import get_pages_from_ranges, get_ranges
 
 
 class TextmarkDialog(BaseDialogWithApply):

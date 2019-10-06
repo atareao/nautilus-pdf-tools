@@ -32,15 +32,12 @@ except Exception as e:
 from gi.repository import Gtk
 import os
 import comun
-from comun import _
-from comun import MIMETYPES_IMAGE
-from tools import get_ranges
-from tools import get_pages_from_ranges
-from tools import update_preview_cb
-from pageoptions import PageOptions
+from basedialog import (generate_button_row,
+                        generate_spinbutton_row, generate_title_row)
 from basedialogwithapply import BaseDialogWithApply
-from basedialog import generate_title_row, generate_simple_button_row
-from basedialog import generate_button_row, generate_spinbutton_row
+from comun import MIMETYPES_IMAGE, _
+from pageoptions import PageOptions
+from tools import get_pages_from_ranges, get_ranges, update_preview_cb
 
 
 class WatermarkDialog(BaseDialogWithApply):

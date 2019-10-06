@@ -30,9 +30,8 @@ except Exception as e:
     print(e)
     exit(1)
 from gi.repository import Gtk
-import comun
-from comun import _
 from basicdialog import BasicDialog
+from comun import _
 
 class ReduceDialog(BasicDialog):
     def __init__(self, title, window):

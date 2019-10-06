@@ -31,12 +31,12 @@ except Exception as e:
     exit(1)
 from gi.repository import Gtk
 import comun
-from comun import _
-from watermarkdialog import WatermarkDialog
-from pageoptions import PageOptions
+from basedialog import (generate_button_row, generate_spinbutton_row,
+                        generate_title_row)
 from basedialogwithapply import BaseDialogWithApply
-from basedialog import generate_title_row, generate_spinbutton_row
-from basedialog import generate_button_row
+from comun import _
+from pageoptions import PageOptions
+from watermarkdialog import WatermarkDialog
 
 
 class SignDialog(WatermarkDialog):

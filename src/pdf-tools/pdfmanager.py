@@ -23,6 +23,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+
 import gi
 try:
     gi.require_version('Gtk', '3.0')
@@ -31,28 +32,25 @@ try:
 except Exception as e:
     print(e)
     exit(1)
-from gi.repository import Gtk
-from gi.repository import GObject
-from gi.repository import GLib
+from gi.repository import GLib, GObject, Gtk
+import os
 import cairoapi as pdfapi
-from resizedialog import ResizeDialog
-from reducedialog import ReduceDialog
+import doitinbackground
+import tools
 from combinedialog import CombineDialog
+from comun import _
 from createpdffromImagesdialog import CreatePDFFromImagesDialog
+from flipdialog import FlipDialog
 from joinpdfsdialog import JoinPdfsDialog
 from paginatedialog import PaginateDialog
+from passworddialog import PasswordDialog
+from progreso import Progreso
+from reducedialog import ReduceDialog
+from resizedialog import ResizeDialog
+from selectpagesdialog import SelectPagesDialog
+from signdialog import SignDialog
 from textmarkdialog import TextmarkDialog
 from watermarkdialog import WatermarkDialog
-from signdialog import SignDialog
-from flipdialog import FlipDialog
-from selectpagesrotatedialog import SelectPagesRotateDialog
-from selectpagesdialog import SelectPagesDialog
-from passworddialog import PasswordDialog
-import doitinbackground
-from progreso import Progreso
-import tools
-from comun import _
-import os
 
 
 class PDFManager(GObject.GObject):

@@ -30,11 +30,11 @@ except Exception as e:
     print(e)
     exit(1)
 from gi.repository import Poppler
-import cairo
 import os
 import shutil
+import cairo
+from PyPDF2 import PdfFileReader, PdfFileWriter
 import tools
-from PyPDF2 import PdfFileWriter, PdfFileReader
 
 
 def get_num_of_pages(file_in):
@@ -98,4 +98,3 @@ def decrypt(file_in, password):
     return False
 
 if __name__ == '__main__':
-    print(extractText('/home/lorenzo/Documentos/el_quijote.txt.pdf'))

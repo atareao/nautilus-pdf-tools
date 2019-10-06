@@ -23,6 +23,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+
 import gi
 try:
     gi.require_version('Gtk', '3.0')
@@ -31,9 +32,7 @@ try:
 except Exception as e:
     print(e)
     exit(1)
-from gi.repository import Gtk
-from gi.repository import GLib
-from gi.repository import GObject
+from gi.repository import GLib, GObject, Gtk
 import threading
 from basicdialog import BasicDialog
 

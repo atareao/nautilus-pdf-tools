@@ -31,9 +31,8 @@ except Exception as e:
     exit(1)
 from gi.repository import Gtk
 import tools
-import comun
-from comun import _
 from basicdialog import BasicDialog
+from comun import _
 
 
 class CombineDialog(BasicDialog):

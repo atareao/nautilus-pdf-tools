@@ -25,21 +25,20 @@
 
 import gi
 try:
-    gi.require_version('Gtk', '3.0')
+    gi.require_version('Gtk', '2.0')
     gi.require_version('Poppler', '0.18')
     gi.require_version('Gio', '2.0')
 except Exception as e:
     print(e)
     exit(1)
-from gi.repository import Gtk
-from gi.repository import Poppler
-from gi.repository import Gio
+from gi.repository import Gio, Gtk, Poppler
 import os
-from miniview import MiniView
 import comun
-from comun import _
-from tools import str2int
 from basicdialog import BasicDialog
+from comun import _
+from miniview import MiniView
+from tools import str2int
+
 
 HEIGHT = 25
 
