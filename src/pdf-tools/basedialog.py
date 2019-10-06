@@ -25,9 +25,9 @@
 
 import gi
 try:
-    gi.require_version('Gtk', '2.0')
+    gi.require_version('Gtk', '3.0')
     gi.require_version('Poppler', '0.18')
-    gi.require_version('Gio', '4.0')
+    gi.require_version('Gio', '2.0')
 except ValueError as e:
     print(e)
     exit(1)
@@ -37,6 +37,7 @@ import comun
 from basicdialog import BasicDialog
 from comun import _
 from miniview import MiniView
+from pageoptions import PageOptions
 from tools import str2int
 
 
@@ -151,6 +152,7 @@ def generate_button(icon, tooltip_text, callback):
 class BaseDialog(BasicDialog):
     def __init__(self, title= '', filename=None, window=None):
         self.filename = filename
+        self.no_page = None
         BasicDialog.__init__(self, title, window)
         self.set_default_size(600, 600)
 
@@ -185,18 +187,19 @@ class BaseDialog(BasicDialog):
             self.no_page = page
             self.show_page.set_text(str(self.no_page + 1))
             self.show_title_page.set_text(str(self.no_page + 1))
-            self.viewport1.set_page(self.document.get_page(self.no_page))
+            self.viewport1.set_page(self.document.get_page(self.no_page),
+                                    PageOptions())
 
-    def next_page(self, button):
+    def next_page(self, *_):
         self.set_page(self.no_page + 1)
 
-    def previous_page(self, button):
+    def previous_page(self, *_):
         self.set_page(self.no_page - 1)
 
-    def first_page(self, button):
+    def first_page(self, *_):
         self.set_page(0)
 
-    def last_page(self, button):
+    def last_page(self, *_):
         self.set_page(self.document.get_n_pages() - 1)
 
 
@@ -295,7 +298,7 @@ class BaseDialog(BasicDialog):
     def get_options_for_pages(self):
         return self.pages
 
-    def close(self, widget):
+    def close(self, *_):
         self.destroy()
 
 

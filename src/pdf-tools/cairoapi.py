@@ -96,5 +96,3 @@ def decrypt(file_in, password):
                 os.remove(tmp_file)
                 return True
     return False
-
-if __name__ == '__main__':

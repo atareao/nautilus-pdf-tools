@@ -170,7 +170,7 @@ class MiniView(Gtk.DrawingArea):
         self.or_height = int(self.or_height * RESOLUTION)
         self.pageOptions = pageOptions
         self.queue_draw()
-    
+
     def set_page_options(self, pageOptions):
         self.pageOptions = pageOptions
         self.queue_draw()

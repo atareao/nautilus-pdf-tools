@@ -41,9 +41,7 @@ class ConvertDialog(BasicDialog):
         self.set_size_request(300, 80)
 
     def init_ui(self):
-        BasicDialog.init_ui(self)        table = Gtk.Table(2, 2, False)
-        vbox.add(table)
-
+        BasicDialog.init_ui(self)
 
         options = Gtk.ListStore(str)
         for extension in MIMETYPES_IMAGE.keys():

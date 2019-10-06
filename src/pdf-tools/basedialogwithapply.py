@@ -82,5 +82,5 @@ class BaseDialogWithApply(BaseDialog):
         pass
 
 if __name__ == '__main__':
-    dialog = BaseDialogWithApply(comun.SAMPLE)
+    dialog = BaseDialogWithApply('', comun.SAMPLE)
     dialog.run()

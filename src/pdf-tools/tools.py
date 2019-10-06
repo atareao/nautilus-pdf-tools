@@ -226,7 +226,7 @@ def convert_pdf_to_png(file_in):
     document = Poppler.Document.new_from_file('file://' + file_in, None)
     number_of_pages = document.get_n_pages()
     if number_of_pages > 0:
-        file_out, ext = os.path.splitext(file_in)
+        file_out = os.path.splitext(file_in)[0]
         for i in range(0, number_of_pages):
             current_page = document.get_page(i)
             pdf_width, pdf_height = current_page.get_size()
@@ -381,7 +381,7 @@ def get_ranges(chain):
 
 def all_files_are_pdf(items):
     for item in items:
-        fileName, fileExtension = os.path.splitext(
+        _, fileExtension = os.path.splitext(
             unquote_plus(item.get_uri()[7:]))
         if fileExtension.lower() != '.pdf':
             return False

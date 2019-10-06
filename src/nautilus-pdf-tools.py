@@ -35,6 +35,7 @@ except ValueError as e:
 from gi.repository import GdkPixbuf, GObject, Gtk
 from gi.repository import Nautilus as FileManager
 import sys
+
 try:
     sys.path.insert(0, '/usr/share/nautilus-python/extensions/pdf-tools/')
     from pdfmanager import PDFManager
@@ -212,19 +213,19 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
                 label=_('About'),
                 tip=_('About'),
                 icon='Gtk-find-and-replace')
-            sub_menuitem_99.connect('activate', self.about)
+            sub_menuitem_99.connect('activate', about)
             submenu.append_item(sub_menuitem_99)
 
             return top_menuitem,
         return
 
-    def about(self, widget):
-        ad = Gtk.AboutDialog()
-        ad.set_name(APPNAME)
-        ad.set_version(VERSION)
-        ad.set_copyright('Copyrignt (c) 2012-2019\nLorenzo Carbonell')
-        ad.set_comments(_('Pdf Tools'))
-        ad.set_license('''
+def about(widget):
+    ad = Gtk.AboutDialog()
+    ad.set_name(APPNAME)
+    ad.set_version(VERSION)
+    ad.set_copyright('Copyrignt (c) 2012-2019\nLorenzo Carbonell')
+    ad.set_comments(_('Pdf Tools'))
+    ad.set_license('''
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
@@ -243,14 +244,14 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 ''')
-        ad.set_website('http://www.atareao.es')
-        ad.set_website_label('http://www.atareao.es')
-        ad.set_authors([
-            'Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>'])
-        ad.set_documenters([
-            'Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>'])
-        ad.set_logo(GdkPixbuf.Pixbuf.new_from_file(ICON))
-        ad.set_icon(GdkPixbuf.Pixbuf.new_from_file(ICON))
-        ad.set_program_name(APPNAME)
-        ad.run()
-        ad.destroy()
+    ad.set_website('http://www.atareao.es')
+    ad.set_website_label('http://www.atareao.es')
+    ad.set_authors([
+        'Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>'])
+    ad.set_documenters([
+        'Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>'])
+    ad.set_logo(GdkPixbuf.Pixbuf.new_from_file(ICON))
+    ad.set_icon(GdkPixbuf.Pixbuf.new_from_file(ICON))
+    ad.set_program_name(APPNAME)
+    ad.run()
+    ad.destroy()

@@ -66,7 +66,7 @@ class BasicDialog(Gtk.Dialog):
         frame1.add(self.grid)
 
 
-    def on_realize(self, widget):
+    def on_realize(self, *_):
         monitor = Gdk.Display.get_primary_monitor(Gdk.Display.get_default())
         scale = monitor.get_scale_factor()
         monitor_width = monitor.get_geometry().width / scale
@@ -75,7 +75,7 @@ class BasicDialog(Gtk.Dialog):
         height = self.get_preferred_height()[0]
         self.move((monitor_width - width)/2, (monitor_height - height)/2)
 
-    def close_application(self, widget):
+    def close_application(self, *_):
         self.hide()
 
 

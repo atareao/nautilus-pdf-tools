@@ -31,7 +31,8 @@ try:
     gi.require_version('GLib', '2.0')
 except ValueError as e:
     print(e)
-    exit(1)
+    #exit(1)
+
 from gi.repository import GLib, GObject, Gtk
 import os
 import cairoapi as pdfapi
@@ -457,7 +458,7 @@ class PDFManager(GObject.GObject):
         files = tools.get_files(selected)
         if files:
             file0 = files[0]
-            filename, filext = os.path.splitext(file0)
+            filename = os.path.splitext(file0)[0]
             file_out = filename + '.txt'
             print(file_out)
             file_out = tools.dialog_save_as_text(
