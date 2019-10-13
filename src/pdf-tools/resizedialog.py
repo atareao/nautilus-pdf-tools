@@ -121,7 +121,7 @@ class ResizeDialog(BasicDialog):
     def get_extension(self):
         return self.extension.get_text()
 
-    def get_size(self):
+    def get_resize(self):
         tree_iter = self.entry1.get_active_iter()
         if tree_iter is not None:
             model = self.entry1.get_model()

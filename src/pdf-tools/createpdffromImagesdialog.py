@@ -302,7 +302,7 @@ class CreatePDFFromImagesDialog(BasicDialog):
             itera = model.iter_next(itera)
         return files
 
-    def get_size(self):
+    def get_dimensions(self):
         tree_iter = self.entry1.get_active_iter()
         if tree_iter is not None:
             model = self.entry1.get_model()

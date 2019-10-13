@@ -31,7 +31,7 @@ try:
 except ValueError as e:
     print(e)
     exit(1)
-
+from gi.repository import Gtk
 import os
 from urllib import unquote_plus
 import cairoapi as pdfapi
@@ -58,7 +58,7 @@ def resize_pdf_pages(selected, window):
     if files:
         cd = ResizeDialog(_('Resize PDF'), window)
         if cd.run() == Gtk.ResponseType.ACCEPT:
-            size = cd.get_size()
+            size = cd.get_resize()
             if cd.is_vertical():
                 width = size[0]
                 height = size[1]
@@ -180,9 +180,9 @@ def create_pdf_from_images(selected, window):
             cpfi.hide()
             files = cpfi.get_png_files()
             if cpfi.is_vertical():
-                width, height = cpfi.get_size()
+                width, height = cpfi.get_dimensions()
             else:
-                height, width = cpfi.get_size()
+                height, width = cpfi.get_dimensions()
             margin = cpfi.get_margin()
             file_out = cpfi.get_file_out()
             cpfi.destroy()
