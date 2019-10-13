@@ -331,9 +331,6 @@ class CreatePDFFromImagesDialog(BasicDialog):
                 return 2
         return 0
 
-    def close_application(self, widget):
-        self.hide()
-
 
 if __name__ == '__main__':
     dialog = CreatePDFFromImagesDialog('Create', [], 'output_file', None)

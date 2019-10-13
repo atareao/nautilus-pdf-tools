@@ -81,9 +81,6 @@ class SelectPagesDialog(BasicDialog):
     def get_file_out(self):
         return self.output_file.get_label()
 
-    def close_application(self, widget):
-        self.hide()
-
 
 if __name__ == '__main__':
     dialog = SelectPagesDialog('Test', None, None)

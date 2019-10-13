@@ -208,9 +208,6 @@ class JoinPdfsDialog(BasicDialog):
             for element in selection:
                 model.remove(model.get_iter(element))
 
-    def close_application(self, widget):
-        self.hide()
-
     def get_pdf_files(self):
         files = []
         model = self.iconview.get_model()

@@ -70,8 +70,6 @@ class ReduceDialog(BasicDialog):
     def get_append(self):
         return self.append_entry.get_text()
 
-    def close_application(self, widget):
-        self.hide()
 
 if __name__ == '__main__':
     dialog = ReduceDialog('Test', None)

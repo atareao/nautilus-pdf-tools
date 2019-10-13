@@ -88,9 +88,6 @@ class PasswordDialog(BasicDialog):
     def get_password(self):
         return self.entry.get_text()
 
-    def close_application(self, widget):
-        self.hide()
-
 
 if __name__ == '__main__':
     dialog = PasswordDialog('Encrypt', None)

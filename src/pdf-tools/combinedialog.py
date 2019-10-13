@@ -206,9 +206,6 @@ class CombineDialog(BasicDialog):
     def get_margin(self):
         return self.entry6.get_value()
 
-    def close_application(self, widget):
-        self.hide()
-
 
 if __name__ == '__main__':
     dialog = CombineDialog('Combine', None)

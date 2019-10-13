@@ -139,9 +139,6 @@ class ResizeDialog(BasicDialog):
                 return True
         return False
 
-    def close_application(self, widget):
-        self.hide()
-
 
 if __name__ == '__main__':
     dialog = ResizeDialog('Test', None)

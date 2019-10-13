@@ -112,7 +112,7 @@ class PDFManager(GObject.GObject):
             pd.destroy()
 
     def decrypt_files(self, selected, window):
-        if files:
+        if selected:
             files = tools.get_files(selected)
             pd = PasswordDialog(_('Decrypt files'), window)
             if pd.run() == Gtk.ResponseType.ACCEPT:
@@ -245,20 +245,20 @@ class PDFManager(GObject.GObject):
         if files:
             rd = ReduceDialog(_('Reduce PDF'), window)
             if rd.run() == Gtk.ResponseType.ACCEPT:
-               dpi = rd.get_dpi()
-               append = rd.get_append()
-               rd.hide()
-               if dpi and dpi != '0' and dpi.isdigit() and append:
-                  dialog = Progreso(_('Reduce PDF size'), window, len(files))
-                  diboo = doitinbackground.DoitInBackgroundReduce(tools.reduce_pdf, files, dpi, append)
+                dpi = rd.get_dpi()
+                append = rd.get_append()
+                rd.hide()
+                if dpi and dpi != '0' and dpi.isdigit() and append:
+                    dialog = Progreso(_('Reduce PDF size'), window, len(files))
+                    diboo = doitinbackground.DoitInBackgroundReduce(tools.reduce_pdf, files, dpi, append)
 
-                  diboo.connect('done', dialog.increase)
-                  diboo.connect('todo', dialog.set_todo_label)
-                  diboo.connect('finished', dialog.close)
-                  diboo.connect('interrupted', dialog.close)
-                  dialog.connect('i-want-stop', diboo.stop_it)
-                  diboo.start()
-                  dialog.run()
+                    diboo.connect('done', dialog.increase)
+                    diboo.connect('todo', dialog.set_todo_label)
+                    diboo.connect('finished', dialog.close)
+                    diboo.connect('interrupted', dialog.close)
+                    dialog.connect('i-want-stop', diboo.stop_it)
+                    diboo.start()
+                    dialog.run()
             rd.destroy()
 
     def operate(self, operation, selected, window):
@@ -307,7 +307,7 @@ class PDFManager(GObject.GObject):
         files = tools.get_files(selected)
         if files:
             file0 = files[0]
-            filename, filext = os.path.splitext(file0)
+            filename = os.path.splitext(file0)[0]
             file_out = filename + '_removed_pages.pdf'
             spd = SelectPagesDialog(_('Remove PDF'),
                                     file_out, window)
@@ -386,40 +386,6 @@ class FileTemp():
 
 
 if __name__ == '__main__':
-    '''
-    directory = 'file:///home/lorenzo/Escritorio/pdfs/'
-    files = [
-        # FileTemp(directory + '2016_prysmiancatalogobt_ 2016.pdf'),
-        FileTemp(directory + 'ejemplo_pdf_01.pdf'),
-        # FileTemp(directory + 'guia_bt_anexo_2_sep03R1.pdf')
-        # FileTemp(directory + 'guia_bt_anexo_2_sep03R1_01.png'),
-        # FileTemp(directory + 'guia_bt_anexo_2_sep03R1_02.png'),
-        # FileTemp(directory + 'guia_bt_anexo_2_sep03R1_03.png'),
-        # FileTemp(directory + 'guia_bt_anexo_2_sep03R1_04.png'),
-        # FileTemp(directory + 'guia_bt_anexo_2_sep03R1_05.png'),
-    ]
-    images = [
-        FileTemp(directory + 'guia_bt_anexo_2_sep03R1_01.png'),
-        FileTemp(directory + 'guia_bt_anexo_2_sep03R1_02.png'),
-        FileTemp(directory + 'guia_bt_anexo_2_sep03R1_03.png'),
-        FileTemp(directory + 'guia_bt_anexo_2_sep03R1_04.png'),
-        FileTemp(directory + 'guia_bt_anexo_2_sep03R1_05.png'),
-    ]
-    '''
     pdfmanager = PDFManager()
-    '''
-    pdfmanager.create_pdf_from_images(images, None)
-    pdfmanager.join_pdf_files(files, None)
-    pdfmanager.resize_pdf_pages(files, None)
-    pdfmanager.convert_pdf_file_to_png(files, None)
-    pdfmanager.combine_pdf_pages(files, None)
-    pdfmanager.paginate(files, None)
-    pdfmanager.reduce(files, None)
-    pdfmanager.textmark(files, None)
-    pdfmanager.rotate_or_flip(files, None)
-    pdfmanager.rotate_some_pages(files, None)
-    pdfmanager.remove_some_pages(files, None)
-    pdfmanager.extract_some_pages(files, None)
-    '''
     file_in = FileTemp('file:///home/lorenzo/Escritorio/quijote.pdf')
-    pdfmanager.operate('paginate', file_in, None)
+    pdfmanager.operate('sign', file_in, None)

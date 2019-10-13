@@ -61,9 +61,6 @@ class ConvertDialog(BasicDialog):
             return model[tree_iter][0]
         return 'PNG'
 
-    def close_application(self, widget):
-        self.hide()
-
 
 if __name__ == '__main__':
     dialog = ConvertDialog()

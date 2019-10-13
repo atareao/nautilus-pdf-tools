@@ -42,8 +42,8 @@ import cairoapi
 import tools
 from pageoptions import PageOptions
 from comun import (BOTTOM, CENTER, LEFT, MIDLE, MIMETYPES_PNG, MMTOPIXEL,
-                   MMTOPNG, MINIVIEWTOPDF, RESOLUTION, RIGHT, ROTATE_000,
-                   ROTATE_090, ROTATE_180, ROTATE_270, TOP)
+                   MMTOPNG, RESOLUTION, RIGHT, ROTATE_000, ROTATE_090,
+                   ROTATE_180, ROTATE_270, TOP)
 
 
 mimetypes.init()

@@ -57,10 +57,12 @@ def update_preview_cb(file_chooser, preview):
         if os.path.isfile(filename) and \
                 mimetypes.guess_type(filename)[0] in MIMETYPES_PDF:
             pixbuf = get_pixbuf_from_pdf(filename, 250)
+            file_chooser.set_preview_widget(Gtk.Image.new_from_pixbuf(pixbuf))
             has_preview = True
         elif os.path.isfile(filename) and\
                 mimetypes.guess_type(filename)[0] in ALL_MIMETYPES_IMAGE:
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 250, 250)
+            file_chooser.set_preview_widget(Gtk.Image.new_from_pixbuf(pixbuf))
             has_preview = True
         else:
             has_preview = False
@@ -249,7 +251,6 @@ def create_from_images(file_out, images, width=1189, height=1682, margin=0):
     pdfsurface = cairo.PDFSurface(temp_pdf, width, height)
     context = cairo.Context(pdfsurface)
     for image in images:
-        basename, extension = os.path.splitext(image)
         if mimetypes.guess_type(image)[0] in MIMETYPES_PNG:
             imagesurface = cairo.ImageSurface.create_from_png(image)
         else:
