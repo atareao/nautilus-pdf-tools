@@ -27,13 +27,11 @@
 import gi
 try:
     gi.require_version('Gtk', '3.0')
-    gi.require_version('GObject', '2.0')
     gi.require_version('GLib', '2.0')
 except ValueError as e:
     print(e)
-    #exit(1)
+    exit(1)
 
-from gi.repository import GLib, GObject, Gtk
 import os
 from urllib import unquote_plus
 import cairoapi as pdfapi

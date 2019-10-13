@@ -201,7 +201,7 @@ class JoinPdfsDialog(BasicDialog):
                                       filename])
         dialog.destroy()
 
-    def on_button_remove_clicked(self, widget):
+    def on_button_remove_clicked(self, _):
         selection = self.iconview.get_selected_items()
         if selection:
             model = self.iconview.get_model()

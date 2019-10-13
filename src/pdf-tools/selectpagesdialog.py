@@ -70,7 +70,7 @@ class SelectPagesDialog(BasicDialog):
             self.grid.attach(self.output_file, 1, 1, 1, 1)
         self.show_all()
 
-    def on_button_output_file_clicked(self, widget, window):
+    def on_button_output_file_clicked(self, _, window):
         file_out = tools.dialog_save_as(
             _('Select file to save new file'),
             self.output_file.get_label(),

@@ -43,6 +43,8 @@ class Progreso(BasicDialog, threading.Thread):
     }
 
     def __init__(self, title, parent, max_value, label=None):
+        BasicDialog.__init__(self)
+        threading.Thread.__init__(self)
         self.max_value = max_value
         self.text_label = label
         self.stop = False
@@ -71,37 +73,34 @@ class Progreso(BasicDialog, threading.Thread):
         self.grid.attach(button_stop, 1, 0, 1, 3)
 
 
-    def set_max_value(self, widget, max_value):
+    def set_max_value(self, _, max_value):
         self.max_value = max_value
 
     def get_stop(self):
         return self.stop
 
-    def on_button_stop_clicked(self, widget):
+    def on_button_stop_clicked(self, _):
         self.stop = True
         self.emit('i-want-stop')
 
-    def set_todo_label(self, widget, todo_label):
+    def set_todo_label(self, _, todo_label):
         if len(todo_label) > 35:
             text = '...' + todo_label[-32:]
         else:
             text = todo_label
         GLib.idle_add(self.label.set_label, text)
 
-    def set_value(self, widget, value):
+    def set_value(self, _, value):
         if value >= 0 and value <= self.max_value:
             self.value = value
             fraction = self.value / self.max_value
             GLib.idle_add(self.progressbar.set_fraction, fraction)
 
-    def set_fraction(self, widget, fraction):
+    def set_fraction(self, _, fraction):
         if fraction >= 0 and fraction <= 1.0:
             GLib.idle_add(self.progressbar.set_fraction, fraction)
 
-    def close(self, widget=None):
-        self.destroy()
-
-    def increase(self, widget, label):
+    def increase(self, _, label):
         self.value += 1.0
         fraction = self.value / self.max_value
         GLib.idle_add(self.progressbar.set_fraction, fraction)

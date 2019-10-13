@@ -239,7 +239,7 @@ class CreatePDFFromImagesDialog(BasicDialog):
             if next_iter is not None:
                 model.swap(selected_iter, next_iter)
 
-    def on_button_add_clicked(self, widget):
+    def on_button_add_clicked(self, _):
         selection = self.iconview.get_selected_items()
         if selection:
             model = self.iconview.get_model()
@@ -286,7 +286,7 @@ class CreatePDFFromImagesDialog(BasicDialog):
                                       filename])
         dialog.destroy()
 
-    def on_button_remove_clicked(self, widget):
+    def on_button_remove_clicked(self, _):
         selection = self.iconview.get_selected_items()
         if selection:
             model = self.iconview.get_model()
@@ -333,6 +333,6 @@ class CreatePDFFromImagesDialog(BasicDialog):
 
 
 if __name__ == '__main__':
-    dialog = CreatePDFFromImagesDialog('Create', [], 'output_file', None)
-    dialog.run()
-    print(dialog.get_png_files())
+    sampleDialog = CreatePDFFromImagesDialog('Create', [], 'output_file', None)
+    sampleDialog.run()
+    print(sampleDialog.get_png_files())

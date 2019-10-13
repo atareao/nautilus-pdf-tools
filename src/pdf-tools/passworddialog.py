@@ -68,7 +68,7 @@ class PasswordDialog(BasicDialog):
 
         self.show_all()
 
-    def on_button_visibility_clicked(self, widget):
+    def on_button_visibility_clicked(self, _):
         if comun.is_package():
             if self.entry.get_visibility():
                 self.image.set_from_icon_name('pdf-tools-password-hide',
