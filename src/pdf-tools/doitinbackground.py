@@ -135,7 +135,6 @@ class DoitInBackgroundPages(DoitInBackgroundBase):
         for i in range(0, number_of_pages):
             self.emit('todo', '{}/{}'.format(i, number_of_pages))
             current_page = document.get_page(i)
-            or_pdf_width, or_pdf_height = current_page.get_size()
             if str(i) in self.pageOptions.keys():
                 pageOptions = self.pageOptions[str(i)]
             else:
