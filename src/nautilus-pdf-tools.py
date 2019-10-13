@@ -38,7 +38,7 @@ import sys
 
 try:
     sys.path.insert(0, '/usr/share/nautilus-python/extensions/pdf-tools/')
-    from pdfmanager import PDFManager
+    import pdfmanager
     from comun import APPNAME, ICON, VERSION
     from comun import _
     import tools
@@ -61,35 +61,34 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
         """File Manager crashes if a plugin doesn't implement the __init__
         method"""
         GObject.Object.__init__(self)
-        self.pdfmanager = PDFManager()
 
     def doit(self, menu, option, selected, window):
         if option == 'rotate' or option == 'watermark' or \
                 option == 'textmark' or option == 'paginate' or \
                 option == 'sign':
-            self.pdfmanager.operate(option, selected, window)
+            pdfmanager.operate(option, selected, window)
         elif option == 'remove pages':
-            self.pdfmanager.remove_some_pages(selected, window)
+            pdfmanager.remove_some_pages(selected, window)
         elif option == 'extract pages':
-            self.pdfmanager.extract_some_pages(selected, window)
+            pdfmanager.extract_some_pages(selected, window)
         elif option == 'join':
-            self.pdfmanager.join_pdf_files(selected, window)
+            pdfmanager.join_pdf_files(selected, window)
         elif option == 'split':
-            self.pdfmanager.split_pdf_files(selected, window)
+            pdfmanager.split_pdf_files(selected, window)
         elif option == 'combine':
-            self.pdfmanager.combine_pdf_pages(selected, window)
+            pdfmanager.combine_pdf_pages(selected, window)
         elif option == 'reduce':
-            self.pdfmanager.reduce(selected, window)
+            pdfmanager.reduce(selected, window)
         elif option == 'resize':
-            self.pdfmanager.resize_pdf_pages(selected, window)
+            pdfmanager.resize_pdf_pages(selected, window)
         elif option == 'convert2png':
-            self.pdfmanager.convert_pdf_file_to_png(selected, window)
+            pdfmanager.convert_pdf_file_to_png(selected, window)
         elif option == 'convert2pdf':
-            self.pdfmanager.create_pdf_from_images(selected, window)
+            pdfmanager.create_pdf_from_images(selected, window)
         elif option == 'encrypt':
-            self.pdfmanager.encrypt_files(selected, window)
+            pdfmanager.encrypt_files(selected, window)
         elif option == 'decrypt':
-            self.pdfmanager.decrypt_files(selected, window)
+            pdfmanager.decrypt_files(selected, window)
 
     def get_file_items(self, window, sel_items):
         """Adds the 'Replace in Filenames' menu item to the File Manager

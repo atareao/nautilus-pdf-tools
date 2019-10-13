@@ -37,7 +37,6 @@ except ValueError as e:
 from gi.repository import Gdk, GdkPixbuf, Gtk, Poppler
 import mimetypes
 import os
-import shlex
 import shutil
 import sh
 import tempfile
