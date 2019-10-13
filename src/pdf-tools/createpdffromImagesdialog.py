@@ -221,7 +221,7 @@ class CreatePDFFromImagesDialog(BasicDialog):
     def get_file_out(self):
         return self.output_file.get_label()
 
-    def on_button_up_clicked(self, widget):
+    def on_button_up_clicked(self, _):
         selection = self.iconview.get_selected_items()
         if selection:
             model = self.iconview.get_model()
@@ -230,7 +230,7 @@ class CreatePDFFromImagesDialog(BasicDialog):
             if previous_iter is not None:
                 model.swap(selected_iter, previous_iter)
 
-    def on_button_down_clicked(self, widget):
+    def on_button_down_clicked(self, _):
         selection = self.iconview.get_selected_items()
         if selection:
             model = self.iconview.get_model()
