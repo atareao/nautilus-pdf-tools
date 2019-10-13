@@ -54,14 +54,13 @@ mimetypes.init()
 def update_preview_cb(file_chooser, preview):
     filename = file_chooser.get_preview_filename()
     try:
-        if os.path.isdir(filename):
-            pixbuf = None
-        elif mimetypes.guess_type(filename)[0] in MIMETYPES_PDF:
+        if os.path.isfile(filename) and \
+                mimetypes.guess_type(filename)[0] in MIMETYPES_PDF:
             pixbuf = get_pixbuf_from_pdf(filename, 250)
-        elif mimetypes.guess_type(filename)[0] in ALL_MIMETYPES_IMAGE:
+            has_preview = True
+        elif os.path.isfile(filename) and\
+                mimetypes.guess_type(filename)[0] in ALL_MIMETYPES_IMAGE:
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(filename, 250, 250)
-        if pixbuf is not None:
-            preview.set_from_pixbuf(pixbuf)
             has_preview = True
         else:
             has_preview = False

@@ -95,7 +95,6 @@ class Progreso(BasicDialog, threading.Thread):
             GLib.idle_add(self.progressbar.set_fraction, fraction)
 
     def set_fraction(self, widget, fraction):
-        print('****', fraction)
         if fraction >= 0 and fraction <= 1.0:
             GLib.idle_add(self.progressbar.set_fraction, fraction)
 
@@ -105,7 +104,6 @@ class Progreso(BasicDialog, threading.Thread):
     def increase(self, widget, label):
         self.value += 1.0
         fraction = self.value / self.max_value
-        print('====', self.value, self.max_value, fraction, '====')
         GLib.idle_add(self.progressbar.set_fraction, fraction)
         if len(label) > 35:
             text = '...' + label[-32:]

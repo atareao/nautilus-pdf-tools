@@ -64,18 +64,10 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
         self.pdfmanager = PDFManager()
 
     def doit(self, menu, option, selected, window):
-        if option == 'rotate':
-            self.pdfmanager.rotate_or_flip(selected, window)
-        elif option == 'watermark':
-            self.pdfmanager.watermark(selected, window)
-        elif option == 'textmark':
-            self.pdfmanager.textmark(selected, window)
-        elif option == 'paginate':
-            self.pdfmanager.paginate(selected, window)
-        elif option == 'sign':
-            self.pdfmanager.sign(selected, window)
-        elif option == 'rotate pages':
-            self.pdfmanager.rotate_some_pages(selected, window)
+        if option == 'rotate' or option == 'watermark' or \
+                option == 'textmark' or option == 'paginate' or \
+                option == 'sign':
+            self.pdfmanager.operate(option, selected, window)
         elif option == 'remove pages':
             self.pdfmanager.remove_some_pages(selected, window)
         elif option == 'extract pages':
@@ -124,6 +116,8 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
                     ('05', _('Sign'), _('Sign pdf files'),
                     'sign'),
                 ]
+            else:
+                items = []
             moreitems = [
                 ('06', _('Remove pages'),
                 _('Remove pages of the document files'),

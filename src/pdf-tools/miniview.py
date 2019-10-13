@@ -67,7 +67,7 @@ class MiniView(Gtk.DrawingArea):
 
     def on_expose(self, widget, cr, data):
         if self.page:
-            if self.rotation_angle == 0.0 or self.rotation_angle == 2.0:
+            if self.pageOptions.rotation_angle == 0.0 or self.pageOptions.rotation_angle == 2.0:
                 zw = (self.width - 2.0 * self.margin) / self.or_width
                 zh = (self.height - 2.0 * self.margin) / self.or_height
                 if zw < zh:
@@ -98,7 +98,7 @@ class MiniView(Gtk.DrawingArea):
             context.set_source_rgba(1.0, 1.0, 1.0, 1.0)
             context.paint()
             mtr = cairo.Matrix()
-            mtr.rotate(self.rotation_angle * math.pi / 2.0)
+            mtr.rotate(self.pageOptions.rotation_angle * math.pi / 2.0)
             mtr.scale(self.zoom * RESOLUTION, self.zoom * RESOLUTION)
             context.transform(mtr)
             if self.pageOptions.rotation_angle == 1.0:
@@ -121,6 +121,8 @@ class MiniView(Gtk.DrawingArea):
                 image_width = watermark_surface.get_width()
                 y = self.pageOptions.image_y - image_height / MMTOPIXEL / 2
                 x = self.pageOptions.image_x - image_width / MMTOPIXEL / 2
+                print(self.page_width, image_width, x)
+                print(self.page_height, image_height, y)
                 context.translate(x * self.zoom, y * self.zoom)
                 context.scale(self.zoom / MMTOPIXEL, self.zoom / MMTOPIXEL)
                 context.set_source_surface(watermark_surface)

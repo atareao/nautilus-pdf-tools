@@ -40,9 +40,10 @@ import shutil
 from threading import Thread
 import cairoapi
 import tools
+from pageoptions import PageOptions
 from comun import (BOTTOM, CENTER, LEFT, MIDLE, MIMETYPES_PNG, MMTOPIXEL,
-                   MMTOPNG, RESOLUTION, RIGHT, ROTATE_000, ROTATE_090,
-                   ROTATE_180, ROTATE_270, TOP)
+                   MMTOPNG, MINIVIEWTOPDF, RESOLUTION, RIGHT, ROTATE_000,
+                   ROTATE_090, ROTATE_180, ROTATE_270, TOP)
 
 
 mimetypes.init()
@@ -115,6 +116,95 @@ class DoitInBackground(DoitInBackgroundBase):
                     break
         self.emit('finished')
 
+class DoitInBackgroundPages(DoitInBackgroundBase):
+    def __init__(self, extension, file_in, pageOptions):
+        DoitInBackgroundBase.__init__(self)
+        self.extension = extension
+        self.file_in = file_in
+        self.pageOptions = pageOptions
+
+    def run(self):
+        document = Poppler.Document.new_from_file('file://' + self.file_in,
+                                                      None)
+        number_of_pages = document.get_n_pages()
+        filename, filext = os.path.splitext(self.file_in)
+        file_out = filename + self.extension + filext
+        self.emit('start', number_of_pages)
+        pdfsurface = cairo.PDFSurface(file_out, 200, 200)
+        context = cairo.Context(pdfsurface)
+        for i in range(0, number_of_pages):
+            self.emit('todo', '{}/{}'.format(i, number_of_pages))
+            current_page = document.get_page(i)
+            or_pdf_width, or_pdf_height = current_page.get_size()
+            if str(i) in self.pageOptions.keys():
+                pageOptions = self.pageOptions[str(i)]
+            else:
+                pageOptions = PageOptions(flip_horizontal=False,
+                                          flip_vertical=False,
+                                          rotation_angle=0.0)
+
+            if pageOptions.rotation_angle == 1.0 or \
+                    pageOptions.rotation_angle == 3.0:
+                pdf_height, pdf_width = current_page.get_size()
+            else:
+                pdf_width, pdf_height = current_page.get_size()
+            pdfsurface.set_size(pdf_width, pdf_height)
+            context.save()
+            if pageOptions.flip_vertical:
+                context.scale(1, -1)
+                context.translate(0, -pdf_height)
+            if pageOptions.flip_horizontal:
+                context.scale(-1, 1)
+                context.translate(-pdf_width, 0)
+            if pageOptions.rotation_angle > 0.0:
+                mtr = cairo.Matrix()
+                mtr.rotate(pageOptions.rotation_angle * math.pi / 2.0)
+                context.transform(mtr)
+                if pageOptions.rotation_angle == 1.0:
+                        context.translate(0.0, -pdf_width)
+                elif pageOptions.rotation_angle == 2.0:
+                        context.translate(-pdf_width, -pdf_height)
+                elif pageOptions.rotation_angle == 3.0:
+                        context.translate(-pdf_height, 0.0)
+            current_page.render(context)
+            context.restore()
+            if pageOptions.image_file:
+                context.save()
+                watermark_surface = tools.create_image_surface_from_file(
+                    pageOptions.image_file, pageOptions.image_zoom)
+                image_height = watermark_surface.get_height()
+                image_width = watermark_surface.get_width()
+                y = (pageOptions.image_y - image_height / MMTOPIXEL / 2) / RESOLUTION
+                x = (pageOptions.image_x - image_width / MMTOPIXEL / 2) / RESOLUTION
+                context.translate(x, y)
+                context.scale(1.0 / MMTOPIXEL / RESOLUTION, 1.0 / MMTOPIXEL / RESOLUTION)
+                context.set_source_surface(watermark_surface)
+                context.paint()
+                context.restore()
+            if pageOptions.text_text:
+                context.save()
+                context.set_source_rgba(*pageOptions.text_color)
+                context.select_font_face(pageOptions.text_font)
+                context.set_font_size(pageOptions.text_size * 1.5)
+                x_bearing, y_bearing, font_width, font_height, _,\
+                    _ = context.text_extents(pageOptions.text_text)
+                y = (pageOptions.text_y + (font_height + y_bearing) / 2) / RESOLUTION
+                x = (pageOptions.text_x - (font_width + x_bearing) / 2) / RESOLUTION
+                context.move_to(x, y)
+                context.translate(x, y)
+                context.scale(1.0 / RESOLUTION, 1.0 / RESOLUTION)
+                context.show_text(pageOptions.text_text)
+                context.restore()
+            context.show_page()
+            if self.stop is True:
+                break
+            self.emit('donef', (float(i)/ float(number_of_pages)))
+        pdfsurface.flush()
+        pdfsurface.finish()
+        if self.stop is True:
+            self.emit('interrupted')
+        else:
+            self.emit('finished')
 
 class DoItInBackgroundResizePages(DoitInBackgroundBase):
     def __init__(self, files_in, extension, width, height):

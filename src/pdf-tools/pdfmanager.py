@@ -35,6 +35,7 @@ except ValueError as e:
 
 from gi.repository import GLib, GObject, Gtk
 import os
+from urllib import unquote_plus
 import cairoapi as pdfapi
 import doitinbackground
 import tools
@@ -239,34 +240,6 @@ class PDFManager(GObject.GObject):
                     dialog.run()
             jpd.destroy()
 
-    def paginate(self, selected, window):
-        files = tools.get_files(selected)
-        if files:
-            file0 = files[0]
-            wd = PaginateDialog(file0, window)
-            if wd.run() == Gtk.ResponseType.ACCEPT:
-                wd.hide()
-                color = wd.get_color()
-                font = wd.get_font()
-                size = wd.get_size()
-                hoption = wd.get_horizontal_option()
-                voption = wd.get_vertical_option()
-                horizontal_margin = wd.get_horizontal_margin()
-                vertical_margin = wd.get_vertical_margin()
-                extension = wd.get_extension()
-                dialog = Progreso(_('Paginate PDF'), window, len(files))
-                diboo = doitinbackground.DoitInBackgroundPaginage(
-                    files, color, font, size, hoption, voption,
-                    horizontal_margin, vertical_margin, extension)
-                dialog.connect('i-want-stop', diboo.stop_it)
-                diboo.connect('todo', dialog.set_todo_label)
-                diboo.connect('donef', dialog.set_fraction)
-                diboo.connect('finished', dialog.close)
-                diboo.connect('interrupted', dialog.close)
-                diboo.start()
-                dialog.run()
-            wd.destroy()
-
     def reduce(self, selected, window):
         files = tools.get_files(selected)
         if files:
@@ -288,109 +261,47 @@ class PDFManager(GObject.GObject):
                   dialog.run()
             rd.destroy()
 
-    def textmark(self, selected, window):
-        files = tools.get_files(selected)
-        if files:
-            file0 = files[0]
-            wd = TextmarkDialog(file0, window)
-            if wd.run() == Gtk.ResponseType.ACCEPT:
-                wd.hide()
-                text = wd.get_text()
-                color = wd.get_color()
-                font = wd.get_font()
-                size = wd.get_size()
-                hoption = wd.get_horizontal_option()
-                voption = wd.get_vertical_option()
-                horizontal_margin = wd.get_horizontal_margin()
-                vertical_margin = wd.get_vertical_margin()
-                extension = wd.get_extension()
-                dialog = Progreso(_('Textmark PDF'), window, len(files))
-                diboo = doitinbackground.DoitInBackgroundTextMark(
-                    files, text, color, font, size, hoption, voption,
-                    horizontal_margin, vertical_margin, extension)
-                diboo.connect('todo', dialog.set_todo_label)
-                diboo.connect('donef', dialog.set_fraction)
-                diboo.connect('finished', dialog.close)
-                diboo.connect('interrupted', dialog.close)
-                dialog.connect('i-want-stop', diboo.stop_it)
-                diboo.start()
-                dialog.run()
-            wd.destroy()
-
-    def sign(self, selected, window):
-        files = tools.get_files(selected)
-        if files:
-            file0 = files[0]
-            sd = SignDialog(file0, window)
-            if sd.run() == Gtk.ResponseType.ACCEPT:
-                sd.hide()
-                position_x = sd.original_position_x
-                position_y = sd.original_position_y
-                zoom = sd.get_watermark_zoom()
-                image = sd.get_image_filename()
-                extension = sd.get_extension()
-                dialog = Progreso(_('Sign PDF'), window, len(files))
-                diboo = doitinbackground.DoitInBackgroundSign(
-                    files, image, position_x, position_y, zoom, extension)
-                diboo.connect('todo', dialog.set_todo_label)
-                diboo.connect('donef', dialog.set_fraction)
-                diboo.connect('finished', dialog.close)
-                diboo.connect('interrupted', dialog.close)
-                dialog.connect('i-want-stop', diboo.stop_it)
-                diboo.start()
-                dialog.run()
-            sd.destroy()
-
-    def watermark(self, selected, window):
-        files = tools.get_files(selected)
-        if files:
-            file0 = files[0]
-            wd = WatermarkDialog(file0, window)
-            if wd.run() == Gtk.ResponseType.ACCEPT:
-                wd.hide()
-                hoption = wd.get_horizontal_option()
-                voption = wd.get_vertical_option()
-                horizontal_margin = wd.get_horizontal_margin()
-                vertical_margin = wd.get_vertical_margin()
-                zoom = float(wd.get_watermark_zoom() / 100.0)
-                image = wd.get_image_filename()
-                extension = wd.get_extension()
-                dialog = Progreso(_('Watermark PDF'), window, len(files))
-                diboo = doitinbackground.DoitInBackgroundWaterMark(
-                    files, image, hoption, voption, horizontal_margin,
-                    vertical_margin, zoom, extension)
-                diboo.connect('todo', dialog.set_todo_label)
-                diboo.connect('donef', dialog.set_fraction)
-                diboo.connect('finished', dialog.close)
-                diboo.connect('interrupted', dialog.close)
-                dialog.connect('i-want-stop', diboo.stop_it)
-                diboo.start()
-                dialog.run()
-            wd.destroy()
-
-    def rotate_or_flip(self, selected, window):
-        files = tools.get_files(selected)
-        if files:
-            file0 = files[0]
-            fd = FlipDialog(file0, window)
-            if fd.run() == Gtk.ResponseType.ACCEPT:
-                fd.hide()
-                rotate = fd.get_rotate()
-                flip_vertical = fd.get_flip_vertical()
-                flip_horizontal = fd.get_flip_horizontal()
-                extension = fd.get_extension()
-                dialog = Progreso(_('Rotate and flip PDF'), window, len(files))
-                diboo = doitinbackground.DoitInBackgroundRotateAndFlip(
-                    files, rotate, flip_vertical, flip_horizontal, extension)
-                diboo.connect('todo', dialog.set_todo_label)
-                diboo.connect('donef', dialog.set_fraction)
-                diboo.connect('finished', dialog.close)
-                diboo.connect('interrupted', dialog.close)
-                dialog.connect('i-want-stop', diboo.stop_it)
-                diboo.start()
-                dialog.run()
-            fd.destroy()
-
+    def operate(self, operation, selected, window):
+        dialog = None
+        title = ''
+        extension = ''
+        file_in = unquote_plus(selected.get_uri()[7:])
+        if file_in and os.path.exists(file_in):
+            if operation == 'rotate':
+                dialog = FlipDialog(file_in, window)
+                title = _('Rotate and flip PDF')
+                extension = '_rotated'
+            elif operation == 'watermark':
+                dialog = WatermarkDialog(filename=file_in, window=window)
+                title = _('Watermark PDF')
+                extension = '_watermarked'
+            elif operation == 'textmark':
+                dialog = TextmarkDialog(filename=file_in, window=window)
+                title = _('Textmark PDF')
+                extension = '_textmarked'
+            elif operation == 'paginate':
+                dialog = PaginateDialog(filename=file_in, window=window)
+                title = _('Paginate PDF')
+                extension = '_paginated'
+            elif operation == 'sign':
+                dialog = SignDialog(filename=file_in, window=window)
+                title = _('Sign PDF')
+                extension = '_signed'
+            if dialog is not None:
+                if dialog.run() == Gtk.ResponseType.ACCEPT:
+                    dialog.hide()
+                    pageOptions = dialog.pages
+                    progress_dialog = Progreso(title, window, 1)
+                    diboo = doitinbackground.DoitInBackgroundPages(
+                        extension, file_in, pageOptions)
+                    diboo.connect('todo', progress_dialog.set_todo_label)
+                    diboo.connect('donef', progress_dialog.set_fraction)
+                    diboo.connect('finished', progress_dialog.close)
+                    diboo.connect('interrupted', progress_dialog.close)
+                    progress_dialog.connect('i-want-stop', diboo.stop_it)
+                    diboo.start()
+                    progress_dialog.run()
+                dialog.destroy()
 
     def remove_some_pages(self, selected, window):
         files = tools.get_files(selected)
@@ -475,6 +386,7 @@ class FileTemp():
 
 
 if __name__ == '__main__':
+    '''
     directory = 'file:///home/lorenzo/Escritorio/pdfs/'
     files = [
         # FileTemp(directory + '2016_prysmiancatalogobt_ 2016.pdf'),
@@ -493,6 +405,7 @@ if __name__ == '__main__':
         FileTemp(directory + 'guia_bt_anexo_2_sep03R1_04.png'),
         FileTemp(directory + 'guia_bt_anexo_2_sep03R1_05.png'),
     ]
+    '''
     pdfmanager = PDFManager()
     '''
     pdfmanager.create_pdf_from_images(images, None)
@@ -508,4 +421,5 @@ if __name__ == '__main__':
     pdfmanager.remove_some_pages(files, None)
     pdfmanager.extract_some_pages(files, None)
     '''
-    pdfmanager.sign(files, None)
+    file_in = FileTemp('file:///home/lorenzo/Escritorio/quijote.pdf')
+    pdfmanager.operate('paginate', file_in, None)
