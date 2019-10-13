@@ -39,7 +39,7 @@ import mimetypes
 import os
 import shlex
 import shutil
-import subprocess
+import sh
 import tempfile
 from urllib import unquote_plus
 import cairo
@@ -285,24 +285,19 @@ def create_from_images(file_out, images, width=1189, height=1682, margin=0):
 def reduce_pdf(file_in, dpi, append):
     try:
         file_out = get_output_filename(file_in, append)
-        rutine = 'ghostscript -q  -dNOPAUSE -dBATCH -dSAFER \
-        -sDEVICE=pdfwrite \
-        -dCompatibilityLevel=1.4 \
-        -dPDFSETTINGS=/screen \
-        -dEmbedAllFonts=true \
-        -dSubsetFonts=true \
-        -dDownsampleColorImages=true \
-        -dColorImageResolution=100 \
-        -dColorImageDownsampleType=/Bicubic \
-        -dColorImageResolution="%s" \
-        -dGrayImageDownsampleType=/Bicubic \
-        -dGrayImageResolution="%s" \
-        -dMonoImageDownsampleType=/Bicubic \
-        -dMonoImageResolution="%s" \
-        -sOutputFile="%s" "%s"' % (dpi, dpi, dpi, file_out, file_in)
-        args = shlex.split(rutine)
-        p = subprocess.Popen(args, stdout=subprocess.PIPE)
-        p.communicate()
+        options = ['-q','-dNOPAUSE','-dBATCH','-dSAFER','-sDEVICE=pdfwrite',
+                   '-dCompatibilityLevel=1.4','-dPDFSETTINGS=/screen',
+                   '-dEmbedAllFonts=true','-dSubsetFonts=true',
+                   '-dDownsampleColorImages=true','-dColorImageResolution=100',
+                   '-dColorImageDownsampleType=/Bicubic',
+                   '-dColorImageResolution="{}"'.format(dpi),
+                   '-dGrayImageDownsampleType=/Bicubic',
+                   '-dGrayImageResolution="{}"'.format(dpi),
+                   '-dMonoImageDownsampleType=/Bicubic',
+                   '-dMonoImageResolution="{}"'.format(dpi),
+                   '-sOutputFile="{}"'.format(file_out),
+                   '"{}"'.format(file_in)]
+        sh.ghostscript(options)
     except Exception as e:
         print(e)
 

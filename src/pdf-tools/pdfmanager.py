@@ -92,7 +92,7 @@ class PDFManager(GObject.GObject):
             cd.destroy()
 
     def encrypt_files(self, selected, window):
-        if files:
+        if selected:
             files = tools.get_files(selected)
             pd = PasswordDialog(_('Encrypt files'), window)
             if pd.run() == Gtk.ResponseType.ACCEPT:
@@ -220,7 +220,7 @@ class PDFManager(GObject.GObject):
         files = tools.get_files(selected)
         if files:
             file_in = files[0]
-            filename, filext = os.path.splitext(file_in)
+            filename = os.path.splitext(file_in)[0]
             file_out = filename + '_joined_files.pdf'
             jpd = JoinPdfsDialog(_('Join PDF files'), files, file_out, window)
             if jpd.run() == Gtk.ResponseType.ACCEPT:
