@@ -101,12 +101,6 @@ class FlipDialog(BaseDialogWithApply):
             _('Horizontal'), None)
         self.popover_listbox.add(row)
 
-        self.popover_listbox.add(generate_separator_row())
-        self.popover_listbox.add(generate_title_row(_('File name'), True))
-
-        self.add_to_file, row = generate_entry_row(_('Add to file'))
-        self.popover_listbox.add(row)
-
     def reset(self):
         self.check_horizontal.set_active(False)
         self.check_vertical.set_active(False)
