@@ -40,7 +40,11 @@ import os
 import shutil
 import sh
 import tempfile
-from urllib import unquote_plus
+try:
+    from urllib.parse import unquote_plus
+except:
+    # Python2
+    from urllib import unquote_plus
 import cairo
 from comun import (ALL_MIMETYPES_IMAGE, EXTENSIONS_FROM, MIMETYPES_IMAGE,
                    MIMETYPES_PDF, MIMETYPES_PNG, MMTOPIXEL, MMTOPNG, _)

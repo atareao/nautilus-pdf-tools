@@ -33,7 +33,6 @@ except ValueError as e:
     exit(1)
 from gi.repository import Gtk
 import os
-from urllib import unquote_plus
 import cairoapi as pdfapi
 import doitinbackground
 import tools
@@ -255,7 +254,8 @@ def operate(operation, selected, window):
     dialog = None
     title = ''
     extension = ''
-    file_in = unquote_plus(selected.get_uri()[7:])
+    files = tools.get_files(selected)
+    file_in = files[0]
     if file_in and os.path.exists(file_in):
         if operation == 'rotate':
             dialog = FlipDialog(file_in, window)
@@ -376,4 +376,4 @@ class FileTemp():
 
 if __name__ == '__main__':
     file_in = FileTemp('file:///home/lorenzo/Escritorio/quijote.pdf')
-    operate('sign', file_in, None)
+    operate('sign', [file_in], None)

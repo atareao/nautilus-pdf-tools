@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-pdf-tools 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-06 09:07+0200\n"
+"POT-Creation-Date: 2019-10-14 00:11+0200\n"
 "PO-Revision-Date: 2016-05-30 17:47+0100\n"
 "Last-Translator: Manuel X. Lemos <mxlemos@openmailbox.org>\n"
 "Language-Team: Galician\n"
@@ -18,145 +18,145 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: src/nautilus-pdf-tools.py:108 src/nautilus-pdf-tools.py:186
-#: src/nautilus-pdf-tools.py:226
+#: src/nautilus-pdf-tools.py:100 src/nautilus-pdf-tools.py:180
+#: src/nautilus-pdf-tools.py:220
 msgid "Pdf Tools"
 msgstr "Ferramentas PDF"
 
-#: src/nautilus-pdf-tools.py:109 src/nautilus-pdf-tools.py:187
+#: src/nautilus-pdf-tools.py:101 src/nautilus-pdf-tools.py:181
 msgid "Tools to manipulate pdf files"
 msgstr "Un conxunto de ferramentas para traballar con ficheiros pdf"
 
-#: src/nautilus-pdf-tools.py:115
+#: src/nautilus-pdf-tools.py:107
 msgid "Rotate and flip"
 msgstr "Xirar e voltear"
 
-#: src/nautilus-pdf-tools.py:115
+#: src/nautilus-pdf-tools.py:107
 msgid "rotate_and_flip pdf files"
 msgstr "Xira e voltea ficheiros pdf"
 
-#: src/nautilus-pdf-tools.py:117 src/pdf-tools/watermarkdialog.py:44
+#: src/nautilus-pdf-tools.py:109 src/pdf-tools/watermarkdialog.py:44
 #: src/pdf-tools/watermarkdialog.py:80 src/pdf-tools/watermarkdialog.py:86
 msgid "Watermark"
 msgstr "Marca de auga"
 
-#: src/nautilus-pdf-tools.py:117
+#: src/nautilus-pdf-tools.py:109
 #, fuzzy
 msgid "Watermark pdf files"
 msgstr "Engade unha marca de auga ao ficheiro pdf"
 
-#: src/nautilus-pdf-tools.py:119 src/pdf-tools/textmarkdialog.py:45
+#: src/nautilus-pdf-tools.py:111 src/pdf-tools/textmarkdialog.py:45
 #: src/pdf-tools/textmarkdialog.py:88 src/pdf-tools/textmarkdialog.py:102
 msgid "Textmark"
 msgstr "Marca de texto"
 
-#: src/nautilus-pdf-tools.py:119
+#: src/nautilus-pdf-tools.py:111
 msgid "Textmark pdf files"
 msgstr "Marca ficheiros con texto"
 
-#: src/nautilus-pdf-tools.py:121 src/pdf-tools/paginatedialog.py:45
+#: src/nautilus-pdf-tools.py:113 src/pdf-tools/paginatedialog.py:45
 msgid "Paginate"
 msgstr "Paxinar"
 
-#: src/nautilus-pdf-tools.py:121
+#: src/nautilus-pdf-tools.py:113
 msgid "Paginate pdf files"
 msgstr "Paxina ficheiros pdf"
 
-#: src/nautilus-pdf-tools.py:123 src/pdf-tools/signdialog.py:44
+#: src/nautilus-pdf-tools.py:115 src/pdf-tools/signdialog.py:44
 msgid "Sign"
 msgstr ""
 
-#: src/nautilus-pdf-tools.py:123
+#: src/nautilus-pdf-tools.py:115
 #, fuzzy
 msgid "Sign pdf files"
 msgstr "Unir ficheiros pdf"
 
-#: src/nautilus-pdf-tools.py:128
+#: src/nautilus-pdf-tools.py:121
 msgid "Remove pages"
 msgstr "Quitar páxinas"
 
-#: src/nautilus-pdf-tools.py:129
+#: src/nautilus-pdf-tools.py:122
 msgid "Remove pages of the document files"
 msgstr "Quita algunhas páxinas do documento"
 
-#: src/nautilus-pdf-tools.py:131
+#: src/nautilus-pdf-tools.py:124
 msgid "Extract pages"
 msgstr "Extraer páxinas"
 
-#: src/nautilus-pdf-tools.py:132
+#: src/nautilus-pdf-tools.py:125
 msgid "Extract pages of the document files"
 msgstr "Extrae páxinas do documento"
 
-#: src/nautilus-pdf-tools.py:134
+#: src/nautilus-pdf-tools.py:127
 msgid "Join pdf files"
 msgstr "Unir ficheiros pdf"
 
-#: src/nautilus-pdf-tools.py:135
+#: src/nautilus-pdf-tools.py:128
 msgid "Join pdf files in one document"
 msgstr "Une ficheiros pdf nun único documento"
 
-#: src/nautilus-pdf-tools.py:137
+#: src/nautilus-pdf-tools.py:130
 msgid "Split pdf files"
 msgstr "Separar un ficheiro pdf"
 
-#: src/nautilus-pdf-tools.py:138
+#: src/nautilus-pdf-tools.py:131
 msgid "Split a pdf in several documents"
 msgstr "Separa ficheiros pdf en varios documentos"
 
-#: src/nautilus-pdf-tools.py:140
+#: src/nautilus-pdf-tools.py:133
 msgid "Combine pdf pages"
 msgstr "Combinar páxinas"
 
-#: src/nautilus-pdf-tools.py:141
+#: src/nautilus-pdf-tools.py:134
 msgid "Combine pdf pages in one page"
 msgstr "Combina varias páxinas nunha única"
 
-#: src/nautilus-pdf-tools.py:143
+#: src/nautilus-pdf-tools.py:136
 msgid "Reduce pdf size"
 msgstr ""
 
-#: src/nautilus-pdf-tools.py:145
+#: src/nautilus-pdf-tools.py:138
 msgid "Resize pdf pages"
 msgstr "Redimensionar páxinas"
 
-#: src/nautilus-pdf-tools.py:147
+#: src/nautilus-pdf-tools.py:140
 #, fuzzy
 msgid "Convert pdf to png"
 msgstr "Convertir a"
 
-#: src/nautilus-pdf-tools.py:148
+#: src/nautilus-pdf-tools.py:141
 msgid "Convert pdf file to png image"
 msgstr ""
 
-#: src/nautilus-pdf-tools.py:150
+#: src/nautilus-pdf-tools.py:143
 msgid "Encrypt"
 msgstr ""
 
-#: src/nautilus-pdf-tools.py:151
+#: src/nautilus-pdf-tools.py:144
 #, fuzzy
 msgid "Encrypt pdf files"
 msgstr "Separar un ficheiro pdf"
 
-#: src/nautilus-pdf-tools.py:153
+#: src/nautilus-pdf-tools.py:146
 msgid "Decrypt"
 msgstr ""
 
-#: src/nautilus-pdf-tools.py:154
+#: src/nautilus-pdf-tools.py:147
 #, fuzzy
 msgid "Decrypt pdf files"
 msgstr "Separar un ficheiro pdf"
 
-#: src/nautilus-pdf-tools.py:176 src/nautilus-pdf-tools.py:177
-#: src/nautilus-pdf-tools.py:212 src/nautilus-pdf-tools.py:213
+#: src/nautilus-pdf-tools.py:170 src/nautilus-pdf-tools.py:171
+#: src/nautilus-pdf-tools.py:206 src/nautilus-pdf-tools.py:207
 msgid "About"
 msgstr "Acerca de..."
 
-#: src/nautilus-pdf-tools.py:192
+#: src/nautilus-pdf-tools.py:186
 #, fuzzy
 msgid "Convert to pdf"
 msgstr "Convertir a"
 
-#: src/nautilus-pdf-tools.py:193
+#: src/nautilus-pdf-tools.py:187
 #, fuzzy
 msgid "Convert images to pdf"
 msgstr "Convertir a"
@@ -185,30 +185,30 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-#: src/pdf-tools/basedialog.py:210 src/pdf-tools/basedialog.py:256
+#: src/pdf-tools/basedialog.py:212 src/pdf-tools/basedialog.py:258
 #, fuzzy
 msgid "First page"
 msgstr "Extraer páxinas"
 
-#: src/pdf-tools/basedialog.py:213 src/pdf-tools/basedialog.py:260
+#: src/pdf-tools/basedialog.py:215 src/pdf-tools/basedialog.py:262
 msgid "Previous page"
 msgstr ""
 
-#: src/pdf-tools/basedialog.py:220 src/pdf-tools/basedialog.py:266
+#: src/pdf-tools/basedialog.py:222 src/pdf-tools/basedialog.py:268
 msgid "Current_page"
 msgstr ""
 
-#: src/pdf-tools/basedialog.py:224 src/pdf-tools/basedialog.py:270
+#: src/pdf-tools/basedialog.py:226 src/pdf-tools/basedialog.py:272
 #, fuzzy
 msgid "Next page"
 msgstr "Extraer páxinas"
 
-#: src/pdf-tools/basedialog.py:228 src/pdf-tools/basedialog.py:274
+#: src/pdf-tools/basedialog.py:230 src/pdf-tools/basedialog.py:276
 #, fuzzy
 msgid "Last page"
 msgstr "Xirar páxinas"
 
-#: src/pdf-tools/basedialog.py:235
+#: src/pdf-tools/basedialog.py:237
 msgid "Options"
 msgstr ""
 
@@ -520,11 +520,11 @@ msgstr ""
 msgid "Add to file"
 msgstr "Ficheiro de texto"
 
-#: src/pdf-tools/convertdialog.py:40 src/pdf-tools/convertdialog.py:52
+#: src/pdf-tools/convertdialog.py:40 src/pdf-tools/convertdialog.py:50
 msgid "Convert to"
 msgstr "Convertir a"
 
-#: src/pdf-tools/convertdialog.py:50 src/pdf-tools/comun.py:132
+#: src/pdf-tools/convertdialog.py:48 src/pdf-tools/comun.py:133
 msgid "ALL"
 msgstr ""
 
@@ -589,95 +589,95 @@ msgstr "Establece a marxe en mm"
 msgid "_combined"
 msgstr ""
 
-#: src/pdf-tools/pdfmanager.py:67 src/pdf-tools/pdfmanager.py:79
+#: src/pdf-tools/pdfmanager.py:59 src/pdf-tools/pdfmanager.py:71
 #, fuzzy
 msgid "Resize PDF"
 msgstr "Redimensionar páxinas"
 
-#: src/pdf-tools/pdfmanager.py:93 src/pdf-tools/pdfmanager.py:99
+#: src/pdf-tools/pdfmanager.py:87 src/pdf-tools/pdfmanager.py:91
 #, fuzzy
 msgid "Encrypt files"
 msgstr "Ficheiros PNG"
 
-#: src/pdf-tools/pdfmanager.py:112
+#: src/pdf-tools/pdfmanager.py:107
 #, fuzzy
 msgid "Decrypt files"
 msgstr "Ficheiro de texto"
 
-#: src/pdf-tools/pdfmanager.py:118
+#: src/pdf-tools/pdfmanager.py:111
 #, fuzzy
 msgid "Dencrypt files"
 msgstr "Ficheiro de texto"
 
-#: src/pdf-tools/pdfmanager.py:133
+#: src/pdf-tools/pdfmanager.py:127
 #, fuzzy
 msgid "Convert PDF to PNG"
 msgstr "Convertir a"
 
-#: src/pdf-tools/pdfmanager.py:147 src/pdf-tools/pdfmanager.py:163
+#: src/pdf-tools/pdfmanager.py:141 src/pdf-tools/pdfmanager.py:157
 #, fuzzy
 msgid "Combine PDF pages"
 msgstr "Combinar varias páxinas por folla"
 
-#: src/pdf-tools/pdfmanager.py:183 src/pdf-tools/pdfmanager.py:195
+#: src/pdf-tools/pdfmanager.py:178 src/pdf-tools/pdfmanager.py:190
 #, fuzzy
 msgid "Create PDF from images"
 msgstr "Paxina ficheiros pdf"
 
-#: src/pdf-tools/pdfmanager.py:220 src/pdf-tools/pdfmanager.py:226
+#: src/pdf-tools/pdfmanager.py:215 src/pdf-tools/pdfmanager.py:221
 #, fuzzy
 msgid "Join PDF files"
 msgstr "Unir ficheiros pdf"
 
-#: src/pdf-tools/pdfmanager.py:253
-#, fuzzy
-msgid "Paginate PDF"
-msgstr "Paxinar"
-
-#: src/pdf-tools/pdfmanager.py:269
+#: src/pdf-tools/pdfmanager.py:236
 #, fuzzy
 msgid "Reduce PDF"
 msgstr "Redimensionar páxinas"
 
-#: src/pdf-tools/pdfmanager.py:276
+#: src/pdf-tools/pdfmanager.py:242
 msgid "Reduce PDF size"
 msgstr ""
 
-#: src/pdf-tools/pdfmanager.py:304
-#, fuzzy
-msgid "Textmark PDF"
-msgstr "Marca de texto"
-
-#: src/pdf-tools/pdfmanager.py:329
-#, fuzzy
-msgid "Sign PDF"
-msgstr "Paxinar"
-
-#: src/pdf-tools/pdfmanager.py:355
-#, fuzzy
-msgid "Watermark PDF"
-msgstr "Marca de auga"
-
-#: src/pdf-tools/pdfmanager.py:379
+#: src/pdf-tools/pdfmanager.py:263
 #, fuzzy
 msgid "Rotate and flip PDF"
 msgstr "Xirar e voltear"
 
-#: src/pdf-tools/pdfmanager.py:398 src/pdf-tools/pdfmanager.py:405
+#: src/pdf-tools/pdfmanager.py:267
+#, fuzzy
+msgid "Watermark PDF"
+msgstr "Marca de auga"
+
+#: src/pdf-tools/pdfmanager.py:271
+#, fuzzy
+msgid "Textmark PDF"
+msgstr "Marca de texto"
+
+#: src/pdf-tools/pdfmanager.py:275
+#, fuzzy
+msgid "Paginate PDF"
+msgstr "Paxinar"
+
+#: src/pdf-tools/pdfmanager.py:279
+#, fuzzy
+msgid "Sign PDF"
+msgstr "Paxinar"
+
+#: src/pdf-tools/pdfmanager.py:303 src/pdf-tools/pdfmanager.py:310
 #, fuzzy
 msgid "Remove PDF"
 msgstr "Quitar"
 
-#: src/pdf-tools/pdfmanager.py:422
+#: src/pdf-tools/pdfmanager.py:325
 msgid "Split PDF"
 msgstr ""
 
-#: src/pdf-tools/pdfmanager.py:436 src/pdf-tools/pdfmanager.py:442
+#: src/pdf-tools/pdfmanager.py:339 src/pdf-tools/pdfmanager.py:345
 #, fuzzy
 msgid "Extract pages from PDF"
 msgstr "Extraer páxinas"
 
-#: src/pdf-tools/pdfmanager.py:464
+#: src/pdf-tools/pdfmanager.py:366
 msgid "Select file to save extracted text"
 msgstr "Selecciona un ficheiro para gardar as páxinas extraídas"
 

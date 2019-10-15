@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-pdf-tools 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-06 09:07+0200\n"
+"POT-Creation-Date: 2019-10-14 00:11+0200\n"
 "PO-Revision-Date: 2019-07-02 16:12+0300\n"
 "Last-Translator: atareao <lorenzo.carbonell.cerezo@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -18,141 +18,141 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: src/nautilus-pdf-tools.py:108 src/nautilus-pdf-tools.py:186
-#: src/nautilus-pdf-tools.py:226
+#: src/nautilus-pdf-tools.py:100 src/nautilus-pdf-tools.py:180
+#: src/nautilus-pdf-tools.py:220
 msgid "Pdf Tools"
 msgstr "Робота з PDF"
 
-#: src/nautilus-pdf-tools.py:109 src/nautilus-pdf-tools.py:187
+#: src/nautilus-pdf-tools.py:101 src/nautilus-pdf-tools.py:181
 msgid "Tools to manipulate pdf files"
 msgstr "Інструменти для роботи з PDF-файлами"
 
-#: src/nautilus-pdf-tools.py:115
+#: src/nautilus-pdf-tools.py:107
 msgid "Rotate and flip"
 msgstr "Повернути і перевернути"
 
-#: src/nautilus-pdf-tools.py:115
+#: src/nautilus-pdf-tools.py:107
 msgid "rotate_and_flip pdf files"
 msgstr "Повернути і перевернути PDF"
 
-#: src/nautilus-pdf-tools.py:117 src/pdf-tools/watermarkdialog.py:44
+#: src/nautilus-pdf-tools.py:109 src/pdf-tools/watermarkdialog.py:44
 #: src/pdf-tools/watermarkdialog.py:80 src/pdf-tools/watermarkdialog.py:86
 msgid "Watermark"
 msgstr "Водяний знак"
 
-#: src/nautilus-pdf-tools.py:117
+#: src/nautilus-pdf-tools.py:109
 #, fuzzy
 msgid "Watermark pdf files"
 msgstr "Водяний знак"
 
-#: src/nautilus-pdf-tools.py:119 src/pdf-tools/textmarkdialog.py:45
+#: src/nautilus-pdf-tools.py:111 src/pdf-tools/textmarkdialog.py:45
 #: src/pdf-tools/textmarkdialog.py:88 src/pdf-tools/textmarkdialog.py:102
 msgid "Textmark"
 msgstr "Текстовий знак"
 
-#: src/nautilus-pdf-tools.py:119
+#: src/nautilus-pdf-tools.py:111
 msgid "Textmark pdf files"
 msgstr "Текстовий знак"
 
-#: src/nautilus-pdf-tools.py:121 src/pdf-tools/paginatedialog.py:45
+#: src/nautilus-pdf-tools.py:113 src/pdf-tools/paginatedialog.py:45
 msgid "Paginate"
 msgstr "Нумерація сторінок"
 
-#: src/nautilus-pdf-tools.py:121
+#: src/nautilus-pdf-tools.py:113
 msgid "Paginate pdf files"
 msgstr "Нумерація сторінок"
 
-#: src/nautilus-pdf-tools.py:123 src/pdf-tools/signdialog.py:44
+#: src/nautilus-pdf-tools.py:115 src/pdf-tools/signdialog.py:44
 msgid "Sign"
 msgstr ""
 
-#: src/nautilus-pdf-tools.py:123
+#: src/nautilus-pdf-tools.py:115
 #, fuzzy
 msgid "Sign pdf files"
 msgstr "Об'єднати PDF-файли"
 
-#: src/nautilus-pdf-tools.py:128
+#: src/nautilus-pdf-tools.py:121
 msgid "Remove pages"
 msgstr "Видалити сторінки"
 
-#: src/nautilus-pdf-tools.py:129
+#: src/nautilus-pdf-tools.py:122
 msgid "Remove pages of the document files"
 msgstr "Видалити сторінки в документі"
 
-#: src/nautilus-pdf-tools.py:131
+#: src/nautilus-pdf-tools.py:124
 msgid "Extract pages"
 msgstr "Видобути сторінки"
 
-#: src/nautilus-pdf-tools.py:132
+#: src/nautilus-pdf-tools.py:125
 msgid "Extract pages of the document files"
 msgstr "Видобути сторінки з документу"
 
-#: src/nautilus-pdf-tools.py:134
+#: src/nautilus-pdf-tools.py:127
 msgid "Join pdf files"
 msgstr "Об'єднати PDF-файли"
 
-#: src/nautilus-pdf-tools.py:135
+#: src/nautilus-pdf-tools.py:128
 msgid "Join pdf files in one document"
 msgstr "Об'єднати PDF-файли в один"
 
-#: src/nautilus-pdf-tools.py:137
+#: src/nautilus-pdf-tools.py:130
 msgid "Split pdf files"
 msgstr "Розділити PDF-файл"
 
-#: src/nautilus-pdf-tools.py:138
+#: src/nautilus-pdf-tools.py:131
 msgid "Split a pdf in several documents"
 msgstr "Розділити PDF-файл на декілька файлів"
 
-#: src/nautilus-pdf-tools.py:140
+#: src/nautilus-pdf-tools.py:133
 msgid "Combine pdf pages"
 msgstr "Об'єднати сторінки"
 
-#: src/nautilus-pdf-tools.py:141
+#: src/nautilus-pdf-tools.py:134
 msgid "Combine pdf pages in one page"
 msgstr "Об'єднати декілька сторінок в одну "
 
-#: src/nautilus-pdf-tools.py:143
+#: src/nautilus-pdf-tools.py:136
 msgid "Reduce pdf size"
 msgstr "Зменшити розмір PDF"
 
-#: src/nautilus-pdf-tools.py:145
+#: src/nautilus-pdf-tools.py:138
 msgid "Resize pdf pages"
 msgstr "Змінити розмір PDF"
 
-#: src/nautilus-pdf-tools.py:147
+#: src/nautilus-pdf-tools.py:140
 msgid "Convert pdf to png"
 msgstr "Конвертувати PDF в PNG"
 
-#: src/nautilus-pdf-tools.py:148
+#: src/nautilus-pdf-tools.py:141
 msgid "Convert pdf file to png image"
 msgstr "Конвертувати PDF-файл в PNG"
 
-#: src/nautilus-pdf-tools.py:150
+#: src/nautilus-pdf-tools.py:143
 msgid "Encrypt"
 msgstr "Зашифрувати файл"
 
-#: src/nautilus-pdf-tools.py:151
+#: src/nautilus-pdf-tools.py:144
 msgid "Encrypt pdf files"
 msgstr "Зашифрувати PDF"
 
-#: src/nautilus-pdf-tools.py:153
+#: src/nautilus-pdf-tools.py:146
 msgid "Decrypt"
 msgstr "Розшифрувати файл"
 
-#: src/nautilus-pdf-tools.py:154
+#: src/nautilus-pdf-tools.py:147
 msgid "Decrypt pdf files"
 msgstr "Розшифрувати PDF"
 
-#: src/nautilus-pdf-tools.py:176 src/nautilus-pdf-tools.py:177
-#: src/nautilus-pdf-tools.py:212 src/nautilus-pdf-tools.py:213
+#: src/nautilus-pdf-tools.py:170 src/nautilus-pdf-tools.py:171
+#: src/nautilus-pdf-tools.py:206 src/nautilus-pdf-tools.py:207
 msgid "About"
 msgstr "Про програму"
 
-#: src/nautilus-pdf-tools.py:192
+#: src/nautilus-pdf-tools.py:186
 msgid "Convert to pdf"
 msgstr "Конвертувати в PDF"
 
-#: src/nautilus-pdf-tools.py:193
+#: src/nautilus-pdf-tools.py:187
 msgid "Convert images to pdf"
 msgstr "Конвертувати зображення в PDF"
 
@@ -180,30 +180,30 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
-#: src/pdf-tools/basedialog.py:210 src/pdf-tools/basedialog.py:256
+#: src/pdf-tools/basedialog.py:212 src/pdf-tools/basedialog.py:258
 #, fuzzy
 msgid "First page"
 msgstr "Видобути сторінки"
 
-#: src/pdf-tools/basedialog.py:213 src/pdf-tools/basedialog.py:260
+#: src/pdf-tools/basedialog.py:215 src/pdf-tools/basedialog.py:262
 msgid "Previous page"
 msgstr ""
 
-#: src/pdf-tools/basedialog.py:220 src/pdf-tools/basedialog.py:266
+#: src/pdf-tools/basedialog.py:222 src/pdf-tools/basedialog.py:268
 msgid "Current_page"
 msgstr ""
 
-#: src/pdf-tools/basedialog.py:224 src/pdf-tools/basedialog.py:270
+#: src/pdf-tools/basedialog.py:226 src/pdf-tools/basedialog.py:272
 #, fuzzy
 msgid "Next page"
 msgstr "Видобути сторінки"
 
-#: src/pdf-tools/basedialog.py:228 src/pdf-tools/basedialog.py:274
+#: src/pdf-tools/basedialog.py:230 src/pdf-tools/basedialog.py:276
 #, fuzzy
 msgid "Last page"
 msgstr "Повернути сторінки"
 
-#: src/pdf-tools/basedialog.py:235
+#: src/pdf-tools/basedialog.py:237
 msgid "Options"
 msgstr ""
 
@@ -509,11 +509,11 @@ msgstr ""
 msgid "Add to file"
 msgstr "Додати до імені файлу"
 
-#: src/pdf-tools/convertdialog.py:40 src/pdf-tools/convertdialog.py:52
+#: src/pdf-tools/convertdialog.py:40 src/pdf-tools/convertdialog.py:50
 msgid "Convert to"
 msgstr "Конвертувати в"
 
-#: src/pdf-tools/convertdialog.py:50 src/pdf-tools/comun.py:132
+#: src/pdf-tools/convertdialog.py:48 src/pdf-tools/comun.py:133
 msgid "ALL"
 msgstr "Усі"
 
@@ -578,79 +578,79 @@ msgstr "Встановіть розмір полів в мм"
 msgid "_combined"
 msgstr ""
 
-#: src/pdf-tools/pdfmanager.py:67 src/pdf-tools/pdfmanager.py:79
+#: src/pdf-tools/pdfmanager.py:59 src/pdf-tools/pdfmanager.py:71
 msgid "Resize PDF"
 msgstr "Змінити розмір файлу"
 
-#: src/pdf-tools/pdfmanager.py:93 src/pdf-tools/pdfmanager.py:99
+#: src/pdf-tools/pdfmanager.py:87 src/pdf-tools/pdfmanager.py:91
 msgid "Encrypt files"
 msgstr "Зашифрувати PDF"
 
-#: src/pdf-tools/pdfmanager.py:112
+#: src/pdf-tools/pdfmanager.py:107
 msgid "Decrypt files"
 msgstr "Розшифрувати PDF"
 
-#: src/pdf-tools/pdfmanager.py:118
+#: src/pdf-tools/pdfmanager.py:111
 msgid "Dencrypt files"
 msgstr "Розшифрувати файл"
 
-#: src/pdf-tools/pdfmanager.py:133
+#: src/pdf-tools/pdfmanager.py:127
 msgid "Convert PDF to PNG"
 msgstr "Конвертувати PDF - в PNG"
 
-#: src/pdf-tools/pdfmanager.py:147 src/pdf-tools/pdfmanager.py:163
+#: src/pdf-tools/pdfmanager.py:141 src/pdf-tools/pdfmanager.py:157
 msgid "Combine PDF pages"
 msgstr "Об'єднати сторінки"
 
-#: src/pdf-tools/pdfmanager.py:183 src/pdf-tools/pdfmanager.py:195
+#: src/pdf-tools/pdfmanager.py:178 src/pdf-tools/pdfmanager.py:190
 msgid "Create PDF from images"
 msgstr "Створити PDF з зображень"
 
-#: src/pdf-tools/pdfmanager.py:220 src/pdf-tools/pdfmanager.py:226
+#: src/pdf-tools/pdfmanager.py:215 src/pdf-tools/pdfmanager.py:221
 msgid "Join PDF files"
 msgstr "Об'єднати PDF"
 
-#: src/pdf-tools/pdfmanager.py:253
-msgid "Paginate PDF"
-msgstr "Додати нумерацію сторінок"
-
-#: src/pdf-tools/pdfmanager.py:269
+#: src/pdf-tools/pdfmanager.py:236
 msgid "Reduce PDF"
 msgstr "Зменшити розмір файлу"
 
-#: src/pdf-tools/pdfmanager.py:276
+#: src/pdf-tools/pdfmanager.py:242
 msgid "Reduce PDF size"
 msgstr "Зменшити розмір PDF"
 
-#: src/pdf-tools/pdfmanager.py:304
-msgid "Textmark PDF"
-msgstr "Додати текстовий знак"
-
-#: src/pdf-tools/pdfmanager.py:329
-msgid "Sign PDF"
-msgstr ""
-
-#: src/pdf-tools/pdfmanager.py:355
-msgid "Watermark PDF"
-msgstr "Водяний знак"
-
-#: src/pdf-tools/pdfmanager.py:379
+#: src/pdf-tools/pdfmanager.py:263
 msgid "Rotate and flip PDF"
 msgstr "Повернути і перевернути pdf-файли"
 
-#: src/pdf-tools/pdfmanager.py:398 src/pdf-tools/pdfmanager.py:405
+#: src/pdf-tools/pdfmanager.py:267
+msgid "Watermark PDF"
+msgstr "Водяний знак"
+
+#: src/pdf-tools/pdfmanager.py:271
+msgid "Textmark PDF"
+msgstr "Додати текстовий знак"
+
+#: src/pdf-tools/pdfmanager.py:275
+msgid "Paginate PDF"
+msgstr "Додати нумерацію сторінок"
+
+#: src/pdf-tools/pdfmanager.py:279
+msgid "Sign PDF"
+msgstr ""
+
+#: src/pdf-tools/pdfmanager.py:303 src/pdf-tools/pdfmanager.py:310
 msgid "Remove PDF"
 msgstr "Видалити сторінки"
 
-#: src/pdf-tools/pdfmanager.py:422
+#: src/pdf-tools/pdfmanager.py:325
 msgid "Split PDF"
 msgstr "Розділити PDF"
 
-#: src/pdf-tools/pdfmanager.py:436 src/pdf-tools/pdfmanager.py:442
+#: src/pdf-tools/pdfmanager.py:339 src/pdf-tools/pdfmanager.py:345
 msgid "Extract pages from PDF"
 msgstr "Видобути сторінки з документу"
 
-#: src/pdf-tools/pdfmanager.py:464
+#: src/pdf-tools/pdfmanager.py:366
 msgid "Select file to save extracted text"
 msgstr "Виберіть файл, щоб зберегти видобутий текст"
 
