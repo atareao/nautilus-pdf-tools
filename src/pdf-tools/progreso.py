@@ -43,7 +43,6 @@ class Progreso(BasicDialog, threading.Thread):
     }
 
     def __init__(self, title, parent, max_value, label=None):
-        BasicDialog.__init__(self)
         threading.Thread.__init__(self)
         self.max_value = max_value
         self.text_label = label

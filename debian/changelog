@@ -1,8 +1,9 @@
-nautilus-pdf-tools (1.2.9-0extras19.06.2) disco; urgency=medium
+nautilus-pdf-tools (1.2.9-0extras19.06.3) disco; urgency=medium
 
   * Added dependencies for python3 used by Nemo
+  * Fix minor issues
 
- -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Tue, 15 Oct 2019 06:11:37 +0200
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Tue, 15 Oct 2019 20:27:23 +0200
 
 nautilus-pdf-tools (1.2.9-0extras19.06.01) disco; urgency=medium
 
