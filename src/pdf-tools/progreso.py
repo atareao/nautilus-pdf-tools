@@ -113,6 +113,10 @@ class Progreso(BasicDialog, threading.Thread):
         self.value -= 1.0
         fraction = self.value / self.max_value
         GLib.idle_add(self.progressbar.set_fraction, fraction)
+    
+    def end_progress(self, widget=None):
+        self.hide()
+        self.close()
 
 
 if __name__ == '__main__':

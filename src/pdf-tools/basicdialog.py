@@ -43,7 +43,6 @@ class BasicDialog(Gtk.Dialog):
         self.set_default_response(Gtk.ResponseType.ACCEPT)
         self.set_resizable(False)
         self.set_icon_from_file(comun.ICON)
-        self.connect('destroy', self.close_application)
         self.connect('realize', self.on_realize)
         self.init_ui()
         self.show_all()
@@ -74,9 +73,6 @@ class BasicDialog(Gtk.Dialog):
         width = self.get_preferred_width()[0]
         height = self.get_preferred_height()[0]
         self.move((monitor_width - width)/2, (monitor_height - height)/2)
-
-    def close_application(self, *_):
-        self.hide()
 
 
 if __name__ == '__main__':

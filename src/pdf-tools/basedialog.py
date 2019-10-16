@@ -298,10 +298,8 @@ class BaseDialog(BasicDialog):
     def get_options_for_pages(self):
         return self.pages
 
-    def close(self, *_):
-        self.destroy()
-
 
 if __name__ == '__main__':
     dialog = BaseDialog('Ejemplo', comun.SAMPLE)
     dialog.run()
+    dialog.close()
