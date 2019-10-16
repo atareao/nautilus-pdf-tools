@@ -239,7 +239,7 @@ def reduce(selected, window):
             rd.hide()
             if dpi and dpi != '0' and dpi.isdigit() and append:
                 dialog = Progreso(_('Reduce PDF size'), window, len(files))
-                diboo = doitinbackground.DoitInBackgroundReduce(tools.reduce_pdf, files, dpi, append)
+                diboo = doitinbackground.DoitInBackgroundWithArgs(tools.reduce_pdf, files, dpi, append)
 
                 diboo.connect('done', dialog.increase)
                 diboo.connect('todo', dialog.set_todo_label)
@@ -376,4 +376,5 @@ class FileTemp():
 
 if __name__ == '__main__':
     file_in = FileTemp('file:///home/lorenzo/Escritorio/quijote.pdf')
-    operate('rotate', [file_in], None)
+    #operate('rotate', [file_in], None)
+    reduce([file_in], None)
