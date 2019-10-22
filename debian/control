@@ -9,21 +9,16 @@ Homepage: http://www.atareao.es
 Package: nautilus-pdf-tools
 Architecture: all
 Depends: ${misc:Depends}, ${python:Depends},
-	python,
-	python-gi,
-	python-gi-cairo,
 	gir1.2-gtk-3.0,
 	gir1.2-gdkpixbuf-2.0,
 	gir1.2-nautilus-3.0,
 	gir1.2-poppler-0.18,
-	python-nautilus,
-	python-pypdf2,
+	python3,
+	python3-gi,
+	python3-gi-cairo,
 	python3-pypdf2,
-	python-sh,
 	python3-sh,
-	python-cairo,
 	python3-cairo,
-	python-pil,
 	python3-pil
 Description: This is a extension for Nautilus to manipulate pdf files
  With this is extension for Nautilus you can manipulate pdf files
