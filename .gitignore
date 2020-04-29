@@ -88,3 +88,5 @@ ENV/
 .ropeproject
 
 .vscode/
+
+debian/files
