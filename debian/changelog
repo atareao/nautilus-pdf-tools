@@ -1,8 +1,8 @@
-nautilus-pdf-tools (1.2.9-0extras20.04.01) focal; urgency=medium
+nautilus-pdf-tools (1.2.9-0extras20.04.03) focal; urgency=medium
 
   * Change sh by plumbum
 
- -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Mon, 20 Jan 2020 07:15:32 +0100
+ -- Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>  Wed, 06 May 2020 20:00:46 +0200
 
 nautilus-pdf-tools (1.2.9-0extras19.10.01) eoan; urgency=medium
 

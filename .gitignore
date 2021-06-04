@@ -90,3 +90,4 @@ ENV/
 .vscode/
 
 debian/files
+src/pdf-tools/.mypy_cache/

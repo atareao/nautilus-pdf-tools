@@ -33,6 +33,7 @@ except ValueError as e:
 from gi.repository import Gdk, Gtk
 import comun
 
+
 class BasicDialog(Gtk.Dialog):
     def __init__(self, title, window=None):
         Gtk.Dialog.__init__(self, title, window)
@@ -59,11 +60,10 @@ class BasicDialog(Gtk.Dialog):
         self.grid.set_row_spacing(10)
         self.grid.set_column_spacing(10)
         self.grid.set_margin_bottom(10)
-        self.grid.set_margin_left(10)
-        self.grid.set_margin_right(10)
+        self.grid.set_margin_start(10)
+        self.grid.set_margin_end(10)
         self.grid.set_margin_top(10)
         frame1.add(self.grid)
-
 
     def on_realize(self, *_):
         monitor = Gdk.Display.get_primary_monitor(Gdk.Display.get_default())
