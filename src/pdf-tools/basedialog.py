@@ -160,7 +160,7 @@ class BaseDialog(BasicDialog):
         BasicDialog.init_ui(self)
 
         self.scrolledwindow1 = Gtk.ScrolledWindow()
-        self.scrolledwindow1.set_size_request(630, 630)
+        self.scrolledwindow1.set_size_request(629, 629)
         self.grid.attach(self.scrolledwindow1, 0, 0, 1, 1)
 
         self.viewport1 = MiniView()
