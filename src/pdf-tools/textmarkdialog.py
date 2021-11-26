@@ -109,8 +109,8 @@ class TextmarkDialog(BaseDialogWithApply):
         color = self.button_color.get_rgba()
         font = self.button_font.get_font()
         size = int(self.button_font.get_font_desc().get_size()/1000)
-        x = self.x
-        y = self.y
+        x = self.x+20
+        y = self.y+15
         if self.check_this.get_active():
             to_update = [ self.no_page]
         elif self.check_all.get_active():
@@ -135,7 +135,7 @@ class TextmarkDialog(BaseDialogWithApply):
         size = int(self.button_font.get_font_desc().get_size()/1000)
         self.viewport1.set_page_options(PageOptions(text_text=text,
                     text_color=color, text_font=font, text_size=size,
-                    text_x=self.x, text_y=self.y))
+                    text_x=self.x+20, text_y=self.y+15))
 
     def on_viewport1_clicked(self, widget, event):
         deltay = abs(self.viewport1.get_allocation().height -

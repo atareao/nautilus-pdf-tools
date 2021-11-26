@@ -117,7 +117,7 @@ class WatermarkDialog(BaseDialogWithApply):
         if not os.path.exists(file_watermark):
             file_watermark = None
         self.viewport1.set_page_options(PageOptions(
-            image_x=self.x, image_y=self.y, image_zoom=zoom,
+            image_x=self.x+20, image_y=self.y+15, image_zoom=zoom,
             image_file=file_watermark))
 
     def on_button_watermark_clicked(self, button):
