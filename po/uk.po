@@ -41,7 +41,6 @@ msgid "Watermark"
 msgstr "Водяний знак"
 
 #: src/nautilus-pdf-tools.py:109
-#, fuzzy
 msgid "Watermark pdf files"
 msgstr "Водяний знак"
 
@@ -64,12 +63,11 @@ msgstr "Нумерація сторінок"
 
 #: src/nautilus-pdf-tools.py:115 src/pdf-tools/signdialog.py:44
 msgid "Sign"
-msgstr ""
+msgstr "Підписати"
 
 #: src/nautilus-pdf-tools.py:115
-#, fuzzy
 msgid "Sign pdf files"
-msgstr "Об'єднати PDF-файли"
+msgstr "Підписати PDF-файли"
 
 #: src/nautilus-pdf-tools.py:121
 msgid "Remove pages"
@@ -158,54 +156,51 @@ msgstr "Конвертувати зображення в PDF"
 
 #: src/pdf-tools/basedialogwithapply.py:54
 msgid "Clear or apply to"
-msgstr ""
+msgstr "Відхилити або застосувати до"
 
 #: src/pdf-tools/basedialogwithapply.py:56
 msgid "This page"
-msgstr ""
+msgstr "Поточна сторінка"
 
 #: src/pdf-tools/basedialogwithapply.py:58
 msgid "All"
-msgstr ""
+msgstr "Усі"
 
 #: src/pdf-tools/basedialogwithapply.py:63
 msgid "Range"
-msgstr ""
+msgstr "Сторінки:"
 
 #: src/pdf-tools/basedialogwithapply.py:71
 msgid "Clear"
-msgstr ""
+msgstr "Відхилити"
 
 #: src/pdf-tools/basedialogwithapply.py:74
 msgid "Apply"
-msgstr ""
+msgstr "Застосувати"
 
 #: src/pdf-tools/basedialog.py:212 src/pdf-tools/basedialog.py:258
-#, fuzzy
 msgid "First page"
-msgstr "Видобути сторінки"
+msgstr "Перша сторінка"
 
 #: src/pdf-tools/basedialog.py:215 src/pdf-tools/basedialog.py:262
 msgid "Previous page"
-msgstr ""
+msgstr "Попередня сторінка"
 
 #: src/pdf-tools/basedialog.py:222 src/pdf-tools/basedialog.py:268
 msgid "Current_page"
-msgstr ""
+msgstr "Поточна сторінка"
 
 #: src/pdf-tools/basedialog.py:226 src/pdf-tools/basedialog.py:272
-#, fuzzy
 msgid "Next page"
-msgstr "Видобути сторінки"
+msgstr "Наступна сторінка"
 
 #: src/pdf-tools/basedialog.py:230 src/pdf-tools/basedialog.py:276
-#, fuzzy
 msgid "Last page"
-msgstr "Повернути сторінки"
+msgstr "Остання сторінка"
 
 #: src/pdf-tools/basedialog.py:237
 msgid "Options"
-msgstr ""
+msgstr "Параметри"
 
 #: src/pdf-tools/joinpdfsdialog.py:51
 #: src/pdf-tools/createpdffromImagesdialog.py:66
@@ -498,16 +493,15 @@ msgstr "Повернути сторінки"
 
 #: src/pdf-tools/flipdialog.py:95
 msgid "Flip"
-msgstr ""
+msgstr "Перевернути"
 
 #: src/pdf-tools/flipdialog.py:105
 msgid "File name"
-msgstr ""
+msgstr "Ім'я файлу"
 
 #: src/pdf-tools/flipdialog.py:107
-#, fuzzy
 msgid "Add to file"
-msgstr "Додати до імені файлу"
+msgstr "Додати до файлу"
 
 #: src/pdf-tools/convertdialog.py:40 src/pdf-tools/convertdialog.py:50
 msgid "Convert to"
@@ -522,17 +516,16 @@ msgid "Text file"
 msgstr "Текстовий файл"
 
 #: src/pdf-tools/paginatedialog.py:81
-#, fuzzy
 msgid "Pagination"
 msgstr "Нумерація сторінок"
 
 #: src/pdf-tools/paginatedialog.py:86 src/pdf-tools/textmarkdialog.py:94
 msgid "Font"
-msgstr ""
+msgstr "Шрифт"
 
 #: src/pdf-tools/paginatedialog.py:91 src/pdf-tools/textmarkdialog.py:99
 msgid "Color"
-msgstr ""
+msgstr "Колір"
 
 #: src/pdf-tools/combinedialog.py:54
 msgid "Pages in Page"
@@ -636,7 +629,7 @@ msgstr "Додати нумерацію сторінок"
 
 #: src/pdf-tools/pdfmanager.py:279
 msgid "Sign PDF"
-msgstr ""
+msgstr "Підписати PDF"
 
 #: src/pdf-tools/pdfmanager.py:303 src/pdf-tools/pdfmanager.py:310
 msgid "Remove PDF"
@@ -677,17 +670,16 @@ msgid "big margin"
 msgstr "Великі поля"
 
 #: src/pdf-tools/signdialog.py:71 src/pdf-tools/signdialog.py:83
-#, fuzzy
 msgid "Select signature file"
-msgstr "Виберіть вихідний файл"
+msgstr "Вибрати файл"
 
 #: src/pdf-tools/signdialog.py:76 src/pdf-tools/signdialog.py:82
 msgid "Signature"
-msgstr ""
+msgstr "Підпис"
 
 #: src/pdf-tools/signdialog.py:78 src/pdf-tools/watermarkdialog.py:82
 msgid "Zoom"
-msgstr ""
+msgstr "Масштаб"
 
 #: src/pdf-tools/selectpagesdialog.py:49
 msgid "Pages"
@@ -704,9 +696,8 @@ msgstr ""
 "діапазони,розділені комами пр.1,4,6-9 "
 
 #: src/pdf-tools/watermarkdialog.py:75 src/pdf-tools/watermarkdialog.py:87
-#, fuzzy
 msgid "Select watermark file"
-msgstr "Водяний знак"
+msgstr "Вибрати файл"
 
 #: src/pdf-tools/watermarkdialog.py:124
 msgid "Select one image"
