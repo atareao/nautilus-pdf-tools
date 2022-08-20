@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# This file is part of nautilus-pdf-tools
-#
 # Copyright (c) 2012 Lorenzo Carbonell Cerezo <a.k.a. atareao>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -191,17 +189,18 @@ class BaseDialog(BasicDialog):
                                     PageOptions())
 
     def next_page(self, *_):
-        self.set_page(self.no_page + 1)
+        page = self.no_page + 1 if self.no_page else 1
+        self.set_page(page)
 
     def previous_page(self, *_):
-        self.set_page(self.no_page - 1)
+        page = self.no_page - 1 if self.no_page else 0
+        self.set_page(page)
 
     def first_page(self, *_):
         self.set_page(0)
 
     def last_page(self, *_):
         self.set_page(self.document.get_n_pages() - 1)
-
 
     def init_headerbar(self):
         self.hb = Gtk.HeaderBar()
@@ -292,8 +291,9 @@ class BaseDialog(BasicDialog):
         if page > -1 and page < self.document.get_n_pages():
             self.set_page(page)
         else:
-            self.show_page.set_text(str(self.no_page + 1))
-            self.show_title_page.set_text(str(self.no_page + 1))
+            page = str(self.no_page + 1 if self.no_page else 1)
+            self.show_page.set_text(page)
+            self.show_title_page.set_text(page)
 
     def get_options_for_pages(self):
         return self.pages

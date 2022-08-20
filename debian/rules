@@ -12,7 +12,7 @@ build-stamp:
 	dh_testdir
 
 	# Add here commands to compile the package.
-	#$(MAKE)
+	# MAKE
 
 	touch build-stamp
 
@@ -22,8 +22,8 @@ clean:
 	rm -f build-stamp
 
 	# Add here commands to clean up after the build process.
-	#$(MAKE) clean
-	#$(MAKE) distclean
+	# MAKE clean
+	# MAKE distclean
 
 	dh_clean
 
@@ -33,20 +33,22 @@ install: build
 	dh_prep
 	dh_installdirs
 	dh_install
+
 	# Create languages directories
-	mkdir -p ${CURDIR}/debian/nautilus-pdf-tools/usr/share/locale-langpack/es/LC_MESSAGES
-	mkdir -p ${CURDIR}/debian/nautilus-pdf-tools/usr/share/locale-langpack/gl/LC_MESSAGES
-	mkdir -p ${CURDIR}/debian/nautilus-pdf-tools/usr/share/locale-langpack/ru/LC_MESSAGES
-	mkdir -p ${CURDIR}/debian/nautilus-pdf-tools/usr/share/locale-langpack/uk/LC_MESSAGES
+	mkdir -p ${CURDIR}/debian//usr/share/locale-langpack/es/LC_MESSAGES
+	mkdir -p ${CURDIR}/debian//usr/share/locale-langpack/gl/LC_MESSAGES
+	mkdir -p ${CURDIR}/debian//usr/share/locale-langpack/ru/LC_MESSAGES
+	mkdir -p ${CURDIR}/debian//usr/share/locale-langpack/uk/LC_MESSAGES
 	# End create languages directories
 	# Compile languages
-	msgfmt po/es.po -o ${CURDIR}/debian/nautilus-pdf-tools/usr/share/locale-langpack/es/LC_MESSAGES/nautilus-pdf-tools.mo
-	msgfmt po/gl.po -o ${CURDIR}/debian/nautilus-pdf-tools/usr/share/locale-langpack/gl/LC_MESSAGES/nautilus-pdf-tools.mo
-	msgfmt po/ru.po -o ${CURDIR}/debian/nautilus-pdf-tools/usr/share/locale-langpack/ru/LC_MESSAGES/nautilus-pdf-tools.mo
-	msgfmt po/uk.po -o ${CURDIR}/debian/nautilus-pdf-tools/usr/share/locale-langpack/uk/LC_MESSAGES/nautilus-pdf-tools.mo
+	msgfmt po/es.po -o ${CURDIR}/debian//usr/share/locale-langpack/es/LC_MESSAGES/.mo
+	msgfmt po/gl.po -o ${CURDIR}/debian//usr/share/locale-langpack/gl/LC_MESSAGES/.mo
+	msgfmt po/ru.po -o ${CURDIR}/debian//usr/share/locale-langpack/ru/LC_MESSAGES/.mo
+	msgfmt po/uk.po -o ${CURDIR}/debian//usr/share/locale-langpack/uk/LC_MESSAGES/.mo
 	# End comile languages
-	# Add here commands to install the package into debian/<packagename>.
-	#$(MAKE) prefix=`pwd`/debian/`dh_listpackages`/usr install
+
+  # Add here commands to install the package into debian/<packagename>.
+	# MAKE prefix=/data/python/nautilus-pdf-tools/debian//usr install
 
 # Build architecture-independent files here.
 binary-indep: build install
@@ -90,3 +92,4 @@ binary-arch: build install
 
 binary: binary-indep binary-arch
 .PHONY: build clean binary-indep binary-arch binary install
+

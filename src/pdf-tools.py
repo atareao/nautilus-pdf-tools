@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# This file is part of nautilus-pdf-tools
-#
 # Copyright (c) 2012 Lorenzo Carbonell Cerezo <a.k.a. atareao>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -104,48 +102,49 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
             top_menuitem.set_submenu(submenu)
             if len(sel_items) == 1:
                 items = [
-                    ('01', _('Rotate and flip'), _('rotate_and_flip pdf files'),
-                    'rotate'),
+                    ('01', _('Rotate and flip'),
+                     _('rotate_and_flip pdf files'),
+                     'rotate'),
                     ('02', _('Watermark'), _('Watermark pdf files'),
-                    'watermark'),
+                     'watermark'),
                     ('03', _('Textmark'), _('Textmark pdf files'),
-                    'textmark'),
+                     'textmark'),
                     ('04', _('Paginate'), _('Paginate pdf files'),
-                    'paginate'),
+                     'paginate'),
                     ('05', _('Sign'), _('Sign pdf files'),
-                    'sign'),
+                     'sign'),
                 ]
             else:
                 items = []
             moreitems = [
                 ('06', _('Remove pages'),
-                _('Remove pages of the document files'),
-                'remove pages'),
+                 _('Remove pages of the document files'),
+                 'remove pages'),
                 ('07', _('Extract pages'),
-                _('Extract pages of the document files'),
-                'extract pages'),
+                 _('Extract pages of the document files'),
+                 'extract pages'),
                 ('08', _('Join pdf files'),
-                _('Join pdf files in one document'),
-                'join'),
+                 _('Join pdf files in one document'),
+                 'join'),
                 ('09', _('Split pdf files'),
-                _('Split a pdf in several documents'),
-                'split'),
+                 _('Split a pdf in several documents'),
+                 'split'),
                 ('10', _('Combine pdf pages'),
-                _('Combine pdf pages in one page'),
-                'combine'),
+                 _('Combine pdf pages in one page'),
+                 'combine'),
                 ('11', _('Reduce pdf size'), _('Reduce pdf size'),
-                'reduce'),
+                 'reduce'),
                 ('12', _('Resize pdf pages'), _('Resize pdf pages'),
-                'resize'),
+                 'resize'),
                 ('13', _('Convert pdf to png'),
-                _('Convert pdf file to png image'),
-                'convert2png'),
+                 _('Convert pdf file to png image'),
+                 'convert2png'),
                 ('14', _('Encrypt'),
-                _('Encrypt pdf files'),
-                'encrypt'),
+                 _('Encrypt pdf files'),
+                 'encrypt'),
                 ('15', _('Decrypt'),
-                _('Decrypt pdf files'),
-                'decrypt'),
+                 _('Decrypt pdf files'),
+                 'decrypt'),
             ]
             items = items + moreitems
             for item in items:
@@ -211,6 +210,7 @@ class PdfToolsMenuProvider(GObject.GObject, FileManager.MenuProvider):
 
             return top_menuitem,
         return
+
 
 def about(widget):
     ad = Gtk.AboutDialog()

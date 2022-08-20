@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# This file is part of nautilus-pdf-tools
-#
 # Copyright (c) 2012 Lorenzo Carbonell Cerezo <a.k.a. atareao>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -479,7 +477,7 @@ class DoItInBackgroundJoinPdf(DoitInBackgroundBase):
         else:
             self.emit('finished')
 
-   
+
 class DoitInBackgroundEncrypt(DoitInBackgroundBase):
     def __init__(self, files, password):
         DoitInBackgroundBase.__init__(self)

@@ -2,8 +2,8 @@ Source: nautilus-pdf-tools
 Section: utils
 Priority: extra
 Maintainer: Lorenzo Carbonell Cerezo <lorenzo.carbonell.cerezo@gmail.com>
-Build-Depends: debhelper (>= 9)
-Standards-Version: 3.9.6
+Build-Depends: debhelper (>= 13)
+Standards-Version: 4.6.1
 Homepage: http://www.atareao.es
 
 Package: nautilus-pdf-tools
